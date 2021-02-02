@@ -11,13 +11,19 @@ import Container from '@material-ui/core/Container';
 class Products extends Component {
   render() {
     return (
-      <Container>
+      <Container className="p-4 bg-white">
         <Electric />
+        <hr className="mb-5 pb-5" />
         <Airtime/>
+        <hr className="mb-5 pb-5"/>
         <Data />
+        <hr className="mb-5 pb-5"/>
         <Cable />
+        <hr className="mb-5 pb-5"/>
         <Deposits />
+        <hr className="mb-5 pb-5"/>
         <Transfer />
+        <hr className="mb-5 pb-5"/>
         <Water />
       </Container>
     );

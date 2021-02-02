@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { fade, makeStyles } from "@material-ui/core/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, CardContent, Button } from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-// import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
+import { Card, CardContent } from "@material-ui/core";
 import Slider from "react-slick";
-
+// import SearchBar from "material-ui-search-bar";
+import Search from '../../Search/Search'
 import rccg from "../../../assets/images/product-logos/rccg.jpg";
 
 function SliderArrowNext(props) {
@@ -29,7 +26,37 @@ function SliderArrowPrev(props) {
   );
 }
 
+const useStyles = makeStyles((theme) => ({
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    width: "100%",
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
+
 export default function LivePreviewExample() {
+  const [values, setValues] = useState("");
+  const classes = useStyles();
   const marketingTestimonials1 = {
     dots: true,
     speed: 500,
@@ -48,6 +75,10 @@ export default function LivePreviewExample() {
     ],
   };
 
+  const doSomethingWith = (values) => {
+    console.log(values);
+  };
+
   return (
     <>
       <div className="pt-5 bg-secondary">
@@ -60,15 +91,16 @@ export default function LivePreviewExample() {
               Id cupidatat ullamco amet reprehenderit quis proident.
             </p>
           </div>
-          <div className="align-center bg-dark w-100">
-            <InputBase
-              className="flex-1, ml-1"
-              placeholder="Search Google Maps"
-              inputProps={{ "aria-label": "search google maps" }}
-            />
-            <IconButton type="submit" className="p-2" aria-label="search">
-              <SearchIcon />
-            </IconButton>
+          <div
+            style={{ top: "10px", left: "3%", right: "3%" }}
+          >
+            {/* <SearchBar
+              value={values}
+              onChange={(newValue) => setValues(newValue)}
+              onRequestSearch={() => doSomethingWith(values)}
+              autoFocus
+            /> */}
+            <Search />
           </div>
           <Slider
             {...marketingTestimonials1}

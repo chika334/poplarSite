@@ -134,7 +134,7 @@ export default function LivePreviewExample() {
                 </Grid>
               </div>
             </Grid>
-            <Grid item xl={5} className="d-flex align-items-center">
+            {/* <Grid item xl={5} className="d-flex align-items-center">
               <div className="w-100 mb-4 mb-md-0">
                 <Card className="border-0 bg-deep-sky mt-5 mt-xl-0 card-box">
                   <CardContent>
@@ -179,7 +179,7 @@ export default function LivePreviewExample() {
                   </CardContent>
                 </Card>
               </div>
-            </Grid>
+            </Grid> */}
           </Grid>
           <div>
             <div className="divider d-sm-none d-md-block rounded-circle bg-dark opacity-2 mx-auto mb-4 mt-5 w-25" />
@@ -229,7 +229,7 @@ export default function LivePreviewExample() {
             </List>
             <div className="divider d-sm-none d-md-block rounded-circle bg-dark opacity-2 mx-auto my-4 w-25" />
             <div className="text-center d-block text-black-50">
-              Copyright &copy; 2020 - UiFort.com
+              Copyright &copy; 2020
             </div>
           </div>
         </Container>

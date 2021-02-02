@@ -15,7 +15,7 @@ const HeaderMenu = (props) => {
             <ul className="d-flex nav nav-neutral-first justify-content-center">
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}/Homepage`}
+                  to={`${process.env.REACT_APP_URL}`}
                   className="font-weight-bold rounded-sm px-3">
                   Home
                 </NavLink>

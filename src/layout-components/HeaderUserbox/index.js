@@ -29,7 +29,7 @@ const HeaderUserbox = () => {
 
   return (
     <>
-      <div className="position-relative ml-2">
+      {/* <div className="position-relative ml-2">
         <Button
           onClick={handleClick}
           className="btn-link p-0 text-left d-flex btn-transition-none align-items-center"
@@ -52,8 +52,8 @@ const HeaderUserbox = () => {
               className="opacity-5"
             />
           </span>
-        </Button>
-        <Menu
+        </Button> */}
+        {/* <Menu
           anchorEl={anchorEl}
           keepMounted
           getContentAnchorEl={null}
@@ -68,8 +68,9 @@ const HeaderUserbox = () => {
           open={Boolean(anchorEl)}
           classes={{ list: "p-0" }}
           onClose={handleClose}
-        >
-          <div className="dropdown-menu-lg overflow-hidden p-0">
+        > */}
+          <Logout />
+          {/* <div className="dropdown-menu-lg overflow-hidden p-0">
             <div
               component="div"
               className="nav-neutral-primary text-left d-flex align-items-center flex-column px-3 pb-3"
@@ -82,9 +83,9 @@ const HeaderUserbox = () => {
               </Link>
               <Logout />
             </div>
-          </div>
-        </Menu>
-      </div>
+          </div> */}
+        {/* </Menu> */}
+      {/* </div> */}
     </>
   );
 };

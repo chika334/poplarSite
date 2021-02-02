@@ -349,7 +349,7 @@ class Transfer extends Component {
                       });
                     }}
                   >
-                    <Card className="cards mt-5">
+                    <Card className="card p-4 mt-5">
                       <h3 className={classes.titles}>{allDetails.name}</h3>
                       <div className={classes.centerImage}>
                         <img width="65" src={allDetails.src} alt="src" />

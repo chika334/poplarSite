@@ -11,7 +11,9 @@ import MailOutlineTwoToneIcon from "@material-ui/icons/MailOutlineTwoTone";
 import LockTwoToneIcon from "@material-ui/icons/LockTwoTone";
 import Loader from "../../Components/Loader/Loader";
 import { withRouter } from "react-router-dom";
-import { hideModal } from "../../_actions/modal";
+import { hideModal, showModal } from "../../_actions/modal";
+import { showForgotModal } from "../../_actions/forgotModal";
+import Grid from "@material-ui/core/Grid";
 
 class Login extends Component {
   constructor(props) {
@@ -33,10 +35,10 @@ class Login extends Component {
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
-      // check for register error
+      // check for login error
       if (error.id === "LOGIN_FAIL") {
-        this.props.hideLoader();
         this.setState({ error: error.message.message });
+        this.props.hideLoader();
       }
     } else {
       this.check();
@@ -45,15 +47,15 @@ class Login extends Component {
 
   check = () => {
     const { isAuthenticated } = this.props;
-    if (isAuthenticated) {
+    console.log(isAuthenticated);
+    if (isAuthenticated === true) {
       this.sendRedirect();
       setTimeout(() => {
         let redirect = localStorage.getItem("redirectPage");
         this.props.hideLoader();
         // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-        window.location.href=`${process.env.REACT_APP_URL}${redirect}`
-        this.props.hideModal();
-      }, 500); 
+        window.location.href = `${process.env.REACT_APP_URL}/PageProfile`;
+      }, 500);
     }
   };
 
@@ -67,6 +69,11 @@ class Login extends Component {
 
   handleClick = (e) => {
     const { email, password } = this.state;
+    if (email === "" || password === "") {
+      this.setState({ error: "Please fill all inputs" });
+      return
+    } 
+
     const user = {
       email,
       password,
@@ -74,6 +81,10 @@ class Login extends Component {
 
     this.props.signin(user);
     this.props.showLoader();
+  }
+
+  forgotPassword = (e) => {
+    this.props.showForgotModal();
   };
 
   render() {
@@ -83,43 +94,24 @@ class Login extends Component {
         <div className="hero-wrapper w-100">
           <div className="flex-grow-1 w-100 align-items-center">
             <div>
+              <div style={{ position: "relative", left: "270px" }}>
+                <Button
+                  onClick={this.props.hideModal}
+                  className="px-4 text-dark-50 mt-3"
+                >
+                  <FontAwesomeIcon icon={["fas", "times"]} />
+                </Button>
+              </div>
               <div className="divider-v divider-v-lg d-none d-lg-block" />
               <div className="text-center mt-4">
                 <div className="mb-0 text-black-50">
                   <h1 className="font-size-xxl mb-1 font-weight-bold">Login</h1>
-                  <p className="mb-0 text-black-50">
+                  <p className="mb-0 text-black-50 mt-5">
                     Fill in the fields below to login to your account
                   </p>
                 </div>
               </div>
               <div className="py-4">
-                <div className="text-center mb-3">
-                  <Button
-                    className="m-2 btn-pill px-4 font-weight-bold btn-google"
-                    size="small"
-                  >
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={["fab", "google"]} />
-                    </span>
-                    <span className="btn-wrapper--label">
-                      Login with Google
-                    </span>
-                  </Button>
-                  <Button
-                    className="m-2 btn-pill px-4 font-weight-bold btn-facebook"
-                    size="small"
-                  >
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={["fab", "facebook"]} />
-                    </span>
-                    <span className="btn-wrapper--label">
-                      Login with Facebook
-                    </span>
-                  </Button>
-                </div>
-                <div className="text-center text-black-50 py-2 mb-4">
-                  or sign in with credentials
-                </div>
                 <div>
                   <div className="mb-4">
                     <TextField
@@ -165,13 +157,23 @@ class Login extends Component {
                       {this.state.error}
                     </Typography>
                   )}
-                  <div className="text-center py-4">
-                    <Button
-                      onClick={this.handleClick}
-                      className="btn-second font-weight-bold p-3 my-2"
-                    >
-                      Submit
-                    </Button>
+                  <div className="d-inline-flex">
+                    <div className="text-center py-2">
+                      <Button
+                        onClick={this.handleClick}
+                        className="btn-second font-weight-bold p-3 my-2"
+                      >
+                        Submit
+                      </Button>
+                    </div>
+                    <div className="text-center">
+                      <Button
+                        onClick={this.forgotPassword}
+                        className="btn bg-white font-weight-bold my-2"
+                      >
+                        forgot Password
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -195,7 +197,9 @@ export default withRouter(
     signin,
     clearErrors,
     showLoader,
+    showForgotModal,
     hideLoader,
+    showModal,
     hideModal,
   })(Login)
 );

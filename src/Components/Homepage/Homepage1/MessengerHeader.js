@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { showModal, hideModal } from "../../../_actions/modal";
 import { showRegisterModal } from "../../../_actions/registerModal";
+import Logout from "../../Logout/Logout";
 
 class MessengerHeader extends Component {
   state = {
@@ -46,7 +47,7 @@ class MessengerHeader extends Component {
   product = (e) => {
     e.preventDefault();
     if (this.props.authUser || localStorage.token) {
-      const redirect = localStorage.getItem("products")
+      const redirect = localStorage.getItem("products");
       this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
       // this.props.showModal();
       // this.props.hideModal();
@@ -62,13 +63,13 @@ class MessengerHeader extends Component {
           <div className="bg-white p-2 shadow-xxl header-nav-wrapper header-nav-wrapper-xl rounded-bottom px-4 navbar-light">
             <div className="app-nav-logo">
               <NavLink
-                to={`${process.env.REACT_APP_URL}/Homepage`}
+                to={`${process.env.REACT_APP_URL}`}
                 title="Bamburgh React Messenger Application with Material-UI PRO"
                 className="app-nav-logo app-nav-logo--dark"
               >
                 <div className="app-nav-logo--text">
-                  <span style={{ color: `rgb(0, 68, 116)` }}>Fastpay</span>
-                  <span style={{ color: `rgb(242, 106, 6)` }}>r</span>
+                  <span style={{ color: `rgb(0, 68, 116)` }}>Poplar</span>
+                  <span style={{ color: `rgb(242, 106, 6)` }}>power</span>
                 </div>
               </NavLink>
             </div>
@@ -76,7 +77,7 @@ class MessengerHeader extends Component {
               <ul className="d-flex nav nav-neutral-first justify-content-center">
                 <li>
                   <NavLink
-                    to={`${process.env.REACT_APP_URL}/Homepage`}
+                    to={`${process.env.REACT_APP_URL}`}
                     className="font-weight-bold rounded-sm px-3"
                   >
                     Home
@@ -141,7 +142,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Electric`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Electric`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Electric");
@@ -161,7 +164,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Water`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Water`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Water");
@@ -180,7 +185,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Cable`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Cable`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Cable");
@@ -200,7 +207,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Airtime`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Airtime`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Airtime");
@@ -219,7 +228,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Data`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Data`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Data");
@@ -238,7 +249,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Transfer`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Transfer`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Transfer");
@@ -257,7 +270,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Deposits`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Deposits`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Deposits");
@@ -279,24 +294,28 @@ class MessengerHeader extends Component {
               </ul>
             </div>
             <div className="header-nav-actions flex-grow-0 flex-lg-grow-1">
-              <span className="d-none d-lg-block">
-                <Button
-                  onClick={(e) => {
-                    this.login(e);
-                  }}
-                  className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
-                >
-                  Login
-                </Button>
-                <Button
-                  onClick={(e) => {
-                    this.register(e);
-                  }}
-                  className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
-                >
-                  Register
-                </Button>
-              </span>
+              {this.props.authUser ? (
+                <Logout />
+              ) : (
+                <span className="d-none d-lg-block">
+                  <Button
+                    onClick={(e) => {
+                      this.login(e);
+                    }}
+                    className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    onClick={(e) => {
+                      this.register(e);
+                    }}
+                    className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
+                  >
+                    Register
+                  </Button>
+                </span>
+              )}
               <span className="d-block d-lg-none">
                 <button
                   onClick={this.toggle}
@@ -410,7 +429,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Electric`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Electric`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Electric");
@@ -430,7 +451,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Water`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Water`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Water");
@@ -449,7 +472,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Cable`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Cable`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Cable");
@@ -468,7 +493,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Airtime`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Airtime`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Airtime");
@@ -487,7 +514,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Transfer`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Transfer`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Transfer");
@@ -506,7 +535,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             if (this.props.authUser) {
-                              this.props.history.push(`${process.env.REACT_APP_URL}/Deposits`)
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/Deposits`
+                              );
                             } else {
                               this.product(e);
                               localStorage.setItem("products", "/Deposits");

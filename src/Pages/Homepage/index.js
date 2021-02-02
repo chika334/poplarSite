@@ -12,8 +12,8 @@ export default function Homepage() {
     <>
       <Homepage1 />
       <Homepage4 />
-      <Homepage2 />
-      <Homepage3 />
+      {/* <Homepage2 /> */}
+      {/* <Homepage3 /> */}
       <Homepage5 />
       <Homepage6 />
     </>

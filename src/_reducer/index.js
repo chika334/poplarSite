@@ -12,11 +12,15 @@ import query from './QueryTranx'
 import loading from './loading'
 import modal from './modal'
 import modalRegister from './registerModal'
+import modalForgot from './forgotModal'
+import resetModal from './ResetPassword'
 
 export default combineReducers({
 	content,
 	modalRegister,
+	resetModal,
 	modal,
+	modalForgot,
 	authUser,
 	error,
 	countryId,

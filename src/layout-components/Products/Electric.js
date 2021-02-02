@@ -144,14 +144,11 @@ class Electric extends Component {
     // if user is authenticated
     if (authUser === true && pages) {
       if (authUser && this.state.wantToPay) {
-        // console.log("authUser @ payBills", authUser);
         this.props.showLoader();
         this.props.token(buyToken);
         this.setState({ wantToPay: false });
       }
       if (success.success) {
-        //if success.success === true
-        // console.log("Success", success);
         this.props.hideLoader();
         console.log("success", success.success);
         this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
@@ -197,7 +194,6 @@ class Electric extends Component {
     };
 
     if (authUser) {
-      // this.payBills()
       this.props.showLoader();
       this.props.token(buyToken);
     } else {
@@ -216,7 +212,6 @@ class Electric extends Component {
     const body = (
       <div className="card pl-3 pr-3 align-items-center">
         <div className="app-wrapper">
-          {/* <img src={this.state.image} /> */}
           {/* <Tab1 /> */}
           <div className="app-wrapper bg-white">
             <Loader />
@@ -339,25 +334,25 @@ class Electric extends Component {
           <div className="row">
             <Grid>
               {sidebarItem.map((allDetails, index) => (
-                // <Grid container justify="center" spacing={3}>
-                <div key={index} className="column">
-                  <Button
-                    onClick={(e) => {
-                      this.Product({
-                        image: allDetails.src,
-                        title: allDetails.name,
-                      });
-                    }}
-                  >
-                    <Card className="cards mt-5">
-                      <h3 className={classes.titles}>{allDetails.name}</h3>
-                      <div className={classes.centerImage}>
-                        <img width="65" src={allDetails.src} alt="src" />
-                      </div>
-                      <h3 className={classes.titles}>{allDetails.figure}</h3>
-                    </Card>
-                  </Button>
-                </div>
+                // <Grid container spacing={3}>
+                  <div key={index} className="column p-3">
+                    <Button
+                      onClick={(e) => {
+                        this.Product({
+                          image: allDetails.src,
+                          title: allDetails.name,
+                        });
+                      }}
+                    >
+                      <Card className="cards p-4 mt-5">
+                        <h3 className={classes.titles}>{allDetails.name}</h3>
+                        <div className={classes.centerImage}>
+                          <img width="65" src={allDetails.src} alt="src" />
+                        </div>
+                        <h3 className={classes.titles}>{allDetails.figure}</h3>
+                      </Card>
+                    </Button>
+                  </div>
                 // </Grid>
               ))}
             </Grid>

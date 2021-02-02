@@ -12,7 +12,7 @@ import LockTwoToneIcon from "@material-ui/icons/LockTwoTone";
 import Loader from "../../Components/Loader/Loader";
 import { withRouter } from "react-router-dom";
 import { hideRegisterModal } from "../../_actions/registerModal";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 class Register extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class Register extends Component {
         let redirect = localStorage.getItem("redirectPage");
         this.props.hideLoader();
         // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-        window.location.href=`${process.env.REACT_APP_URL}${redirect}`
+        window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
         this.props.hideRegisterModal();
       }, 500);
     }
@@ -102,7 +102,7 @@ class Register extends Component {
       };
 
       this.props.signup(user);
-      this.props.showLoader()
+      this.props.showLoader();
     }
   };
 
@@ -112,11 +112,20 @@ class Register extends Component {
         <Loader />
         <div className="hero-wrapper w-100">
           <div className="flex-grow-1 w-100 align-items-center">
+            {/* modal close */}
+            <div style={{ position: "relative", left: "270px" }}>
+              <Button
+                onClick={this.props.hideRegisterModal}
+                className="px-4 text-dark-50 mt-2"
+              >
+                <FontAwesomeIcon icon={["fas", "times"]} />
+              </Button>
+            </div>
             <div>
               <div className="divider-v divider-v-lg d-none d-lg-block" />
               <div className="text-center mt-4">
                 <div className="mb-0 text-black-50">
-                  <h1 className="font-size-xxl mb-1 font-weight-bold">
+                  <h1 className="font-size-xxl mb-3 font-weight-bold">
                     Register
                   </h1>
                   <p className="mb-0 text-black-50">
@@ -125,35 +134,8 @@ class Register extends Component {
                 </div>
               </div>
               <div className="py-4">
-                <div className="text-center mb-3">
-                  <Button
-                    className="m-2 btn-pill px-4 font-weight-bold btn-google"
-                    size="small"
-                  >
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={["fab", "google"]} />
-                    </span>
-                    <span className="btn-wrapper--label">
-                      Register with Google
-                    </span>
-                  </Button>
-                  <Button
-                    className="m-2 btn-pill px-4 font-weight-bold btn-facebook"
-                    size="small"
-                  >
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={["fab", "facebook"]} />
-                    </span>
-                    <span className="btn-wrapper--label">
-                      Register with Facebook
-                    </span>
-                  </Button>
-                </div>
-                <div className="text-center text-black-50 py-2 mb-4">
-                  or Register with credentials
-                </div>
                 <div>
-                <div className="mb-4">
+                  <div className="mb-4">
                     <TextField
                       fullWidth
                       variant="outlined"
@@ -231,7 +213,7 @@ class Register extends Component {
                       {this.state.error}
                     </Typography>
                   )}
-                  <div className="text-center py-4">
+                  <div className="text-center">
                     <Button
                       onClick={this.handleClick}
                       className="btn-second font-weight-bold p-3 my-2"

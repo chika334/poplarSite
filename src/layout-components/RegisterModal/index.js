@@ -16,12 +16,12 @@ function SimpleModal(props) {
       <div className="app-wrapper">
         <Register />
       </div>
-      <Button
+      {/* <Button
         onClick={props.hideRegisterModal}
         className="px-4 d-flex bg-danger align-items-center justify-content-center text-dark-50"
       >
         <FontAwesomeIcon icon={["fas", "times"]} />
-      </Button>
+      </Button> */}
     </div>
   );
 

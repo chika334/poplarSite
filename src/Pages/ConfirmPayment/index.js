@@ -39,10 +39,10 @@ class BuyToken extends Component {
     return (
       <>
         <PerfectScrollbar>
-          <div className="m-4 card-header rounded-0 bg-white px-5 py-4 border-bottom">
+          <div className="m-4 card-header rounded-0 bg-white border-bottom">
             <Container className="d-block text-center py-3 text-sm-left d-sm-flex align-items-center justify-content-between">
               <div className="d-flex align-items-center mb-3 mb-sm-0">
-                <div className="responsive-container">
+                <div className="">
                   <h2>Confirm Payment</h2>
                   <hr />
                   <table>
@@ -72,7 +72,7 @@ class BuyToken extends Component {
                   >
                     Confirm Payment
                   </Button>
-                  <Button
+                  {/* <Button
                     color="primary"
                     autoFocus="autoFocus"
                     className="ml-3"
@@ -80,7 +80,7 @@ class BuyToken extends Component {
                     // onClick={this.submit}
                   >
                     Download Invoice
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </Container>
@@ -99,7 +99,7 @@ class BuyToken extends Component {
                     // className="btn-second font-weight-bold w-50 my-2"
                     variant="contained"
                   >
-                    Confirm Payment
+                    Back to Dashboard
                   </Button>
                 </Link>
               </DialogActions>

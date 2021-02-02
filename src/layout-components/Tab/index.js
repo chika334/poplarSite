@@ -1,22 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Tab1 from './Tab1'
-import Tab2 from './Tab2'
-import Tab3 from './Tab3'
-import Tab4 from './Tab4'
-
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    maxWidth: 500,
-  },
-});
+import rccg from "../../assets/images/product-logos/rccg.jpg";
+import Tab1 from "./Tab1";
+import Tab2 from "./Tab2";
+import Tab3 from "./Tab3";
+import Tab4 from "./Tab4";
+import AppBar from "@material-ui/core/AppBar";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -25,8 +18,8 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`nav-tabpanel-${index}`}
-      aria-labelledby={`nav-tab-${index}`}
+      id={`scrollable-force-tabpanel-${index}`}
+      aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -44,7 +37,22 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-export default function IconTabs() {
+function a11yProps(index) {
+  return {
+    id: `scrollable-force-tab-${index}`,
+    "aria-controls": `scrollable-force-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export default function ScrollableTabsButtonForce() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -53,56 +61,48 @@ export default function IconTabs() {
   };
 
   return (
-    <Paper square className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="fullWidth"
-        indicatorColor="secondary"
-        textColor="secondary"
-        aria-label="icon tabs example"
-      >
-        <Tab
-          icon={
-            <FontAwesomeIcon
-              icon={["fas", "lightbulb"]}
-              style={{ width: "50%", height: "3em" }}
-              // className="text-warning"
-            />
-          }
-          aria-label="phone"
-        />
-        <Tab
-          icon={
-            <FontAwesomeIcon
-              icon={["fas", "lightbulb"]}
-              style={{ width: "50%", height: "3em" }}
-              // className="text-warning"
-            />
-          }
-          aria-label="favorite"
-        />
-        <Tab
-          icon={
-            <FontAwesomeIcon
-              icon={["fas", "lightbulb"]}
-              style={{ width: "50%", height: "3em" }}
-              // className="text-warning"
-            />
-          }
-          aria-label="person"
-        />
-        <Tab
-          icon={
-            <FontAwesomeIcon
-              icon={["fas", "lightbulb"]}
-              style={{ width: "50%", height: "3em" }}
-              // className="text-warning"
-            />
-          }
-          aria-label="person"
-        />
-      </Tabs>
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          // variant="scrollable"
+          // scrollButtons="on"
+          // indicatorColor="primary"
+          textColor="primary"
+          aria-label="force tabs example"
+          className="m-5"
+        >
+          <Tab
+            className="h-50"
+            label={`${process.env.REACT_APP_RCCG}`}
+            icon={<img src={rccg} width="60" />}
+            {...a11yProps(0)}
+          />
+          <Tab
+            className="h-50"
+            label={`${process.env.REACT_APP_RCCG}`}
+            icon={<img src={rccg} width="60" />}
+            {...a11yProps(1)}
+          />
+          <Tab
+            className="h-50"
+            label={`${process.env.REACT_APP_RCCG}`}
+            icon={<img src={rccg} width="60" />}
+            {...a11yProps(2)}
+          />
+          <Tab
+            className="h-50"
+            label={`${process.env.REACT_APP_RCCG}`}
+            icon={
+              <>
+                <img src={rccg} width="60" />{" "}
+              </>
+            }
+            {...a11yProps(3)}
+          />
+        </Tabs>
+      </AppBar>
       <TabPanel value={value} index={0}>
         <Tab1 />
       </TabPanel>
@@ -115,6 +115,6 @@ export default function IconTabs() {
       <TabPanel value={value} index={3}>
         <Tab4 />
       </TabPanel>
-    </Paper>
+    </div>
   );
 }

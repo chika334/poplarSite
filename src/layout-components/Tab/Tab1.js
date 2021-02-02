@@ -120,13 +120,6 @@ class Tab1 extends Component {
       this.props.token(buyToken);
     }
 
-    // if (authUser || localStorage.token) {
-    //   this.props.hideModal();
-    //   this.props.hideLoader();
-    //   let redirect = localStorage.getItem("redirectPage");
-    //   // window.location.href = `${process.env.REACT_APP_URL}/buytoken`
-    //   this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
-    // }
     else {
       this.setState({ wantToPay: true });
       this.handleOpen();

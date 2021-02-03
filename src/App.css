@@ -6,11 +6,11 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-.verifynumber input[type=number] {
+.verifynumber input[type="number"] {
   -moz-appearance: textfield;
   /* background-color: green; */
   width: 90%;
-  margin: 4%
+  margin: 4%;
 }
 
 /* Float four columns side by side */
@@ -21,7 +21,9 @@ input::-webkit-inner-spin-button {
 }
 
 /* Remove extra left and right margins, due to padding in columns */
-.row {margin: 0 -5px;}
+.row {
+  margin: 0 -5px;
+}
 
 /* Clear floats after the columns */
 .row:after {
@@ -44,5 +46,58 @@ input::-webkit-inner-spin-button {
     width: 100%;
     display: block;
     margin-bottom: 20px;
+  }
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 1px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+@media only screen and (max-width: 576px) {
+  .tab {
+    /* background-color: green; */
+    width: 100%
+  }
+  button p {
+    /* background-color: red; */
+    font-size: 0.44rem;
+    font-weight: bold;
+  }
+
+  button img {
+    width: 50px
   }
 }

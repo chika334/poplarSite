@@ -10,13 +10,13 @@ import { setSidebarToggleMobile } from '../../_actions/contents';
 
 import { NavLink } from 'react-router-dom';
 
-import projectLogo from '../../assets/images/react.svg';
+// import projectLogo from '../../assets/images/react.svg';
 
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import HomeWorkTwoToneIcon from '@material-ui/icons/HomeWorkTwoTone';
-import SpeakerNotesTwoToneIcon from '@material-ui/icons/SpeakerNotesTwoTone';
+// import SpeakerNotesTwoToneIcon from '@material-ui/icons/SpeakerNotesTwoTone';
 import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
-import VpnKeyTwoToneIcon from '@material-ui/icons/VpnKeyTwoTone';
+// import VpnKeyTwoToneIcon from '@material-ui/icons/VpnKeyTwoTone';
 
 const SidebarCollapsed = (props) => {
   const toggleSidebarMobile = () => {
@@ -39,19 +39,20 @@ const SidebarCollapsed = (props) => {
           { 'app-sidebar--shadow': sidebarShadow }
         )}>
         <div className="app-sidebar--header">
-          <div className="app-sidebar-logo">
+          {/* <div className="app-sidebar-logo"> */}
             <NavLink
-              to={`${process.env.REACT_APP_URL}/Homepage`}
-              title="Bamburgh React Messenger Application with Material-UI PRO"
-              className="app-sidebar-logo">
-              <div className="app-sidebar-logo--icon">
-                <img
+              to={`${process.env.REACT_APP_URL}`}
+              title={`${process.env.REACT_APP_NAME}`}
+              className="app-sidebar-logo text-white">
+              {/* <div className="app-sidebar-logo--icon"> */}
+                {/* <img
                   alt="Bamburgh React Messenger Application with Material-UI PRO"
                   src={projectLogo}
-                />
-              </div>
+                /> */}
+                <b>{process.env.REACT_APP_NAME}</b>
+              {/* </div> */}
             </NavLink>
-          </div>
+          {/* </div> */}
         </div>
 
         <div className="app-sidebar--content">
@@ -66,14 +67,14 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/Homepage`}>
+                    to={`${process.env.REACT_APP_URL}`}>
                     <span>
                       <HomeWorkTwoToneIcon />
                     </span>
                   </NavLink>
                 </Tooltip>
               </li>
-              <li>
+              {/* <li>
                 <Tooltip
                   classes={{ tooltip: 'tooltip-secondary text-nowrap' }}
                   placement="right"
@@ -88,7 +89,7 @@ const SidebarCollapsed = (props) => {
                     </span>
                   </NavLink>
                 </Tooltip>
-              </li>
+              </li> */}
               <li>
                 <Tooltip
                   classes={{ tooltip: 'tooltip-secondary text-nowrap' }}
@@ -98,7 +99,7 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/PageProfile`}>
+                    to={`${process.env.REACT_APP_URL}/profilepage`}>
                     <span>
                       <AccountCircleTwoToneIcon />
                     </span>
@@ -114,14 +115,14 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/Settings`}>
+                    to={`${process.env.REACT_APP_URL}/settings`}>
                     <span>
                       <SettingsTwoToneIcon />
                     </span>
                   </NavLink>
                 </Tooltip>
               </li>
-              <li>
+              {/* <li>
                 <Tooltip
                   classes={{ tooltip: 'tooltip-secondary text-nowrap' }}
                   placement="right"
@@ -136,7 +137,7 @@ const SidebarCollapsed = (props) => {
                     </span>
                   </NavLink>
                 </Tooltip>
-              </li>
+              </li> */}
             </ul>
           </PerfectScrollbar>
         </div>

@@ -118,9 +118,7 @@ class Tab1 extends Component {
       // this.payBills()
       this.props.showLoader();
       this.props.token(buyToken);
-    }
-
-    else {
+    } else {
       this.setState({ wantToPay: true });
       this.handleOpen();
     }
@@ -274,7 +272,15 @@ class Tab1 extends Component {
           aria-describedby="simple-modal-description"
         >
           <>
-            <div className="card w-50 align-items-center">
+            <div className="card pl-3 pr-3 align-items-center">
+              <div style={{ position: "relative", left: "150px" }}>
+                <Button
+                  onClick={this.handleClose}
+                  className="px-4 text-dark-50 mt-3"
+                >
+                  <FontAwesomeIcon icon={["fas", "times"]} />
+                </Button>
+              </div>
               <div className="app-wrapper bg-white">
                 <Loader />
                 <div className="hero-wrapper w-100">
@@ -292,33 +298,6 @@ class Tab1 extends Component {
                         </div>
                       </div>
                       <div className="py-4">
-                        <div className="text-center mb-3">
-                          <Button
-                            className="m-2 btn-pill px-4 font-weight-bold btn-google"
-                            size="small"
-                          >
-                            <span className="btn-wrapper--icon">
-                              <FontAwesomeIcon icon={["fab", "google"]} />
-                            </span>
-                            <span className="btn-wrapper--label">
-                              Login with Google
-                            </span>
-                          </Button>
-                          <Button
-                            className="m-2 btn-pill px-4 font-weight-bold btn-facebook"
-                            size="small"
-                          >
-                            <span className="btn-wrapper--icon">
-                              <FontAwesomeIcon icon={["fab", "facebook"]} />
-                            </span>
-                            <span className="btn-wrapper--label">
-                              Login with Facebook
-                            </span>
-                          </Button>
-                        </div>
-                        <div className="text-center text-black-50 py-2 mb-4">
-                          or sign in with credentials
-                        </div>
                         <div>
                           <div className="mb-4">
                             <TextField
@@ -364,13 +343,31 @@ class Tab1 extends Component {
                               {this.state.error}
                             </Typography>
                           )}
-                          <div className="text-center py-4">
+                          {/* <div className="text-center py-4">
                             <Button
                               onClick={this.handleClick}
                               className="btn-second font-weight-bold p-3 my-2"
                             >
                               Submit
                             </Button>
+                          </div> */}
+                          <div className="d-inline-flex">
+                            <div className="text-center py-2">
+                              <Button
+                                onClick={this.handleClick}
+                                className="btn-second font-weight-bold p-3 my-2"
+                              >
+                                Submit
+                              </Button>
+                            </div>
+                            <div className="text-center">
+                              <Button
+                                onClick={this.forgotPassword}
+                                className="btn bg-white font-weight-bold my-2"
+                              >
+                                forgot Password
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -378,12 +375,6 @@ class Tab1 extends Component {
                   </div>
                 </div>
               </div>
-              <Button
-                onClick={this.handleClose}
-                className="btn-danger btn-icon d-40 shadow-sm hover-scale-lg btn-animated-icon-sm p-0"
-              >
-                <FontAwesomeIcon icon={["fas", "times"]} />
-              </Button>
             </div>
           </>
         </Modal>

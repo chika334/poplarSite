@@ -42,6 +42,7 @@ const SidebarHeader = (props) => {
                 alt="Bamburgh React Messenger Application with Material-UI PRO"
                 src={projectLogo}
               />
+              {/* {process.env.REACT_APP_URL} */}
             </div>
             <div className="app-sidebar-logo--text">
               <span>Messenger</span>

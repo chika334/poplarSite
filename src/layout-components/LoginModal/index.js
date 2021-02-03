@@ -3,8 +3,8 @@ import React from "react";
 import Modal from "@material-ui/core/Modal";
 import { useSelector, connect } from "react-redux";
 import Login from "./Login";
-import { Button } from "@material-ui/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { Button } from "@material-ui/core";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { hideModal } from "../../_actions/modal";
 // import Product from "./Product";
 

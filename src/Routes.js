@@ -113,11 +113,11 @@ const Routes = () => {
           <RegisterModal />
           <ForgotModal />
           {/* <Switch> */}
-          {/* <Redirect
+          <Redirect
             exact
             from="/"
             to={`${process.env.REACT_APP_URL}`}
-          /> */}
+          />
           <Route
             path={[
               `${process.env.REACT_APP_URL}`,
@@ -156,23 +156,23 @@ const Routes = () => {
 
           <Route
             path={[
-              `${process.env.REACT_APP_URL}/Dashboard`,
-              `${process.env.REACT_APP_URL}/Electric`,
-              `${process.env.REACT_APP_URL}/Water`,
-              `${process.env.REACT_APP_URL}/Cable`,
-              `${process.env.REACT_APP_URL}/Airtime`,
-              `${process.env.REACT_APP_URL}/Data`,
-              `${process.env.REACT_APP_URL}/Transfer`,
-              `${process.env.REACT_APP_URL}/Deposits`,
-              `${process.env.REACT_APP_URL}/Products`,
-              `${process.env.REACT_APP_URL}/PageProfile`,
+              `${process.env.REACT_APP_URL}/dashboard`,
+              `${process.env.REACT_APP_URL}/electric`,
+              `${process.env.REACT_APP_URL}/water`,
+              `${process.env.REACT_APP_URL}/cable`,
+              `${process.env.REACT_APP_URL}/airtime`,
+              `${process.env.REACT_APP_URL}/data`,
+              `${process.env.REACT_APP_URL}/transfer`,
+              `${process.env.REACT_APP_URL}/deposits`,
+              `${process.env.REACT_APP_URL}/products`,
+              `${process.env.REACT_APP_URL}/profilepage`,
               `${process.env.REACT_APP_URL}/buytoken`,
-              `${process.env.REACT_APP_URL}/Settings`,
+              `${process.env.REACT_APP_URL}/settings`,
               `${process.env.REACT_APP_URL}/walletTranx`,
               `${process.env.REACT_APP_URL}/reportTranx`,
               `${process.env.REACT_APP_URL}/fundWallet`,
               `${process.env.REACT_APP_URL}/debitWallet`,
-              `${process.env.REACT_APP_URL}/PageRegisterOverlay`,
+              // `${process.env.REACT_APP_URL}/PageRegisterOverlay`,
             ]}
           >
             <CollapsedSidebar>
@@ -184,13 +184,13 @@ const Routes = () => {
                   variants={pageVariants}
                   transition={pageTransition}
                 >
-                  <PrivateRoute
+                  {/* <PrivateRoute
                     path={`${process.env.REACT_APP_URL}/PageRegisterOverlay`}
                     exact
                     component={PageRegisterOverlay}
-                  />
+                  /> */}
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Dashboard`}
+                    path={`${process.env.REACT_APP_URL}/dashboard`}
                     exact
                     component={Overview}
                   />
@@ -215,47 +215,47 @@ const Routes = () => {
                     component={debitWallet}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Deposits`}
+                    path={`${process.env.REACT_APP_URL}/deposits`}
                     exact
                     component={Deposits}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Transfer`}
+                    path={`${process.env.REACT_APP_URL}/transfer`}
                     exact
                     component={Transfer}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Data`}
+                    path={`${process.env.REACT_APP_URL}/data`}
                     exact
                     component={Data}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Airtime`}
+                    path={`${process.env.REACT_APP_URL}/airtime`}
                     exact
                     component={Airtime}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Cable`}
+                    path={`${process.env.REACT_APP_URL}/cable`}
                     exact
                     component={Cable}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Water`}
+                    path={`${process.env.REACT_APP_URL}/water`}
                     exact
                     component={Water}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Electric`}
+                    path={`${process.env.REACT_APP_URL}/electric`}
                     exact
                     component={Electric}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/Products`}
+                    path={`${process.env.REACT_APP_URL}/products`}
                     exact
                     component={Products}
                   />
                   <PrivateRoute
-                    path={`${process.env.REACT_APP_URL}/PageProfile`}
+                    path={`${process.env.REACT_APP_URL}/profilepage`}
                     exact
                     component={PageProfile}
                   />

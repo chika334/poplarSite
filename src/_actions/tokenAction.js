@@ -1,6 +1,6 @@
 import axios from "axios";
 import { returnErrors } from "./errorAction";
-import { BUYTOKEN_FAIL, BUY_TOKEN } from "./type";
+import { BUYTOKEN_FAIL, BUY_TOKEN, CLEAR_BUY_TOKEN } from "./type";
 import { tokenConfig } from "./userAction";
 
 export const token = (buyToken) => (dispatch, getState) => {
@@ -22,3 +22,9 @@ export const token = (buyToken) => (dispatch, getState) => {
       });
     });
 };
+
+export const clearToken = () => dispatch => {
+  dispatch({
+    type: CLEAR_BUY_TOKEN
+  })
+}

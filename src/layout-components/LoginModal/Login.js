@@ -13,7 +13,7 @@ import Loader from "../../Components/Loader/Loader";
 import { withRouter } from "react-router-dom";
 import { hideModal, showModal } from "../../_actions/modal";
 import { showForgotModal } from "../../_actions/forgotModal";
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 
 class Login extends Component {
   constructor(props) {
@@ -51,10 +51,10 @@ class Login extends Component {
     if (isAuthenticated === true) {
       this.sendRedirect();
       setTimeout(() => {
-        let redirect = localStorage.getItem("redirectPage");
+        // let redirect = localStorage.getItem("redirectPage");
         this.props.hideLoader();
         // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-        window.location.href = `${process.env.REACT_APP_URL}/PageProfile`;
+        window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
       }, 500);
     }
   };

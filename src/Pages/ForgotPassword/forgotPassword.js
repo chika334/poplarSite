@@ -8,7 +8,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Icon from "@material-ui/core/Icon";
+// import Icon from "@material-ui/core/Icon";
 import { connect } from "react-redux";
 import Alert from "@material-ui/lab/Alert";
 import { clearErrors } from "../../_actions/errorAction";
@@ -17,7 +17,7 @@ import { showForgotModal, hideForgotModal } from "../../_actions/forgotModal";
 import Loader from "../../Components/Loader/Loader";
 import { showLoader, hideLoader } from "../../_actions/loading";
 import { showResetModal } from '../../_actions/ResetPassword';
-import ResetModal from '../ResetPassword'
+// import ResetModal from '../ResetPassword'
 
 const styles = (theme) => ({
   card: {

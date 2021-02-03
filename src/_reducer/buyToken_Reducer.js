@@ -1,4 +1,4 @@
-import { BUY_TOKEN, BUYTOKEN_FAIL } from "../_actions/type";
+import { BUY_TOKEN, BUYTOKEN_FAIL, CLEAR_BUY_TOKEN } from "../_actions/type";
 
 const initialState = {
   success: false,
@@ -13,6 +13,12 @@ function buyToken (state = initialState, action) {
         token: action.payload,
         success: true,
       };
+    case CLEAR_BUY_TOKEN: 
+      return {
+        ...state,
+        token: null,
+        success: false
+      }
     case BUYTOKEN_FAIL:
       return {
         ...state,

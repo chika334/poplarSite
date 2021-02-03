@@ -82,7 +82,7 @@ class DebitWallet extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
     if (error !== prevProps.error) {
       // check for register error
       if (error.id === "DEBITWALLET_FAIL") {

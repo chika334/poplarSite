@@ -1,5 +1,5 @@
 import React from "react";
-import { fundWallets } from '../../_actions/wallet'
+import { fundWallets } from "../../_actions/wallet";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -16,6 +16,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { clearErrors } from "../../_actions/errorAction";
 import axios from "axios";
+import { showLoader, hideLoader } from "../../_actions/loading";
+import Loader from "../../Components/Loader/Loader";
 
 const styles = (theme) => ({
   card: {
@@ -36,9 +38,9 @@ const styles = (theme) => ({
     marginLeft: theme.spacing(),
     marginRight: theme.spacing(),
     width: 300,
-    [theme.breakpoints.down('sm')]: {
-      width: 250
-    }
+    [theme.breakpoints.down("sm")]: {
+      width: 250,
+    },
   },
   buttonField: {
     marginLeft: theme.spacing(),
@@ -83,10 +85,11 @@ class Wallet extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
     if (error !== prevProps.error) {
       // check for register error
       if (error.id === "FUND_WALLET_FAIL") {
+        this.props.hideLoader();
         this.setState({ error: error.message.message });
       }
     } else {
@@ -95,10 +98,11 @@ class Wallet extends React.Component {
   }
 
   check = () => {
-    const { isAuthenticated } = this.props;
-    if (isAuthenticated) {
-      this.setState({ redirect: true });
+    const { success } = this.props;
+    // console.log(success);
+    if (success.success) {
       this.sendRedirect();
+      this.props.hideLoader();
       // this.props.history.push("/profile/dashboard");
     }
   };
@@ -120,10 +124,11 @@ class Wallet extends React.Component {
     const fundWallet = {
       source,
       amount,
-      reference
+      reference,
     };
 
-    this.props.fundWallets(fundWallet)
+    this.props.showLoader();
+    this.props.fundWallets(fundWallet);
   };
 
   render() {
@@ -131,6 +136,7 @@ class Wallet extends React.Component {
     return (
       <div>
         <Card className={classes.card}>
+          <Loader />
           <CardContent>
             <Typography type="" className={classes.title}>
               Fund Wallet
@@ -146,7 +152,9 @@ class Wallet extends React.Component {
                 {this.state.data === null
                   ? ""
                   : this.state.data.map((allData) => (
-                      <MenuItem key={allData.sourceType} value={allData.id}>{allData.sourceName}</MenuItem>
+                      <MenuItem key={allData.sourceType} value={allData.id}>
+                        {allData.sourceName}
+                      </MenuItem>
                     ))}
               </Select>
             </FormControl>{" "}
@@ -192,6 +200,9 @@ class Wallet extends React.Component {
             </Button>
           </CardActions>
         </Card>
+        <div className="mt-5 text-center">
+          <a href={`${process.env.REACT_APP_URL}/profilepage`}>back to Profile</a>
+        </div>
       </div>
     );
   }
@@ -201,8 +212,12 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.authUser.isAuthenticated,
   authUser: state.authUser,
   error: state.error,
+  success: state.wallet,
 });
 
-export default connect(mapStateToProps, { clearErrors, fundWallets })(
-  withStyles(styles)(Wallet)
-);
+export default connect(mapStateToProps, {
+  clearErrors,
+  fundWallets,
+  showLoader,
+  hideLoader,
+})(withStyles(styles)(Wallet));

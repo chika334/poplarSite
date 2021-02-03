@@ -11,23 +11,23 @@ export default function LivePreviewExample() {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  const [checked1, setChecked1] = useState(false);
+  // const [checked1, setChecked1] = useState(false);
 
-  const toggleCheck1 = () => {
-    setChecked1(!checked1);
-  };
+  // const toggleCheck1 = () => {
+  //   setChecked1(!checked1);
+  // };
 
-  const [checked2, setChecked2] = useState(false);
+  // const [checked2, setChecked2] = useState(false);
 
-  const toggleCheck2 = () => {
-    setChecked2(!checked2);
-  };
+  // const toggleCheck2 = () => {
+  //   setChecked2(!checked2);
+  // };
 
-  const [country, setCountry] = useState("");
+  // const [country, setCountry] = useState("");
 
-  const handleChange = (event) => {
-    setCountry(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setCountry(event.target.value);
+  // };
 
   return (
     <>

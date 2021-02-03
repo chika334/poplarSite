@@ -3,8 +3,8 @@ import Modal from "@material-ui/core/Modal";
 import Register from "./Register";
 import { hideRegisterModal } from "../../_actions/registerModal";
 import { useSelector, connect } from "react-redux";
-import { Button } from "@material-ui/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { Button } from "@material-ui/core";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SimpleModal(props) {
   const autoShowModal = useSelector(

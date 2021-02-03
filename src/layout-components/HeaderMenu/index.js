@@ -29,14 +29,14 @@ const HeaderMenu = (props) => {
               </li>
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}/PageProfile`}
+                  to={`${process.env.REACT_APP_URL}/profilepage`}
                   className="font-weight-bold rounded-sm px-3">
                   Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}/Settings`}
+                  to={`${process.env.REACT_APP_URL}/settings`}
                   className="font-weight-bold rounded-sm px-3">
                   Settings
                 </NavLink>
@@ -65,7 +65,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Electric`)
+                              props.history.push(`${process.env.REACT_APP_URL}/electric`)
                             }
                           }}
                           target="_blank"
@@ -82,7 +82,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Water`)
+                              props.history.push(`${process.env.REACT_APP_URL}/water`)
                             }
                           }}
                           target="_blank"
@@ -98,7 +98,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Cable`)
+                              props.history.push(`${process.env.REACT_APP_URL}/cable`)
                             }
                           }}
                           // selected
@@ -115,7 +115,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Airtime`)
+                              props.history.push(`${process.env.REACT_APP_URL}/airtime`)
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -131,7 +131,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Data`)
+                              props.history.push(`${process.env.REACT_APP_URL}/data`)
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -147,7 +147,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Transfer`)
+                              props.history.push(`${process.env.REACT_APP_URL}/transfer`)
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -163,10 +163,10 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/Deposits`)
+                              props.history.push(`${process.env.REACT_APP_URL}/deposits`)
                             }
                           }}
-                          onClick={(e) => e.preventDefault()}
+                          // onClick={(e) => e.preventDefault()}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Deposits</span>

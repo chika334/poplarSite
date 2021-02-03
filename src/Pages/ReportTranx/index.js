@@ -22,9 +22,9 @@ const styles = (theme) => ({
 });
 
 class Report extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { classes } = this.props;

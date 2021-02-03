@@ -1,57 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  CircularProgress,
+  // Grid,
+  // Card,
+  // CardMedia,
+  // CardContent,
+  // Typography,
+  // CircularProgress,
   Toolbar,
-  AppBar,
+  // AppBar,
   TextField,
 } from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
+// import { fade, makeStyles } from "@material-ui/core/styles";
 // import { toFirstCharUppercase } from "./constants";
 import SearchIcon from "@material-ui/icons/Search";
 // import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
-  pokedexContainer: {
-    paddingTop: "20px",
-    paddingLeft: "50px",
-    paddingRight: "50px",
-  },
-  cardMedia: {
-    margin: "auto",
-  },
-  cardContent: {
-    textAlign: "center",
-  },
-  searchContainer: {
-    display: "flex",
-    // backgroundColor: fade(theme.palette.common.white, 0.15),
-    backgroundColor: "red",
-    // paddingLeft: "20px",
-    // paddingRight: "20px",
-    marginTop: "5px",
-    marginBottom: "5px",
-    alignItems: "center",
-  },
-  searchIcon: {
-    alignSelf: "flex-end",
-    marginBottom: "5px",
-  },
-  searchInput: {
-    width: "200px",
-    margin: "5px",
-  },
-}));
-
 const Search = (props) => {
-  const classes = useStyles();
-  const { history } = props;
-  const [pokemonData, setPokemonData] = useState({});
-  const [filter, setFilter] = useState("");
+  // const classes = useStyles();
+  // const { history } = props;
+  // const [pokemonData, setPokemonData] = useState({});
+  const [setFilter] = useState("");
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);

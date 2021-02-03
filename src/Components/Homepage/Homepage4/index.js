@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { fade, makeStyles } from "@material-ui/core/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardContent } from "@material-ui/core";
 import Slider from "react-slick";
@@ -26,37 +25,9 @@ function SliderArrowPrev(props) {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    width: "100%",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-}));
-
 export default function LivePreviewExample() {
-  const [values, setValues] = useState("");
-  const classes = useStyles();
+  // const [values, setValues] = useState("");
+  // const classes = useStyles();
   const marketingTestimonials1 = {
     dots: true,
     speed: 500,
@@ -75,9 +46,9 @@ export default function LivePreviewExample() {
     ],
   };
 
-  const doSomethingWith = (values) => {
-    console.log(values);
-  };
+  // const doSomethingWith = (values) => {
+  //   console.log(values);
+  // };
 
   return (
     <>

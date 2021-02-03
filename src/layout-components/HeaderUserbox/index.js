@@ -1,36 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Typography,
-  Menu,
-  Button,
-  List,
-  // ListItemLink,
-  ListItem,
-  Tooltip,
-  Divider,
-} from "@material-ui/core";
+// import React, { useState } from "react";
+// import { Link } from "react-router-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   Typography,
+//   Menu,
+//   Button,
+//   List,
+//   // ListItemLink,
+//   ListItem,
+//   Tooltip,
+//   Divider,
+// } from "@material-ui/core";
 
 import Logout from "../../Components/Logout/Logout";
 
-import avatar7 from "../../assets/images/avatars/avatar7.jpg";
+// import avatar7 from "../../assets/images/avatars/avatar7.jpg";
 
 const HeaderUserbox = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <>
-      {/* <div className="position-relative ml-2">
-        <Button
+      <div className="position-relative ml-2">
+        {/* <Button
           onClick={handleClick}
           className="btn-link p-0 text-left d-flex btn-transition-none align-items-center"
         >
@@ -52,8 +52,8 @@ const HeaderUserbox = () => {
               className="opacity-5"
             />
           </span>
-        </Button> */}
-        {/* <Menu
+        </Button>
+        <Menu
           anchorEl={anchorEl}
           keepMounted
           getContentAnchorEl={null}
@@ -85,7 +85,7 @@ const HeaderUserbox = () => {
             </div>
           </div> */}
         {/* </Menu> */}
-      {/* </div> */}
+      </div>
     </>
   );
 };

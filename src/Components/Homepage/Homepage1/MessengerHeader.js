@@ -25,10 +25,10 @@ class MessengerHeader extends Component {
     e.preventDefault();
     if (this.props.authUser || localStorage.token) {
       this.props.hideModal();
-      this.props.history.push(`${process.env.REACT_APP_URL}/PageProfile`);
+      this.props.history.push(`${process.env.REACT_APP_URL}/profilepage`);
     } else if (localStorage.token) {
       this.props.hideModal();
-      this.props.history.push(`${process.env.REACT_APP_URL}/Settings`);
+      this.props.history.push(`${process.env.REACT_APP_URL}/settings`);
     } else {
       this.props.showModal();
     }
@@ -88,11 +88,11 @@ class MessengerHeader extends Component {
                     onClick={(e) => {
                       if (this.props.authUser) {
                         this.props.history.push(
-                          `${process.env.REACT_APP_URL}/PageProfile`
+                          `${process.env.REACT_APP_URL}/profilepage`
                         );
                       } else {
                         this.good(e);
-                        localStorage.setItem("redirectPage", "/PageProfile");
+                        localStorage.setItem("redirectPage", "/profilepage");
                       }
                     }}
                     className="font-weight-bold rounded-sm px-3"
@@ -105,11 +105,11 @@ class MessengerHeader extends Component {
                     onClick={(e) => {
                       if (this.props.authUser) {
                         this.props.history.push(
-                          `${process.env.REACT_APP_URL}/Settings`
+                          `${process.env.REACT_APP_URL}/settings`
                         );
                       } else {
                         this.good(e);
-                        localStorage.setItem("redirectPage", "/Settings");
+                        localStorage.setItem("redirectPage", "/settings");
                       }
                     }}
                     className="font-weight-bold rounded-sm px-3"
@@ -143,11 +143,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Electric`
+                                `${process.env.REACT_APP_URL}/electric`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Electric");
+                              localStorage.setItem("products", "electric");
                             }
                           }}
                           target="_blank"
@@ -165,11 +165,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Water`
+                                `${process.env.REACT_APP_URL}/water`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Water");
+                              localStorage.setItem("products", "/water");
                             }
                           }}
                           target="_blank"
@@ -186,11 +186,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Cable`
+                                `${process.env.REACT_APP_URL}/cable`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Cable");
+                              localStorage.setItem("products", "/cable");
                             }
                           }}
                           // selected
@@ -208,11 +208,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Airtime`
+                                `${process.env.REACT_APP_URL}/airtime`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Airtime");
+                              localStorage.setItem("products", "/airtime");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -229,11 +229,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Data`
+                                `${process.env.REACT_APP_URL}/data`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Data");
+                              localStorage.setItem("products", "data");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -250,11 +250,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Transfer`
+                                `${process.env.REACT_APP_URL}/transfer`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Transfer");
+                              localStorage.setItem("products", "/transfer");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -271,14 +271,14 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Deposits`
+                                `${process.env.REACT_APP_URL}/deposits`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Deposits");
+                              localStorage.setItem("products", "/deposits");
                             }
                           }}
-                          onClick={(e) => e.preventDefault()}
+                          // onClick={(e) => e.preventDefault()}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Deposits</span>
@@ -294,28 +294,30 @@ class MessengerHeader extends Component {
               </ul>
             </div>
             <div className="header-nav-actions flex-grow-0 flex-lg-grow-1">
-              {this.props.authUser ? (
-                <Logout />
-              ) : (
-                <span className="d-none d-lg-block">
-                  <Button
-                    onClick={(e) => {
-                      this.login(e);
-                    }}
-                    className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
-                  >
-                    Login
-                  </Button>
-                  <Button
-                    onClick={(e) => {
-                      this.register(e);
-                    }}
-                    className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
-                  >
-                    Register
-                  </Button>
-                </span>
-              )}
+              <span className="d-none d-lg-block">
+                {this.props.authUser ? (
+                  <Logout />
+                ) : (
+                  <>
+                    <Button
+                      onClick={(e) => {
+                        this.login(e);
+                      }}
+                      className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      onClick={(e) => {
+                        this.register(e);
+                      }}
+                      className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
+                    >
+                      Register
+                    </Button>
+                  </>
+                )}
+              </span>
               <span className="d-block d-lg-none">
                 <button
                   onClick={this.toggle}
@@ -358,7 +360,7 @@ class MessengerHeader extends Component {
                       <ListItem
                         button
                         component={NavLink}
-                        to={`${process.env.REACT_APP_URL}/Homepage`}
+                        to={`${process.env.REACT_APP_URL}`}
                         className="px-4 d-flex align-items-center"
                       >
                         <span>Home</span>
@@ -373,13 +375,13 @@ class MessengerHeader extends Component {
                         onClick={(e) => {
                           if (this.props.authUser) {
                             this.props.history.push(
-                              `${process.env.REACT_APP_URL}/PageProfile`
+                              `${process.env.REACT_APP_URL}/profilepage`
                             );
                           } else {
                             this.good(e);
                             localStorage.setItem(
                               "redirectPage",
-                              "/PageProfile"
+                              "/profilepage"
                             );
                           }
                         }}
@@ -397,11 +399,11 @@ class MessengerHeader extends Component {
                         onClick={(e) => {
                           if (this.props.authUser) {
                             this.props.history.push(
-                              `${process.env.REACT_APP_URL}/Settings`
+                              `${process.env.REACT_APP_URL}/settings`
                             );
                           } else {
                             this.good(e);
-                            localStorage.setItem("redirectPage", "/Settings");
+                            localStorage.setItem("redirectPage", "/settings");
                           }
                         }}
                         className="px-4 d-flex w-100 align-items-center"
@@ -430,11 +432,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Electric`
+                                `${process.env.REACT_APP_URL}/electric`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Electric");
+                              localStorage.setItem("products", "/electric");
                             }
                           }}
                           target="_blank"
@@ -452,11 +454,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Water`
+                                `${process.env.REACT_APP_URL}/water`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Water");
+                              localStorage.setItem("products", "/water");
                             }
                           }}
                           target="_blank"
@@ -473,11 +475,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Cable`
+                                `${process.env.REACT_APP_URL}/cable`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Cable");
+                              localStorage.setItem("products", "/cable");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -494,11 +496,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Airtime`
+                                `${process.env.REACT_APP_URL}/airtime`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Airtime");
+                              localStorage.setItem("products", "/airtime");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -515,11 +517,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Transfer`
+                                `${process.env.REACT_APP_URL}/transfer`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Transfer");
+                              localStorage.setItem("products", "/transfer");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -536,11 +538,11 @@ class MessengerHeader extends Component {
                           onClick={(e) => {
                             if (this.props.authUser) {
                               this.props.history.push(
-                                `${process.env.REACT_APP_URL}/Deposits`
+                                `${process.env.REACT_APP_URL}/deposits`
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/Deposits");
+                              localStorage.setItem("products", "/deposits");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -555,36 +557,49 @@ class MessengerHeader extends Component {
                     </div>
                   </div>
                   <div className="divider" />
-                  <List>
-                    <ListItem
-                      button
-                      component={Button}
-                      onClick={(e) => {
-                        this.login(e);
-                      }}
-                      className="px-4 d-flex w-100 align-items-center"
-                    >
-                      <span>Login</span>
-                      <FontAwesomeIcon
-                        icon={["fas", "angle-right"]}
-                        className="opacity-6 ml-auto"
-                      />
-                    </ListItem>
-                    <ListItem
-                      button
-                      component={Button}
-                      onClick={(e) => {
-                        this.register(e);
-                      }}
-                      className="px-4 d-flex w-100 align-items-center"
-                    >
-                      <span>Register</span>
-                      <FontAwesomeIcon
-                        icon={["fas", "angle-right"]}
-                        className="opacity-6 ml-auto"
-                      />
-                    </ListItem>
-                  </List>
+                  {this.props.authUser ? (
+                    <List>
+                      <ListItem className="px-4 d-flex w-100 align-items-center">
+                        <Logout>
+                          <FontAwesomeIcon
+                            icon={["fas", "angle-right"]}
+                            className="opacity-6 ml-auto"
+                          />
+                        </Logout>
+                      </ListItem>
+                    </List>
+                  ) : (
+                    <List>
+                      <ListItem
+                        button
+                        component={Button}
+                        onClick={(e) => {
+                          this.login(e);
+                        }}
+                        className="px-4 d-flex w-100 align-items-center"
+                      >
+                        <span>Login</span>
+                        <FontAwesomeIcon
+                          icon={["fas", "angle-right"]}
+                          className="opacity-6 ml-auto"
+                        />
+                      </ListItem>
+                      <ListItem
+                        button
+                        component={Button}
+                        onClick={(e) => {
+                          this.register(e);
+                        }}
+                        className="px-4 d-flex w-100 align-items-center"
+                      >
+                        <span>Register</span>
+                        <FontAwesomeIcon
+                          icon={["fas", "angle-right"]}
+                          className="opacity-6 ml-auto"
+                        />
+                      </ListItem>
+                    </List>
+                  )}
                 </div>
               </Collapse>
             </div>

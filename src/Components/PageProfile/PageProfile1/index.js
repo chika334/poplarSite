@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import clsx from "clsx";
+// import clsx from "clsx";
 import { Container, Button, List } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,20 +13,20 @@ import hero1 from "../../../assets/images/hero-bg/hero-8.jpg";
 
 function LivePreviewExample(props) {
   const user = useSelector((state) => state.authUser);
-  const [inputBg, setInputBg] = useState(false);
-  const toggleInputBg = () => setInputBg(!inputBg);
+  // const [inputBg, setInputBg] = useState(false);
+  // const toggleInputBg = () => setInputBg(!inputBg);
 
-  const [activeTab, setActiveTab] = useState("1");
+  // const [activeTab, setActiveTab] = useState("1");
 
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
-  };
+  // const toggle = (tab) => {
+  //   if (activeTab !== tab) setActiveTab(tab);
+  // };
 
-  const [activeTab2, setActiveTab2] = useState("1");
+  const [activeTab2] = useState("1");
 
-  const toggle2 = (tab) => {
-    if (activeTab2 !== tab) setActiveTab2(tab);
-  };
+  // const toggle2 = (tab) => {
+  //   if (activeTab2 !== tab) setActiveTab2(tab);
+  // };
 
   const [files, setFiles] = useState([]);
   const {

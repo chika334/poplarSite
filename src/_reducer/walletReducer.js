@@ -2,7 +2,8 @@ import { WALLET_LOADING, WALLET_LOADED, WALLET_ERROR, FUND_WALLET_FAIL, FUND_WAL
 
 const initialState = {
   isLoading: false,
-  wallet: null
+  wallet: null, 
+  success: false
 }
 
 function walletReducer (state = initialState, action) {
@@ -16,19 +17,21 @@ function walletReducer (state = initialState, action) {
       return {
         ...state,
         wallet: action.payload,
-        isLoading: false
+        isLoading: false,
       }
     case FUND_WALLET:
       return {
         ...state,
         wallet: action.payload,
-        isLoading: false
+        isLoading: false,
+        success: true
       }
     case FUND_WALLET_FAIL:
     case WALLET_ERROR:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        success: false
       }
     default:
       return state;

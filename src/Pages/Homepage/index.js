@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Homepage1 from '../../Components/Homepage/Homepage1';
-import Homepage2 from '../../Components/Homepage/Homepage2';
-import Homepage3 from '../../Components/Homepage/Homepage3';
+// import Homepage2 from '../../Components/Homepage/Homepage2';
+// import Homepage3 from '../../Components/Homepage/Homepage3';
 import Homepage4 from '../../Components/Homepage/Homepage4';
 import Homepage5 from '../../Components/Homepage/Homepage5';
 import Homepage6 from '../../Components/Homepage/Homepage6';

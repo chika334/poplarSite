@@ -1,26 +1,26 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
+// import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import { EditProfile } from "../../../_actions/userAction";
-import { clearErrors } from "../../../_actions/errorAction";
+// import { clearErrors } from "../../../_actions/errorAction";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import Icon from "@material-ui/core/Icon";
+// import Icon from "@material-ui/core/Icon";
 import Alert from "@material-ui/lab/Alert";
 import { showLoader, hideLoader } from "../../../_actions/loading";
 import Loader from "../../../Components/Loader/Loader";
-import loading from "../../../_reducer/loading";
+// import loading from "../../../_reducer/loading";
 
 const styles = (theme) => ({
   root: {

@@ -14,7 +14,7 @@ const Form = ({ formName }) => {
 	const dispatch = useDispatch();
 
 	const [values, handleChange] = useForm({ ...inputFields });
-	const [formIsValid, errors, validate] = useValidator(form.fields, values);
+	const [errors, validate] = useValidator(form.fields, values);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

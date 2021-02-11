@@ -58,7 +58,7 @@ export const useValidator = (fields, values) => {
 			return isValid;
 		}
 	};
-	return [formIsValid, error, validate];
+	return [error, validate];
 };
 
 const createErrorDefault = (fields) => {

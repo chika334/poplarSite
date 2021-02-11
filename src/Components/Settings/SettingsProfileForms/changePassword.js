@@ -108,9 +108,10 @@ class changePassword extends React.Component {
         <Card className={classes.card}>
           {this.state.msg ? <Alert severity="success">{this.state.msg.message}</Alert> : null}
           <CardContent>
-            <Typography type="" className={classes.title}>
+            {/* <Typography type="" className={classes.title}>
               Change Password
-            </Typography>
+            </Typography> */}
+            <h3>Change Password</h3>
             <TextField
               id="oldPassword"
               label="Old Password"

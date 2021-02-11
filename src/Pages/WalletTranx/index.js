@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import "./report.css";
 import moment from "moment";
+import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 
 const styles = (theme) => ({
   root: {
@@ -22,11 +23,13 @@ class WalletReport extends Component {
   // constructor(props) {
   //   super(props);
   // }
-
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className="hero-wrapper bg-composed-wrapper bg-light pb-5">
+        <div className="header-top-section">
+          <MessengerHeader />
+        </div>
         <div className="responsive-container">
           <h2 className={classes.title}>Wallet Report</h2>
           <table>
@@ -43,7 +46,6 @@ class WalletReport extends Component {
               {this.props.wallet.wallet === null
                 ? ""
                 : this.props.wallet.wallet.map((result, index) => {
-                    // console.log(result)
                     return (
                       <tr key={index}>
                         <td data-title="id">{result.id}</td>

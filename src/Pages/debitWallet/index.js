@@ -16,6 +16,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { clearErrors } from "../../_actions/errorAction";
 import axios from "axios";
+import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 
 const styles = (theme) => ({
   card: {
@@ -128,7 +129,10 @@ class DebitWallet extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className="hero-wrapper bg-composed-wrapper bg-light pb-5">
+        <div className="header-top-section">
+          <MessengerHeader />
+        </div>
         <Card className={classes.card}>
           <CardContent>
             <Typography type="" className={classes.title}>

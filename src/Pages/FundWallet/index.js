@@ -18,6 +18,8 @@ import { clearErrors } from "../../_actions/errorAction";
 import axios from "axios";
 import { showLoader, hideLoader } from "../../_actions/loading";
 import Loader from "../../Components/Loader/Loader";
+import Alert from "@material-ui/lab/Alert";
+import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 
 const styles = (theme) => ({
   card: {
@@ -55,6 +57,7 @@ const styles = (theme) => ({
 });
 
 class Wallet extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -62,7 +65,7 @@ class Wallet extends React.Component {
       amount: "",
       redirect: false,
       reference: "",
-      data: null,
+      data: [],
       error: "",
     };
   }
@@ -112,11 +115,31 @@ class Wallet extends React.Component {
   };
 
   componentDidMount() {
+    this._isMounted = true;
+    // this.fundSource();
     axios
-      .get(`http://www.blacksillicon.com/fastpayr/api/v1/fundsource`)
-      .then((res) => this.setState({ data: res.data }))
+      .get(`${process.env.REACT_APP_FUND_SOURCE}`)
+      // .then((res) => res.data)
+      .then((res) => {
+        if (this._isMounted) {
+          this.setState({ data: res.data });
+        }
+      })
       .catch((err) => console.log(err));
   }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  fundSource = () => {
+    const fundsource = fetch(
+      `${process.env.REACT_APP_FUND_SOURCE}`
+    ).then((resp) => resp.json());
+    Promise.all([fundsource])
+      .then((res) => this.setState({ data: res.data }))
+      .catch((err) => console.log(err));
+  };
 
   clickSubmit = (e) => {
     e.preventDefault();
@@ -127,20 +150,28 @@ class Wallet extends React.Component {
       reference,
     };
 
-    this.props.showLoader();
     this.props.fundWallets(fundWallet);
+    this.props.showLoader();
   };
 
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className="hero-wrapper bg-composed-wrapper bg-light">
+        <div className="header-top-section pb-2">
+          <MessengerHeader />
+        </div>
         <Card className={classes.card}>
-          <Loader />
+          {/* <Loader /> */}
           <CardContent>
             <Typography type="" className={classes.title}>
               Fund Wallet
             </Typography>
+            {this.props.success.success ? (
+              <Alert severity="success">Successfully funded account</Alert>
+            ) : (
+              ""
+            )}
             <FormControl className={classes.textField}>
               <InputLabel id="demo-simple-select-label">Source</InputLabel>
               <Select
@@ -149,7 +180,7 @@ class Wallet extends React.Component {
                 value={this.state.source || ""}
                 onChange={this.handleSelect}
               >
-                {this.state.data === null
+                {this.state.data === []
                   ? ""
                   : this.state.data.map((allData) => (
                       <MenuItem key={allData.sourceType} value={allData.id}>
@@ -201,7 +232,9 @@ class Wallet extends React.Component {
           </CardActions>
         </Card>
         <div className="mt-5 text-center">
-          <a href={`${process.env.REACT_APP_URL}/profilepage`}>back to Profile</a>
+          <a href={`${process.env.REACT_APP_URL}/profilepage`}>
+            back to Profile
+          </a>
         </div>
       </div>
     );

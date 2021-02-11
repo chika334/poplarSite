@@ -14,9 +14,11 @@ import DialpadOutlinedIcon from "@material-ui/icons/DialpadOutlined";
 import { clearErrors } from "../../_actions/errorAction";
 import { token } from "../../_actions/tokenAction";
 import { showLoader, hideLoader } from "../../_actions/loading";
+import { hideModal } from "../../_actions/modal";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
+import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 
 const styles = (theme) => ({
   card: {
@@ -211,107 +213,107 @@ class Electric extends Component {
     const { classes } = this.props;
     const body = (
       <div className="card pl-3 pr-3 align-items-center">
-        <div className="app-wrapper">
-          {/* <Tab1 /> */}
-          <div className="app-wrapper bg-white">
-            <Loader />
-            <div className="hero-wrapper w-100">
-              <div className="flex-grow-1 w-100 align-items-center">
-                <div>
-                  <div className="divider-v divider-v-lg d-none d-lg-block" />
-                  <div className="text-center mt-4">
-                    <img width="100" src={rccg} alt="rccg" />
-                    <h1 className="font-size-xxl mb-1 font-weight-bold">
+        <div style={{ position: "relative", left: "150px" }}>
+          <Button onClick={this.hideModal} className="px-4 text-dark-50 mt-3">
+            <FontAwesomeIcon icon={["fas", "times"]} />
+          </Button>
+        </div>
+        <div className="app-wrapper bg-white">
+          <Loader />
+          <div className="hero-wrapper w-100">
+            <div className="flex-grow-1 w-100 align-items-center">
+              <div>
+                <div className="divider-v divider-v-lg d-none d-lg-block" />
+                <div className="text-center mt-2">
+                  <img width="100" src={rccg} alt="rccg" />
+                  <h1 className="font-size-xxl mb-1 font-weight-bold">
+                    {process.env.REACT_APP_RCCG}
+                  </h1>
+                  <p className="mb-0 text-black-50">
+                    Fill in the fields below to pay your{" "}
+                    <span className="text-lowercase">
                       {process.env.REACT_APP_RCCG}
-                    </h1>
-                    <p className="mb-0 text-black-50">
-                      Fill in the fields below to pay your{" "}
-                      <span className="text-lowercase">
-                        {process.env.REACT_APP_RCCG}
-                      </span>
-                    </p>
-                  </div>
-                  <div className="py-4">
-                    <div>
-                      <div className="mb-4">
-                        <TextField
-                          fullWidth
-                          variant="outlined"
-                          id="fullname"
-                          type="text"
-                          label="Full Name"
-                          value={this.state.fullname}
-                          onChange={this.handleChange("fullname")}
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <PersonIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <TextField
-                          fullWidth
-                          variant="outlined"
-                          id="number"
-                          type="number"
-                          value={this.state.accountNumber}
-                          onChange={this.handleChange("accountNumber")}
-                          label="Meter Number"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <DialpadOutlinedIcon />
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </div>
-                      <div className="mb-3">
-                        <TextField
-                          fullWidth
-                          variant="outlined"
-                          id="amount"
-                          label="Amount"
-                          value={this.state.amount}
-                          onChange={this.handleChange("amount")}
-                          type="number"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <span className="pr-3 align-items-center">
-                                  ₦
-                                </span>
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </div>
-                      {this.state.error && (
-                        <Typography
-                          className="text-center"
-                          component="p"
-                          color="error"
-                        >
-                          {this.state.error}
-                        </Typography>
-                      )}
-                      <div className="text-center py-4">
-                        <Button
-                          onClick={(e) => {
-                            if (this.props.authUser) {
-                              this.submit(e);
-                            } else {
-                              this.submit(e);
-                            }
-                          }}
-                          className="btn-second font-weight-bold w-50 my-2"
-                        >
-                          Submit
-                        </Button>
-                      </div>
+                    </span>
+                  </p>
+                </div>
+                <div className="py-4">
+                  <div>
+                    <div className="mb-4">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        id="fullname"
+                        type="text"
+                        label="Full Name"
+                        value={this.state.fullname}
+                        onChange={this.handleChange("fullname")}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <PersonIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        id="number"
+                        type="number"
+                        value={this.state.accountNumber}
+                        onChange={this.handleChange("accountNumber")}
+                        label="Meter Number"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <DialpadOutlinedIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        id="amount"
+                        label="Amount"
+                        value={this.state.amount}
+                        onChange={this.handleChange("amount")}
+                        type="number"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <span className="pr-3 align-items-center">₦</span>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    {this.state.error && (
+                      <Typography
+                        className="text-center"
+                        component="p"
+                        color="error"
+                      >
+                        {this.state.error}
+                      </Typography>
+                    )}
+                    <div className="text-center py-4">
+                      <Button
+                        onClick={(e) => {
+                          if (this.props.authUser) {
+                            this.submit(e);
+                          } else {
+                            this.submit(e);
+                          }
+                        }}
+                        className="btn-second font-weight-bold w-50 my-2"
+                      >
+                        Submit
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -319,22 +321,21 @@ class Electric extends Component {
             </div>
           </div>
         </div>
-        <Button
-          onClick={this.hideModal}
-          className="px-4 d-flex bg-danger align-items-center justify-content-center text-dark-50"
-        >
-          <FontAwesomeIcon icon={["fas", "times"]} />
-        </Button>
+        {/* </div> */}
       </div>
     );
     return (
-      <div className="mt-3">
-        <Container>
-          <h3>Electric</h3>
-          <div className="row">
-            <Grid>
-              {sidebarItem.map((allDetails, index) => (
-                // <Grid container spacing={3}>
+      <div className="hero-wrapper bg-composed-wrapper bg-light">
+        <div className="header-top-section">
+          <MessengerHeader />
+        </div>
+        <div className="mt-5">
+          <Container>
+            <h3>Electric</h3>
+            <div className="row">
+              <Grid>
+                {sidebarItem.map((allDetails, index) => (
+                  // <Grid container spacing={3}>
                   <div key={index} className="column p-3">
                     <Button
                       onClick={(e) => {
@@ -344,7 +345,7 @@ class Electric extends Component {
                         });
                       }}
                     >
-                      <Card className="cards p-4 mt-5">
+                      <Card className="card p-4 mt-5">
                         <h3 className={classes.titles}>{allDetails.name}</h3>
                         <div className={classes.centerImage}>
                           <img width="65" src={allDetails.src} alt="src" />
@@ -353,20 +354,21 @@ class Electric extends Component {
                       </Card>
                     </Button>
                   </div>
-                // </Grid>
-              ))}
-            </Grid>
-          </div>
-        </Container>
-        <Modal
-          open={this.state.show}
-          onClose={this.hideModal}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          className="pt-4 pb-4 d-flex align-item-center justify-content-center"
-        >
-          <>{body}</>
-        </Modal>
+                  // </Grid>
+                ))}
+              </Grid>
+            </div>
+          </Container>
+          <Modal
+            open={this.state.show}
+            onClose={this.hideModal}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            className="pt-4 pb-4 d-flex align-item-center justify-content-center"
+          >
+            <>{body}</>
+          </Modal>
+        </div>
       </div>
     );
   }
@@ -382,6 +384,7 @@ export default withRouter(
   connect(mapStateToProps, {
     showLoader,
     hideLoader,
+    hideModal,
     token,
     clearErrors,
   })(withStyles(styles)(Electric))

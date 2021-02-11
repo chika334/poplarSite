@@ -7,9 +7,9 @@ import {
   TRANSACTION_ERROR,
 } from "./type";
 
-export const getTransactions = () => (dispatch, getState) => {
+export const getTransactions = () => async (dispatch, getState) => {
   dispatch({ type: TRANSACTION_LOADING });
-  axios
+  await axios
     .get(
       `${process.env.REACT_APP_API}/fastpayr/api/v1/paymentrequest/latest`,
       tokenConfig(getState)

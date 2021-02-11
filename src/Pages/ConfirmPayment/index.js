@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { Container } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import { clearToken } from "../../_actions/tokenAction";
 import { Prompt } from "react-router";
 import { jsPDF } from "jspdf";
-// import Dialog from "@material-ui/core/Dialog";
-// import DialogActions from "@material-ui/core/DialogActions";
-// import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
-// import DialogTitle from "@material-ui/core/DialogTitle";
+import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 
 class BuyToken extends Component {
   state = {
@@ -23,45 +19,37 @@ class BuyToken extends Component {
     e.preventDefault();
     const { token } = this.props.success === null ? "" : this.props.success;
     // new document in jspdf
-    let doc = new jsPDF({unit: 'pt', orientation: 'p', lineHeight: 1.2})
+    let doc = new jsPDF({ unit: "pt", orientation: "p", lineHeight: 1.2 });
     // add some text to the pdf
-
-    doc.text(20, 30, `${process.env.REACT_APP_NAME}`)
-    doc.text(20, 50, `Thank you for using ${process.env.REACT_APP_NAME}`)
-    doc.text(20, 70, `Reference Number:-   ${token.reference}`)
-    doc.text(20, 90, `Current Balance:-    ${token.currentBalance}`) 
+    doc.text(20, 30, `${process.env.REACT_APP_NAME}`);
+    doc.text(20, 50, `Thank you for using ${process.env.REACT_APP_NAME}`);
+    doc.text(20, 70, `Name:- ${this.props.authUser.user.user.fullName}`);
+    doc.text(
+      20,
+      90,
+      `Company Name:- ${this.props.authUser.user.sender.companyName}`
+    );
+    doc.text(20, 110, `Reference Number:-   ${token.reference}`);
+    doc.text(20, 130, `Current Balance:-    ${token.currentBalance}`);
     // set font
     // doc.addFont()
-    doc.setFont('serif');
+    doc.setFont("serif");
     // doc.setFontType('normal')
 
     // save the pdf file
-    doc.save(`${process.env.REACT_APP_URL}.pdf`)
+    doc.save(`${process.env.REACT_APP_URL}.pdf`);
   };
 
-  componentDidMount() {
-    // window.onbeforeunload = function () {
-    //   this.setState({ isBlocking: true })
-    //   return "";
-    // }.bind(this);
-  }
-
-  // onUnload(event) {
-  //   alert("page Refreshed");
-  //   this.props.history.push(`${process.env.REACT_APP_URL}/PageProfile`)
-  // }
-
-  // componentDidUpdate = () => {
-  //   if (this.state.shouldBlockNavigation) {
-  //     window.onbeforeunload = () => true;
-  //   } else {
-  //     window.onbeforeunload = undefined;
-  //   }
+  // submit = (e) => {
+  //   e.preventDefault();
+  //   const string = renderToString(<Prints />);
+  //   const pdf = new jsPDF();
+  //   pdf.fromHTML(string)
+  //   pdf.save('pdf')
   // };
 
   componentDidUpdate() {
     const token = this.props.success;
-    // console.log(token);
     this.props.history.listen(() => {
       // Detecting, user has changed URL
       if (this.props.history.location.pathname) {
@@ -90,54 +78,50 @@ class BuyToken extends Component {
       this.props.clearToken();
       // // this.props.history.push(`${process.env.REACT_APP_URL}/Products`);
       window.location.href = `${process.env.REACT_APP_URL}/Products`;
-    } 
+    }
     // else {
     //   const { token } = this.props.success === null ? "" : this.props.success;
     // }
     return (
-      <>
+      <div className="hero-wrapper bg-composed-wrapper bg-light">
+        <div className="header-top-section pb-5">
+          <MessengerHeader />
+        </div>
         <PerfectScrollbar>
           <Prompt
             when={this.state.isBlocking}
-            message={() =>
-              `On reload all transaction history will b lost`
-            }
+            message={() => `On reload all transaction history will b lost`}
           />
           <div className="m-4 card-header rounded-0 bg-white border-bottom">
             <Container className="d-block text-center py-3 text-sm-left d-sm-flex align-items-center justify-content-between">
               <div className="d-flex align-items-center mb-3 mb-sm-0">
                 <div className="">
-                  <h2>Confirm Payment</h2>
+                  <h2>Download Payment Invoice</h2>
                   <hr />
-                  <table>
+                  <table id="target">
                     <tbody>
                       <tr>
-                        <td>Transaction status</td>
+                        <td>Transaction status:- </td>
                         <td>{token.message}</td>
                       </tr>
                       <tr>
-                        <td>Reference Number</td>
+                        <td>Reference Number:- </td>
                         <td>{token.reference}</td>
                       </tr>
                       <tr>
-                        <td>Current Balance</td>
+                        <td>Current Balance:- </td>
                         <td>{token.currentBalance}</td>
                       </tr>
                     </tbody>
                   </table>
                   <div className="pt-3" />
                   <hr />
-                  {/* <Button
-                    color="primary"
-                    autoFocus="autoFocus"
-                    // className="btn-second font-weight-bold w-50 my-2"
-                    variant="contained"
-                    onClick={this.submit}
-                  >
-                    Confirm Payment
-                  </Button> */}
                   <Button
-                    color="primary"
+                    style={{
+                      backgroundColor: `rgb(0, 68, 116)`,
+                      color: "#fff",
+                    }}
+                    // color="primary"
                     autoFocus="autoFocus"
                     className="ml-3"
                     variant="contained"
@@ -146,13 +130,13 @@ class BuyToken extends Component {
                     Download Invoice
                   </Button>
                   <Button
-                    // color="primary"
                     autoFocus="autoFocus"
                     className="ml-3 bg-white"
                     variant="contained"
-                    // onClick={this.submit}
                   >
-                    Back to Profile
+                    <Link to={`${process.env.REACT_APP_URL}/profilepage`}>
+                      Back to Profile
+                    </Link>
                   </Button>
                 </div>
               </div>
@@ -179,12 +163,13 @@ class BuyToken extends Component {
             </Dialog> */}
           </div>
         </PerfectScrollbar>
-      </>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
+  authUser: state.authUser,
   success: state.buyToken,
 });
 

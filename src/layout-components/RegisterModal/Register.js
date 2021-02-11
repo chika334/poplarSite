@@ -55,8 +55,8 @@ class Register extends Component {
       setTimeout(() => {
         let redirect = localStorage.getItem("redirectPage");
         this.props.hideLoader();
-        // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-        window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
+        this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+        // window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
         this.props.hideRegisterModal();
       }, 500);
     }

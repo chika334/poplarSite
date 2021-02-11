@@ -11,3 +11,9 @@ export const hideLoader = () => dispatch => {
     type: HIDE_LOADER
   })
 }
+
+// export const removeLoader = () => dispatch => {
+//   dispatch({
+//     type: REMOVE_LOADER
+//   })
+// }

@@ -14,9 +14,13 @@ import modal from './modal'
 import modalRegister from './registerModal'
 import modalForgot from './forgotModal'
 import resetModal from './ResetPassword'
+import productModal from './ProductLoginDisplay'
+import ProductDisplayModal from './ProductModal'
 
 export default combineReducers({
 	content,
+	productModal,
+	ProductDisplayModal,
 	modalRegister,
 	resetModal,
 	modal,

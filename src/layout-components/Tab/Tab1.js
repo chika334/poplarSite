@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { clearErrors } from "../../_actions/errorAction";
 import { token } from "../../_actions/tokenAction";
 import { showLoader, hideLoader } from "../../_actions/loading";
-import Loader from "../../Components/Loader/Loader";
+import SuspenseLoading from "../../Components/Loader/Loader";
 import { withRouter } from "react-router-dom";
 import Modal from "@material-ui/core/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -98,29 +98,36 @@ class Tab1 extends Component {
   submit = (e) => {
     e.preventDefault();
     const { authUser } = this.props;
-    const {
-      accountNumber,
-      amount,
-      fullname,
-      productCode,
-      customerId,
-    } = this.state;
+    if (localStorage.ProductTitle === "RCCG ELECTRIC") {
+      const {
+        accountNumber,
+        amount,
+        fullname,
+        productCode,
+        customerId,
+      } = this.state;
 
-    const buyToken = {
-      productCode,
-      fullname,
-      amount,
-      accountNumber,
-      customerId,
-    };
+      const buyToken = {
+        productCode,
+        fullname,
+        amount,
+        accountNumber,
+        customerId,
+      };
 
-    if (authUser) {
-      // this.payBills()
-      this.props.showLoader();
-      this.props.token(buyToken);
-    } else {
-      this.setState({ wantToPay: true });
-      this.handleOpen();
+      if (authUser) {
+        this.props.showLoader();
+        this.props.token(buyToken);
+      } else {
+        this.setState({ wantToPay: true });
+        this.handleOpen();
+      }
+    } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
+      console.log(localStorage.ProductTitle);
+    } else if (localStorage.ProductTitle === "EKO ELECTRIC") {
+      console.log(localStorage.ProductTitle);
+    } else if (localStorage.ProductTitle === "DSTV Subscription") {
+      console.log(localStorage.ProductTitle);
     }
   };
 
@@ -171,179 +178,186 @@ class Tab1 extends Component {
 
   render() {
     return (
-      <div className="app-wrapper bg-white">
-        <Loader />
-        <div className="hero-wrapper w-100">
-          <div className="flex-grow-1 w-100 align-items-center">
-            <div>
-              <div className="divider-v divider-v-lg d-none d-lg-block" />
-              <div className="text-center mt-4">
-                <img width="100" src={rccg} alt="rccg" />
-                <h1 className="font-size-xxl mb-1 font-weight-bold">
-                  {process.env.REACT_APP_RCCG}
-                </h1>
-                <p className="mb-0 text-black-50">
-                  Fill in the fields below to pay your{" "}
-                  <span className="text-lowercase">
-                    {process.env.REACT_APP_RCCG}
-                  </span>
-                </p>
-              </div>
-              <div className="py-4">
-                <div>
-                  <div className="mb-4">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="fullname"
-                      type="text"
-                      label="Full Name"
-                      value={this.state.fullname}
-                      onChange={this.handleChange("fullname")}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <PersonIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="number"
-                      type="number"
-                      value={this.state.accountNumber}
-                      onChange={this.handleChange("accountNumber")}
-                      label="Meter Number"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <DialpadOutlinedIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="amount"
-                      label="Amount"
-                      value={this.state.amount}
-                      onChange={this.handleChange("amount")}
-                      type="number"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <span className="pr-3 align-items-center">₦</span>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="text-center py-4">
-                    <Button
-                      onClick={(e) => {
-                        if (this.props.authUser) {
-                          this.submit(e);
-                        } else {
-                          this.submit(e);
-                        }
-                      }}
-                      className="btn-second font-weight-bold w-50 my-2"
-                    >
-                      Submit
-                    </Button>
+      <>
+        {/* <SuspenseLoading /> */}
+        <div className="app-wrapper">
+          <div className="hero-wrapper w-100">
+            <div className="flex-grow-1 w-100 align-items-center">
+              <div>
+                <div className="divider-v divider-v-lg d-none d-lg-block" />
+                <div className="text-center mt-4">
+                  <img
+                    width="100"
+                    src={localStorage.getItem("ProductImage")}
+                    alt="rccg"
+                  />
+                  <h1 className="font-size-xxl mb-1 font-weight-bold">
+                    {/* {process.env.REACT_APP_RCCG} */}
+                    {localStorage.getItem("ProductTitle")}
+                  </h1>
+                  <p className="mb-0 text-black-50">
+                    Fill in the fields below to pay your{" "}
+                    <span className="text-lowercase">
+                      {/* {process.env.REACT_APP_RCCG} */}
+                      {localStorage.getItem("ProductTitle")}
+                    </span>
+                  </p>
+                </div>
+                <div className="py-4">
+                  <div>
+                    <div className="mb-4">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        id="fullname"
+                        type="text"
+                        label="Full Name"
+                        value={this.state.fullname}
+                        onChange={this.handleChange("fullname")}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <PersonIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        id="number"
+                        type="number"
+                        value={this.state.accountNumber}
+                        onChange={this.handleChange("accountNumber")}
+                        label="Meter Number"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <DialpadOutlinedIcon />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        id="amount"
+                        label="Amount"
+                        value={this.state.amount}
+                        onChange={this.handleChange("amount")}
+                        type="number"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <span className="pr-3 align-items-center">₦</span>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
+                    <div className="text-center py-4">
+                      <Button
+                        onClick={(e) => {
+                          if (this.props.authUser) {
+                            this.submit(e);
+                          } else {
+                            this.submit(e);
+                          }
+                        }}
+                        className="btn-second font-weight-bold w-50 my-2"
+                      >
+                        Submit
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <Modal
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="simple-modal-title"
-          className="pt-4 pb-4 d-flex align-item-center justify-content-center"
-          aria-describedby="simple-modal-description"
-        >
-          <>
-            <div className="card pl-3 pr-3 align-items-center">
-              <div style={{ position: "relative", left: "150px" }}>
-                <Button
-                  onClick={this.handleClose}
-                  className="px-4 text-dark-50 mt-3"
-                >
-                  <FontAwesomeIcon icon={["fas", "times"]} />
-                </Button>
-              </div>
-              <div className="app-wrapper bg-white">
-                <Loader />
-                <div className="hero-wrapper w-100">
-                  <div className="flex-grow-1 w-100 align-items-center">
-                    <div>
-                      <div className="divider-v divider-v-lg d-none d-lg-block" />
-                      <div className="text-center mt-4">
-                        <div className="mb-0 text-black-50">
-                          <h1 className="font-size-xxl mb-1 font-weight-bold">
-                            Login
-                          </h1>
-                          <p className="mb-0 text-black-50">
-                            Fill in the fields below to login to your account
-                          </p>
+          <Modal
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="simple-modal-title"
+            className="pt-4 pb-4 d-flex align-item-center justify-content-center"
+            aria-describedby="simple-modal-description"
+          >
+            <>
+              <div className="card pl-3 pr-3 align-items-center">
+                <div style={{ position: "relative", left: "150px" }}>
+                  <Button
+                    onClick={this.handleClose}
+                    className="px-4 text-dark-50 mt-3"
+                  >
+                    <FontAwesomeIcon icon={["fas", "times"]} />
+                  </Button>
+                </div>
+                <div className="app-wrapper bg-white">
+                  <SuspenseLoading />
+                  <div className="hero-wrapper w-100">
+                    <div className="flex-grow-1 w-100 align-items-center">
+                      <div>
+                        <div className="divider-v divider-v-lg d-none d-lg-block" />
+                        <div className="text-center mt-4">
+                          <div className="mb-0 text-black-50">
+                            <h1 className="font-size-xxl mb-1 font-weight-bold">
+                              Login
+                            </h1>
+                            <p className="mb-0 text-black-50">
+                              Fill in the fields below to login to your account
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="py-4">
-                        <div>
-                          <div className="mb-4">
-                            <TextField
-                              fullWidth
-                              variant="outlined"
-                              id="textfield-email"
-                              label="Email address"
-                              onChange={this.handleChange("email")}
-                              value={this.state.email || ""}
-                              InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <MailOutlineTwoToneIcon />
-                                  </InputAdornment>
-                                ),
-                              }}
-                            />
-                          </div>
-                          <div className="mb-3">
-                            <TextField
-                              fullWidth
-                              variant="outlined"
-                              id="textfield-password"
-                              label="Password"
-                              onChange={this.handleChange("password")}
-                              type="password"
-                              value={this.state.password || ""}
-                              InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <LockTwoToneIcon />
-                                  </InputAdornment>
-                                ),
-                              }}
-                            />
-                          </div>
-                          {this.state.error && (
-                            <Typography
-                              className="text-center"
-                              component="p"
-                              color="error"
-                            >
-                              {this.state.error}
-                            </Typography>
-                          )}
-                          {/* <div className="text-center py-4">
+                        <div className="py-4">
+                          <div>
+                            <div className="mb-4">
+                              <TextField
+                                fullWidth
+                                variant="outlined"
+                                id="textfield-email"
+                                label="Email address"
+                                onChange={this.handleChange("email")}
+                                value={this.state.email || ""}
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <MailOutlineTwoToneIcon />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </div>
+                            <div className="mb-3">
+                              <TextField
+                                fullWidth
+                                variant="outlined"
+                                id="textfield-password"
+                                label="Password"
+                                onChange={this.handleChange("password")}
+                                type="password"
+                                value={this.state.password || ""}
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <LockTwoToneIcon />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                              />
+                            </div>
+                            {this.state.error && (
+                              <Typography
+                                className="text-center"
+                                component="p"
+                                color="error"
+                              >
+                                {this.state.error}
+                              </Typography>
+                            )}
+                            {/* <div className="text-center py-4">
                             <Button
                               onClick={this.handleClick}
                               className="btn-second font-weight-bold p-3 my-2"
@@ -351,22 +365,23 @@ class Tab1 extends Component {
                               Submit
                             </Button>
                           </div> */}
-                          <div className="d-inline-flex">
-                            <div className="text-center py-2">
-                              <Button
-                                onClick={this.handleClick}
-                                className="btn-second font-weight-bold p-3 my-2"
-                              >
-                                Submit
-                              </Button>
-                            </div>
-                            <div className="text-center">
-                              <Button
-                                onClick={this.forgotPassword}
-                                className="btn bg-white font-weight-bold my-2"
-                              >
-                                forgot Password
-                              </Button>
+                            <div className="d-inline-flex">
+                              <div className="text-center py-2">
+                                <Button
+                                  onClick={this.handleClick}
+                                  className="btn-second font-weight-bold p-3 my-2"
+                                >
+                                  Submit
+                                </Button>
+                              </div>
+                              <div className="text-center">
+                                <Button
+                                  onClick={this.forgotPassword}
+                                  className="btn bg-white font-weight-bold my-2"
+                                >
+                                  forgot Password
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -375,10 +390,10 @@ class Tab1 extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-          </>
-        </Modal>
-      </div>
+            </>
+          </Modal>
+        </div>
+      </>
     );
   }
 }

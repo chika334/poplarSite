@@ -14,6 +14,7 @@ import {
   EDITPROFILE,
 } from "./type.js";
 import { returnErrors } from "./errorAction.js";
+import { hideLoader, showLoader } from "../_actions/loading";
 // import { tokenConfig } from "./userAction";
 
 export const getCountryId = () => (dispatch, getState) => {
@@ -123,13 +124,18 @@ export const signin = (user) => (dispatch, getState) => {
       user,
       config
     )
-    .then((res) =>
+    .then(
+      (res) => 
       dispatch({
         type: LOGIN_USER,
         payload: res.data,
-      })
+      }),
+      dispatch(hideLoader())
+      // hideLoader()
     )
     .catch((err) => {
+      dispatch(hideLoader());
+      // hideLoader();
       dispatch(
         returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
       );

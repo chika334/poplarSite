@@ -117,6 +117,25 @@ class MessengerHeader extends Component {
                     Settings
                   </Button>
                 </li>
+                {this.props.authUser && localStorage.token ? (
+                  <li>
+                    <Button
+                      onClick={(e) => {
+                        if (this.props.authUser) {
+                          // this.props.history.push(
+                          //   `${process.env.REACT_APP_URL}/reportTranx`
+                          // );
+                          window.location.href = `${process.env.REACT_APP_URL}/reportTranx`
+                        }
+                      }}
+                      className="font-weight-bold rounded-sm px-3"
+                    >
+                      Transactions
+                    </Button>
+                  </li>
+                ) : (
+                  ""
+                )}
                 <li>
                   <a
                     href="#/"
@@ -295,7 +314,7 @@ class MessengerHeader extends Component {
             </div>
             <div className="header-nav-actions flex-grow-0 flex-lg-grow-1">
               <span className="d-none d-lg-block">
-                {this.props.authUser ? (
+                {this.props.authUser && localStorage.token ? (
                   <Logout />
                 ) : (
                   <>
@@ -414,6 +433,34 @@ class MessengerHeader extends Component {
                           className="opacity-6 ml-auto"
                         />
                       </ListItem>
+                      {this.props.authUser && localStorage.token ? (
+                        <ListItem
+                          button
+                          component={Button}
+                          onClick={(e) => {
+                            if (this.props.authUser) {
+                              this.props.history.push(
+                                `${process.env.REACT_APP_URL}/reportTranx`
+                              );
+                            } else {
+                              this.good(e);
+                              localStorage.setItem(
+                                "redirectPage",
+                                "/reportTranx"
+                              );
+                            }
+                          }}
+                          className="px-4 d-flex w-100 align-items-center"
+                        >
+                          <span>Transactions</span>
+                          <FontAwesomeIcon
+                            icon={["fas", "angle-right"]}
+                            className="opacity-6 ml-auto"
+                          />
+                        </ListItem>
+                      ) : (
+                        ""
+                      )}
                     </List>
                   </div>
                   <div className="divider" />
@@ -557,7 +604,7 @@ class MessengerHeader extends Component {
                     </div>
                   </div>
                   <div className="divider" />
-                  {this.props.authUser ? (
+                  {this.props.authUser && localStorage.token ? (
                     <List>
                       <ListItem className="px-4 d-flex w-100 align-items-center">
                         <Logout>

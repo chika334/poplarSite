@@ -1,26 +1,18 @@
-import React from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Grid,
   Container,
-  // InputAdornment,
-  // Card,
-  // CardContent,
-  // Button,
   List,
   ListItem,
-  // TextField
-} from '@material-ui/core';
-
-// import EmailTwoToneIcon from '@material-ui/icons/EmailTwoTone';
+} from "@material-ui/core";
 
 export default function LivePreviewExample() {
   return (
     <>
-      <div className="z-over pb-5 rounded" style={{ marginTop: '-50px' }}>
+      <div className="z-over pb-5 rounded" style={{ marginTop: "-50px" }}>
         <Container className="pt-0 pt-xl-5">
-          <Grid container spacing={6}>
+          {/* <Grid container spacing={6}>
             <Grid item xl={7} className="d-flex align-items-center">
               <div className="w-100">
                 <Grid container spacing={6} className="d-none d-md-flex mt-3">
@@ -32,13 +24,15 @@ export default function LivePreviewExample() {
                       </h6>
                       <List
                         component="div"
-                        className="nav-transparent-alt flex-column">
+                        className="nav-transparent-alt flex-column"
+                      >
                         <ListItem
                           component="a"
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           Products
                         </ListItem>
                         <ListItem
@@ -46,7 +40,8 @@ export default function LivePreviewExample() {
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           Services
                         </ListItem>
                         <ListItem
@@ -54,7 +49,8 @@ export default function LivePreviewExample() {
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           About us
                         </ListItem>
                       </List>
@@ -68,13 +64,15 @@ export default function LivePreviewExample() {
                       </h6>
                       <List
                         component="div"
-                        className="nav-transparent-alt flex-column">
+                        className="nav-transparent-alt flex-column"
+                      >
                         <ListItem
                           component="a"
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           Support center
                         </ListItem>
                         <ListItem
@@ -82,7 +80,8 @@ export default function LivePreviewExample() {
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           Affiliates
                         </ListItem>
                         <ListItem
@@ -90,7 +89,8 @@ export default function LivePreviewExample() {
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           Contact us
                         </ListItem>
                       </List>
@@ -103,13 +103,15 @@ export default function LivePreviewExample() {
                       </h6>
                       <List
                         component="div"
-                        className="nav-transparent-alt flex-column">
+                        className="nav-transparent-alt flex-column"
+                      >
                         <ListItem
                           component="a"
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           React themes
                         </ListItem>
                         <ListItem
@@ -117,7 +119,8 @@ export default function LivePreviewExample() {
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           HTML5 themes
                         </ListItem>
                         <ListItem
@@ -125,7 +128,8 @@ export default function LivePreviewExample() {
                           button
                           href="#/"
                           onClick={(e) => e.preventDefault()}
-                          className="px-0 py-1 text-black-50">
+                          className="px-0 py-1 text-black-50"
+                        >
                           Angular themes
                         </ListItem>
                       </List>
@@ -134,65 +138,21 @@ export default function LivePreviewExample() {
                 </Grid>
               </div>
             </Grid>
-            {/* <Grid item xl={5} className="d-flex align-items-center">
-              <div className="w-100 mb-4 mb-md-0">
-                <Card className="border-0 bg-deep-sky mt-5 mt-xl-0 card-box">
-                  <CardContent>
-                    <div className="text-black">
-                      <h1 className="font-size-xl mb-2 text-white font-weight-bold">
-                        Newsletter Subscribe
-                      </h1>
-                      <p className="font-size-md mb-4 text-white-50">
-                        Stay up to date with our latest news and updates by
-                        subscribing to our monthly newsletter
-                      </p>
-                      <div>
-                        <Grid container spacing={2}>
-                          <Grid item md={7}>
-                            <TextField
-                              variant="outlined"
-                              size="small"
-                              id="input-with-icon-textfield1234"
-                              className="w-100 text-white-50 rounded-sm"
-                              InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <EmailTwoToneIcon />
-                                  </InputAdornment>
-                                )
-                              }}
-                            />
-                          </Grid>
-                          <Grid item md={5}>
-                            <Button className="w-100 mt-3 mt-md-0 shadow-none btn-success">
-                              <span className="btn-wrapper--label">
-                                Sign up
-                              </span>
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      </div>
-                      <small className="text-white-50 d-block pt-2">
-                        We promise not to spam you with unwanted emails!
-                      </small>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </Grid> */}
-          </Grid>
+          </Grid> */}
           <div>
-            <div className="divider d-sm-none d-md-block rounded-circle bg-dark opacity-2 mx-auto mb-4 mt-5 w-25" />
+            {/*  <div className="divider d-sm-none d-md-block rounded-circle bg-dark opacity-2 mx-auto mb-4 mt-5 w-25" />
             <List
               component="div"
-              className="nav-transparent-alt text-nowrap d-flex justify-content-center">
+              className="nav-transparent-alt text-nowrap d-flex justify-content-center"
+            >
               <ListItem
                 button
                 className="text-facebook hover-scale-sm"
                 href="#/"
-                onClick={(e) => e.preventDefault()}>
+                onClick={(e) => e.preventDefault()}
+              >
                 <FontAwesomeIcon
-                  icon={['fab', 'facebook']}
+                  icon={["fab", "facebook"]}
                   className="font-size-lg"
                 />
               </ListItem>
@@ -200,9 +160,10 @@ export default function LivePreviewExample() {
                 button
                 className="text-twitter hover-scale-sm"
                 href="#/"
-                onClick={(e) => e.preventDefault()}>
+                onClick={(e) => e.preventDefault()}
+              >
                 <FontAwesomeIcon
-                  icon={['fab', 'twitter']}
+                  icon={["fab", "twitter"]}
                   className="font-size-lg"
                 />
               </ListItem>
@@ -210,9 +171,10 @@ export default function LivePreviewExample() {
                 button
                 className="text-google hover-scale-sm"
                 href="#/"
-                onClick={(e) => e.preventDefault()}>
+                onClick={(e) => e.preventDefault()}
+              >
                 <FontAwesomeIcon
-                  icon={['fab', 'google']}
+                  icon={["fab", "google"]}
                   className="font-size-lg"
                 />
               </ListItem>
@@ -220,16 +182,18 @@ export default function LivePreviewExample() {
                 button
                 className="text-instagram hover-scale-sm"
                 href="#/"
-                onClick={(e) => e.preventDefault()}>
+                onClick={(e) => e.preventDefault()}
+              >
                 <FontAwesomeIcon
-                  icon={['fab', 'instagram']}
+                  icon={["fab", "instagram"]}
                   className="font-size-lg"
                 />
               </ListItem>
-            </List>
+            </List> */}
             <div className="divider d-sm-none d-md-block rounded-circle bg-dark opacity-2 mx-auto my-4 w-25" />
             <div className="text-center d-block text-black-50">
-              Copyright &copy; 2020
+              {`${process.env.REACT_APP_NAME}`}
+              <span className="p-2">Copyright &copy; 2021</span>
             </div>
           </div>
         </Container>

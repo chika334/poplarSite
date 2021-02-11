@@ -246,14 +246,8 @@ export class TranxReport extends PureComponent {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state);
-    // console.log(this.props.transactions);
     return (
       <div>
-        {/* <div className="hero-wrapper bg-composed-wrapper bg-light">
-          <div className="header-top-section">
-            <MessengerHeader />
-          </div> */}
         <div className="responsive-container">
           <h2 className={classes.title}>Transactions</h2>
           <table>
@@ -270,14 +264,35 @@ export class TranxReport extends PureComponent {
               </tr>
             </thead>
             <tbody>
-              {this.state.tableData.map((tdata, i) => (
-                console.log(tdata)
-                // <tr>
-                //   <td>{tdata.id}</td>
-                //   <td>{tdata.name}</td>
-                //   <td>{tdata.email}</td>
-                //   <td>{tdata.body}</td>
-                // </tr>
+              {this.state.tableData.map((tdata, index) => (
+                <tr key={index}>
+                  <td data-title="id">{index}</td>
+                  <td data-title="Fastr Id">{tdata.response.fastrId}</td>
+                  <td data-title="Full Name">
+                    {tdata.response.paymentRequestid.fullname}
+                  </td>
+                  <td data-title="Account Number">
+                    {tdata.response.paymentRequestid.accountNumber}
+                  </td>
+                  <td data-title="Payment type name">
+                    {
+                      tdata.response.paymentRequestid.serviceproviderId
+                        .paymentTypeid.paymentTypeName
+                    }
+                  </td>
+                  <td data-title="Phone number">
+                    {
+                      tdata.response.paymentRequestid.serviceproviderId.manager
+                        .phone
+                    }
+                  </td>
+                  <td data-title="title">
+                    {tdata.response.paymentRequestid.productCode.title}
+                  </td>
+                  <td data-title="Amount">
+                    {tdata.response.paymentRequestid.amount}
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>

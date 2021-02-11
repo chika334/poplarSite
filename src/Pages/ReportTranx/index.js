@@ -136,7 +136,8 @@ import React, { PureComponent } from "react";
 import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 import { List, ListItem } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Transactions from './Transactions'
+import Transactions from "./Transactions";
+import Filter from "./Filter";
 
 export class Report extends PureComponent {
   state = {
@@ -146,9 +147,9 @@ export class Report extends PureComponent {
   handleChange = (e) => {
     e.preventDefault();
     this.setState({
-      data: e.target.value
-    })
-    // console.log(e.target.value);
+      data: e.target.value,
+    });
+    console.log(e.target);
   };
   render() {
     return (
@@ -159,14 +160,20 @@ export class Report extends PureComponent {
           </div>
         </div>
         <div className="mt-5 d-flex align-content-center justify-content-center">
+          <label className="pr-3">Select option: </label>
           <select onClick={(e) => this.handleChange(e)}>
             <option>Select Option</option>
-            <option value="allTransactionPagination">daniel</option>
-            <option value="filterByDate">daniel</option>
+            <option value="allTransactionPagination">All Transactions</option>
+            <option value="filterByDate" id="filter">daniel</option>
             <option value="chika">daniel</option>
           </select>
         </div>
-        {this.state.data === "allTransactionPagination" ? <Transactions /> : console.log("bad")}
+        {this.state.data === "allTransactionPagination" ? (
+          <Transactions />
+        ) : (
+          console.log("bad")
+        )}
+        {this.state.data === "filterByDate" ? <Filter /> : console.log("Fine")}
       </div>
     );
   }

@@ -67,6 +67,7 @@
     "react-trend": "^1.2.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-calendar-react": "^0.15.3",
     "slick-carousel": "^1.8.1",
     "typescript": "^4.1.3",
     "web-vitals": "^0.2.4",

@@ -9,10 +9,13 @@ import { showLoader, hideLoader } from "../../_actions/loading";
 import { InputAdornment, Button, TextField } from "@material-ui/core";
 import MailOutlineTwoToneIcon from "@material-ui/icons/MailOutlineTwoTone";
 import LockTwoToneIcon from "@material-ui/icons/LockTwoTone";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Loader from "../../Components/Loader/Loader";
 import { withRouter } from "react-router-dom";
 import { hideRegisterModal } from "../../_actions/registerModal";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import Form from "../../data/Register/Form";
+
+const FORM_NAME = "registerForm";
 
 class Register extends Component {
   constructor(props) {
@@ -50,15 +53,21 @@ class Register extends Component {
   check = () => {
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
+      console.log("REGISTER");
       this.sendRedirect();
+      this.props.hideLoader();
+      this.props.hideRegisterModal();
+      let redirect = localStorage.getItem("redirectPage");
+      // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
       // this.setState({ redirect: true });
-      setTimeout(() => {
-        let redirect = localStorage.getItem("redirectPage");
-        this.props.hideLoader();
-        this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-        // window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
-        this.props.hideRegisterModal();
-      }, 500);
+      // setTimeout(() => {
+      //   let redirect = localStorage.getItem("redirectPage");
+      //   this.props.hideLoader();
+      //   this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      //   // window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
+      //   this.props.hideRegisterModal();
+      // }, 500);
     }
   };
 
@@ -134,7 +143,8 @@ class Register extends Component {
                 </div>
               </div>
               <div className="py-4">
-                <div>
+                <Form formName={FORM_NAME} key={FORM_NAME} />
+                {/* <div>
                   <div className="mb-4">
                     <TextField
                       fullWidth
@@ -203,29 +213,21 @@ class Register extends Component {
                         ),
                       }}
                     />
-                  </div>
-                  {this.state.error && (
-                    <Typography
-                      className="text-center"
-                      component="p"
-                      color="error"
-                    >
-                      {this.state.error}
-                    </Typography>
-                  )}
-                  <div className="text-center">
-                    <Button
-                      onClick={this.handleClick}
-                      className="btn-second font-weight-bold p-3 my-2"
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                </div>
+                  </div> */}
+                {this.state.error && (
+                  <Typography
+                    className="text-center"
+                    component="p"
+                    color="error"
+                  >
+                    {this.state.error}
+                  </Typography>
+                )}
               </div>
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     );
   }

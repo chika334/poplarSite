@@ -149,7 +149,6 @@ export class Report extends PureComponent {
     this.setState({
       data: e.target.value,
     });
-    console.log(e.target);
   };
   render() {
     return (
@@ -164,7 +163,7 @@ export class Report extends PureComponent {
           <select onClick={(e) => this.handleChange(e)}>
             <option>Select Option</option>
             <option value="allTransactionPagination">All Transactions</option>
-            <option value="filterByDate" id="filter">daniel</option>
+            <option value="filterByDate">daniel</option>
             <option value="chika">daniel</option>
           </select>
         </div>

@@ -21,7 +21,7 @@ function SimpleModal(props) {
 
   return (
     <div>
-      <Modal
+      {/* <Modal
         open={modal}
         onClose={props.hideProductModal}
         aria-labelledby="simple-modal-title"
@@ -29,7 +29,7 @@ function SimpleModal(props) {
         className="pt-4 pb-4 d-flex align-item-center justify-content-center"
       >
         <>{body}</>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

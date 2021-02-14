@@ -5,14 +5,15 @@ import { Provider } from "react-redux";
 import ScrollToTop from "./utils/ScrollToTop";
 import store from "./config/store.ts";
 import "./assets/base.scss";
-import './App.css';
+import "./App.css";
+import NoInternet from './NoInternet'
 
 // _actions
-import { getUser } from './_actions/userAction'
-import { getCountryId } from './_actions/Action_countryId'
-import { getTransactions } from './_actions/transactions'
-import { wallets } from './_actions/wallet'
-import { showModal, hideModal } from './_actions/modal'
+import { getUser } from "./_actions/userAction";
+import { getCountryId } from "./_actions/Action_countryId";
+import { getTransactions } from "./_actions/transactions";
+import { wallets } from "./_actions/wallet";
+import { showModal, hideModal } from "./_actions/modal";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -277,12 +278,14 @@ class componentName extends Component {
       return <Redirect to={`${process.env.REACT_APP_URL}`} />;
     }
   }
+
   render() {
     return (
       <Provider store={store}>
         <Router>
           <ScrollToTop>
-            <Routes />
+            {/* checks if user has internet connection */}
+            {navigator.onLine ? <Routes /> : <NoInternet />}
           </ScrollToTop>
         </Router>
       </Provider>

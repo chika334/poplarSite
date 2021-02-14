@@ -20,33 +20,31 @@ class BuyToken extends Component {
     const { token } = this.props.success === null ? "" : this.props.success;
     // new document in jspdf
     let doc = new jsPDF({ unit: "pt", orientation: "p", lineHeight: 1.2 });
+    let img = localStorage.getItem("ProductImage");
     // add some text to the pdf
-    doc.text(20, 30, `${process.env.REACT_APP_NAME}`);
-    doc.text(20, 50, `Thank you for using ${process.env.REACT_APP_NAME}`);
-    doc.text(20, 70, `Name:- ${this.props.authUser.user.user.fullName}`);
+    doc.addImage(img, "jpg jpeg png", 200, 40, 180, 160);
     doc.text(
-      20,
-      90,
+      180,
+      230,
+      `${process.env.REACT_APP_NAME} ${localStorage.getItem("ProductTitle")}`
+    );
+    doc.text(220, 250, `Name:- ${this.props.authUser.user.user.fullName}`);
+    doc.text(
+      200,
+      270,
       `Company Name:- ${this.props.authUser.user.sender.companyName}`
     );
-    doc.text(20, 110, `Reference Number:-   ${token.reference}`);
-    doc.text(20, 130, `Current Balance:-    ${token.currentBalance}`);
+    doc.text(180, 290, `Reference Number:-   ${token.reference}`);
+    doc.text(200, 310, `Current Balance:-    ${token.currentBalance}`);
+    doc.text(180, 400, `Thank you for using ${process.env.REACT_APP_NAME}`);
     // set font
     // doc.addFont()
-    doc.setFont("serif");
+    // doc.setFont("times", "italics", "400");
     // doc.setFontType('normal')
 
     // save the pdf file
     doc.save(`${process.env.REACT_APP_URL}.pdf`);
   };
-
-  // submit = (e) => {
-  //   e.preventDefault();
-  //   const string = renderToString(<Prints />);
-  //   const pdf = new jsPDF();
-  //   pdf.fromHTML(string)
-  //   pdf.save('pdf')
-  // };
 
   componentDidUpdate() {
     const token = this.props.success;

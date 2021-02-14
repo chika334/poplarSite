@@ -26,6 +26,9 @@ import {
   showProductModal,
 } from "../../../_actions/ProductLoginDisplay";
 import { showProductDetailsModal } from "../../../_actions/ProductModal";
+import Form from "../../../data/forms/Form";
+
+const FORM_NAME = "loginForm";
 
 const FourDetails = [
   {
@@ -66,12 +69,10 @@ class ProductDisplay extends Component {
     if (error !== prevProps.error) {
       // check for register error
       if (error.id === "BUYTOKEN_FAIL") {
+        // this.props.hideLoader();
         this.setState({ error: error.message.message });
-        this.props.hideLoader();
       }
     } else {
-      console.log(authUser);
-      console.log(localStorage.token);
       this.check();
     }
   }
@@ -79,16 +80,8 @@ class ProductDisplay extends Component {
   check = (props) => {
     const { authUser } = this.props;
     if (localStorage.token) {
-      console.log("GOOD");
-      // this.sendRedirect();
       // this.props.hideLoader();
       // this.props.hideModal();
-      // <Redirect
-      //   to={{
-      //     pathname: `${process.env.REACT_APP_URL}/fourProducts`,
-      //     state: { props },
-      //   }}
-      // />;
       this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
       // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
       // <Redirect to={`${process.env.REACT_APP_URL}/profilepage`} />
@@ -105,22 +98,22 @@ class ProductDisplay extends Component {
     }
   };
 
-  submit = (e) => {
-    e.preventDefault();
-    const { email, password } = this.state;
-    if (email === "" || password === "") {
-      this.setState({ error: "Please fill all inputs" });
-      return;
-    }
+  // submit = (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = this.state;
+  //   if (email === "" || password === "") {
+  //     this.setState({ error: "Please fill all inputs" });
+  //     return;
+  //   }
 
-    const user = {
-      email,
-      password,
-    };
+  //   const user = {
+  //     email,
+  //     password,
+  //   };
 
-    this.props.signin(user);
-    this.props.showLoader();
-  };
+  //   this.props.signin(user);
+  //   this.props.showLoader();
+  // };
 
   forgotPassword = (e) => {
     this.props.showForgotModal();
@@ -193,7 +186,7 @@ class ProductDisplay extends Component {
           onClose={this.handleClose}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          className="pt-4 pb-4 d-flex align-item-center justify-content-center"
+          className="pt-4 pb-4 d-flex align-item-center w-auto h-auto justify-content-center"
         >
           <>
             <div className="card pl-3 pr-3 align-items-center">
@@ -222,7 +215,8 @@ class ProductDisplay extends Component {
                           </div>
                         </div>
                         <div className="py-4">
-                          <div>
+                          <Form formName={FORM_NAME} key={FORM_NAME} />
+                          {/* <div>
                             <div className="mb-4">
                               <TextField
                                 fullWidth
@@ -275,19 +269,19 @@ class ProductDisplay extends Component {
                                 >
                                   Submit
                                 </Button>
-                              </div>
-                              <div className="text-center">
-                                <Button
-                                  onClick={this.forgotPassword}
-                                  className="btn bg-white font-weight-bold my-2"
-                                >
-                                  forgot Password
-                                </Button>
-                              </div>
-                            </div>
+                              </div> */}
+                          <div className="text-center">
+                            <Button
+                              onClick={this.forgotPassword}
+                              className="btn bg-white font-weight-bold my-2"
+                            >
+                              forgot Password
+                            </Button>
                           </div>
                         </div>
                       </div>
+                      {/* </div> */}
+                      {/* </div> */}
                     </div>
                   </div>
                 </div>

@@ -19,7 +19,7 @@ export default function LivePreviewExample() {
           <MessengerHeader />
         </div>
         <Container>
-          <Card>
+          <Card className="m-2">
             <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-0">
               <List
                 component="div"
@@ -34,7 +34,7 @@ export default function LivePreviewExample() {
                   }}
                 >
                   <span className="font-weight-bold font-size-sm text-uppercase">
-                    Personal details
+                    Edit details
                   </span>
                   <div className="divider" />
                 </ListItem>
@@ -47,7 +47,7 @@ export default function LivePreviewExample() {
                   }}
                 >
                   <span className="font-weight-bold font-size-sm text-uppercase">
-                    Settings
+                    Change password
                   </span>
                   <div className="divider" />
                 </ListItem>

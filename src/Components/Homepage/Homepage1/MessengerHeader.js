@@ -25,11 +25,14 @@ class MessengerHeader extends Component {
     e.preventDefault();
     if (this.props.authUser || localStorage.token) {
       this.props.hideModal();
-      this.props.history.push(`${process.env.REACT_APP_URL}/profilepage`);
-    } else if (localStorage.token) {
-      this.props.hideModal();
-      this.props.history.push(`${process.env.REACT_APP_URL}/settings`);
-    } else {
+      const redirect = localStorage.getItem("redirectPage");
+      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+    }
+    // else if (localStorage.token) {
+    //   this.props.hideModal();
+    //   this.props.history.push(`${process.env.REACT_APP_URL}/settings`);
+    // }
+    else {
       this.props.showModal();
     }
   };
@@ -47,7 +50,7 @@ class MessengerHeader extends Component {
   product = (e) => {
     e.preventDefault();
     if (this.props.authUser || localStorage.token) {
-      const redirect = localStorage.getItem("products");
+      const redirect = localStorage.getItem("redirectPage");
       this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
       // this.props.showModal();
       // this.props.hideModal();
@@ -122,10 +125,7 @@ class MessengerHeader extends Component {
                     <Button
                       onClick={(e) => {
                         if (this.props.authUser) {
-                          // this.props.history.push(
-                          //   `${process.env.REACT_APP_URL}/reportTranx`
-                          // );
-                          window.location.href = `${process.env.REACT_APP_URL}/reportTranx`
+                          window.location.href = `${process.env.REACT_APP_URL}/reportTranx`;
                         }
                       }}
                       className="font-weight-bold rounded-sm px-3"
@@ -148,7 +148,7 @@ class MessengerHeader extends Component {
                     </span>
                   </a>
                   <div className="submenu-dropdown submenu-dropdown--md">
-                    <div className="shadow-lg w-100 bg-deep-sky p-4 rounded">
+                    <div className="shadow-lg w-100 bg-primary p-4 rounded">
                       <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
                         Our Products
                       </div>
@@ -165,8 +165,8 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/electric`
                               );
                             } else {
-                              this.product(e);
-                              localStorage.setItem("products", "electric");
+                              localStorage.setItem("redirectPage", "/electric");
+                              this.good(e);
                             }
                           }}
                           target="_blank"
@@ -187,8 +187,8 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/water`
                               );
                             } else {
-                              this.product(e);
-                              localStorage.setItem("products", "/water");
+                              localStorage.setItem("redirectPage", "/water");
+                              this.good(e);
                             }
                           }}
                           target="_blank"
@@ -209,7 +209,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/cable");
+                              localStorage.setItem("redirectPage", "/cable");
                             }
                           }}
                           // selected
@@ -231,7 +231,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/airtime");
+                              localStorage.setItem("redirectPage", "/airtime");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -252,7 +252,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "data");
+                              localStorage.setItem("redirectPage", "data");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -273,7 +273,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/transfer");
+                              localStorage.setItem("redirectPage", "/transfer");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -294,7 +294,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/deposits");
+                              localStorage.setItem("redirectPage", "/deposits");
                             }
                           }}
                           // onClick={(e) => e.preventDefault()}
@@ -483,7 +483,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/electric");
+                              localStorage.setItem("redirectPage", "/electric");
                             }
                           }}
                           target="_blank"
@@ -505,7 +505,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/water");
+                              localStorage.setItem("redirectPage", "/water");
                             }
                           }}
                           target="_blank"
@@ -526,7 +526,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/cable");
+                              localStorage.setItem("redirectPage", "/cable");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -547,7 +547,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/airtime");
+                              localStorage.setItem("redirectPage", "/airtime");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -568,7 +568,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/transfer");
+                              localStorage.setItem("redirectPage", "/transfer");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -589,7 +589,7 @@ class MessengerHeader extends Component {
                               );
                             } else {
                               this.product(e);
-                              localStorage.setItem("products", "/deposits");
+                              localStorage.setItem("redirectPage", "/deposits");
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"

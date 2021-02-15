@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import rccg from "../../assets/images/product-logos/rccg.jpg";
+import Ikeja from "../../assets/images/product-logos/ikeja.png";
+import eko from "../../assets/images/product-logos/eko.jpg";
+// import dstv from "../../assets/images/product-logos/dstv.jpg";
 import Grid from "@material-ui/core/Grid";
 import { Container, Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
@@ -14,6 +17,7 @@ import DialpadOutlinedIcon from "@material-ui/icons/DialpadOutlined";
 import { clearErrors } from "../../_actions/errorAction";
 import { token } from "../../_actions/tokenAction";
 import { showLoader, hideLoader } from "../../_actions/loading";
+import { hideModal } from "../../_actions/modal";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
@@ -55,28 +59,39 @@ const styles = (theme) => ({
 
 const sidebarItem = [
   {
-    name: "RCCG Electric",
+    name: `${process.env.REACT_APP_RCCG}`,
     src: `${rccg}`,
+    figure: "Redeem electric powering",
+    more: "Giving power to RCCG",
   },
   {
-    name: "ABUJA Electric",
-    src: `${rccg}`,
+    name: `${process.env.REACT_APP_IKEJA}`,
+    src: `${Ikeja}`,
+    figure: "Redeem electric powering",
+    more: "Giving power to IKEJA",
   },
   {
-    name: "KANO Electric",
-    src: `${rccg}`,
+    name: `${process.env.REACT_APP_EKO}`,
+    src: `${eko}`,
+    figure: "Redeem electric powering",
+    more: "Giving power to EKO",
   },
   {
-    name: "EKO Electric",
+    name: `${process.env.REACT_APP_ABUJA}`,
     src: `${rccg}`,
+    figure: `${process.env.REACT_APP_ABUJA}`,
+    more: "Giving power to ABUJA",
   },
   {
     name: "KADUNA ELectric",
-    src: `${rccg}`,
+    src: `${Ikeja}`,
+    figure:
+      "LSets text font face, variant for upcoming text elements. See output of jsPDF.getFontList()",
+    more: "Giving power to KADUNA",
   },
 ];
 
-class Data extends Component {
+class Electric extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -145,14 +160,11 @@ class Data extends Component {
     // if user is authenticated
     if (authUser === true && pages) {
       if (authUser && this.state.wantToPay) {
-        // console.log("authUser @ payBills", authUser);
         this.props.showLoader();
         this.props.token(buyToken);
         this.setState({ wantToPay: false });
       }
       if (success.success) {
-        //if success.success === true
-        // console.log("Success", success);
         this.props.hideLoader();
         console.log("success", success.success);
         this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
@@ -198,7 +210,6 @@ class Data extends Component {
     };
 
     if (authUser) {
-      // this.payBills()
       this.props.showLoader();
       this.props.token(buyToken);
     } else {
@@ -212,167 +223,206 @@ class Data extends Component {
     this.setState({ show: false });
   };
 
+  FillForm = (props) => {
+    // const { authUser } = this.props;
+    this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+    // if (authUser === false) {
+    //   this.setState({ open: true });
+    // } else {
+    //   // console.log("BAD ERROR");
+    // }
+  };
+
   render() {
     const { classes } = this.props;
-    const body = (
-      <div className="card pl-3 pr-3 align-items-center">
-        <div style={{ position: "relative", left: "150px" }}>
-          <Button onClick={this.hideModal} className="px-4 text-dark-50 mt-3">
-            <FontAwesomeIcon icon={["fas", "times"]} />
-          </Button>
-        </div>
-        {/* <img src={this.state.image} /> */}
-        {/* <Tab1 /> */}
-        <div className="app-wrapper bg-white">
-          <Loader />
-          <div className="hero-wrapper w-100">
-            <div className="flex-grow-1 w-100 align-items-center">
-              <div>
-                <div className="divider-v divider-v-lg d-none d-lg-block" />
-                <div className="text-center mt-3">
-                  <img width="100" src={rccg} alt="rccg" />
-                  <h1 className="font-size-xxl mb-1 font-weight-bold">
-                    {process.env.REACT_APP_RCCG}
-                  </h1>
-                  <p className="mb-0 text-black-50">
-                    Fill in the fields below to pay your{" "}
-                    <span className="text-lowercase">
-                      {process.env.REACT_APP_RCCG}
-                    </span>
-                  </p>
-                </div>
-                <div className="py-3">
-                  <div>
-                    <div className="mb-4">
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        id="fullname"
-                        type="text"
-                        label="Full Name"
-                        value={this.state.fullname}
-                        onChange={this.handleChange("fullname")}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <PersonIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        id="number"
-                        type="number"
-                        value={this.state.accountNumber}
-                        onChange={this.handleChange("accountNumber")}
-                        label="Meter Number"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <DialpadOutlinedIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        id="amount"
-                        label="Amount"
-                        value={this.state.amount}
-                        onChange={this.handleChange("amount")}
-                        type="number"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <span className="pr-3 align-items-center">₦</span>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </div>
-                    {this.state.error && (
-                      <Typography
-                        className="text-center"
-                        component="p"
-                        color="error"
-                      >
-                        {this.state.error}
-                      </Typography>
-                    )}
-                    <div className="text-center py-4">
-                      <Button
-                        onClick={(e) => {
-                          if (this.props.authUser) {
-                            this.submit(e);
-                          } else {
-                            this.submit(e);
-                          }
-                        }}
-                        className="btn-second font-weight-bold w-50 my-2"
-                      >
-                        Submit
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    // const body = (
+    //   <div className="card pl-3 pr-3 align-items-center">
+    //     <div style={{ position: "relative", left: "150px" }}>
+    //       <Button onClick={this.hideModal} className="px-4 text-dark-50 mt-3">
+    //         <FontAwesomeIcon icon={["fas", "times"]} />
+    //       </Button>
+    //     </div>
+    //     <div className="app-wrapper bg-white">
+    //       <Loader />
+    //       <div className="hero-wrapper w-100">
+    //         <div className="flex-grow-1 w-100 align-items-center">
+    //           <div>
+    //             <div className="divider-v divider-v-lg d-none d-lg-block" />
+    //             <div className="text-center mt-2">
+    //               <img width="100" src={rccg} alt="rccg" />
+    //               <h1 className="font-size-xxl mb-1 font-weight-bold">
+    //                 {process.env.REACT_APP_RCCG}
+    //               </h1>
+    //               <p className="mb-0 text-black-50">
+    //                 Fill in the fields below to pay your{" "}
+    //                 <span className="text-lowercase">
+    //                   {process.env.REACT_APP_RCCG}
+    //                 </span>
+    //               </p>
+    //             </div>
+    //             <div className="py-4">
+    //               <div>
+    //                 <div className="mb-4">
+    //                   <TextField
+    //                     fullWidth
+    //                     variant="outlined"
+    //                     id="fullname"
+    //                     type="text"
+    //                     label="Full Name"
+    //                     value={this.state.fullname}
+    //                     onChange={this.handleChange("fullname")}
+    //                     InputProps={{
+    //                       startAdornment: (
+    //                         <InputAdornment position="start">
+    //                           <PersonIcon />
+    //                         </InputAdornment>
+    //                       ),
+    //                     }}
+    //                   />
+    //                 </div>
+    //                 <div className="mb-4">
+    //                   <TextField
+    //                     fullWidth
+    //                     variant="outlined"
+    //                     id="number"
+    //                     type="number"
+    //                     value={this.state.accountNumber}
+    //                     onChange={this.handleChange("accountNumber")}
+    //                     label="Meter Number"
+    //                     InputProps={{
+    //                       startAdornment: (
+    //                         <InputAdornment position="start">
+    //                           <DialpadOutlinedIcon />
+    //                         </InputAdornment>
+    //                       ),
+    //                     }}
+    //                   />
+    //                 </div>
+    //                 <div className="mb-3">
+    //                   <TextField
+    //                     fullWidth
+    //                     variant="outlined"
+    //                     id="amount"
+    //                     label="Amount"
+    //                     value={this.state.amount}
+    //                     onChange={this.handleChange("amount")}
+    //                     type="number"
+    //                     InputProps={{
+    //                       startAdornment: (
+    //                         <InputAdornment position="start">
+    //                           <span className="pr-3 align-items-center">₦</span>
+    //                         </InputAdornment>
+    //                       ),
+    //                     }}
+    //                   />
+    //                 </div>
+    //                 {this.state.error && (
+    //                   <Typography
+    //                     className="text-center"
+    //                     component="p"
+    //                     color="error"
+    //                   >
+    //                     {this.state.error}
+    //                   </Typography>
+    //                 )}
+    //                 <div className="text-center py-4">
+    //                   <Button
+    //                     onClick={(e) => {
+    //                       if (this.props.authUser) {
+    //                         this.submit(e);
+    //                       } else {
+    //                         this.submit(e);
+    //                       }
+    //                     }}
+    //                     className="btn-second font-weight-bold w-50 my-2"
+    //                   >
+    //                     Submit
+    //                   </Button>
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     {/* </div> */}
+    //   </div>
+    // );
     return (
       <div className="hero-wrapper bg-composed-wrapper bg-light">
         <div className="header-top-section">
           <MessengerHeader />
         </div>
-        <div className="mt-5">
+        <div className="mt-5 h-auto">
           <Container>
             <h3>Data</h3>
             <div className="row">
-              <Grid>
+              <Grid container item xs={12} spacing={3}>
                 {sidebarItem.map((allDetails, index) => (
-                  // <Grid container justify="center" spacing={3}>
                   <div key={index} className="column p-3">
-                    <Button
-                      onClick={(e) => {
-                        this.Product({
-                          image: allDetails.src,
-                          title: allDetails.name,
-                        });
-                      }}
-                    >
-                      <Card className="card p-4 mt-5">
-                        <h3 className={classes.titles}>{allDetails.name}</h3>
-                        <div className={classes.centerImage}>
-                          <img width="65" src={allDetails.src} alt="src" />
+                    <Card className="card p-2 bg-white w-80 h-100 mt-2">
+                      <div className="h-30">
+                        <div className="d-flex align-items-center justify-content-center w-100">
+                          <img
+                            width="68"
+                            height="60"
+                            src={allDetails.src}
+                            alt="src"
+                          />
                         </div>
-                        <h3 className={classes.titles}>{allDetails.figure}</h3>
-                      </Card>
-                    </Button>
+                        <h5 className="m-auto d-flex align-items-center justify-content-center p-50 color-grey">
+                          {allDetails.name}
+                        </h5>
+                        <br />
+                      </div>
+                      <hr />
+                      <small className={classes.titles}>
+                        {allDetails.figure}
+                      </small>
+                      <small className="m-auto d-flex align-items-center justify-content-center p-50 color-grey">
+                        {allDetails.more}
+                      </small>
+                      <div className="d-flex align-items-center justify-content-center mt-3">
+                        <Button
+                          style={{
+                            backgroundColor: `rgb(0, 68, 116)`,
+                            color: "#fff",
+                          }}
+                          className="w-50"
+                          onClick={(e) => {
+                            localStorage.setItem(
+                              "ProductImage",
+                              `${allDetails.src}`
+                            );
+                            localStorage.setItem(
+                              "ProductTitle",
+                              `${allDetails.name}`
+                            );
+                            this.FillForm({
+                              image: allDetails.src,
+                              title: allDetails.name,
+                            });
+                          }}
+                        >
+                          Buy
+                        </Button>
+                      </div>
+                    </Card>
                   </div>
-                  // </Grid>
                 ))}
               </Grid>
             </div>
           </Container>
+          {/* <Modal
+            open={this.state.show}
+            onClose={this.hideModal}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            className="pt-4 pb-4 d-flex align-item-center justify-content-center"
+          >
+            <>{body}</>
+          </Modal> */}
         </div>
-        <Modal
-          open={this.state.show}
-          onClose={this.hideModal}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          className="pt-4 pb-4 d-flex align-item-center justify-content-center"
-        >
-          <>{body}</>
-        </Modal>
       </div>
     );
   }
@@ -388,7 +438,19 @@ export default withRouter(
   connect(mapStateToProps, {
     showLoader,
     hideLoader,
+    hideModal,
     token,
     clearErrors,
-  })(withStyles(styles)(Data))
+  })(withStyles(styles)(Electric))
 );
+// export default withRouter(
+//   connect(mapStateToProps, {
+//     signin,
+//     showModal,
+//     hideModal,
+//     showLoader,
+//     hideLoader,
+//     token,
+//     clearErrors,
+//   })(Tab1)
+// );

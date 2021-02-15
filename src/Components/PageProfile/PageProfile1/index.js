@@ -67,7 +67,7 @@ function LivePreviewExample(props) {
           <div className="header-top-section">
             <MessengerHeader />
           </div>
-          <div className="app-inner-content-layout--main p-0">
+          <div className="app-inner-content-layout--main p-0 mb-3 h-auto">
             <div className="hero-wrapper rounded-bottom shadow-xxl">
               <div className="flex-grow-1 d-flex align-items-center">
                 <div className="bg-composed-wrapper--bg rounded-bottom opacity-4" />

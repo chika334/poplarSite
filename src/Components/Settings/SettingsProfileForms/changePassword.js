@@ -19,6 +19,7 @@ const styles = (theme) => ({
     margin: "auto",
     textAlign: "center",
     marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
     paddingBottom: theme.spacing(2),
   },
   error: {

@@ -31,6 +31,8 @@ import Water from "./layout-components/Products/Water";
 import Airtime from "./layout-components/Products/Airtime";
 import Deposits from "./layout-components/Products/Deposits";
 import FourProducts from "./Components/FourPRoducts";
+import Footer from "./Components/Homepage/Homepage6";
+import Header from "./Components/Homepage/Homepage1/MessengerHeader";
 
 // Example Pages
 import Overview from "./Pages/Overview";
@@ -171,6 +173,7 @@ const Routes = (props) => {
                       component={ForgotPassword}
                     /> */}
                     </motion.div>
+                    {/* <Footer /> */}
                   </Switch>
                 </PresentationLayout>
               </Route>
@@ -197,6 +200,7 @@ const Routes = (props) => {
                 ]}
               >
                 <PresentationLayout>
+                  {/* <Header /> */}
                   {/* <CollapsedSidebar> */}
                   <Switch location={location} key={location.pathname}>
                     <motion.div
@@ -298,10 +302,11 @@ const Routes = (props) => {
                       />
                     </motion.div>
                   </Switch>
+                  <Footer />
                   {/* </CollapsedSidebar> */}
                 </PresentationLayout>
               </Route>
-              <Route
+              {/* <Route
                 path={[
                   `${process.env.REACT_APP_URL}/PageLoginOverlay`,
                   `${process.env.REACT_APP_URL}/PageRecoverOverlay`,
@@ -330,7 +335,7 @@ const Routes = (props) => {
                     </motion.div>
                   </Switch>
                 </MinimalLayout>
-              </Route>
+              </Route> */}
             </Suspense>
           </>
         )}

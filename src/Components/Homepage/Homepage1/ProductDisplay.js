@@ -153,28 +153,32 @@ class ProductDisplay extends Component {
                     <small className="m-auto d-flex align-items-center justify-content-center p-50 color-grey">
                       {allDetails.description}
                     </small>
-                    <Button
-                      style={{
-                        backgroundColor: `rgb(0, 68, 116)`,
-                        color: "#fff",
-                      }}
-                      onClick={(e) => {
-                        localStorage.setItem(
-                          "ProductImage",
-                          `${allDetails.src}`
-                        );
-                        localStorage.setItem(
-                          "ProductTitle",
-                          `${allDetails.name}`
-                        );
-                        this.FillForm({
-                          image: allDetails.src,
-                          title: allDetails.name,
-                        });
-                      }}
-                    >
-                      Buy
-                    </Button>
+                    <div className="d-flex align-items-center justify-content-center m-2">
+                      <Button
+                        style={{
+                          backgroundColor: `rgb(0, 68, 116)`,
+                          color: "#fff",
+                          display: "flex",
+                          alignSelf: "center",
+                        }}
+                        onClick={(e) => {
+                          localStorage.setItem(
+                            "ProductImage",
+                            `${allDetails.src}`
+                          );
+                          localStorage.setItem(
+                            "ProductTitle",
+                            `${allDetails.name}`
+                          );
+                          this.FillForm({
+                            image: allDetails.src,
+                            title: allDetails.name,
+                          });
+                        }}
+                      >
+                        Buy
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               </div>

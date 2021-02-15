@@ -10,7 +10,7 @@ import {
 export default function LivePreviewExample() {
   return (
     <>
-      <div className="z-over pb-5 rounded" style={{ marginTop: "-50px" }}>
+      <div className="z-over pb-5 rounded" style={{ marginTop: "50px" }}>
         <Container className="pt-0 pt-xl-5">
           {/* <Grid container spacing={6}>
             <Grid item xl={7} className="d-flex align-items-center">

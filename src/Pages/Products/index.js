@@ -17,23 +17,25 @@ class Products extends Component {
         <div className="header-top-section pb-5">
           <MessengerHeader />
         </div>
-        <h3 className="">Our Products</h3>
-        <Container>
-          {/* <hr className="mb-5 pb-5" /> */}
-          <Electric />
-          <hr className="mb-5 pb-5" />
-          <Airtime />
-          <hr className="mb-5 pb-5" />
-          <Data />
-          <hr className="mb-5 pb-5" />
-          <Cable />
-          <hr className="mb-5 pb-5" />
-          <Deposits />
-          <hr className="mb-5 pb-5" />
-          <Transfer />
-          <hr className="mb-5 pb-5" />
-          <Water />
-        </Container>
+        <div className="h-auto">
+          <h3 className="text-center">Our Products</h3>
+          <Container>
+            {/* <hr className="mb-5 pb-5" /> */}
+            <Electric />
+            <hr className="mb-5 pb-5" />
+            <Airtime />
+            <hr className="mb-5 pb-5" />
+            <Data />
+            <hr className="mb-5 pb-5" />
+            <Cable />
+            <hr className="mb-5 pb-5" />
+            <Deposits />
+            <hr className="mb-5 pb-5" />
+            <Transfer />
+            <hr className="mb-5 pb-5" />
+            <Water />
+          </Container>
+        </div>
       </div>
     );
   }

@@ -125,14 +125,14 @@ class Login extends Component {
                       {this.state.error}
                     </Typography>
                   )}
-                  <div className="text-center">
+                  {/* <div className="text-center">
                     <Button
                       onClick={this.forgotPassword}
                       className="btn bg-white font-weight-bold my-2"
                     >
                       forgot Password
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

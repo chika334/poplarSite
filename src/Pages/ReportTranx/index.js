@@ -167,7 +167,8 @@ export class Report extends PureComponent {
             <option value="chika">daniel</option>
           </select>
         </div>
-        {this.state.data === "allTransactionPagination" ? (
+        {this.state.data === "allTransactionPagination" ||
+        this.state.data === "" ? (
           <Transactions />
         ) : (
           console.log("bad")

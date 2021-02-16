@@ -14,6 +14,7 @@ const Form = ({ formName }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem("redirectPage", "/electric");
     if (validate()) {
       if (localStorage.ProductTitle === "RCCG ELECTRIC") {
         dispatch(form.submit(values));

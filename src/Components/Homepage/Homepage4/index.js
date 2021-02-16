@@ -275,7 +275,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/electric`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -310,7 +311,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/electric`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -332,7 +334,7 @@ export default function LivePreviewExample() {
                   <div className="align-items-center">
                     <div>
                       <Card className="card-transparent">
-                        <img src={ikeja} style={{ width: 80 }} alt="..." />
+                        <img src={ikeja} style={{ width: 65 }} alt="..." />
                         <h4 className="text-center">
                           {process.env.REACT_APP_IKEJA}
                         </h4>
@@ -345,7 +347,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/electric`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -380,7 +383,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/cable`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -415,7 +419,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/electric`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -450,7 +455,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/electric`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -472,7 +478,7 @@ export default function LivePreviewExample() {
                   <div className="align-items-center">
                     <div>
                       <Card className="card-transparent">
-                        <img src={ikeja} style={{ width: 80 }} alt="..." />
+                        <img src={ikeja} style={{ width: 65 }} alt="..." />
                         <h4 className="text-center">
                           {process.env.REACT_APP_IKEJA}
                         </h4>
@@ -485,7 +491,8 @@ export default function LivePreviewExample() {
                         reprehenderit.
                         <Link to={`${process.env.REACT_APP_URL}/electric`}>
                           <FontAwesomeIcon
-                            className="ml-3 text-primary"
+                            className="ml-3"
+                            style={{ color: "#048cfc" }}
                             icon={["fas", "arrow-right"]}
                           />
                         </Link>
@@ -506,7 +513,8 @@ export default function LivePreviewExample() {
             Check out our other products
             <Link to={`${process.env.REACT_APP_URL}/Products`}>
               <FontAwesomeIcon
-                className="ml-3 text-primary"
+                className="ml-3"
+                style={{ color: "#048cfc" }}
                 icon={["fas", "arrow-right"]}
               />
             </Link>

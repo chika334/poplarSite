@@ -246,7 +246,8 @@ class VerticalLinearStepper extends Component {
           <CardActions>
             <Button
               variant="contained"
-              color="primary"
+              // color="primary"
+              style={{ backgroundColor: "#048cfc", color: "#fff" }}
               onClick={this.clickSubmit}
               className={classes.submit}
             >

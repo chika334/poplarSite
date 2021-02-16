@@ -216,33 +216,23 @@ export class TranxReport extends PureComponent {
   // });
   // }
 
-  getData() {
-    this.props.transactions === null
-      ? console.log("bad")
-      : // : this.props.transactions.map((allData) => {
-        //     // console.log(allData);
-        //     var slice = allData.slice(
-        //       this.state.offset,
-        //       this.state.offset + this.state.perPage
-        //     );
-
-        //     this.setState({
-        //       pageCount: Math.ceil(allData.length / this.state.perPage),
-        //       orgtableData: allData,
-        //       tableData: slice,
-        //     });
-        //   });
-        this.setState({
-          pageCount: Math.ceil(
-            this.props.transactions.length / this.state.perPage
-          ),
-          orgtableData: this.props.transactions,
-          tableData: this.props.transactions.slice(
-            this.state.offset,
-            this.state.offset + this.state.perPage
-          ),
-        });
-  }
+  getData = () => {
+    // console.log(this.props.transactions);
+    setTimeout(() => {
+      this.props.transactions === null
+        ? console.log("bad")
+        : this.setState({
+            pageCount: Math.ceil(
+              this.props.transactions.length / this.state.perPage
+            ),
+            orgtableData: this.props.transactions,
+            tableData: this.props.transactions.slice(
+              this.state.offset,
+              this.state.offset + this.state.perPage
+            ),
+          });
+    }, 2000);
+  };
 
   render() {
     const { classes } = this.props;
@@ -318,6 +308,7 @@ export class TranxReport extends PureComponent {
 
 const mapStateToProps = (state) => ({
   transactions: state.transactions.transaction,
+  authUser: state.authUser.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(TranxReport));

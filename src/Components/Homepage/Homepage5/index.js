@@ -1,9 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import rccg from '../../../assets/images/product-logos/rccg.jpg'
-import eko from '../../../assets/images/product-logos/eko.jpg'
-import ikeja from '../../../assets/images/product-logos/ikeja.png'
-import dstv from '../../../assets/images/product-logos/dstv.jpg'
+import rccg from "../../../assets/images/product-logos/rccg.jpg";
+import eko from "../../../assets/images/product-logos/eko.jpg";
+import ikeja from "../../../assets/images/product-logos/ikeja.png";
+import dstv from "../../../assets/images/product-logos/dstv.jpg";
 import {
   Grid,
   Container,
@@ -29,7 +29,10 @@ import stock4 from "../../../assets/images/stock-photos/stock-4.jpg";
 export default function LivePreviewExample() {
   return (
     <>
-      <div className="hero-wrapper bg-deep-sky pt-4 pt-xl-5 bg-composed-wrapper">
+      <div
+        className="hero-wrapper pt-4 pt-xl-5 bg-composed-wrapper"
+        style={{ backgroundColor: "#048cfc", color: "#fff" }}
+      >
         <div className="hero-wrapper--content">
           <div
             className="bg-composed-wrapper--image bg-composed-filter-rm opacity-6"
@@ -70,11 +73,7 @@ export default function LivePreviewExample() {
                           onClick={(e) => e.preventDefault()}
                           className="card mt-4 shadow-sm-dark card-box-hover-rise mb-5"
                         >
-                          <img
-                            src={rccg}
-                            className="card-img-top"
-                            alt="..."
-                          />
+                          <img src={rccg} className="card-img-top" alt="..." />
                           <div className="p-3 bg-secondary rounded text-center p-xl-4 d-flex align-items-center justify-content-center">
                             <img src={logo1} alt="..." style={{ height: 25 }} />
                           </div>
@@ -86,11 +85,7 @@ export default function LivePreviewExample() {
                           onClick={(e) => e.preventDefault()}
                           className="card shadow-sm-dark card-box-hover-rise mb-5"
                         >
-                          <img
-                            src={eko}
-                            className="card-img-top"
-                            alt="..."
-                          />
+                          <img src={eko} className="card-img-top" alt="..." />
                           <div className="p-3 bg-secondary rounded text-center p-xl-4 d-flex align-items-center justify-content-center">
                             <img src={logo2} alt="..." style={{ height: 25 }} />
                           </div>
@@ -124,11 +119,7 @@ export default function LivePreviewExample() {
                           onClick={(e) => e.preventDefault()}
                           className="card shadow-sm-dark card-box-hover-rise mb-5"
                         >
-                          <img
-                            src={dstv}
-                            className="card-img-top"
-                            alt="..."
-                          />
+                          <img src={dstv} className="card-img-top" alt="..." />
                           <div className="p-2 bg-secondary rounded text-center p-xl-4 d-flex align-items-center justify-content-center">
                             {/* <img src={logo4} alt="..." style={{ height: 25 }} /> */}
                             {`${process.env.REACT_APP_DSTV}`}

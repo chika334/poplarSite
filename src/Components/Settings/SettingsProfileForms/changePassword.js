@@ -144,7 +144,8 @@ class changePassword extends React.Component {
           </CardContent>
           <CardActions>
             <Button
-              color="primary"
+              // color="primary"
+              style={{ backgroundColor: "#048cfc", color: "#fff" }}
               type="button"
               variant="contained"
               onClick={this.clickSubmit}

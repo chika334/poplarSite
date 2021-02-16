@@ -135,7 +135,8 @@ function LivePreviewExample(props) {
                     <Button
                       selected={activeTab2 === "1"}
                       className="p-3 mx-3 rounded-lg"
-                      style={{ backgroundColor: `rgb(0, 68, 116)` }}
+                      // style={{ backgroundColor: `rgb(0, 68, 116)` }}
+                      style={{ backgroundColor: "#048cfc", color: "#fff" }}
                     >
                       <Link to={`${process.env.REACT_APP_URL}/Dashboard`}>
                         <span className="font-size-lg text-white px-2 py-1">
@@ -147,7 +148,8 @@ function LivePreviewExample(props) {
                     <Button
                       selected={activeTab2 === "1"}
                       className="mx-3 rounded-lg"
-                      style={{ backgroundColor: `rgb(242, 106, 6)` }}
+                      // style={{ backgroundColor: `rgb(242, 106, 6)` }}
+                      style={{ backgroundColor: "#048cfc", color: "#fff" }}
                       onClick={(e) => {
                         if (props.authUser) {
                           window.location.href = `${process.env.REACT_APP_URL}/walletTranx`;
@@ -166,7 +168,7 @@ function LivePreviewExample(props) {
                       className="mx-3 p-3 rounded-lg"
                       style={{
                         // backgroundColor: `rgb(0, 68, 116)`,
-                        border: `3px solid rgb(0, 68, 116)`,
+                        border: `3px solid #048cfc`,
                         width: "94%",
                       }}
                     >

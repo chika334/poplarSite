@@ -14,6 +14,7 @@ const Form = ({ formName }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    localStorage.setItem("redirectPage", "/profilepage")
     if (validate()) {
       dispatch(form.submit(values));
     }

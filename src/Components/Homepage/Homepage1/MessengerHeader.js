@@ -68,11 +68,19 @@ class MessengerHeader extends Component {
               <NavLink
                 to={`${process.env.REACT_APP_URL}`}
                 title="Bamburgh React Messenger Application with Material-UI PRO"
-                className="app-nav-logo app-nav-logo--dark"
+                className="d-flex align-items-center justify-content-center"
               >
-                <div className="app-nav-logo--text">
-                  <span style={{ color: `rgb(0, 68, 116)` }}>Poplar</span>
-                  <span style={{ color: `rgb(242, 106, 6)` }}>power</span>
+                <div
+                  className="app-nav-logo--text p-3 ml-3"
+                  style={{
+                    backgroundColor: "#048cfc",
+                    color: "#fff",
+                    borderRadius: "30px",
+                  }}
+                >
+                  <span className="d-flex align-items-center justify-content-center">{`${process.env.REACT_APP_NAME}`}</span>
+                  {/* <span>Poplar</span>
+                  <span>power</span> */}
                 </div>
               </NavLink>
             </div>
@@ -148,7 +156,10 @@ class MessengerHeader extends Component {
                     </span>
                   </a>
                   <div className="submenu-dropdown submenu-dropdown--md">
-                    <div className="shadow-lg w-100 bg-primary p-4 rounded">
+                    <div
+                      className="shadow-lg w-100 p-4 rounded"
+                      style={{ backgroundColor: "#048cfc", color: "#fff" }}
+                    >
                       <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
                         Our Products
                       </div>
@@ -208,7 +219,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/cable`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/cable");
                             }
                           }}
@@ -230,7 +241,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/airtime`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/airtime");
                             }
                           }}
@@ -251,7 +262,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/data`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "data");
                             }
                           }}
@@ -272,7 +283,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/transfer`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/transfer");
                             }
                           }}
@@ -293,7 +304,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/deposits`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/deposits");
                             }
                           }}
@@ -322,7 +333,8 @@ class MessengerHeader extends Component {
                       onClick={(e) => {
                         this.login(e);
                       }}
-                      className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
+                      style={{ backgroundColor: "#048cfc", color: "#fff" }}
+                      className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
                     >
                       Login
                     </Button>
@@ -330,7 +342,8 @@ class MessengerHeader extends Component {
                       onClick={(e) => {
                         this.register(e);
                       }}
-                      className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
+                      style={{ backgroundColor: "#048cfc", color: "#fff" }}
+                      className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
                     >
                       Register
                     </Button>
@@ -353,6 +366,7 @@ class MessengerHeader extends Component {
                 </button>
               </span>
             </div>
+            {/* mobile */}
             <div className="d-flex d-lg-none">
               <Collapse
                 in={this.state.collapse}
@@ -482,7 +496,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/electric`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/electric");
                             }
                           }}
@@ -504,7 +518,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/water`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/water");
                             }
                           }}
@@ -525,7 +539,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/cable`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/cable");
                             }
                           }}
@@ -546,7 +560,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/airtime`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/airtime");
                             }
                           }}
@@ -567,7 +581,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/transfer`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/transfer");
                             }
                           }}
@@ -588,7 +602,7 @@ class MessengerHeader extends Component {
                                 `${process.env.REACT_APP_URL}/deposits`
                               );
                             } else {
-                              this.product(e);
+                              this.good(e);
                               localStorage.setItem("redirectPage", "/deposits");
                             }
                           }}

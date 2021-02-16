@@ -155,12 +155,12 @@ class ProductDisplay extends Component {
                     </small>
                     <div className="d-flex align-items-center justify-content-center m-2">
                       <Button
-                        style={{
-                          backgroundColor: `rgb(0, 68, 116)`,
-                          color: "#fff",
-                          display: "flex",
-                          alignSelf: "center",
-                        }}
+                        // style={{
+                        //   backgroundColor: `rgb(0, 68, 116)`,
+                        //   color: "#fff",
+                        // }}
+                        style={{ backgroundColor: "#048cfc", color: "#fff" }}
+                        className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
                         onClick={(e) => {
                           localStorage.setItem(
                             "ProductImage",
@@ -274,14 +274,14 @@ class ProductDisplay extends Component {
                                   Submit
                                 </Button>
                               </div> */}
-                          <div className="text-center">
+                          {/* <div className="text-center">
                             <Button
                               onClick={this.forgotPassword}
                               className="btn bg-white font-weight-bold my-2"
                             >
                               forgot Password
                             </Button>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                       {/* </div> */}

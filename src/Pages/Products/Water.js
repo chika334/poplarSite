@@ -553,7 +553,7 @@ class Electric extends Component {
       }
       if (success.success) {
         this.props.hideLoader();
-        console.log("success", success.success);
+        // console.log("success", success.success);
         this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
       }
       if (success.success === false && this.state.wantToPay === false) {
@@ -771,10 +771,11 @@ class Electric extends Component {
                       </small>
                       <div className="d-flex align-items-center justify-content-center mt-3">
                         <Button
-                          style={{
-                            backgroundColor: `rgb(0, 68, 116)`,
-                            color: "#fff",
-                          }}
+                          // style={{
+                          //   backgroundColor: `rgb(0, 68, 116)`,
+                          //   color: "#fff",
+                          // }}
+                          style={{ backgroundColor: "#048cfc", color: "#fff" }}
                           className="w-50"
                           onClick={(e) => {
                             localStorage.setItem(

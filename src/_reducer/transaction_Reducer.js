@@ -2,6 +2,7 @@ import {
   TRANSACTION_LOADING,
   TRANSACTION_LOADED,
   TRANSACTION_ERROR,
+  FILTER_BYDATE,
 } from "../_actions/type";
 
 const initialState = {
@@ -16,6 +17,7 @@ function transactionReducer(state = initialState, action) {
         ...state,
         isLoading: true,
       };
+    case FILTER_BYDATE:
     case TRANSACTION_LOADED:
       return {
         ...state,

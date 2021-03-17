@@ -5,6 +5,7 @@ import {
   TRANSACTION_LOADING,
   TRANSACTION_LOADED,
   TRANSACTION_ERROR,
+  FILTER_BYDATE,
 } from "./type";
 
 export const getTransactions = () => async (dispatch, getState) => {
@@ -26,4 +27,22 @@ export const getTransactions = () => async (dispatch, getState) => {
         type: TRANSACTION_ERROR,
       });
     });
+};
+
+export const filterByDate = (value) => async (dispatch, getState) => {
+  // dispatch({ type: FILTER_LOADING });
+  await axios
+    .post(
+      `${process.env.REACT_APP_API}/fastpayr/api/v1/paymentrequest/datefilter`,
+      value,
+      // config,
+      tokenConfig(getState)
+    )
+    .then((res) =>
+      dispatch({
+        type: FILTER_BYDATE,
+        payload: res.data,
+      })
+    )
+    .catch((err) => console.log(err));
 };

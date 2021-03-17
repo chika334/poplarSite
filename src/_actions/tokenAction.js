@@ -4,9 +4,13 @@ import { BUYTOKEN_FAIL, BUY_TOKEN, CLEAR_BUY_TOKEN } from "./type";
 import { tokenConfig } from "./userAction";
 
 export const token = (buyToken) => (dispatch, getState) => {
+  // console.log(buyToken);
   axios
     .post(
-      `${process.env.REACT_APP_API}/fastpayr/api/v1/payment/singlepayment`, buyToken, tokenConfig(getState))
+      `${process.env.REACT_APP_API}/fastpayr/api/v1/payment/singlepayment`,
+      buyToken,
+      tokenConfig(getState)
+    )
     .then((res) =>
       dispatch({
         type: BUY_TOKEN,
@@ -19,12 +23,13 @@ export const token = (buyToken) => (dispatch, getState) => {
       );
       dispatch({
         type: BUYTOKEN_FAIL,
+        payload: err.response,
       });
     });
 };
 
-export const clearToken = () => dispatch => {
+export const clearToken = () => (dispatch) => {
   dispatch({
-    type: CLEAR_BUY_TOKEN
-  })
-}
+    type: CLEAR_BUY_TOKEN,
+  });
+};

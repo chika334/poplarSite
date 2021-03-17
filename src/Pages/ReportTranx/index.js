@@ -138,18 +138,9 @@ import { List, ListItem } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Transactions from "./Transactions";
 import Filter from "./Filter";
+import Select from "./Select";
 
 export class Report extends PureComponent {
-  state = {
-    data: "",
-  };
-
-  handleChange = (e) => {
-    e.preventDefault();
-    this.setState({
-      data: e.target.value,
-    });
-  };
   render() {
     return (
       <div>
@@ -158,22 +149,7 @@ export class Report extends PureComponent {
             <MessengerHeader />
           </div>
         </div>
-        <div className="mt-5 d-flex align-content-center justify-content-center">
-          <label className="pr-3">Select option: </label>
-          <select onClick={(e) => this.handleChange(e)}>
-            <option>Select Option</option>
-            <option value="allTransactionPagination">All Transactions</option>
-            <option value="filterByDate">daniel</option>
-            <option value="chika">daniel</option>
-          </select>
-        </div>
-        {this.state.data === "allTransactionPagination" ||
-        this.state.data === "" ? (
-          <Transactions />
-        ) : (
-          console.log("bad")
-        )}
-        {this.state.data === "filterByDate" ? <Filter /> : console.log("Fine")}
+        <Select />
       </div>
     );
   }

@@ -184,7 +184,7 @@ class Tab1 extends Component {
                     alt="rccg"
                   />
                   <h1 className="font-size-xxl mb-1 font-weight-bold">
-                    {process.env.REACT_APP_RCCG}
+                    {/* {process.env.REACT_APP_RCCG} */}
                     {localStorage.getItem("ProductTitle")}
                   </h1>
                   <p className="mb-0 text-black-50">

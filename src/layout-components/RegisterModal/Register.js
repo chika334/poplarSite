@@ -44,6 +44,7 @@ class Register extends Component {
       if (error.id === "REGISTER_FAIL") {
         this.props.hideLoader();
         this.setState({ error: error.message.message });
+        console.log(error);
       }
     } else {
       this.check();
@@ -58,16 +59,7 @@ class Register extends Component {
       this.props.hideLoader();
       this.props.hideRegisterModal();
       let redirect = localStorage.getItem("redirectPage");
-      // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
       window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
-      // this.setState({ redirect: true });
-      // setTimeout(() => {
-      //   let redirect = localStorage.getItem("redirectPage");
-      //   this.props.hideLoader();
-      //   this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-      //   // window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
-      //   this.props.hideRegisterModal();
-      // }, 500);
     }
   };
 
@@ -144,76 +136,6 @@ class Register extends Component {
               </div>
               <div className="py-4">
                 <Form formName={FORM_NAME} key={FORM_NAME} />
-                {/* <div>
-                  <div className="mb-4">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="textfield-firstname"
-                      label="First Name"
-                      onChange={this.handleChange("firstname")}
-                      value={this.state.firstname || ""}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AccountCircleIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="textfield-lastname"
-                      label="Last Name"
-                      onChange={this.handleChange("lastname")}
-                      value={this.state.lastname || ""}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AccountCircleIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="textfield-email"
-                      label="Email address"
-                      onChange={this.handleChange("email")}
-                      value={this.state.email || ""}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <MailOutlineTwoToneIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      id="textfield-password"
-                      label="Password"
-                      onChange={this.handleChange("password")}
-                      type="password"
-                      value={this.state.password || ""}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <LockTwoToneIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </div> */}
                 {this.state.error && (
                   <Typography
                     className="text-center"

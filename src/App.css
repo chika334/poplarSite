@@ -143,3 +143,203 @@ input::-webkit-inner-spin-button {
   border-radius: unset;
 }
 /* pagination ends */
+
+/* paystack payment */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap");
+
+.App {
+  /* background-color: red; */
+  text-align: center;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-family: "Roboto";
+  letter-spacing: 0.1rem;
+}
+
+.containers {
+  margin-top: 50px;
+  display: flex;
+  width: 400px;
+  /* height: 430px; */
+}
+
+.item {
+  width: 100%;
+  position: relative;
+}
+
+.item-image {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.overlay-effect {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.2;
+  background-color: #303030;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.item-details {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5px;
+  margin-left: 20px;
+  color: #000;
+  text-align: left;
+}
+
+.item-details__title {
+  font-size: 22px;
+}
+
+.item-details__amount {
+  font-weight: bolder;
+}
+
+.checkout {
+  /* background: #84a17d; fallback for old browsers */
+  /* background-color: #fff; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 430px;
+  padding: 50px;
+  /* padding-left: 50px;
+  padding-right: 50px; */
+  margin-top: 50px;
+  width: 100%;
+}
+
+.checkout-form {
+  padding: 10px 25px;
+}
+
+.checkout-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.checkout-field label {
+  text-align: left;
+  /* color: #979da7; */
+  color: #000;
+  font-size: 10px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.checkout-field input {
+  background-color: transparent;
+  border: 1px solid #cecece;
+  border-radius: 5px;
+  color: #e0eafc;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.checkout-field input:focus {
+  background-color: transparent;
+  outline: none;
+}
+
+.paystack-button {
+  cursor: pointer;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  background-color: #bfbfbf;
+  font-weight: bold;
+  /* color: #e0eafc; */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 45px;
+  margin-top: 20px;
+}
+
+.paystack-button:hover {
+  background-color: #dadada;
+}
+
+.paystack-button:focus {
+  outline: none;
+}
+
+.allnew {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.allnew > div {
+  margin: 5px;
+  padding: 2px;
+  width: 50%;
+}
+
+.allsecond {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.allsecond > div {
+  margin: 5px;
+  padding: 2px;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .allnew {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .allnew > div {
+    padding: 10px;
+    width: 50%;
+  }
+
+  .allsecond {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .allsecond > div {
+    padding: 10px;
+    width: 50%;
+  }
+}
+
+@media (max-width: 599px) {
+  .App {
+    /* background: green; */
+    width: 100%;
+    height: auto;
+  }
+  .allnew {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .containers {
+    /* background-color: red; */
+    width: 400px
+  }
+
+  .allnew > div {
+    padding: 10px;
+    /*width: 50%;*/
+  }
+}
+/* paystack payment ends */

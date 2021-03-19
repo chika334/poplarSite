@@ -51,7 +51,7 @@ class MessengerHeader extends Component {
     e.preventDefault();
     if (this.props.authUser || localStorage.token) {
       const redirect = localStorage.getItem("redirectPage");
-      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
       // this.props.showModal();
       // this.props.hideModal();
       // this.props.history.push(`${process.env.REACT_APP_URL}/PageProfile`);
@@ -329,7 +329,7 @@ class MessengerHeader extends Component {
                   <Logout />
                 ) : (
                   <>
-                    <Button
+                    {/* <Button
                       onClick={(e) => {
                         this.login(e);
                       }}
@@ -337,7 +337,7 @@ class MessengerHeader extends Component {
                       className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
                     >
                       Login
-                    </Button>
+                    </Button> */}
                     <Button
                       onClick={(e) => {
                         this.register(e);
@@ -631,7 +631,7 @@ class MessengerHeader extends Component {
                     </List>
                   ) : (
                     <List>
-                      <ListItem
+                      {/* <ListItem
                         button
                         component={Button}
                         onClick={(e) => {
@@ -644,7 +644,7 @@ class MessengerHeader extends Component {
                           icon={["fas", "angle-right"]}
                           className="opacity-6 ml-auto"
                         />
-                      </ListItem>
+                      </ListItem> */}
                       <ListItem
                         button
                         component={Button}

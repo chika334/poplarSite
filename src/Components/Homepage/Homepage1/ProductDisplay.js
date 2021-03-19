@@ -68,7 +68,7 @@ class ProductDisplay extends Component {
     const { error, authUser, success } = this.props;
     if (error !== prevProps.error) {
       // check for register error
-      if (error.id === "BUYTOKEN_FAIL") {
+      if (error.id === "LOGIN_FAIL") {
         // this.props.hideLoader();
         this.setState({ error: error.message.message });
       }
@@ -93,7 +93,6 @@ class ProductDisplay extends Component {
     if (authUser === false) {
       this.setState({ open: true });
     } else {
-      // console.log("BAD ERROR");
       this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
     }
   };
@@ -219,6 +218,17 @@ class ProductDisplay extends Component {
                           </div>
                         </div>
                         <div className="py-4">
+                          <div>
+                            {this.state.error && (
+                              <Typography
+                                className="pb-3 text-center"
+                                component="p"
+                                color="error"
+                              >
+                                {this.state.error}
+                              </Typography>
+                            )}
+                          </div>
                           <Form formName={FORM_NAME} key={FORM_NAME} />
                           {/* <div>
                             <div className="mb-4">

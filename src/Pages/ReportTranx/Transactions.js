@@ -1,143 +1,17 @@
-// import React, { useState, useEffect } from "react";
-// import { withStyles } from "@material-ui/core/styles";
-// // import Paper from "../component/Paper/Paper";
-// // import PropTypes from "prop-types";
-// // import { makeStyles } from "@material-ui/core/styles";
-// // import Typography from "@material-ui/core/Typography";
-// import { connect, useSelector } from "react-redux";
-// import "../WalletTranx/report.css";
-// import { List, ListItem } from "@material-ui/core";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
-// import { showLoader } from "../../_actions/loading";
-// import { getTransactions } from "../../_actions/transactions";
-// import axios from "axios";
-// import { tokenConfig } from "../../_actions/userAction";
-
-// const styles = (theme) => ({
-//   root: {
-//     width: "100%",
-//   },
-//   title: {
-//     margin: "auto",
-//     height: 80,
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     color: theme.palette.text.secondary,
-//   },
-// });
-
-// const Report = (props) => {
-//   // const [tranx, setTranx] = useState(null);
-//   // const [perPage, setperPage] = useState(10);
-//   const [values, setValues] = useState({
-//     tranx: [],
-//     perPage: 10,
-//     offset: 0,
-//     orgtableData: [],
-//     currentPage: 0,
-//     // pageCount: null,
-//   });
-
-//   const { offset, orgtableData, currentPage, tranx, perPage } = values;
-
-//   const transactions = useSelector((state) => state.transactions.transaction);
-//   const user = useSelector((state) => state.authUser);
-//   const { classes } = props;
-
-//   useEffect(() => {
-//     getData();
-//   }, [transactions]);
-
-//   const getData = () => {
-//     return transactions === null
-//       ? null
-//       : transactions.map((result, index) => {
-//           // setTranx(result)
-
-//           const slice = result.slice(offset, offset + perPage);
-//           setValues({
-//             ...values,
-//             tranx: result,
-//             pageCount: Math.ceil(result.length / perPage),
-//             orgtableData: result,
-//             tableData: slice
-//           });
-//         });
-//   };
-
-//   console.log(values);
-//   return (
-// <div className="hero-wrapper bg-composed-wrapper bg-light">
-//   <div className="header-top-section">
-//     <MessengerHeader />
-//   </div>
-//   <div className="responsive-container">
-//     <h2 className={classes.title}>Transactions</h2>
-//         <table>
-//           <thead>
-//             <tr>
-//               <th>id</th>
-//               <th>System Id</th>
-//               <th>full name</th>
-//               <th>account number</th>
-//               <th>Payment type name</th>
-//               <th>Phone number</th>
-//               <th>title</th>
-//               <th>Amount</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {transactions === null
-//               ? null
-//               : transactions.map((result, index) => {
-//                   return (
-//                     <tr key={index}>
-//                       <td data-title="id">{index}</td>
-//                       <td data-title="Fastr Id">{result.response.fastrId}</td>
-//                       <td data-title="Full Name">
-//                         {result.response.paymentRequestid.fullname}
-//                       </td>
-//                       <td data-title="Account Number">
-//                         {result.response.paymentRequestid.accountNumber}
-//                       </td>
-//                       <td data-title="Payment type name">
-//                         {
-//                           result.response.paymentRequestid.serviceproviderId
-//                             .paymentTypeid.paymentTypeName
-//                         }
-//                       </td>
-//                       <td data-title="Phone number">
-//                         {
-//                           result.response.paymentRequestid.serviceproviderId
-//                             .manager.phone
-//                         }
-//                       </td>
-//                       <td data-title="title">
-//                         {result.response.paymentRequestid.productCode.title}
-//                       </td>
-//                       <td data-title="Amount">
-//                         {result.response.paymentRequestid.amount}
-//                       </td>
-//                     </tr>
-//                   );
-//                 })}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default connect(null, { showLoader })(withStyles(styles)(Report));
-
 import React, { PureComponent } from "react";
 import axios from "axios";
-// import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 import ReactPaginate from "react-paginate";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Table,
+  LinearProgress,
+  Card,
+  CardContent,
+  Button,
+  Tooltip,
+} from "@material-ui/core";
 
 const styles = (theme) => ({
   root: {
@@ -199,23 +73,6 @@ export class TranxReport extends PureComponent {
     this.getData();
   }
 
-  // getData() {
-  //   axios.get(`https://jsonplaceholder.typicode.com/comments`).then((res) => {
-  //     var data = res.data;
-
-  //     var slice = data.slice(
-  //       this.state.offset,
-  //       this.state.offset + this.state.perPage
-  //     );
-
-  //   this.setState({
-  //     pageCount: Math.ceil(data.length / this.state.perPage),
-  //     orgtableData: res.data,
-  //     tableData: slice,
-  //   });
-  // });
-  // }
-
   getData = () => {
     // console.log(this.props.transactions);
     setTimeout(() => {
@@ -237,8 +94,8 @@ export class TranxReport extends PureComponent {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <div className="responsive-container">
+      <div style={{ marginLeft: "5%", marginRight: "5%" }}>
+        {/* <div className="responsive-container">
           <h2 className={classes.title}>Transactions</h2>
           <table>
             <thead>
@@ -299,8 +156,106 @@ export class TranxReport extends PureComponent {
             subContainerClassName={"pages pagination"}
             activeClassName={"active"}
           />
-        </div>
-        {/* </div> */}
+        </div> */}
+
+        <Card className="card-box mb-spacing-6-x2">
+          <div className="card-header pr-2">
+            <div className="card-header--title">All Transactions</div>
+            <div className="card-header--actions">
+              <Tooltip title="Refresh">
+                <Button size="small" className="btn-neutral-primary">
+                  <FontAwesomeIcon icon={["fas", "cog"]} spin />
+                </Button>
+              </Tooltip>
+            </div>
+          </div>
+          <CardContent>
+            <div className="table-responsive-md">
+              <Table className="table table-borderless table-hover text-nowrap mb-0">
+                <thead>
+                  <tr>
+                    <th className="text-center">id</th>
+                    <th className="text-center">System Id</th>
+                    <th className="text-center">full name</th>
+                    <th className="text-center">account number</th>
+                    <th className="text-center">Payment type name</th>
+                    <th className="text-center">Phone number</th>
+                    <th className="text-center">title</th>
+                    <th className="text-center">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <div className="d-flex align-items-center">0jw912983</div>
+                    </td>
+                    <td className="text-center">
+                      <div className="badge badge-neutral-warning text-warning px-4">
+                        Ikenye daniel
+                      </div>
+                    </td>
+                    <td className="text-center">
+                      <div>01232344323</div>
+                    </td>
+                    <td className="text-center">
+                      <div>Poplar</div>
+                    </td>
+                    <td className="table-text text-center">09052673281</td>
+                    <td className="table-text text-center">
+                      Electricity payment
+                    </td>
+                    <td className="table-text text-center">₦5000</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      <div className="d-flex align-items-center">0jw912983</div>
+                    </td>
+                    <td className="text-center">
+                      <div className="badge badge-neutral-warning text-warning px-4">
+                        Divine saviour
+                      </div>
+                    </td>
+                    <td className="text-center">
+                      <div>01232344323</div>
+                    </td>
+                    <td className="text-center">
+                      <div>Poplar</div>
+                    </td>
+                    <td className="table-text text-center">09052673281</td>
+                    <td className="table-text text-center">
+                      Electricity payment
+                    </td>
+                    <td className="table-text text-center">₦5000</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      <div className="d-flex align-items-center">0jw912983</div>
+                    </td>
+                    <td className="text-center">
+                      <div className="badge badge-neutral-warning text-warning px-4">
+                        Abule samuel
+                      </div>
+                    </td>
+                    <td className="text-center">
+                      <div>87291212</div>
+                    </td>
+                    <td className="text-center">
+                      <div>Poplar</div>
+                    </td>
+                    <td className="table-text text-center">09052673281</td>
+                    <td className="table-text text-center">
+                      Electricity payment
+                    </td>
+                    <td className="table-text text-center">₦5000</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }

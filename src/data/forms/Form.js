@@ -7,6 +7,7 @@ import { useDispatch, connect } from "react-redux";
 import { paymentForms, getStateValues } from "./PaymentForms";
 import { useForm, useValidator } from "./useForm";
 import { showForgotModal } from "../../_actions/forgotModal";
+// import { showLoader } from "../../_actions/loading";
 
 const Form = ({ formName, props }) => {
   const form = paymentForms(formName);
@@ -19,8 +20,10 @@ const Form = ({ formName, props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("redirectPage", "/profilepage");
+    // props.showLoader();
+    // localStorage.setItem("redirectPage", "/profilepage");
     if (validate()) {
+      // dispatch(showLoader());
       dispatch(form.submit(values));
     }
   };

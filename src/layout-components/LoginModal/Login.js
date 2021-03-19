@@ -50,9 +50,9 @@ class Login extends Component {
     if (isAuthenticated) {
       let redirect = localStorage.getItem("redirectPage");
       // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-      console.log("LOGIN");
+      // console.log("LOGIN");
       this.sendRedirect();
-      this.props.hideLoader();
+      // this.props.hideLoader();
       this.props.hideModal();
       // this.props.history.push(`${process.env.REACT_APP_URL}/profilepage`);
       window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
@@ -114,11 +114,10 @@ class Login extends Component {
                 </div>
               </div>
               <div className="py-4">
-                <Form formName={FORM_NAME} key={FORM_NAME} />
                 <div>
                   {this.state.error && (
                     <Typography
-                      className="text-center"
+                      className="pb-3 text-center"
                       component="p"
                       color="error"
                     >
@@ -126,6 +125,7 @@ class Login extends Component {
                     </Typography>
                   )}
                 </div>
+                <Form formName={FORM_NAME} key={FORM_NAME} />
               </div>
             </div>
           </div>

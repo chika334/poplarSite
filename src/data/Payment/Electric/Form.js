@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { PaymentForm, getStateValues } from "./RCCGElectricForm";
 import { useForm, useValidator } from "./useForm";
 import Pay from "../../../Components/paystack/pay";
-import Paystack from "../../../Components/paystack/paystack";
+// import Paystack from "../../../Components/paystack/paystack";
 
 const Form = ({ formName }) => {
   const form = PaymentForm(formName);

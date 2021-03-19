@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import rccg from "../../assets/images/product-logos/rccg.jpg";
+import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { showModal, hideModal } from "../../_actions/modal";
 import PropTypes from "prop-types";
@@ -54,23 +54,17 @@ class Tab1 extends Component {
       // check for register error
       if (error.id === "BUYTOKEN_FAIL") {
         this.setState({ error: error.message.message });
+        console.log(this.state.error);
       }
     } else {
       if (authUser && success.success) {
         this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
+        // window.location.href = `${process.env.REACT_APP_URL}/buytoken`;
         console.log("Logged");
       }
       this.sendRedirect();
     }
   }
-
-  // goods = () => {
-  //   const { authUser } = this.props;
-  //   const pages = localStorage.getItem("LoggedPage");
-  //   if (authUser && pages) {
-  //     this.payBills();
-  //   }
-  // };
 
   sendRedirect = () => {
     this.props.clearErrors();
@@ -196,6 +190,17 @@ class Tab1 extends Component {
                   </p>
                 </div>
                 <div className="py-4">
+                  <div>
+                    {this.state.error && (
+                      <Typography
+                        className="pb-3 text-center"
+                        component="p"
+                        color="error"
+                      >
+                        {this.state.error}
+                      </Typography>
+                    )}
+                  </div>
                   <Form formName={FORM_NAME} key={FORM_NAME} />
                   {/* <div>
                     <div className="mb-4">

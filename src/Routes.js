@@ -81,44 +81,6 @@ const Routes = (props) => {
     duration: 0.6,
   };
 
-  // const SuspenseLoading = () => {
-  //   const [show, setShow] = useState(false);
-  //   useEffect(() => {
-  //     let timeout = setTimeout(() => setShow(true), 300);
-  //     return () => {
-  //       clearTimeout(timeout);
-  //     };
-  //   }, []);
-
-  //   return (
-  //     <>
-  //       <AnimatePresence>
-  //         {show && (
-  //           <motion.div
-  //             key="loading"
-  //             initial={{ opacity: 0 }}
-  //             animate={{ opacity: 1 }}
-  //             exit={{ opacity: 0 }}
-  //             transition={{ duration: 0.3 }}
-  //           >
-  //             <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
-  //               <div className="d-flex align-items-center flex-column px-4">
-  //                 <ClimbingBoxLoader color={"#3c44b1"} loading={true} />
-  //               </div>
-  //               <div className="text-muted font-size-xl text-center pt-3">
-  //                 Please wait while we load the page
-  //                 <span className="font-size-lg d-block text-dark">
-  //                   Welcome to `${process.env.REACT_APP_NAME}`
-  //                 </span>
-  //               </div>
-  //             </div>
-  //           </motion.div>
-  //         )}
-  //       </AnimatePresence>
-  //     </>
-  //   );
-  // };
-
   useEffect(() => {
     props.showLoader();
     setTimeout(() => {
@@ -210,6 +172,41 @@ const Routes = (props) => {
                       variants={pageVariants}
                       transition={pageTransition}
                     >
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/products`}
+                        exact
+                        component={Products}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/data`}
+                        exact
+                        component={Data}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/airtime`}
+                        exact
+                        component={Airtime}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/cable`}
+                        exact
+                        component={Cable}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/water`}
+                        exact
+                        component={Water}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/electric`}
+                        exact
+                        component={Electric}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/transfer`}
+                        exact
+                        component={Transfer}
+                      />
                       <PrivateRoute
                         path={`${process.env.REACT_APP_URL}/buyProducts`}
                         exact
@@ -244,41 +241,6 @@ const Routes = (props) => {
                         path={`${process.env.REACT_APP_URL}/deposits`}
                         exact
                         component={Deposits}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/transfer`}
-                        exact
-                        component={Transfer}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/data`}
-                        exact
-                        component={Data}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/airtime`}
-                        exact
-                        component={Airtime}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/cable`}
-                        exact
-                        component={Cable}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/water`}
-                        exact
-                        component={Water}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/electric`}
-                        exact
-                        component={Electric}
-                      />
-                      <PrivateRoute
-                        path={`${process.env.REACT_APP_URL}/products`}
-                        exact
-                        component={Products}
                       />
                       <PrivateRoute
                         path={`${process.env.REACT_APP_URL}/profilepage`}

@@ -1,13 +1,13 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { inputGenerator } from "./InputGenerator";
-
+import { Link } from "react-router-dom";
 import { useDispatch, connect } from "react-redux";
-
+import { List, ListItem } from "@material-ui/core";
 import { paymentForms, getStateValues } from "./PaymentForms";
 import { useForm, useValidator } from "./useForm";
 import { showForgotModal } from "../../_actions/forgotModal";
-// import { showLoader } from "../../_actions/loading";
+import { showRegisterModal } from "../../_actions/registerModal";
 
 const Form = ({ formName, props }) => {
   const form = paymentForms(formName);
@@ -23,7 +23,6 @@ const Form = ({ formName, props }) => {
     // props.showLoader();
     // localStorage.setItem("redirectPage", "/profilepage");
     if (validate()) {
-      // dispatch(showLoader());
       dispatch(form.submit(values));
     }
   };
@@ -33,11 +32,25 @@ const Form = ({ formName, props }) => {
     dispatch(showForgotModal());
   };
 
+  const register = (e) => {
+    dispatch(showRegisterModal());
+  };
+
   return (
     <div>
       {form.fields.map((f, key) =>
         inputGenerator(key, f, values[f.name], handleChange, errors[f.name])
       )}
+      <div >
+        <div className="text-center d-flex justify-content-center">
+          <p>
+            Don't have an account???
+            <Button onClick={register} className="btn p-3 my-2">
+              Register
+            </Button>
+          </p>
+        </div>
+      </div>
       <div className="d-inline-flex">
         <div className="text-center py-2">
           <Button
@@ -47,10 +60,10 @@ const Form = ({ formName, props }) => {
             Submit
           </Button>
         </div>
-        <div style={{ marginLeft: "110px" }}>
+        <div style={{ marginLeft: "80px" }}>
           <Button
             onClick={forgotPassword}
-            className="btn bg-white font-weight-bold p-3 my-2"
+            className="btn bg-white text-uppercase p-3 my-2"
           >
             forgot Password
           </Button>
@@ -60,4 +73,4 @@ const Form = ({ formName, props }) => {
   );
 };
 
-export default connect(null, { showForgotModal })(Form);
+export default connect(null, { showForgotModal, showRegisterModal })(Form);

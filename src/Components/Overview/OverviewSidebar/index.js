@@ -35,32 +35,28 @@ const Services = () => {
       <PerfectScrollbar>
         <div className="mt-3 bg-white">
           <div>
-            <Container className="d-block text-center py-3 text-sm-left align-items-center justify-content-between">
+            <Container className="d-block text-center align-items-center justify-content-between">
               <div className="align-items-center mb-3 mb-sm-0">
                 {mapItems.map((allDetails, index) => (
-                  <div key={index}>
-                    {/* <Link to={`${allDetails.url}`}> */}
-                    <div style={{ backgroundColor: "rgb(0, 68, 116)", color: "#fff" }} className="card card-box-alt m-3">
-                      <h3 className="m-auto p-3">{allDetails.name}</h3>
-                      <div className="">
+                  <div className="dashboardCard" key={index}>
+                    <div style={{ backgroundColor: "rgb(0, 68, 116)", color: "#fff" }} className="card card-box-alt m-md-2">
+                      <h4 className="m-auto p-2 text-uppercase">{allDetails.name}</h4>
+                      {/* <div className="">
                         <span className="">{allDetails.icon}</span>
-                      </div>
-                      <h3 className="">{tranx.length - tranx.length}</h3>
+                      </div> */}
+                      <h4 className="">{tranx.length - tranx.length}</h4>
                     </div>
-                    {/* </Link> */}
                   </div>
                 ))}
                 {complete.map((allDetails, index) => (
-                  <div key={index}>
-                    {/* <Link to={`${allDetails.url}`}> */}
-                    <div style={{ backgroundColor: "rgb(0, 68, 116)", color: "#fff" }} className="card card-box-alt m-3">
-                      <h3 className="m-auto p-3">{allDetails.name}</h3>
-                      <div className="">
+                  <div className="dashboardCard" key={index}>
+                    <div style={{ backgroundColor: "rgb(0, 68, 116)", color: "#fff" }} className="card card-box-alt m-md-2">
+                      <h4 className="m-auto p-2 text-uppercase">{allDetails.name}</h4>
+                      {/* <div className="">
                         <span className="">{allDetails.icon}</span>
-                      </div>
-                      <h3 className="">{tranx.length}</h3>
+                      </div> */}
+                      <h4 className="">{tranx.length}</h4>
                     </div>
-                    {/* </Link> */}
                   </div>
                 ))}
               </div>

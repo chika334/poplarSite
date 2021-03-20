@@ -384,7 +384,6 @@
 //   })(withStyles(styles)(Electric))
 // );
 
-
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -622,119 +621,6 @@ class Electric extends Component {
 
   render() {
     const { classes } = this.props;
-    // const body = (
-    //   <div className="card pl-3 pr-3 align-items-center">
-    //     <div style={{ position: "relative", left: "150px" }}>
-    //       <Button onClick={this.hideModal} className="px-4 text-dark-50 mt-3">
-    //         <FontAwesomeIcon icon={["fas", "times"]} />
-    //       </Button>
-    //     </div>
-    //     <div className="app-wrapper bg-white">
-    //       <Loader />
-    //       <div className="hero-wrapper w-100">
-    //         <div className="flex-grow-1 w-100 align-items-center">
-    //           <div>
-    //             <div className="divider-v divider-v-lg d-none d-lg-block" />
-    //             <div className="text-center mt-2">
-    //               <img width="100" src={rccg} alt="rccg" />
-    //               <h1 className="font-size-xxl mb-1 font-weight-bold">
-    //                 {process.env.REACT_APP_RCCG}
-    //               </h1>
-    //               <p className="mb-0 text-black-50">
-    //                 Fill in the fields below to pay your{" "}
-    //                 <span className="text-lowercase">
-    //                   {process.env.REACT_APP_RCCG}
-    //                 </span>
-    //               </p>
-    //             </div>
-    //             <div className="py-4">
-    //               <div>
-    //                 <div className="mb-4">
-    //                   <TextField
-    //                     fullWidth
-    //                     variant="outlined"
-    //                     id="fullname"
-    //                     type="text"
-    //                     label="Full Name"
-    //                     value={this.state.fullname}
-    //                     onChange={this.handleChange("fullname")}
-    //                     InputProps={{
-    //                       startAdornment: (
-    //                         <InputAdornment position="start">
-    //                           <PersonIcon />
-    //                         </InputAdornment>
-    //                       ),
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 <div className="mb-4">
-    //                   <TextField
-    //                     fullWidth
-    //                     variant="outlined"
-    //                     id="number"
-    //                     type="number"
-    //                     value={this.state.accountNumber}
-    //                     onChange={this.handleChange("accountNumber")}
-    //                     label="Meter Number"
-    //                     InputProps={{
-    //                       startAdornment: (
-    //                         <InputAdornment position="start">
-    //                           <DialpadOutlinedIcon />
-    //                         </InputAdornment>
-    //                       ),
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 <div className="mb-3">
-    //                   <TextField
-    //                     fullWidth
-    //                     variant="outlined"
-    //                     id="amount"
-    //                     label="Amount"
-    //                     value={this.state.amount}
-    //                     onChange={this.handleChange("amount")}
-    //                     type="number"
-    //                     InputProps={{
-    //                       startAdornment: (
-    //                         <InputAdornment position="start">
-    //                           <span className="pr-3 align-items-center">₦</span>
-    //                         </InputAdornment>
-    //                       ),
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 {this.state.error && (
-    //                   <Typography
-    //                     className="text-center"
-    //                     component="p"
-    //                     color="error"
-    //                   >
-    //                     {this.state.error}
-    //                   </Typography>
-    //                 )}
-    //                 <div className="text-center py-4">
-    //                   <Button
-    //                     onClick={(e) => {
-    //                       if (this.props.authUser) {
-    //                         this.submit(e);
-    //                       } else {
-    //                         this.submit(e);
-    //                       }
-    //                     }}
-    //                     className="btn-second font-weight-bold w-50 my-2"
-    //                   >
-    //                     Submit
-    //                   </Button>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //     {/* </div> */}
-    //   </div>
-    // );
     return (
       <div className="hero-wrapper bg-composed-wrapper bg-light">
         {/* <div className="header-top-section">
@@ -771,10 +657,6 @@ class Electric extends Component {
                       </small>
                       <div className="d-flex align-items-center justify-content-center mt-3">
                         <Button
-                          // style={{
-                          //   backgroundColor: `rgb(0, 68, 116)`,
-                          //   color: "#fff",
-                          // }}
                           style={{ backgroundColor: "#048cfc", color: "#fff" }}
                           className="w-50"
                           onClick={(e) => {
@@ -831,14 +713,3 @@ export default withRouter(
     clearErrors,
   })(withStyles(styles)(Electric))
 );
-// export default withRouter(
-//   connect(mapStateToProps, {
-//     signin,
-//     showModal,
-//     hideModal,
-//     showLoader,
-//     hideLoader,
-//     token,
-//     clearErrors,
-//   })(Tab1)
-// );

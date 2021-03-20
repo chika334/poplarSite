@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import { inputGenerator } from "./inputGenerator";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PaymentForm, getStateValues } from "./RCCGElectricForm";
 import { useForm, useValidator } from "./useForm";
 import Pay from "../../../Components/paystack/pay";
-// import Paystack from "../../../Components/paystack/paystack";
+import Typography from "@material-ui/core/Typography";
 
 const Form = ({ formName }) => {
   const form = PaymentForm(formName);
+  const error = useSelector((state) => state.error);
+  const [payerror, setPayError] = useState("");
   const inputFields = getStateValues(form.fields);
   const dispatch = useDispatch();
   const [values, handleChange] = useForm({ ...inputFields });
   const [errors, validate] = useValidator(form.fields, values);
+
+  useEffect(() => {
+    if (error.id === "BUYTOKEN_FAIL") {
+      setPayError(error.message.message);
+    }
+  }, [error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("redirectPage", "/electric");
     if (validate()) {
       if (localStorage.ProductTitle === "RCCG ELECTRIC") {
-        console.log(values);
+        // console.log(values);
         dispatch(form.submit(values));
         console.log(localStorage.ProductTitle === "RCCG ELECTRIC");
       } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
@@ -34,6 +42,11 @@ const Form = ({ formName }) => {
 
   return (
     <div>
+      {payerror && (
+        <Typography className="pb-3 text-center" component="p" color="error">
+          {payerror}
+        </Typography>
+      )}
       {form.fields.map((f, key) =>
         inputGenerator(key, f, values[f.name], handleChange, errors[f.name])
       )}

@@ -45,6 +45,9 @@ input::-webkit-inner-spin-button {
   .column {
     width: 100%;
     display: block;
+    /* display: flex;
+    align-content: center;
+    justify-content: center; */
     margin-bottom: 20px;
   }
 }
@@ -334,7 +337,7 @@ input::-webkit-inner-spin-button {
 
   .containers {
     /* background-color: red; */
-    width: 400px
+    width: 400px;
   }
 
   .allnew > div {
@@ -343,3 +346,16 @@ input::-webkit-inner-spin-button {
   }
 }
 /* paystack payment ends */
+
+.dashboardCard {
+  /* background-color: #47ccde; */
+  max-width: 89%;
+  /* padding: 5%; */
+}
+@media only screen and (max-width: 600px) {
+  .dashboardCard {
+    max-width: 100%;
+    margin-bottom: 5%;
+    /* background-color: red; */
+  }
+}

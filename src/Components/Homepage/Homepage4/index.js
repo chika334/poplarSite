@@ -511,7 +511,7 @@ export default function LivePreviewExample() {
           </Slider>
           <p className="text-center pt-3">
             Check out our other products
-            <Link to={`${process.env.REACT_APP_URL}/Products`}>
+            <Link to={`${process.env.REACT_APP_URL}/products`}>
               <FontAwesomeIcon
                 className="ml-3"
                 style={{ color: "#048cfc" }}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { useSelector } from "react-redux";
+import Grid from '@material-ui/core/Grid';
 
 const Charts = () => {
   const [values, setValues] = useState({
@@ -55,15 +56,17 @@ const Charts = () => {
           all.data.length === 0 ? <h2 key={index}>PENDING...</h2> : ""
         )}
         <h3 className="text-center">Transaction chart</h3>
-        <div className="pl-5 bg-white">
-          <Chart
-            options={options}
-            series={values.series}
-            type="line"
-            width="90%"
-            height={300}
-          />
-        </div>
+        <Grid item xs={12}>
+          <div className="pl-5 bg-white">
+            <Chart
+              options={options}
+              series={values.series}
+              type="line"
+              width="90%"
+              height={300}
+            />
+          </div>
+        </Grid>
       </PerfectScrollbar>
     </>
   );

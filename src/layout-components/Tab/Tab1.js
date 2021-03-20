@@ -58,11 +58,11 @@ class Tab1 extends Component {
       }
     } else {
       if (authUser && success.success) {
+        this.sendRedirect();
         this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
         // window.location.href = `${process.env.REACT_APP_URL}/buytoken`;
         console.log("Logged");
       }
-      this.sendRedirect();
     }
   }
 
@@ -164,6 +164,7 @@ class Tab1 extends Component {
   };
 
   render() {
+    console.log(this.state.error);
     return (
       <>
         <div className="app-wrapper">
@@ -190,17 +191,6 @@ class Tab1 extends Component {
                   </p>
                 </div>
                 <div className="py-4">
-                  <div>
-                    {this.state.error && (
-                      <Typography
-                        className="pb-3 text-center"
-                        component="p"
-                        color="error"
-                      >
-                        {this.state.error}
-                      </Typography>
-                    )}
-                  </div>
                   <Form formName={FORM_NAME} key={FORM_NAME} />
                   {/* <div>
                     <div className="mb-4">

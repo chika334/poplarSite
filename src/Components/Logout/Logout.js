@@ -14,8 +14,8 @@ export class Logout extends Component {
     e.preventDefault();
     if (localStorage.token) {
       this.props.logout();
-      // window.location.href = `${process.env.REACT_APP_URL}`;
-      this.props.history.push(`${process.env.REACT_APP_URL}`);
+      window.location.href = `${process.env.REACT_APP_URL}`;
+      // this.props.history.push(`${process.env.REACT_APP_URL}`);
       // console.log("good");
     }
   };

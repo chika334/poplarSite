@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { showForgotModal, hideForgotModal } from "../../_actions/forgotModal";
 import Loader from "../../Components/Loader/Loader";
 import { showLoader, hideLoader } from "../../_actions/loading";
-import { showResetModal } from '../../_actions/ResetPassword';
+import { showResetModal } from "../../_actions/ResetPassword";
 // import ResetModal from '../ResetPassword'
 
 const styles = (theme) => ({
@@ -86,7 +86,7 @@ class forgotpassword extends React.Component {
     } else {
       this.props.hideLoader();
       // if(localStorage.getItem("value")) {
-        // this.props.showResetModal()
+      // this.props.showResetModal()
       // }
       this.sendRedirect();
     }

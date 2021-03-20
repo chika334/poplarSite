@@ -79,8 +79,6 @@ class MessengerHeader extends Component {
                   }}
                 >
                   <span className="d-flex align-items-center justify-content-center">{`${process.env.REACT_APP_NAME}`}</span>
-                  {/* <span>Poplar</span>
-                  <span>power</span> */}
                 </div>
               </NavLink>
             </div>
@@ -171,131 +169,131 @@ class MessengerHeader extends Component {
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/electric`
                               );
-                            } else {
-                              localStorage.setItem("redirectPage", "/electric");
-                              this.good(e);
-                            }
+                            // } else {
+                            //   localStorage.setItem("redirectPage", "/electric");
+                            //   this.good(e);
+                            // }
                           }}
                           target="_blank"
                           className="px-4 text-white-50 d-flex align-items-center"
                         >
                           <span>Electric</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/water`
                               );
-                            } else {
-                              localStorage.setItem("redirectPage", "/water");
-                              this.good(e);
-                            }
+                            // } else {
+                            //   localStorage.setItem("redirectPage", "/water");
+                            //   this.good(e);
+                            // }
                           }}
                           target="_blank"
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Water</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/cable`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/cable");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/cable");
+                            // }
                           }}
                           // selected
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Cable</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/airtime`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/airtime");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/airtime");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Airtime</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/data`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "data");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "data");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Data</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/transfer`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/transfer");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/transfer");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Bank Transfer</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
-                        <ListItem
+                        {/* <ListItem
                           component="a"
                           button
                           onClick={(e) => {
@@ -316,7 +314,7 @@ class MessengerHeader extends Component {
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
                           />
-                        </ListItem>
+                        </ListItem> */}
                       </List>
                     </div>
                   </div>
@@ -397,10 +395,10 @@ class MessengerHeader extends Component {
                         className="px-4 d-flex align-items-center"
                       >
                         <span>Home</span>
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                           icon={["fas", "angle-right"]}
                           className="opacity-6 ml-auto"
-                        />
+                        /> */}
                       </ListItem>
                       <ListItem
                         button
@@ -421,10 +419,10 @@ class MessengerHeader extends Component {
                         className="px-4 d-flex w-100 align-items-center"
                       >
                         Profile
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                           icon={["fas", "angle-right"]}
                           className="opacity-6 ml-auto"
-                        />
+                        /> */}
                       </ListItem>
                       <ListItem
                         button
@@ -442,10 +440,10 @@ class MessengerHeader extends Component {
                         className="px-4 d-flex w-100 align-items-center"
                       >
                         <span>Settings</span>
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                           icon={["fas", "angle-right"]}
                           className="opacity-6 ml-auto"
-                        />
+                        /> */}
                       </ListItem>
                       {this.props.authUser && localStorage.token ? (
                         <ListItem
@@ -467,10 +465,10 @@ class MessengerHeader extends Component {
                           className="px-4 d-flex w-100 align-items-center"
                         >
                           <span>Transactions</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                       ) : (
                         ""
@@ -491,128 +489,128 @@ class MessengerHeader extends Component {
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/electric`
-                              );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/electric");
-                            }
+                            // if (this.props.authUser) {
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/electric`
+                            );
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/electric");
+                            // }
                           }}
                           target="_blank"
                           className="px-4 text-white-50 d-flex align-items-center"
                         >
                           <span>Electric</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/water`
-                              );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/water");
-                            }
+                            // if (this.props.authUser) {
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/water`
+                            );
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/water");
+                            // }
                           }}
                           target="_blank"
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Water</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/cable`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/cable");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/cable");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Cable</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/airtime`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/airtime");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/airtime");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Airtime</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/transfer`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/transfer");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/transfer");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Bank Transfer</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            if (this.props.authUser) {
+                            // if (this.props.authUser) {
                               this.props.history.push(
                                 `${process.env.REACT_APP_URL}/deposits`
                               );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/deposits");
-                            }
+                            // } else {
+                            //   this.good(e);
+                            //   localStorage.setItem("redirectPage", "/deposits");
+                            // }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Deposits</span>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </ListItem>
                       </List>
                     </div>
@@ -622,10 +620,10 @@ class MessengerHeader extends Component {
                     <List>
                       <ListItem className="px-4 d-flex w-100 align-items-center">
                         <Logout>
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={["fas", "angle-right"]}
                             className="opacity-6 ml-auto"
-                          />
+                          /> */}
                         </Logout>
                       </ListItem>
                     </List>
@@ -654,10 +652,10 @@ class MessengerHeader extends Component {
                         className="px-4 d-flex w-100 align-items-center"
                       >
                         <span>Register</span>
-                        <FontAwesomeIcon
+                        {/* <FontAwesomeIcon
                           icon={["fas", "angle-right"]}
                           className="opacity-6 ml-auto"
-                        />
+                        /> */}
                       </ListItem>
                     </List>
                   )}

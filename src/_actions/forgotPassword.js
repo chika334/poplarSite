@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { returnErrors } from './errorAction'
 import { FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD } from './type'
+import { hideLoader, showLoader } from './loading';
 
 export const forgotPassword = (details) => (dispatch) => {
   const config = {

@@ -29,7 +29,7 @@ export default function Overview() {
           </div>
           <div
             className={clsx(
-              "app-inner-content-layout--sidebar bg-white app-inner-content-layout--sidebar__xxl order-1",
+              "app-inner-content-layout--sidebar bg-white app-inner-content-layout--sidebar__md order-1",
               { "layout-sidebar-open": isSidebarMenuOpen }
             )}
           >

@@ -12,8 +12,10 @@ import { InputAdornment, Button, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import { showModal, hideModal } from "../../../_actions/modal";
-import Modal from '../../../layout-components/LoginModal'
-import ProductDisplay from './ProductDisplay'
+import Modal from "../../../layout-components/LoginModal";
+import ProductDisplay from "./ProductDisplay";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function LivePreviewExample(props) {
   const authUser = useSelector((state) => state.authUser.isAuthenticeated);
@@ -72,8 +74,6 @@ function LivePreviewExample(props) {
                 <div className="d-flex flex-row flex-wrap justify-content-center">
                   <div className="position-relative py-3 py-xl-4 px-4 px-xl-5">
                     <div className="divider-v divider-v-lg" />
-                    {/* all tabs */}
-                    {/* <Tab /> */}
                     <ProductDisplay />
                   </div>
                 </div>
@@ -83,6 +83,16 @@ function LivePreviewExample(props) {
           </div>
         </div>
       </div>
+      <p className="text-center pt-3">
+        Check out our other products
+        <Link to={`${process.env.REACT_APP_URL}/products`}>
+          <FontAwesomeIcon
+            className="ml-3"
+            style={{ color: "#048cfc" }}
+            icon={["fas", "arrow-right"]}
+          />
+        </Link>
+      </p>
     </>
   );
 }

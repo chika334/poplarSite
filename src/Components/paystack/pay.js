@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PaystackButton } from "react-paystack";
 import { connect, useSelector } from "react-redux";
 import Modal from "@material-ui/core/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card } from "@material-ui/core";
 import { token } from "../../_actions/tokenAction";
+import Typography from "@material-ui/core/Typography";
 
 const Pay = (props) => {
   // const publicKey = process.env.REACT_PUBLIC_KEY;
   const user = useSelector((state) => state.authUser.user);
+  // const error = useSelector((state) => state.error);
+  const [errors, setErrors] = useState("");
   const publicKey = "pk_test_94d23f00aed71d8e360418111baf7ccfbb6ecc1f";
   const [amounts, setAmount] = useState("");
   const amount = amounts * 100;
@@ -21,7 +24,17 @@ const Pay = (props) => {
   const paymentMethod = "fastrpaystck";
   const [open, setOpen] = useState(false);
 
-  console.log(amount);
+  // console.log(amount);
+  useEffect(() => {
+    const { error } = props;
+    // if (error !== prevProps.error) {
+    if (error.id === "BUYTOKEN_FAIL") {
+      setErrors(error.message.message);
+    }
+    // }
+  }, [props.error]);
+
+  // console.log(errors);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,15 +56,15 @@ const Pay = (props) => {
     text: "Pay Now",
     onSuccess: (reference) => {
       const customerId = null;
-      // const buyToken = {
-      //   productCode,
-      //   fullname,
-      //   amount,
-      //   accountNumber,
-      //   customerId,
-      //   reference: reference.reference,
-      //   paymentMethod,
-      // };
+      const buyToken = {
+        productCode,
+        fullname,
+        amount,
+        accountNumber,
+        customerId,
+        reference: reference.reference,
+        paymentMethod,
+      };
       // const buyToken = {
       //   productCode: "rccg-power-12",
       //   fullname: "Testing Testing",
@@ -64,7 +77,7 @@ const Pay = (props) => {
 
       console.log(reference.reference);
 
-      // props.token(buyToken);
+      props.token(buyToken);
     },
     // alert("Thanks for doing business with us! Come back soon!!"),
     onClose: () => alert("Wait! Don't leave :("),
@@ -102,6 +115,15 @@ const Pay = (props) => {
                     <FontAwesomeIcon icon={["fas", "times"]} />
                   </Button>
                 </div>
+                {errors && (
+                  <Typography
+                    className="pb-3 text-center"
+                    component="p"
+                    color="error"
+                  >
+                    {errors}
+                  </Typography>
+                )}
                 <div className="checkout-form">
                   <div className="checkout-field">
                     <label>Name</label>
@@ -149,4 +171,8 @@ const Pay = (props) => {
   );
 };
 
-export default connect(null, { token })(Pay);
+const mapStateToProps = (state) => ({
+  error: state.error,
+});
+
+export default connect(mapStateToProps, { token })(Pay);

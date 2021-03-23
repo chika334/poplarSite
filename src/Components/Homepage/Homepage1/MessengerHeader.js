@@ -73,12 +73,27 @@ class MessengerHeader extends Component {
                 <div
                   className="app-nav-logo--text p-3 ml-3"
                   style={{
-                    backgroundColor: "#048cfc",
+                    backgroundColor: "#ea4335",
                     color: "#fff",
                     borderRadius: "30px",
                   }}
                 >
-                  <span className="d-flex align-items-center justify-content-center">{`${process.env.REACT_APP_NAME}`}</span>
+                  <span
+                    style={{ height: "20px" }}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    Poplar
+                    {/* <br /> */}
+                  </span>
+
+                  <small
+                    style={{ height: "5px" }}
+                    className="d-flex text-uppercase align-items-center justify-content-center"
+                  >
+                    <strong>power</strong>
+                  </small>
+
+                  {/* <span className="d-flex align-items-center justify-content-center">{`${process.env.REACT_APP_NAME}`}</span> */}
                 </div>
               </NavLink>
             </div>
@@ -169,152 +184,76 @@ class MessengerHeader extends Component {
                           component="a"
                           button
                           onClick={(e) => {
-                            // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/electric`
-                              );
-                            // } else {
-                            //   localStorage.setItem("redirectPage", "/electric");
-                            //   this.good(e);
-                            // }
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/electric`
+                            );
                           }}
                           target="_blank"
                           className="px-4 text-white-50 d-flex align-items-center"
                         >
                           <span>Electric</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/water`
-                              );
-                            // } else {
-                            //   localStorage.setItem("redirectPage", "/water");
-                            //   this.good(e);
-                            // }
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/water`
+                            );
                           }}
                           target="_blank"
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Water</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                         <ListItem
                           button
                           onClick={(e) => {
-                            // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/cable`
-                              );
-                            // } else {
-                            //   this.good(e);
-                            //   localStorage.setItem("redirectPage", "/cable");
-                            // }
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/cable`
+                            );
                           }}
                           // selected
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Cable</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/airtime`
-                              );
-                            // } else {
-                            //   this.good(e);
-                            //   localStorage.setItem("redirectPage", "/airtime");
-                            // }
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/airtime`
+                            );
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Airtime</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/data`
-                              );
-                            // } else {
-                            //   this.good(e);
-                            //   localStorage.setItem("redirectPage", "data");
-                            // }
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/data`
+                            );
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Data</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"
                           button
                           onClick={(e) => {
-                            // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/transfer`
-                              );
-                            // } else {
-                            //   this.good(e);
-                            //   localStorage.setItem("redirectPage", "/transfer");
-                            // }
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/transfer`
+                            );
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Bank Transfer</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
-                        {/* <ListItem
-                          component="a"
-                          button
-                          onClick={(e) => {
-                            if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/deposits`
-                              );
-                            } else {
-                              this.good(e);
-                              localStorage.setItem("redirectPage", "/deposits");
-                            }
-                          }}
-                          // onClick={(e) => e.preventDefault()}
-                          className="px-4 d-flex text-white-50 align-items-center"
-                        >
-                          <span>Deposits</span>
-                          <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          />
-                        </ListItem> */}
                       </List>
                     </div>
                   </div>
@@ -327,15 +266,6 @@ class MessengerHeader extends Component {
                   <Logout />
                 ) : (
                   <>
-                    {/* <Button
-                      onClick={(e) => {
-                        this.login(e);
-                      }}
-                      style={{ backgroundColor: "#048cfc", color: "#fff" }}
-                      className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
-                    >
-                      Login
-                    </Button> */}
                     <Button
                       onClick={(e) => {
                         this.register(e);
@@ -533,9 +463,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/cable`
-                              );
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/cable`
+                            );
                             // } else {
                             //   this.good(e);
                             //   localStorage.setItem("redirectPage", "/cable");
@@ -554,9 +484,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/airtime`
-                              );
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/airtime`
+                            );
                             // } else {
                             //   this.good(e);
                             //   localStorage.setItem("redirectPage", "/airtime");
@@ -575,9 +505,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/transfer`
-                              );
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/transfer`
+                            );
                             // } else {
                             //   this.good(e);
                             //   localStorage.setItem("redirectPage", "/transfer");
@@ -596,9 +526,9 @@ class MessengerHeader extends Component {
                           button
                           onClick={(e) => {
                             // if (this.props.authUser) {
-                              this.props.history.push(
-                                `${process.env.REACT_APP_URL}/deposits`
-                              );
+                            this.props.history.push(
+                              `${process.env.REACT_APP_URL}/deposits`
+                            );
                             // } else {
                             //   this.good(e);
                             //   localStorage.setItem("redirectPage", "/deposits");

@@ -75,7 +75,7 @@ export default function LivePreviewExample() {
                         >
                           <img src={rccg} className="card-img-top" alt="..." />
                           <div className="p-3 bg-secondary rounded text-center p-xl-4 d-flex align-items-center justify-content-center">
-                            <img src={logo1} alt="..." style={{ height: 25 }} />
+                          {`${process.env.REACT_APP_RCCG}`}
                           </div>
                         </a>
                       </Grid>
@@ -87,7 +87,8 @@ export default function LivePreviewExample() {
                         >
                           <img src={eko} className="card-img-top" alt="..." />
                           <div className="p-3 bg-secondary rounded text-center p-xl-4 d-flex align-items-center justify-content-center">
-                            <img src={logo2} alt="..." style={{ height: 25 }} />
+                            {/* <img src={logo2} alt="..." style={{ height: 25 }} /> */}
+                            {`${process.env.REACT_APP_EKO}`}
                           </div>
                         </a>
                       </Grid>
@@ -104,11 +105,12 @@ export default function LivePreviewExample() {
                               alt="..."
                             />
                             <div className="p-3 bg-secondary rounded text-center p-xl-4 d-flex align-items-center justify-content-center">
-                              <img
+                              {/* <img
                                 src={logo3}
                                 alt="..."
                                 style={{ height: 25 }}
-                              />
+                              /> */}
+                              {`${process.env.REACT_APP_IKEJA}`}
                             </div>
                           </a>
                         </div>

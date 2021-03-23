@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { Toolbar, TextField } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardContent, Button, Grid, Container } from "@material-ui/core";
@@ -6,7 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 // import SearchBar from "material-ui-search-bar";
-import Search from "../../Search/Search";
+// import Search from "../../Search/Search";
 import rccg from "../../../assets/images/product-logos/rccg.jpg";
 import eko from "../../../assets/images/product-logos/eko.jpg";
 import ikeja from "../../../assets/images/product-logos/ikeja.png";
@@ -147,29 +149,7 @@ function SliderArrowPrev(props) {
 }
 
 export default function LivePreviewExample() {
-  // const [values, setValues] = useState("");
-  // const classes = useStyles();
-  // const marketingTestimonials1 = {
-  //   dots: true,
-  //   // fade: true,
-  //   speed: 500,
-  //   slidesToShow: 3,
-  //   infinite: true,
-  //   slidesToScroll: 1,
-  //   arrows: true,
-  //   nextArrow: <SliderArrowNext />,
-  //   prevArrow: <SliderArrowPrev />,
-  //   className: "slides"
-  //   // responsive: [
-  //   //   {
-  //   //     breakpoint: 1100,
-  //   //     settings: { slidesToShow: 2, slidesToScroll: 2 },
-  //   //     // mobile: 400,
-  //   //     // settings: { slidesToShow: 1, slidesToScroll:  1},
-  //   //   },
-  //   // ],
-  // };
-
+  const [filter, setFilter] = useState("");
   const marketingTestimonials1 = {
     dots: true,
     infinite: true,
@@ -187,9 +167,17 @@ export default function LivePreviewExample() {
     ],
   };
 
-  // const doSomethingWith = (values) => {
-  //   console.log(values);
-  // };
+  const handleSearchChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  // console.log(filter);
+
+  const handleSubmit = (e, filter) => {
+    e.preventDefault();
+    console.log(filter);
+    const keyword = filter.toLowerCase();
+  };
 
   return (
     <>
@@ -200,57 +188,25 @@ export default function LivePreviewExample() {
               Our Products and services
             </h1>
             <p className="font-size-xl mb-0 mb-lg-5 text-black-50">
-              Id cupidatat ullamco amet reprehenderit quis proident.
+              Products we provide.
             </p>
           </div>
           <div style={{ top: "10px", left: "3%", right: "3%" }}>
-            <Search />
+            {/* <Search /> */}
+            {/* <Toolbar>
+              <div className="w-100 d-flex align-items-center justify-content-center">
+                <TextField
+                  className="w-100"
+                  onChange={handleSearchChange}
+                  label="Search..."
+                  variant="standard"
+                />
+                <Button onClick={(e) => handleSubmit(e, filter)}>
+                  <SearchIcon className="" />
+                </Button>
+              </div>
+            </Toolbar> */}
           </div>
-          {/* <div className="row">
-            {slideDetails.map((allDetails, index) => (
-              <Slider
-                key={index}
-                {...marketingTestimonials1}
-                // className="slider-arrows-outside mb-5 slider-arrows-dark slider-dots-outside"
-              >
-                <div className="">
-                  <Card className="m-4">
-                    <CardContent>
-                      <div className="align-items-center">
-                        <div>
-                          <Card className="card-transparent">
-                            <img
-                              src={allDetails.src}
-                              style={{ width: 80 }}
-                              alt="..."
-                            />
-                            <h4 className="text-center">{allDetails.title}</h4>
-                          </Card>
-                        </div>
-                        <div className="pl-4">
-                          <blockquote className="my-3 text-black-50">
-                            {allDetails.quote}
-                            <Link to={allDetails.link}>
-                              <FontAwesomeIcon
-                                className="ml-3 text-primary"
-                                icon={["fas", "arrow-right"]}
-                              />
-                            </Link>
-                          </blockquote>
-                          <div className="font-size-lg font-weight-bold">
-                            Product:-
-                            <small className="text-black-50 pl-2">
-                              {allDetails.title}
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </Slider>
-            ))}
-          </div> */}
           <Slider
             {...marketingTestimonials1}
             className="slider-arrows-outside mb-5 slider-arrows-dark slider-dots-outside"

@@ -6,7 +6,7 @@ import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Table,
-  LinearProgress,
+  Container,
   Card,
   CardContent,
   Button,
@@ -39,7 +39,7 @@ class WalletReport extends Component {
         <div className="header-top-section">
           <MessengerHeader />
         </div>
-      {/* // <div> */}
+        {/* // <div> */}
         {/* <div className="responsive-container">
           <h2 className={classes.title}>Wallet Report</h2>
           <table>
@@ -77,104 +77,112 @@ class WalletReport extends Component {
             </tbody>
           </table>
         </div> */}
-        <Card className="card-box mb-spacing-6-x2 mt-5">
-          <div className="card-header pr-2">
-            <div className="card-header--title">All Wallet Transactions</div>
-            <div className="card-header--actions">
-              <Tooltip title="Refresh">
-                <Button size="small" className="btn-neutral-primary">
-                  <FontAwesomeIcon icon={["fas", "cog"]} spin />
-                </Button>
-              </Tooltip>
+        <Container>
+          <Card className="card-box mb-spacing-6-x2 mt-5">
+            <div className="card-header pr-2">
+              <div className="card-header--title">All Wallet Transactions</div>
+              <div className="card-header--actions">
+                <Tooltip title="Refresh">
+                  <Button size="small" className="btn-neutral-primary">
+                    <FontAwesomeIcon icon={["fas", "cog"]} spin />
+                  </Button>
+                </Tooltip>
+              </div>
             </div>
-          </div>
-          <CardContent>
-            <div className="table-responsive-md">
-              <Table className="table table-borderless table-hover text-nowrap mb-0">
-                <thead>
-                  <tr>
-                    <th className="text-center">id</th>
-                    <th className="text-center">System Id</th>
-                    <th className="text-center">full name</th>
-                    <th className="text-center">account number</th>
-                    <th className="text-center">Payment type name</th>
-                    <th className="text-center">Phone number</th>
-                    <th className="text-center">title</th>
-                    <th className="text-center">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                      <div className="d-flex align-items-center">0jw912983</div>
-                    </td>
-                    <td className="text-center">
-                      <div className="badge badge-neutral-warning text-warning px-4">
-                        Ikenye daniel
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <div>01232344323</div>
-                    </td>
-                    <td className="text-center">
-                      <div>Poplar</div>
-                    </td>
-                    <td className="table-text text-center">09052673281</td>
-                    <td className="table-text text-center">
-                      Electricity payment
-                    </td>
-                    <td className="table-text text-center">₦5000</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>
-                      <div className="d-flex align-items-center">0jw912983</div>
-                    </td>
-                    <td className="text-center">
-                      <div className="badge badge-neutral-warning text-warning px-4">
-                        Divine saviour
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <div>01232344323</div>
-                    </td>
-                    <td className="text-center">
-                      <div>Poplar</div>
-                    </td>
-                    <td className="table-text text-center">09052673281</td>
-                    <td className="table-text text-center">
-                      Electricity payment
-                    </td>
-                    <td className="table-text text-center">₦5000</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>
-                      <div className="d-flex align-items-center">0jw912983</div>
-                    </td>
-                    <td className="text-center">
-                      <div className="badge badge-neutral-warning text-warning px-4">
-                        Abule samuel
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <div>87291212</div>
-                    </td>
-                    <td className="text-center">
-                      <div>Poplar</div>
-                    </td>
-                    <td className="table-text text-center">09052673281</td>
-                    <td className="table-text text-center">
-                      Electricity payment
-                    </td>
-                    <td className="table-text text-center">₦5000</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
+            <CardContent>
+              <div className="table-responsive-md">
+                <Table className="table table-borderless table-hover text-nowrap mb-0">
+                  <thead>
+                    <tr>
+                      <th className="text-center">id</th>
+                      <th className="text-center">System Id</th>
+                      <th className="text-center">full name</th>
+                      <th className="text-center">account number</th>
+                      <th className="text-center">Payment type name</th>
+                      <th className="text-center">Phone number</th>
+                      <th className="text-center">title</th>
+                      <th className="text-center">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          0jw912983
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-warning text-warning px-4">
+                          Ikenye daniel
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <div>01232344323</div>
+                      </td>
+                      <td className="text-center">
+                        <div>Poplar</div>
+                      </td>
+                      <td className="table-text text-center">09052673281</td>
+                      <td className="table-text text-center">
+                        Electricity payment
+                      </td>
+                      <td className="table-text text-center">₦5000</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          0jw912983
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-warning text-warning px-4">
+                          Divine saviour
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <div>01232344323</div>
+                      </td>
+                      <td className="text-center">
+                        <div>Poplar</div>
+                      </td>
+                      <td className="table-text text-center">09052673281</td>
+                      <td className="table-text text-center">
+                        Electricity payment
+                      </td>
+                      <td className="table-text text-center">₦5000</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          0jw912983
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <div className="badge badge-neutral-warning text-warning px-4">
+                          Abule samuel
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <div>87291212</div>
+                      </td>
+                      <td className="text-center">
+                        <div>Poplar</div>
+                      </td>
+                      <td className="table-text text-center">09052673281</td>
+                      <td className="table-text text-center">
+                        Electricity payment
+                      </td>
+                      <td className="table-text text-center">₦5000</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        </Container>
       </div>
     );
   }

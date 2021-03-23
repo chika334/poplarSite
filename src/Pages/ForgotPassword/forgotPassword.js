@@ -133,21 +133,21 @@ class forgotpassword extends React.Component {
     return (
       <div>
         {/* <ResetModal /> */}
-        <div style={{ position: "relative", left: "250px" }}>
-          <Button
-            onClick={this.props.hideForgotModal}
-            className="px-4 text-dark-50 mt-3"
-          >
-            <FontAwesomeIcon icon={["fas", "times"]} />
-          </Button>
-        </div>
         <Card className={classes.card}>
+          <div style={{ position: "absolute", right: "0" }}>
+            <Button
+              onClick={this.props.hideForgotModal}
+              className="px-4 text-dark-50 mt-3"
+            >
+              <FontAwesomeIcon icon={["fas", "times"]} />
+            </Button>
+          </div>
           {/* <div style={{ position: "relative", left: "270px" }}></div> */}
           <Loader />
           {this.state.msg ? (
             <Alert severity="success">{this.state.msg}</Alert>
           ) : null}
-          <CardContent>
+          <CardContent className="pt-5">
             <Typography type="" className={classes.title}>
               forgot REQUEST PASSWORD RESET
             </Typography>

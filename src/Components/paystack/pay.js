@@ -12,7 +12,8 @@ const Pay = (props) => {
   const user = useSelector((state) => state.authUser.user);
   // const error = useSelector((state) => state.error);
   const [errors, setErrors] = useState("");
-  const publicKey = "pk_test_94d23f00aed71d8e360418111baf7ccfbb6ecc1f";
+  // const publicKey = "pk_test_94d23f00aed71d8e360418111baf7ccfbb6ecc1f";
+  const publicKey = "pk_test_07df38cc2381f42f40a3bcb363a5b6e0b7882dbe"
   const [amounts, setAmount] = useState("");
   const amount = amounts * 100;
   const [accountNumber, setAccountNumber] = useState(null);

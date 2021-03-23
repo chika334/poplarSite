@@ -8,7 +8,7 @@ function SimpleModal(props) {
   const modal = useSelector((state) => state.modalForgot.autoForgotModal);
 
   const body = (
-    <div className="card m-5 align-items-center">
+    <div className="">
       <div className="">
         <ForgotPassword />
       </div>
@@ -24,7 +24,7 @@ function SimpleModal(props) {
         onClose={props.hideForgotModal}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        className="m-5 p-5 d-flex align-item-center justify-content-center"
+        className="p-4 d-flex align-item-center justify-content-center"
       >
         <>{body}</>
       </Modal>

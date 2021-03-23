@@ -29,6 +29,9 @@ function SimpleModal(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         className="pt-4 pb-4 d-flex align-item-center justify-content-center"
+        // style={{
+        //   maxHeight: "20%",
+        // }}
       >
         <>{body}</>
       </Modal>

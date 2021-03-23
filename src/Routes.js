@@ -44,15 +44,7 @@ import WalletTranx from "./Pages/WalletTranx";
 import ReportTranx from "./Pages/ReportTranx";
 import FundWallet from "./Pages/FundWallet";
 import debitWallet from "./Pages/debitWallet";
-// import ForgotPassword from './Pages/ForgotPassword'
-
-// const Homepage = lazy(() => import("./Pages/Homepage"));
-// const PageLoginOverlay = lazy(() =>
-//   import("./layout-components/LoginModal/Login")
-// );
-// // const PageRegisterOverlay = lazy(() => import("./Pages/PageRegisterOverlay"));
-// const PageRecoverOverlay = lazy(() => import("./Pages/PageRecoverOverlay"));
-// const BuyToken = lazy(() => import("./Pages/ConfirmPayment"));
+import DashOverview from "./Pages/DashboardCommerce";
 
 import Homepage from "./Pages/Homepage";
 import PageLoginOverlay from "./layout-components/LoginModal/Login";
@@ -158,6 +150,7 @@ const Routes = (props) => {
                   `${process.env.REACT_APP_URL}/reportTranx`,
                   `${process.env.REACT_APP_URL}/fundWallet`,
                   `${process.env.REACT_APP_URL}/debitWallet`,
+                  `${process.env.REACT_APP_URL}/dash`,
                   // `${process.env.REACT_APP_URL}/PageRegisterOverlay`,
                 ]}
               >
@@ -176,6 +169,11 @@ const Routes = (props) => {
                         path={`${process.env.REACT_APP_URL}/products`}
                         exact
                         component={Products}
+                      />
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/dash`}
+                        exact
+                        component={DashOverview}
                       />
                       <Route
                         path={`${process.env.REACT_APP_URL}/data`}

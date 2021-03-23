@@ -60,12 +60,12 @@ function LivePreviewExample(props) {
           <Modal />
           <div className="bg-composed-wrapper--bg bg-white opacity-5" />
           <div className="bg-composed-wrapper--content">
-            <div className="py-5">
+            <div className="py-3">
               <Container className="text-black text-center py-2">
-                <Grid item md={10} lg={8} className="mx-auto pb-4">
-                  <h2 className="display-3 px-4 font-weight-bold">
+                <Grid item md={10} lg={8} className="mx-auto pb-2">
+                  {/* <h2 className="display-3 px-4 font-weight-bold">
                     {process.env.REACT_APP_NAME}
-                  </h2>
+                  </h2> */}
                   <p className="font-size-xl mt-3 mb-0 text-black-50">
                     {process.env.REACT_APP_HERO_TEXT}
                   </p>

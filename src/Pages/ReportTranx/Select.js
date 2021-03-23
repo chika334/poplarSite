@@ -61,8 +61,6 @@ function Select(props) {
     };
 
     props.filterByDate(dates);
-
-    // console.log(dates);
   };
   return (
     <>
@@ -83,7 +81,6 @@ function Select(props) {
       ) : (
         console.log("bad")
       )}
-      {/* {this.state.data === "filterByDate" ? <Filter /> : console.log("Fine")} */}
       {data === "filterByDate" ? (
         <>
           <form className={classes.container} noValidate>

@@ -63,10 +63,10 @@ function LivePreviewExample(props) {
   return (
     <>
       <div className="hero-wrapper">
-        <div className="hero-wrapper bg-composed-wrapper bg-light">
-          <div className="header-top-section">
+        <div className="hero-wrapper bg-composed-wrapper">
+          {/* <div className="header-top-section">
             <MessengerHeader />
-          </div>
+          </div> */}
           <div className="app-inner-content-layout--main p-0 mb-3 h-auto">
             <div className="hero-wrapper rounded-bottom shadow-xxl">
               <div className="flex-grow-1 d-flex align-items-center">

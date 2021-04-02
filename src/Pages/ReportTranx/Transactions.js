@@ -94,71 +94,7 @@ export class TranxReport extends PureComponent {
   render() {
     const { classes } = this.props;
     return (
-      // <div style={{ marginLeft: "5%", marginRight: "5%" }}>
       <div>
-        {/* <div className="responsive-container">
-          <h2 className={classes.title}>Transactions</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>System Id</th>
-                <th>full name</th>
-                <th>account number</th>
-                <th>Payment type name</th>
-                <th>Phone number</th>
-                <th>title</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.tableData.map((tdata, index) => (
-                <tr key={index}>
-                  <td data-title="id">{index}</td>
-                  <td data-title="Fastr Id">{tdata.response.fastrId}</td>
-                  <td data-title="Full Name">
-                    {tdata.response.paymentRequestid.fullname}
-                  </td>
-                  <td data-title="Account Number">
-                    {tdata.response.paymentRequestid.accountNumber}
-                  </td>
-                  <td data-title="Payment type name">
-                    {
-                      tdata.response.paymentRequestid.serviceproviderId
-                        .paymentTypeid.paymentTypeName
-                    }
-                  </td>
-                  <td data-title="Phone number">
-                    {
-                      tdata.response.paymentRequestid.serviceproviderId.manager
-                        .phone
-                    }
-                  </td>
-                  <td data-title="title">
-                    {tdata.response.paymentRequestid.productCode.title}
-                  </td>
-                  <td data-title="Amount">
-                    {tdata.response.paymentRequestid.amount}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <ReactPaginate
-            previousLabel={"prev"}
-            nextLabel={"next"}
-            breakLabel={"..."}
-            breakClassName={"break-me"}
-            pageCount={this.state.pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={this.handlePageClick}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"}
-          />
-        </div> */}
-
         <Container>
           <Card className="card-box mb-spacing-6-x2">
             <div className="card-header pr-2">
@@ -173,7 +109,7 @@ export class TranxReport extends PureComponent {
             </div>
             <CardContent>
               <div className="table-responsive-md">
-                <Table className="table table-borderless table-hover text-nowrap mb-0">
+                <Table className="table table-borderless table-hover">
                   <thead>
                     <tr>
                       <th className="text-center">id</th>
@@ -187,78 +123,42 @@ export class TranxReport extends PureComponent {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          0jw912983
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-warning text-warning px-4">
-                          Ikenye daniel
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <div>01232344323</div>
-                      </td>
-                      <td className="text-center">
-                        <div>Poplar</div>
-                      </td>
-                      <td className="table-text text-center">09052673281</td>
-                      <td className="table-text text-center">
-                        Electricity payment
-                      </td>
-                      <td className="table-text text-center">₦5000</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          0jw912983
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-warning text-warning px-4">
-                          Divine saviour
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <div>01232344323</div>
-                      </td>
-                      <td className="text-center">
-                        <div>Poplar</div>
-                      </td>
-                      <td className="table-text text-center">09052673281</td>
-                      <td className="table-text text-center">
-                        Electricity payment
-                      </td>
-                      <td className="table-text text-center">₦5000</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          0jw912983
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <div className="badge badge-neutral-warning text-warning px-4">
-                          Abule samuel
-                        </div>
-                      </td>
-                      <td className="text-center">
-                        <div>87291212</div>
-                      </td>
-                      <td className="text-center">
-                        <div>Poplar</div>
-                      </td>
-                      <td className="table-text text-center">09052673281</td>
-                      <td className="table-text text-center">
-                        Electricity payment
-                      </td>
-                      <td className="table-text text-center">₦5000</td>
-                    </tr>
+                    {this.state.tableData.map((tdata, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td className="text-center">
+                          {tdata.response.fastrId}
+                        </td>
+                        <td className="text-center">
+                          {tdata.response.paymentRequestid.fullname}
+                        </td>
+                        <td className="text-center">
+                          <div>
+                            {tdata.response.paymentRequestid.accountNumber}
+                          </div>
+                        </td>
+                        <td className="text-center">
+                          <div>
+                            {
+                              tdata.response.paymentRequestid.serviceproviderId
+                                .paymentTypeid.paymentTypeName
+                            }
+                          </div>
+                        </td>
+                        <td className="table-text text-center">
+                          {
+                            tdata.response.paymentRequestid.serviceproviderId
+                              .manager.phone
+                          }
+                        </td>
+                        <td className="table-text text-center">
+                          {tdata.response.paymentRequestid.productCode.title}
+                        </td>
+                        <td className="table-text text-center">
+                          {tdata.response.paymentRequestid.amount}
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
               </div>

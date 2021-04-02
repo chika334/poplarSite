@@ -7,10 +7,11 @@ import { List, ListItem } from "@material-ui/core";
 import { paymentForms, getStateValues } from "./PaymentForms";
 import { useForm, useValidator } from "./useForm";
 import { showForgotModal } from "../../_actions/forgotModal";
+import { showLoader } from "../../_actions/loading";
 import { showRegisterModal } from "../../_actions/registerModal";
 
-const Form = ({ formName, props }) => {
-  const form = paymentForms(formName);
+const Form = (props) => {
+  const form = paymentForms(props.formName);
   const inputFields = getStateValues(form.fields);
 
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Form = ({ formName, props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // props.showLoader();
+    props.showLoader();
     // localStorage.setItem("redirectPage", "/profilepage");
     if (validate()) {
       dispatch(form.submit(values));
@@ -41,7 +42,7 @@ const Form = ({ formName, props }) => {
       {form.fields.map((f, key) =>
         inputGenerator(key, f, values[f.name], handleChange, errors[f.name])
       )}
-      <div >
+      <div>
         <div className="text-center d-flex justify-content-center">
           <p>
             Don't have an account???
@@ -73,4 +74,8 @@ const Form = ({ formName, props }) => {
   );
 };
 
-export default connect(null, { showForgotModal, showRegisterModal })(Form);
+export default connect(null, {
+  showForgotModal,
+  showRegisterModal,
+  showLoader,
+})(Form);

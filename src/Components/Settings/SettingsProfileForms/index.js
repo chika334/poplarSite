@@ -15,11 +15,11 @@ export default function LivePreviewExample() {
   return (
     <div className="hero-wrapper">
       <div className="hero-wrapper bg-light">
-        <div className="header-top-section mb-4">
+        {/* <div className="header-top-section mb-4">
           <MessengerHeader />
-        </div>
+        </div> */}
         <Container>
-          <Card className="m-2">
+          <Card className="mt-2">
             <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-0">
               <List
                 component="div"

@@ -63,7 +63,7 @@ class MessengerHeader extends Component {
     return (
       <>
         <Container>
-          <div className="bg-white p-2 shadow-xxl header-nav-wrapper header-nav-wrapper-xl rounded-bottom px-4 navbar-light">
+          <div className="p-2 shadow-xxl header-nav-wrapper header-nav-wrapper-xl rounded-bottom px-4 navbar-light">
             <div className="app-nav-logo">
               <NavLink
                 to={`${process.env.REACT_APP_URL}`}

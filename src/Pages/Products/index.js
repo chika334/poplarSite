@@ -14,10 +14,10 @@ class Products extends Component {
   render() {
     return (
       <div className="hero-wrapper bg-composed-wrapper bg-light">
-        <div className="header-top-section pb-5">
+        {/* <div className="header-top-section pb-5">
           <MessengerHeader />
-        </div>
-        <div className="h-auto">
+        </div> */}
+        <div className="mt-5 h-auto">
           <h3 className="text-center">Our Products</h3>
           <Container>
             {/* <hr className="mb-5 pb-5" /> */}

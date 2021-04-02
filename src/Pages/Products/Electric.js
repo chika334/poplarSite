@@ -447,19 +447,19 @@ const sidebarItem = [
   {
     name: `${process.env.REACT_APP_RCCG}`,
     src: `${rccg}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_RCCG}`,
     more: "Giving power to RCCG",
   },
   {
     name: `${process.env.REACT_APP_IKEJA}`,
     src: `${Ikeja}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_IKEJA}`,
     more: "Giving power to IKEJA",
   },
   {
     name: `${process.env.REACT_APP_EKO}`,
     src: `${eko}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_EKO}`,
     more: "Giving power to EKO",
   },
   {
@@ -469,9 +469,10 @@ const sidebarItem = [
     more: "Giving power to ABUJA",
   },
   {
-    name: `${process.env.REACT_APP_IKEJA}`,
+    name: "KADUNA ELECTRIC",
     src: `${Ikeja}`,
-    figure: `${process.env.REACT_APP_IKEJA}`,
+    figure:
+      "KADUNA ELECTRIC",
     more: "Giving power to KADUNA",
   },
 ];

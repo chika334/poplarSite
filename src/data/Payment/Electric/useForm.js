@@ -71,9 +71,6 @@ const createErrorDefault = (fields) => {
 };
 
 const createConstraint = (fields) => {
-  // Constraint Data{
-  //     email: {validator: validateEmail, isCustom: false},
-  // }
   const constraints = {};
 
   fields.forEach((f) => {

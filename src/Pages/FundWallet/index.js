@@ -158,9 +158,9 @@ class Wallet extends React.Component {
     const { classes } = this.props;
     return (
       <div className="hero-wrapper bg-composed-wrapper bg-light">
-        <div className="header-top-section pb-2">
+        {/* <div className="header-top-section pb-2">
           <MessengerHeader />
-        </div>
+        </div> */}
         <Card className={classes.card}>
           {/* <Loader /> */}
           <CardContent>

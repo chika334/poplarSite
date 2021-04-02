@@ -12,10 +12,10 @@ export default function LivePreviewExample() {
       <Card className="card-box mb-spacing-6-x2">
         <div className="card-header-alt p-4">
           <h6 className="font-weight-bold font-size-lg mb-1 text-black">
-            Weekly Sales
+            Our Product sales
           </h6>
           <p className="text-black-50 mb-0">
-            Reports for what we sold this week.
+            View most used transactions
           </p>
         </div>
         <div className="divider" />

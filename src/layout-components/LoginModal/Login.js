@@ -54,8 +54,8 @@ class Login extends Component {
       this.sendRedirect();
       // this.props.hideLoader();
       this.props.hideModal();
-      // this.props.history.push(`${process.env.REACT_APP_URL}/profilepage`);
-      window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
+      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      // window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
       // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
       // <Redirect to={`${process.env.REACT_APP_URL}/profilepage`} />
     }

@@ -213,16 +213,21 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 430px;
-  padding: 50px;
+  /* overflow: auto; */
+  /* height: 430px; */
+  /* height: 300px; */
+  height: auto;
+  /* padding: 50px; */
+  padding-left: 10px;
+  padding-right: 10px;
   /* padding-left: 50px;
   padding-right: 50px; */
-  margin-top: 50px;
+  margin-top: 5px;
   width: 100%;
 }
 
 .checkout-form {
-  padding: 10px 25px;
+  /* padding: 10px 25px; */
 }
 
 .checkout-field {
@@ -245,7 +250,7 @@ input::-webkit-inner-spin-button {
   background-color: transparent;
   border: 1px solid #cecece;
   border-radius: 5px;
-  color: #e0eafc;
+  /* color: #e0eafc; */
   height: 35px;
   padding-left: 10px;
 }
@@ -359,3 +364,11 @@ input::-webkit-inner-spin-button {
     /* background-color: red; */
   }
 }
+
+/* pdf styling */
+/* .pdf {
+  width: 612px;
+  height: 792px;
+  background-color: white;
+  margin: 0 auto;
+} */

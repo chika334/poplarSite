@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MessengerHeader from "../Components/Homepage/Homepage1/MessengerHeader";
+// import MessengerHeader from "../Components/Homepage/Homepage1/MessengerHeader";
 import { Button, Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import { showModal } from "../_actions/modal";
@@ -13,7 +13,7 @@ class ProtectRoutes extends Component {
   render() {
     return (
       <div>
-        <MessengerHeader />
+        {/* <MessengerHeader /> */}
         <Container
           style={{
             alignItems: "center",
@@ -31,7 +31,7 @@ class ProtectRoutes extends Component {
                   className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first"
                   onClick={(e) => {
                     this.handleClick(e);
-                    localStorage.setItem("redirectPage", "/PageProfile");
+                    localStorage.setItem("redirectPage", "/profilepage");
                   }}
                 >
                   Login

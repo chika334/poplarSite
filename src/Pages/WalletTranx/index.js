@@ -36,47 +36,6 @@ class WalletReport extends Component {
     const { classes } = this.props;
     return (
       <div className="hero-wrapper bg-light pb-5">
-        <div className="header-top-section">
-          <MessengerHeader />
-        </div>
-        {/* // <div> */}
-        {/* <div className="responsive-container">
-          <h2 className={classes.title}>Wallet Report</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>Amount</th>
-                <th>Refernce Number</th>
-                <th>Date</th>
-                <th>Source Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.wallet.wallet === null
-                ? ""
-                : this.props.wallet.wallet.map((result, index) => {
-                    return (
-                      <tr key={index}>
-                        <td data-title="id">{result.id}</td>
-                        <td data-title="Amount">{result.amount}</td>
-                        <td data-title="Reference Number">
-                          {result.reference}
-                        </td>
-                        <td data-title="Date">
-                          {moment(
-                            new Date(result.fundSourceid.timestamp).getTime()
-                          ).format("YYYY-MM-DD hh:mm:ss")}
-                        </td>
-                        <td data-title="Source Name">
-                          {result.fundSourceid.sourceName}
-                        </td>
-                      </tr>
-                    );
-                  })}
-            </tbody>
-          </table>
-        </div> */}
         <Container>
           <Card className="card-box mb-spacing-6-x2 mt-5">
             <div className="card-header pr-2">

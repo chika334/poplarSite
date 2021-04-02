@@ -52,14 +52,14 @@ class BuyToken extends Component {
       // Detecting, user has changed URL
       if (this.props.history.location.pathname) {
         this.props.clearToken();
-        window.location.href = `${process.env.REACT_APP_URL}/PageProfile`;
+        window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
       } else if (
         this.props.history.location.pathname &&
         token.success === false
       ) {
         this.props.clearToken();
         // this.props.history.push(`${process.env.REACT_APP_URL}/Products`);
-        window.location.href = `${process.env.REACT_APP_URL}/Products`;
+        window.location.href = `${process.env.REACT_APP_URL}/products`;
       }
     });
   }

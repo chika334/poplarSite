@@ -8,11 +8,6 @@ export default function Settings() {
   return (
     <>
       <div className="flex-column">
-        {/* <PageTitle
-          titleHeading="Settings"
-          titleDescription="Manage your profile settings from this example page.">
-          <SettingsPageTitleActions />
-        </PageTitle> */}
         <SettingsProfileForms />
       </div>
     </>

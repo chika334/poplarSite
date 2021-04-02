@@ -1,35 +1,106 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
-import { inputGenerator } from "./inputGenerator";
-import { useDispatch, useSelector } from "react-redux";
+import { InputGenerator } from "./inputGenerator";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { PaymentForm, getStateValues } from "./RCCGElectricForm";
 import { useForm, useValidator } from "./useForm";
 import Pay from "../../../Components/paystack/pay";
 import Typography from "@material-ui/core/Typography";
+import { hideLoader, showLoader } from "../../../_actions/loading";
+import { hideMeter, verifyNumber } from "../../../_actions/tokenAction";
+import store from "../../../config/store";
 
-const Form = ({ formName }) => {
-  const form = PaymentForm(formName);
-  const error = useSelector((state) => state.error);
-  const [payerror, setPayError] = useState("");
+const Form = (props) => {
+  const form = PaymentForm(props.formName);
+  const userDetails = useSelector((state) => state.verify);
+  const [error, setError] = useState("");
+  const [loader, setLoader] = useState(false);
   const inputFields = getStateValues(form.fields);
   const dispatch = useDispatch();
   const [values, handleChange] = useForm({ ...inputFields });
   const [errors, validate] = useValidator(form.fields, values);
+  const [isVerified, setIsVerified] = useState(false);
+  const [details, setDetails] = useState(null);
 
   useEffect(() => {
-    if (error.id === "BUYTOKEN_FAIL") {
-      setPayError(error.message.message);
+    if (userDetails.success === true) {
+      console.log("good");
+    } else {
+      console.log("bad");
     }
-  }, [error]);
+  }, [userDetails]);
 
-  const handleSubmit = (e) => {
+  const onVerify = async () => {
+    const { meterNumber } = values;
+    // console.log(values);
+    // if (values.meterNumber === "") {
+    //   return null;
+    // } else {
+    return await form.submit(meterNumber);
+    // }
+  };
+
+  // useEffect(() => {
+  //   if (loader === true) {
+  //     console.log(loader);
+  //   }
+  //   // setDetails(result);
+  // }, [loader]);
+
+  const verifyNumber = async (e) => {
     e.preventDefault();
-    localStorage.setItem("redirectPage", "/electric");
-    if (validate()) {
+    const { meterNumber } = values;
+    props.showLoader();
+    setError("");
+    // setLoader(false);
+    if (values.meterNumber.length === 11) {
       if (localStorage.ProductTitle === "RCCG ELECTRIC") {
-        // console.log(values);
-        dispatch(form.submit(values));
-        console.log(localStorage.ProductTitle === "RCCG ELECTRIC");
+        // store.dispatch(form.submit(meterNumber));
+        props.verifyNumber(meterNumber);
+        // dispatch(verifyNumber(meterNumber))
+        // console.log(userDetails);
+        if (userDetails.success === true) {
+          console.log("good");
+          setDetails(userDetails);
+          props.hideLoader();
+        }
+        // localStorage.setItem("Amount", values.amount);
+        // try {
+        //   const result = await onVerify();
+        //   const {
+        //     responsedesc,
+        //     meterNumber,
+        //     customerName,
+        //     accountNumber,
+        //     address,
+        //     undertaking,
+        //   } = result;
+        //   console.log(result);
+        //   if (responsedesc) {
+        //     // useEffect(() => {
+        //     //   setDetails(result);
+        //     // }, [input]);
+        //     setLoader(true);
+        //     // setDetails([
+        //     //   {
+        //     //     ...details,
+        //     //     status: responsedesc,
+        //     //     meterNumber: meterNumber,
+        //     //     accountNumber: accountNumber,
+        //     //     customerName: customerName,
+        //     //     address: address,
+        //     //     undertaking: undertaking,
+        //     //   },
+        //     // ]);
+        //     console.log(result);
+        //     props.hideLoader();
+        //   } else {
+        //     setError("Enter correct Meter Number");
+        //     // console.log("nice");
+        //   }
+        // } catch (error) {
+        //   console.log(error);
+        // }
       } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
         console.log(localStorage.ProductTitle);
       } else if (localStorage.ProductTitle === "EKO ELECTRIC") {
@@ -37,18 +108,50 @@ const Form = ({ formName }) => {
       } else if (localStorage.ProductTitle === "DSTV Subscription") {
         console.log(localStorage.ProductTitle);
       }
+
+      setIsVerified(true);
+    } else {
+      props.hideLoader();
+      if (values.meterNumber.length < 11) {
+        setError("Incorrect Meter Number, must be 11 digits");
+      } else if (values.meterNumber.length > 11) {
+        setError("Incorrect Meter Number, must be 11 digits");
+      }
     }
+  };
+
+  console.log(details);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("redirectPage", "/electric");
+    // if (validate()) {
+    props.hideMeter();
+    console.log(props);
+    // if (localStorage.ProductTitle === "RCCG ELECTRIC") {
+    //   dispatch(form.submits(values));
+    //   // console.log(values.amount);
+    //   localStorage.setItem("Amount", values.amount);
+    //   console.log(localStorage.ProductTitle === "RCCG ELECTRIC");
+    // } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
+    //   console.log(localStorage.ProductTitle);
+    // } else if (localStorage.ProductTitle === "EKO ELECTRIC") {
+    //   console.log(localStorage.ProductTitle);
+    // } else if (localStorage.ProductTitle === "DSTV Subscription") {
+    //   console.log(localStorage.ProductTitle);
+    // }
+    // }
   };
 
   return (
     <div>
-      {payerror && (
+      {error && (
         <Typography className="pb-3 text-center" component="p" color="error">
-          {payerror}
+          {error}
         </Typography>
       )}
       {form.fields.map((f, key) =>
-        inputGenerator(key, f, values[f.name], handleChange, errors[f.name])
+        InputGenerator(key, f, values[f.name], handleChange, errors[f.name])
       )}
       {/* <div className="text-center">
         <Button
@@ -63,18 +166,34 @@ const Form = ({ formName }) => {
           <Pay />
         </div>
         {/* <Paystack /> */}
-        <div className="text-center">
-          <Button
-            onClick={handleSubmit}
-            style={{
-              backgroundColor: "#048cfc",
-              position: "absolute",
-              right: 0,
-            }}
-          >
-            Pay with Wallet
-          </Button>
-        </div>
+        {isVerified && (
+          <div className="text-center">
+            <Button
+              onClick={handleSubmit}
+              style={{
+                backgroundColor: "#048cfc",
+                position: "absolute",
+                right: 0,
+              }}
+            >
+              Pay with Wallet
+            </Button>
+          </div>
+        )}
+        {!isVerified && (
+          <div className="text-center">
+            <Button
+              onClick={verifyNumber}
+              style={{
+                backgroundColor: "#048cfc",
+                position: "absolute",
+                right: 0,
+              }}
+            >
+              verify Meter Number
+            </Button>
+          </div>
+        )}
       </div>
       {/* <div className="d-inline-flex">
         <div className="text-center py-2">
@@ -90,4 +209,9 @@ const Form = ({ formName }) => {
   );
 };
 
-export default Form;
+export default connect(null, {
+  showLoader,
+  hideLoader,
+  hideMeter,
+  verifyNumber,
+})(Form);

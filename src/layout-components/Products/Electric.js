@@ -61,19 +61,19 @@ const sidebarItem = [
   {
     name: `${process.env.REACT_APP_RCCG}`,
     src: `${rccg}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_RCCG}`,
     more: "Giving power to RCCG",
   },
   {
     name: `${process.env.REACT_APP_IKEJA}`,
     src: `${Ikeja}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_IKEJA}`,
     more: "Giving power to IKEJA",
   },
   {
     name: `${process.env.REACT_APP_EKO}`,
     src: `${eko}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_EKO}`,
     more: "Giving power to EKO",
   },
   {
@@ -83,10 +83,9 @@ const sidebarItem = [
     more: "Giving power to ABUJA",
   },
   {
-    name: "KADUNA ELectric",
+    name: "KADUNA ELECTRIC",
     src: `${Ikeja}`,
-    figure:
-      "LSets text font face, variant for upcoming text elements. See output of jsPDF.getFontList()",
+    figure: "KADUNA ELECTRIC",
     more: "Giving power to KADUNA",
   },
 ];
@@ -224,135 +223,16 @@ class Electric extends Component {
   };
 
   FillForm = (props) => {
-    // const { authUser } = this.props;
     this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
-    // if (authUser === false) {
-    //   this.setState({ open: true });
-    // } else {
-    //   // console.log("BAD ERROR");
-    // }
   };
 
   render() {
     const { classes } = this.props;
-    // const body = (
-    //   <div className="card pl-3 pr-3 align-items-center">
-    //     <div style={{ position: "relative", left: "150px" }}>
-    //       <Button onClick={this.hideModal} className="px-4 text-dark-50 mt-3">
-    //         <FontAwesomeIcon icon={["fas", "times"]} />
-    //       </Button>
-    //     </div>
-    //     <div className="app-wrapper bg-white">
-    //       <Loader />
-    //       <div className="hero-wrapper w-100">
-    //         <div className="flex-grow-1 w-100 align-items-center">
-    //           <div>
-    //             <div className="divider-v divider-v-lg d-none d-lg-block" />
-    //             <div className="text-center mt-2">
-    //               <img width="100" src={rccg} alt="rccg" />
-    //               <h1 className="font-size-xxl mb-1 font-weight-bold">
-    //                 {process.env.REACT_APP_RCCG}
-    //               </h1>
-    //               <p className="mb-0 text-black-50">
-    //                 Fill in the fields below to pay your{" "}
-    //                 <span className="text-lowercase">
-    //                   {process.env.REACT_APP_RCCG}
-    //                 </span>
-    //               </p>
-    //             </div>
-    //             <div className="py-4">
-    //               <div>
-    //                 <div className="mb-4">
-    //                   <TextField
-    //                     fullWidth
-    //                     variant="outlined"
-    //                     id="fullname"
-    //                     type="text"
-    //                     label="Full Name"
-    //                     value={this.state.fullname}
-    //                     onChange={this.handleChange("fullname")}
-    //                     InputProps={{
-    //                       startAdornment: (
-    //                         <InputAdornment position="start">
-    //                           <PersonIcon />
-    //                         </InputAdornment>
-    //                       ),
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 <div className="mb-4">
-    //                   <TextField
-    //                     fullWidth
-    //                     variant="outlined"
-    //                     id="number"
-    //                     type="number"
-    //                     value={this.state.accountNumber}
-    //                     onChange={this.handleChange("accountNumber")}
-    //                     label="Meter Number"
-    //                     InputProps={{
-    //                       startAdornment: (
-    //                         <InputAdornment position="start">
-    //                           <DialpadOutlinedIcon />
-    //                         </InputAdornment>
-    //                       ),
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 <div className="mb-3">
-    //                   <TextField
-    //                     fullWidth
-    //                     variant="outlined"
-    //                     id="amount"
-    //                     label="Amount"
-    //                     value={this.state.amount}
-    //                     onChange={this.handleChange("amount")}
-    //                     type="number"
-    //                     InputProps={{
-    //                       startAdornment: (
-    //                         <InputAdornment position="start">
-    //                           <span className="pr-3 align-items-center">₦</span>
-    //                         </InputAdornment>
-    //                       ),
-    //                     }}
-    //                   />
-    //                 </div>
-    //                 {this.state.error && (
-    //                   <Typography
-    //                     className="text-center"
-    //                     component="p"
-    //                     color="error"
-    //                   >
-    //                     {this.state.error}
-    //                   </Typography>
-    //                 )}
-    //                 <div className="text-center py-4">
-    //                   <Button
-    //                     onClick={(e) => {
-    //                       if (this.props.authUser) {
-    //                         this.submit(e);
-    //                       } else {
-    //                         this.submit(e);
-    //                       }
-    //                     }}
-    //                     className="btn-second font-weight-bold w-50 my-2"
-    //                   >
-    //                     Submit
-    //                   </Button>
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //     {/* </div> */}
-    //   </div>
-    // );
     return (
       <div className="hero-wrapper bg-composed-wrapper bg-light">
-        <div className="header-top-section">
+        {/* <div className="header-top-section">
           <MessengerHeader />
-        </div>
+        </div> */}
         <div className="mt-5 h-auto">
           <Container>
             <h3>Electric</h3>

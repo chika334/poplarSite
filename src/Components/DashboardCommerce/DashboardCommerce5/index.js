@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import clsx from 'clsx';
+import clsx from "clsx";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Grid,
   InputAdornment,
@@ -11,15 +11,21 @@ import {
   Button,
   List,
   ListItem,
-  TextField
-} from '@material-ui/core';
+  TextField,
+} from "@material-ui/core";
 
-import avatar4 from '../../../assets/images/avatars/avatar4.jpg';
-import avatar5 from '../../../assets/images/avatars/avatar5.jpg';
-import avatar6 from '../../../assets/images/avatars/avatar6.jpg';
-import avatar7 from '../../../assets/images/avatars/avatar7.jpg';
+import rccg from "../../../assets/images/product-logos/rccg.jpg";
+import dstv from "../../../assets/images/product-logos/dstv.jpg";
+import ikeja from "../../../assets/images/product-logos/ikeja.png";
+import eko from "../../../assets/images/product-logos/eko.jpg";
+import waterlogo from "../../../assets/images/product-logos/waterlogo.png";
 
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
+import avatar4 from "../../../assets/images/avatars/avatar4.jpg";
+import avatar5 from "../../../assets/images/avatars/avatar5.jpg";
+import avatar6 from "../../../assets/images/avatars/avatar6.jpg";
+import avatar7 from "../../../assets/images/avatars/avatar7.jpg";
+
+import SearchTwoToneIcon from "@material-ui/icons/SearchTwoTone";
 
 export default function LivePreviewExample() {
   const [inputBg, setInputBg] = useState(false);
@@ -28,7 +34,7 @@ export default function LivePreviewExample() {
   return (
     <>
       <Grid container spacing={6}>
-        <Grid item xl={6} className="d-flex">
+        {/* <Grid item xl={6} className="d-flex">
           <Card className="card-box w-100">
             <div className="card-header">
               <div className="card-header--title">
@@ -159,53 +165,28 @@ export default function LivePreviewExample() {
               </ListItem>
             </List>
           </Card>
-        </Grid>
+        </Grid> */}
         <Grid item xl={6} className="d-flex">
           <Card className="card-box w-100">
             <div className="card-header">
               <div className="card-header--title">
-                <small className="d-block text-uppercase mt-1">Messages</small>
-                <b>Messenger Window</b>
+                <small className="d-block text-uppercase mt-1">Products</small>
+                <b>Our Top Products</b>
               </div>
-              <div className="avatar-icon-wrapper avatar-initials shadow-none d-40 mr-0">
-                <div className="avatar-icon text-white bg-night-sky d-40 font-size-sm">
-                  ET
-                </div>
-                <div
-                  className="badge badge-warning badge-position badge-position--bottom-center badge-circle-inner"
-                  title="Badge bottom center">
-                  Online
-                </div>
-              </div>
-            </div>
-            <div
-              className={clsx(
-                'd-flex transition-base align-items-center justify-content-between py-2 px-4',
-                { 'bg-secondary': !inputBg }
-              )}>
-              <div>
-                <Button
-                  size="small"
-                  className="btn-link p-0 btn-transition-none btn-link-danger">
-                  <span className="btn-wrapper--label font-size-sm">
-                    Delete all
-                  </span>
-                </Button>
-              </div>
-              <div className="font-size-sm font-weight-bold">Emma Taylor</div>
             </div>
             <div className="divider" />
             <div
               className={clsx(
-                'd-flex align-items-center transition-base px-4 py-1',
-                { 'py-3 bg-secondary': inputBg }
-              )}>
+                "d-flex align-items-center transition-base px-4 py-1",
+                { "py-3 bg-secondary": inputBg }
+              )}
+            >
               <div className="search-wrapper w-100">
                 <TextField
                   variant="outlined"
                   size="small"
                   className="bg-white w-100"
-                  classes={{ root: 'input-border-0' }}
+                  classes={{ root: "input-border-0" }}
                   id="input-with-icon-textfield225-1"
                   placeholder="Search messages..."
                   onFocus={toggleInputBg}
@@ -215,7 +196,7 @@ export default function LivePreviewExample() {
                       <InputAdornment position="start">
                         <SearchTwoToneIcon />
                       </InputAdornment>
-                    )
+                    ),
                   }}
                 />
               </div>
@@ -228,31 +209,34 @@ export default function LivePreviewExample() {
                 href="#/"
                 disableRipple
                 onClick={(e) => e.preventDefault()}
-                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3">
+                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3"
+              >
                 <div className="d-flex align-items-center">
                   <div className="avatar-icon-wrapper d-50 mr-3">
-                    <div className="avatar-icon rounded-circle d-50">
-                      <img alt="..." src={avatar7} />
+                    <div className="avatar-icon rounded-circle d-60">
+                      <img alt="..." src={rccg} />
                     </div>
                   </div>
                   <div>
                     <div className="font-weight-bold font-size-sm text-black">
-                      Siena Handley
+                      {process.env.REACT_APP_RCCG}
                     </div>
                     <div className="d-flex align-items-center font-size-xs">
-                      <div className="badge badge-success badge-circle border-white border-1 mr-2">
+                      {/* <div className="badge badge-success badge-circle border-white border-1 mr-2">
                         Completed
+                      </div> */}
+                      <div className="text-dark">
+                        Redeemed Electricity (RCCG)
                       </div>
-                      <div className="text-success">Online</div>
                     </div>
                   </div>
                 </div>
                 <div>
                   <Button size="small" className="btn-neutral-dark px-3">
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </span>
-                    <span className="btn-wrapper--label">Add</span>
+                    {/* <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon icon={["fas", "plus"]} />
+                    </span> */}
+                    <span className="btn-wrapper--label">Buy</span>
                   </Button>
                 </div>
               </ListItem>
@@ -262,31 +246,34 @@ export default function LivePreviewExample() {
                 href="#/"
                 disableRipple
                 onClick={(e) => e.preventDefault()}
-                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3">
+                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3"
+              >
                 <div className="d-flex align-items-center">
                   <div className="avatar-icon-wrapper d-50 mr-3">
-                    <div className="avatar-icon rounded-circle d-50">
-                      <img alt="..." src={avatar6} />
+                    <div className="avatar-icon rounded-circle d-60">
+                      <img alt="..." src={eko} />
                     </div>
                   </div>
                   <div>
                     <div className="font-weight-bold font-size-sm text-black">
-                      Karla Byrne
+                      {process.env.REACT_APP_EKO}
                     </div>
                     <div className="d-flex align-items-center font-size-xs">
-                      <div className="badge badge-success badge-circle border-white border-1 mr-2">
+                      {/* <div className="badge badge-success badge-circle border-white border-1 mr-2">
                         Completed
+                      </div> */}
+                      <div className="text-dark">
+                        Eko Electricity Distribution Company{" "}
                       </div>
-                      <div className="text-success">Online</div>
                     </div>
                   </div>
                 </div>
                 <div>
                   <Button size="small" className="btn-neutral-dark px-3">
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </span>
-                    <span className="btn-wrapper--label">Add</span>
+                    {/* <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon icon={["fas", "plus"]} />
+                    </span> */}
+                    <span className="btn-wrapper--label">Buy</span>
                   </Button>
                 </div>
               </ListItem>
@@ -296,34 +283,34 @@ export default function LivePreviewExample() {
                 href="#/"
                 disableRipple
                 onClick={(e) => e.preventDefault()}
-                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3">
+                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3"
+              >
                 <div className="d-flex align-items-center">
                   <div className="avatar-icon-wrapper d-50 mr-3">
                     <div className="avatar-icon rounded-circle d-50">
-                      <img alt="..." src={avatar5} />
+                      <img alt="..." src={waterlogo} />
                     </div>
                   </div>
                   <div>
                     <div className="font-weight-bold font-size-sm text-black">
-                      Eden Hays
+                      {process.env.REACT_APP_WATER}
                     </div>
                     <div className="d-flex align-items-center font-size-xs">
-                      <div className="badge badge-danger badge-circle border-white border-1 mr-2">
+                      {/* <div className="badge badge-danger badge-circle border-white border-1 mr-2">
                         Completed
+                      </div> */}
+                      <div className="text-dark">
+                        Working to server you better
                       </div>
-                      <div className="text-danger">Offline</div>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <Button
-                    size="small"
-                    className="btn-neutral-dark px-3"
-                    disabled>
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </span>
-                    <span className="btn-wrapper--label">Add</span>
+                  <Button size="small" className="btn-neutral-dark px-3">
+                    {/* <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon icon={["fas", "plus"]} />
+                    </span> */}
+                    <span className="btn-wrapper--label">Buy</span>
                   </Button>
                 </div>
               </ListItem>
@@ -333,31 +320,32 @@ export default function LivePreviewExample() {
                 href="#/"
                 disableRipple
                 onClick={(e) => e.preventDefault()}
-                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3">
+                className="d-flex bg-white hover-scale-rounded justify-content-between align-items-center py-3"
+              >
                 <div className="d-flex align-items-center">
                   <div className="avatar-icon-wrapper d-50 mr-3">
                     <div className="avatar-icon rounded-circle d-50">
-                      <img alt="..." src={avatar4} />
+                      <img alt="..." src={dstv} />
                     </div>
                   </div>
                   <div>
                     <div className="font-weight-bold font-size-sm text-black">
-                      Janine Benton
+                      {process.env.REACT_APP_DSTV}
                     </div>
                     <div className="d-flex align-items-center font-size-xs">
-                      <div className="badge badge-warning badge-circle border-white border-1 mr-2">
+                      {/* <div className="badge badge-warning badge-circle border-white border-1 mr-2">
                         Completed
-                      </div>
-                      <div className="text-warning">In a meeting</div>
+                      </div> */}
+                      <div className="text-dark">so much more</div>
                     </div>
                   </div>
                 </div>
                 <div>
                   <Button size="small" className="btn-neutral-dark px-3">
-                    <span className="btn-wrapper--icon">
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </span>
-                    <span className="btn-wrapper--label">Add</span>
+                    {/* <span className="btn-wrapper--icon">
+                      <FontAwesomeIcon icon={["fas", "plus"]} />
+                    </span> */}
+                    <span className="btn-wrapper--label">Buy</span>
                   </Button>
                 </div>
               </ListItem>

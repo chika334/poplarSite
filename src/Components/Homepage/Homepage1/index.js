@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Grid, Container } from "@material-ui/core";
-import rccg from "../../../assets/images/product-logos/rccg.jpg";
-import Ikeja from "../../../assets/images/product-logos/ikeja.png";
-import eko from "../../../assets/images/product-logos/eko.jpg";
-import dstv from "../../../assets/images/product-logos/dstv.jpg";
-import { Tab } from "../../../layout-components";
-import Card from "@material-ui/core/Card";
+// import rccg from "../../../assets/images/product-logos/rccg.jpg";
+// import Ikeja from "../../../assets/images/product-logos/ikeja.png";
+// import eko from "../../../assets/images/product-logos/eko.jpg";
+// import dstv from "../../../assets/images/product-logos/dstv.jpg";
+// import { Tab } from "../../../layout-components";
+// import Card from "@material-ui/core/Card";
 import particles1 from "../../../assets/images/hero-bg/particles-2.svg";
-import MessengerHeader from "./MessengerHeader.js";
-import { InputAdornment, Button, TextField } from "@material-ui/core";
+// import MessengerHeader from "./MessengerHeader.js";
+// import { InputAdornment, Button, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import { showModal, hideModal } from "../../../_actions/modal";
@@ -49,9 +49,9 @@ function LivePreviewExample(props) {
   return (
     <>
       <div className="hero-wrapper bg-composed-wrapper bg-light">
-        <div className="header-top-section pb-2">
+        {/* <div className="header-top-section pb-2">
           <MessengerHeader />
-        </div>
+        </div> */}
         <div className="hero-wrapper--content">
           <div
             className="bg-composed-wrapper--image opacity-5"

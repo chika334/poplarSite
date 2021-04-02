@@ -6,7 +6,7 @@ import ScrollToTop from "./utils/ScrollToTop";
 import store from "./config/store.ts";
 import "./assets/base.scss";
 import "./App.css";
-import NoInternet from './NoInternet'
+import NoInternet from "./NoInternet";
 
 // _actions
 import { getUser } from "./_actions/userAction";
@@ -14,6 +14,7 @@ import { getCountryId } from "./_actions/Action_countryId";
 import { getTransactions } from "./_actions/transactions";
 import { wallets } from "./_actions/wallet";
 import { showModal, hideModal } from "./_actions/modal";
+import { verifyNumber } from "./_actions/tokenAction";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -272,6 +273,7 @@ class componentName extends Component {
       store.dispatch(getUser());
       store.dispatch(getTransactions());
       store.dispatch(wallets());
+      // store.dispatch(verifyNumber());
       store.dispatch(showModal());
       store.dispatch(hideModal());
     } else {

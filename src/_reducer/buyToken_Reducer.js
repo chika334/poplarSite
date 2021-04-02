@@ -2,10 +2,10 @@ import { BUY_TOKEN, BUYTOKEN_FAIL, CLEAR_BUY_TOKEN } from "../_actions/type";
 
 const initialState = {
   success: false,
-  token: null
+  token: null,
 };
 
-function buyToken (state = initialState, action) {
+function buyToken(state = initialState, action) {
   switch (action.type) {
     case BUY_TOKEN:
       return {
@@ -13,12 +13,12 @@ function buyToken (state = initialState, action) {
         token: action.payload,
         success: true,
       };
-    case CLEAR_BUY_TOKEN: 
+    case CLEAR_BUY_TOKEN:
       return {
         ...state,
         token: null,
-        success: false
-      }
+        success: false,
+      };
     case BUYTOKEN_FAIL:
       return {
         ...state,
@@ -29,4 +29,4 @@ function buyToken (state = initialState, action) {
   }
 }
 
-export default buyToken
+export default buyToken;

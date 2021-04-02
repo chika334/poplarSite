@@ -447,19 +447,19 @@ const sidebarItem = [
   {
     name: `${process.env.REACT_APP_RCCG}`,
     src: `${rccg}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_RCCG}`,
     more: "Giving power to RCCG",
   },
   {
     name: `${process.env.REACT_APP_IKEJA}`,
     src: `${Ikeja}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_IKEJA}`,
     more: "Giving power to IKEJA",
   },
   {
     name: `${process.env.REACT_APP_EKO}`,
     src: `${eko}`,
-    figure: "Redeem electric powering",
+    figure: `${process.env.REACT_APP_EKO}`,
     more: "Giving power to EKO",
   },
   {
@@ -469,10 +469,10 @@ const sidebarItem = [
     more: "Giving power to ABUJA",
   },
   {
-    name: "KADUNA ELectric",
+    name: "KADUNA ELECTRIC",
     src: `${Ikeja}`,
     figure:
-      "LSets text font face, variant for upcoming text elements. See output of jsPDF.getFontList()",
+      "KADUNA ELECTRIC",
     more: "Giving power to KADUNA",
   },
 ];
@@ -612,20 +612,12 @@ class Electric extends Component {
   FillForm = (props) => {
     // const { authUser } = this.props;
     this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
-    // if (authUser === false) {
-    //   this.setState({ open: true });
-    // } else {
-    //   // console.log("BAD ERROR");
-    // }
   };
 
   render() {
     const { classes } = this.props;
     return (
       <div className="hero-wrapper bg-composed-wrapper bg-light">
-        {/* <div className="header-top-section">
-          <MessengerHeader />
-        </div> */}
         <div className="mt-2 h-auto">
           <Container>
             <h3>Airtime</h3>

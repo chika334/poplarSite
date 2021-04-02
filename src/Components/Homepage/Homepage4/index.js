@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Toolbar, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
@@ -23,6 +23,8 @@ function SliderArrowNext(props) {
     </div>
   );
 }
+
+let cardDisplay;
 
 const slideDetails = [
   {
@@ -150,6 +152,8 @@ function SliderArrowPrev(props) {
 
 export default function LivePreviewExample() {
   const [filter, setFilter] = useState("");
+  const [search, setSearch] = useState(null);
+  const [sliderItems, setSliderItems] = useState(slideDetails);
   const marketingTestimonials1 = {
     dots: true,
     infinite: true,
@@ -167,16 +171,21 @@ export default function LivePreviewExample() {
     ],
   };
 
+  useEffect(() => {
+    setSliderItems(slideDetails);
+  }, [filter]);
+
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
 
-  // console.log(filter);
-
   const handleSubmit = (e, filter) => {
     e.preventDefault();
-    console.log(filter);
     const keyword = filter.toLowerCase();
+
+    setSliderItems(
+      sliderItems.filter((item) => item.title.toLowerCase() == keyword)
+    );
   };
 
   return (
@@ -192,8 +201,7 @@ export default function LivePreviewExample() {
             </p>
           </div>
           <div style={{ top: "10px", left: "3%", right: "3%" }}>
-            {/* <Search /> */}
-            {/* <Toolbar>
+            <Toolbar>
               <div className="w-100 d-flex align-items-center justify-content-center">
                 <TextField
                   className="w-100"
@@ -205,265 +213,51 @@ export default function LivePreviewExample() {
                   <SearchIcon className="" />
                 </Button>
               </div>
-            </Toolbar> */}
+            </Toolbar>
           </div>
           <Slider
             {...marketingTestimonials1}
             className="slider-arrows-outside mb-5 slider-arrows-dark slider-dots-outside"
           >
             {" "}
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={rccg} style={{ width: 80 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_RCCG}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-3 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/electric`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
+            {sliderItems.map((allData, index) => (
+              <div key={index}>
+                <Card style={{ height: "350px" }} className="m-4">
+                  <CardContent>
+                    <div className="align-items-center">
+                      <div style={{ height: "140px" }}>
+                        <Card className="card-transparent">
+                          <img
+                            src={allData.src}
+                            style={{ width: 90, height: 100 }}
+                            alt="..."
                           />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_RCCG}
-                        </small>
+                          <h4 className="text-center">{allData.title}</h4>
+                        </Card>
+                      </div>
+                      <div className="pl-4">
+                        <blockquote className="my-3 text-black-50">
+                          {allData.quote}
+                          <Link to={allData.link}>
+                            <FontAwesomeIcon
+                              className="ml-3"
+                              style={{ color: "#048cfc" }}
+                              icon={["fas", "arrow-right"]}
+                            />
+                          </Link>
+                        </blockquote>
+                        <div className="font-size-lg font-weight-bold">
+                          Product:-
+                          <small className="text-black-50 pl-2">
+                            {process.env.REACT_APP_RCCG}
+                          </small>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={eko} style={{ width: 80 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_EKO}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-3 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/electric`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
-                          />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_EKO}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={ikeja} style={{ width: 65 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_IKEJA}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-2 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/electric`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
-                          />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_IKEJA}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={rccg} style={{ width: 80 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_DSTV}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-3 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/cable`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
-                          />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_DSTV}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={rccg} style={{ width: 80 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_RCCG}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-3 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/electric`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
-                          />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_RCCG}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={eko} style={{ width: 80 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_EKO}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-3 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/electric`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
-                          />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_EKO}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            <div>
-              <Card className="m-4">
-                <CardContent>
-                  <div className="align-items-center">
-                    <div>
-                      <Card className="card-transparent">
-                        <img src={ikeja} style={{ width: 65 }} alt="..." />
-                        <h4 className="text-center">
-                          {process.env.REACT_APP_IKEJA}
-                        </h4>
-                      </Card>
-                    </div>
-                    <div className="pl-4">
-                      <blockquote className="my-3 text-black-50">
-                        Enim cupidatat cillum sit mollit enim reprehenderit
-                        dolore esse eiusmod proident incididunt officia
-                        reprehenderit.
-                        <Link to={`${process.env.REACT_APP_URL}/electric`}>
-                          <FontAwesomeIcon
-                            className="ml-3"
-                            style={{ color: "#048cfc" }}
-                            icon={["fas", "arrow-right"]}
-                          />
-                        </Link>
-                      </blockquote>
-                      <div className="font-size-lg font-weight-bold">
-                        Product:-
-                        <small className="text-black-50 pl-2">
-                          {process.env.REACT_APP_IKEJA}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
           </Slider>
           <p className="text-center pt-3">
             Check out our other products

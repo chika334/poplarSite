@@ -16,10 +16,9 @@ import modalForgot from "./forgotModal";
 import resetModal from "./ResetPassword";
 import productModal from "./ProductLoginDisplay";
 import ProductDisplayModal from "./ProductModal";
-import verify from "./verifyToken";
+import service from "./Service";
 
 export default combineReducers({
-  verify,
   content,
   productModal,
   ProductDisplayModal,
@@ -37,4 +36,5 @@ export default combineReducers({
   changepassword,
   wallet,
   loading,
+  service,
 });

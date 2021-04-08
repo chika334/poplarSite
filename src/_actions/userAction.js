@@ -132,7 +132,7 @@ export const signin = (user) => (dispatch, getState) => {
 					type: LOGIN_USER,
 					payload: res.data,
 				}),
-			dispatch(hideLoader())
+			// dispatch(hideLoader())
 			// hideLoader()
 		)
 		.catch((err) => {

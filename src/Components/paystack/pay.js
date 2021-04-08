@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { PaystackButton } from "react-paystack";
+// import { PaystackButton } from "react-paystack";
+import { Redirect } from "react-router-dom";
+import { PaystackConsumer } from "react-paystack";
 import { connect, useSelector } from "react-redux";
 import Modal from "@material-ui/core/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card } from "@material-ui/core";
 import DialpadOutlinedIcon from "@material-ui/icons/DialpadOutlined";
 import { TextField, InputAdornment } from "@material-ui/core";
-import { token } from "../../_actions/tokenAction";
+import { paystackToken, token } from "../../_actions/tokenAction";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 
@@ -14,60 +16,80 @@ const Pay = (props) => {
   // const publicKey = process.env.REACT_PUBLIC_KEY;
   const user = useSelector((state) => state.authUser.user);
   const [errors, setErrors] = useState("");
-  // const publicKey = "pk_test_94d23f00aed71d8e360418111baf7ccfbb6ecc1f";
-  const publicKey = "pk_test_07df38cc2381f42f40a3bcb363a5b6e0b7882dbe";
-  const [amounts, setAmount] = useState("");
+  // const publicKey = "pk_test_07df38cc2381f42f40a3bcb363a5b6e0b7882dbe";
+  // const publicKey = `${process.env.REACT_APP_API_LIVE_KEY}`;
+  const publicKey = "pk_live_76004bcc59f334f109b8a3bc68735ee620c10485";
+  const amounts = props.amount;
   const amount = amounts * 100;
   const [meterNumber, setMeterNumber] = useState("");
   const productCode = "rccg-power-12";
-  // const amount = 1000 * 100;
   const email = `${user === null ? "" : user.user.email}`;
   const [phone, setPhone] = useState("");
-  const paymentMethod = "fastrwallet";
+  const paymentMethod = "fastrpaystack";
+  const customerId = "";
   const [open, setOpen] = useState(false);
   const [inError, setInError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [wantToPay, setWantToPay] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
+  const [redirect, setRedirect] = useState(false);
   // const [fullname, setFullName] = useState("");
+  const [values, setValues] = useState({
+    inital: false,
+    showAmount: false,
+    initialDetails: null,
+    verify: false,
+    Details: false,
+    amountInital: false,
+  });
+
+  console.log(props);
+
+  // const { amounts, meterNumber } = numbers;
+
+  const {
+    inital,
+    showAmount,
+    initialDetails,
+    verify,
+    Details,
+    amountInital,
+  } = values;
+
   const fullname = userDetails === null ? "" : userDetails.customerName;
 
-  // console.log(amount);
-  useEffect(() => {
-    const { error } = props;
-    // if (error !== prevProps.error) {
-    if (error.id === "BUYTOKEN_FAIL") {
-      setErrors(error.message.message);
-    }
-    // }
-  }, [props.error]);
-
   const handleChange = (name) => (event) => {
-    // this.setState({ [name]: event.target.value });
-    console.log(event.target.value);
     setMeterNumber(event.target.value);
-  };
-
-  const handleAmount = (name) => (event) => {
-    setAmount(event.target.value);
   };
 
   const submit = async (e) => {
     e.preventDefault();
-    const { authUser } = props;
+    const { token, isAuthenticated } = props.authUser;
+    // console.log(token);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    // if token, add to header
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
     if (meterNumber === "") {
-      setInError({ inError: "Input Required" });
+      console.log(meterNumber);
+      setInError("Input Required");
     } else {
       if (localStorage.ProductTitle === "RCCG ELECTRIC") {
-        // const { meterNumber } = this.state;
-
         if (localStorage.token) {
-          console.log("submit");
+          // console.log("submit");
           setLoading(true);
           try {
             axios
               .get(
-                `http://www.blacksillicon.com/fastpayr/api/v1/provider/redeem/customer/${meterNumber}`
+                `${process.env.REACT_APP_API_VERIFYMETERNO}${meterNumber}`,
+                config
               )
               .then((res) =>
                 setTimeout(() => {
@@ -75,6 +97,14 @@ const Pay = (props) => {
                   // this.setState({ loading: false, userDetails: res.data });
                   setUserDetails(res.data);
                   setLoading(false);
+                  setValues({
+                    ...values,
+                    Details: false,
+                    inital: true,
+                    verify: true,
+                    showAmount: true,
+                    amountInital: true,
+                  });
                 }, 300)
               )
               .catch((err) => console.log(err));
@@ -82,8 +112,6 @@ const Pay = (props) => {
             console.log(err);
           }
         } else {
-          // setWantToPay({ wantToPay: true });
-          // this.handleOpen();
         }
       } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
         console.log(localStorage.ProductTitle);
@@ -99,9 +127,43 @@ const Pay = (props) => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const Close = () => {
     console.log(open);
     setOpen(false);
+  };
+
+  // you can call this function anything
+  const handleSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    if (reference.message === "Approved") {
+      // console.log(reference.reference);
+      if (userDetails === null) {
+        return "";
+      } else if (userDetails.responsedesc === "Success") {
+        // this.setState({ loading: true });
+        const fastrId = initialDetails.fastrId;
+        // const reference = reference.reference;
+
+        const buyToken = {
+          fastrId,
+          reference: reference.reference,
+          // reference: "T965771745193942"
+        };
+
+        setRedirect(true);
+        props.paystackToken(buyToken);
+        // console.log(buyToken);
+        props.history.push(`${process.env.REACT_APP_URL}/invoice`);
+      }
+    } else {
+      console.log("bad");
+    }
+  };
+
+  // you can call this function anything
+  const handleClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
   };
 
   const componentProps = {
@@ -113,26 +175,72 @@ const Pay = (props) => {
     },
     publicKey,
     text: "Pay Now",
-    onSuccess: (reference) => {
-      const customerId = "";
-      const buyToken = {
-        productCode,
-        fullname,
-        amount: amounts,
-        accountNumber: meterNumber,
-        customerId,
-        reference: reference.reference,
-        paymentMethod,
+    onSuccess: (reference) => handleSuccess(reference),
+    onClose: handleClose,
+  };
+
+  const initializePayment = (e) => {
+    e.preventDefault();
+    const { token } = props.authUser;
+    const amount = amounts;
+
+    if (localStorage.token && userDetails === null) {
+      return "";
+    } else if (localStorage.token && userDetails.responsedesc === "Success") {
+      setLoading(true);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
       };
 
-      // console.log(buyToken.amount);
-      localStorage.setItem("Amount", buyToken.amount);
+      // if token, add to header
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+      }
 
-      props.token(buyToken);
-    },
-    // alert("Thanks for doing business with us! Come back soon!!"),
-    onClose: () => alert("Wait! Don't leave :("),
+      const fullname = userDetails.customerName;
+      const meterNumber = userDetails.meterNumber;
+
+      const buyToken = {
+        productCode,
+        paymentMethod,
+        fullname,
+        amount,
+        accountNumber: meterNumber,
+        customerId,
+      };
+
+      console.log(buyToken);
+
+      axios
+        .post(
+          `${process.env.REACT_APP_API_INITIALIZE_PAYMENT}`,
+          buyToken,
+          config
+        )
+        .then((res) =>
+          setTimeout(() => {
+            // setUserDetails(res.data);
+            setLoading(false);
+            setValues({
+              ...values,
+              Details: true,
+              initialDetails: res.data,
+              inital: true,
+              verify: true,
+              showAmount: false,
+              amountInital: false,
+            });
+          }, 300)
+        )
+        .catch((err) => console.log(err));
+    }
   };
+
+  if (props.buyToken.change) {
+    return <Redirect to={`/invoice`} />;
+  }
 
   return (
     <>
@@ -145,7 +253,7 @@ const Pay = (props) => {
       </Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={Close}
         aria-labelledby="simple-modal-title"
         style={{ overflow: "auto" }}
         aria-describedby="simple-modal-description"
@@ -160,7 +268,7 @@ const Pay = (props) => {
                     left: "50%",
                   }}
                 >
-                  <Button onClick={handleClose} className="px-4 text-dark-50">
+                  <Button onClick={Close} className="px-4 text-dark-50">
                     <FontAwesomeIcon icon={["fas", "times"]} />
                   </Button>
                 </div>
@@ -191,153 +299,57 @@ const Pay = (props) => {
                   </Typography>
                 )}
                 <div className="checkout-form">
-                  {/* <div className="checkout-field">
-                    <label>Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      onChange={(e) => setFullName(e.target.value)}
-                    />
-                  </div> */}
-                  {/* <div className="checkout-field">
-                    <label>Meter Number</label>
-                    <input
-                      type="number"
-                      id="amount"
-                      onChange={(e) => setMeterNumber(e.target.value)}
-                    />
-                  </div> */}
                   <div className="checkout-field">
-                    {/* <label>Amount</label>
-                    <input
-                      type="number"
-                      id="amount"
-                      onChange={(e) => setAmount(e.target.value)}
-                    /> */}
-                    {userDetails === null ? (
-                      <TextField
-                        fullWidth
-                        type="number"
-                        variant="outlined"
-                        id="number"
-                        // onChange={(e) => setMeterNumber(e.target.value)}
-                        style={{ color: "#000" }}
-                        onChange={handleChange("meterNumber")}
-                        value={meterNumber}
-                        name="meterNumber"
-                        label="Meter Number"
-                        helperText={inError}
-                        error={inError !== null}
-                        placeholder="Meter Number"
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <DialpadOutlinedIcon />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  {userDetails === null ? (
-                    ""
-                  ) : userDetails.responsedesc === "Success" ? (
-                    <>
-                      <div className="allnew">
-                        <p>Full Name: </p>
-                        <p style={{ paddingLeft: "63px" }}>
-                          {userDetails.customerName}
-                        </p>
-                      </div>
-                      <div className="allnew">
-                        <p>Address: </p>
-                        <p style={{ paddingLeft: "74px" }}>
-                          {userDetails.address}
-                        </p>
-                      </div>
-                      <div className="allnew">
-                        <p>Meter Number: </p>
-                        <p style={{ paddingLeft: "30px" }}>
-                          {userDetails.meterNumber}
-                        </p>
-                      </div>
-                      <div className="allnew">
-                        <p>undertaking: </p>
-                        <p style={{ paddingLeft: "30px" }}>
-                          {userDetails.undertaking}
-                        </p>
-                      </div>
-
-                      <div className="mb-3">
-                        <TextField
-                          fullWidth
-                          variant="outlined"
-                          id="amount"
-                          label="Amount"
-                          value={amounts}
-                          onChange={handleAmount("amount")}
-                          type="number"
-                          helperText={inError}
-                          error={inError !== null}
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <span className="pr-3 align-items-center">
-                                  ₦
-                                </span>
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  {/* <div className="checkout-field">
-                    <label>Phone</label>
-                    <input
-                      type="text"
-                      id="phone"
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  </div> */}
-                  {userDetails === null ? (
-                    <>
+                    <div>
+                      <>
+                        <div className="allnew">
+                          <p style={{ paddingLeft: "20px" }}>Full Name: </p>
+                          <p style={{ paddingLeft: "63px" }}>
+                            {props.data.customerName}
+                          </p>
+                        </div>
+                        <div className="allnew">
+                          <p style={{ paddingLeft: "20px" }}>Address: </p>
+                          <p style={{ paddingLeft: "78px" }}>
+                            {props.data.address}
+                          </p>
+                        </div>
+                        <div className="allnew">
+                          <p style={{ paddingLeft: "20px" }}>Meter Number: </p>
+                          <p style={{ paddingLeft: "30px" }}>
+                            {props.data.meterNumber}
+                          </p>
+                        </div>
+                        <div className="allnew">
+                          <p style={{ paddingLeft: "20px" }}>undertaking: </p>
+                          <p style={{ paddingLeft: "20px" }}>
+                            {props.data.undertaking}
+                          </p>
+                        </div>
+                        <div className="allnew">
+                          <p style={{ paddingLeft: "20px" }}>Amount: </p>
+                          <p style={{ paddingLeft: "85px" }}>₦{amounts}</p>
+                        </div>
+                      </>
                       <div className="text-center">
-                        <Button
-                          onClick={(e) => {
-                            // submit(e);
-                            if (localStorage.token) {
-                              submit(e);
-                            } else {
-                              submit(e);
-                            }
-                          }}
-                          style={{
-                            backgroundColor: "#048cfc",
-                            // position: "absolute",
-                            // right: 0,
-                          }}
-                        >
-                          verify Number
-                        </Button>
+                        <PaystackConsumer {...componentProps}>
+                          {({ initializePayment }) => (
+                            <Button
+                              style={{
+                                backgroundColor: "grey",
+                                width: "100px",
+                              }}
+                              onClick={() =>
+                                initializePayment(handleSuccess, handleClose)
+                              }
+                            >
+                              Card Payment
+                            </Button>
+                          )}
+                        </PaystackConsumer>
                       </div>
-                    </>
-                  ) : (
-                    <div className="text-center">
-                      <PaystackButton
-                        className="paystack-button"
-                        {...componentProps}
-                      />
                     </div>
-                  )}
-                  {/* <PaystackButton
-                    className="paystack-button"
-                    {...componentProps}
-                  /> */}
+                  </div>
                 </div>
               </div>
             </Card>
@@ -350,6 +362,8 @@ const Pay = (props) => {
 
 const mapStateToProps = (state) => ({
   error: state.error,
+  authUser: state.authUser,
+  buyToken: state.buyToken,
 });
 
-export default connect(mapStateToProps, { token })(Pay);
+export default connect(mapStateToProps, { paystackToken, token })(Pay);

@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-// import Typography from "@material-ui/core/Typography";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { PaystackConsumer } from "react-paystack";
 import {
   TextField,
   InputAdornment,
   Button,
   Typography,
 } from "@material-ui/core";
-// import PersonIcon from "@material-ui/icons/Person";
+import { Redirect } from "react-router-dom";
 import DialpadOutlinedIcon from "@material-ui/icons/DialpadOutlined";
 import { showModal, hideModal } from "../../_actions/modal";
 import PropTypes from "prop-types";
 import { clearErrors } from "../../_actions/errorAction";
-import { token, verifyNumber } from "../../_actions/tokenAction";
+import { token, paystackToken } from "../../_actions/tokenAction";
+import { verifyNumber } from "../../_actions/verify";
 import { showLoader, hideLoader } from "../../_actions/loading";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { signin } from "../../_actions/userAction";
 import Form from "../../data/Payment/Electric/Form";
 import axios from "axios";
@@ -35,91 +36,136 @@ function getModalStyle() {
   };
 }
 
-class Tab1 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false,
-      meterNumber: "",
-      phoneNo: "",
-      amount: "",
-      userDetails: null,
-      productCode: "rccg-power-12",
-      paymentMethod: "fastrwallet",
-      customerId: "",
-      fullname: "",
-      error: "",
-      inError: null,
-      loading: false,
-      open: false,
-      change: false,
-      wantToPay: false,
-      modalStyle: getModalStyle,
-      msg: "",
-    };
-  }
+function Tab1(props) {
+  const [values, setValues] = useState({
+    checked: false,
+    email: `${
+      props.authUser.user === null ? "" : props.authUser.user.user.email
+    }`,
+    redirect: false,
+    fullname: "",
+    publicKey: "",
+    meterNumber: "",
+    phoneNo: "",
+    userDetails: null,
+    productCode: "rccg-power-12",
+    paymentMethod: "fastrwallet",
+    customerId: "",
+    error: "",
+    inError: null,
+    loading: false,
+    open: false,
+    change: false,
+    wantToPay: false,
+    modalStyle: getModalStyle,
+    Details: false,
+    msg: "",
+    inital: false,
+    showAmount: false,
+    initialDetails: null,
+    verify: false,
+    input: false,
+    amounts: "",
+    amount: "",
+  });
 
-  static propTypes = {
-    token: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired,
+  const handleValueChange = (field, value) => {
+    setValues((state) => ({ [field]: value }));
   };
 
-  componentDidUpdate(prevProps) {
-    const { error, success, authUser } = this.props;
-    // console.log(verify);
-    if (error !== prevProps.error) {
-      // check for register error
-      if (error.id === "BUYTOKEN_FAIL") {
-        this.setState({ error: error.message.message });
-        // console.log(this.state.error);
-      }
-    } else {
-      if (authUser && success.success) {
-        this.sendRedirect();
-        this.props.history.push(`${process.env.REACT_APP_URL}/invoice`);
-        // this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
-        // window.location.href = `${process.env.REACT_APP_URL}/buytoken`;
-      }
-    }
-  }
+  const {
+    amount,
+    amounts,
+    checked,
+    email,
+    redirect,
+    fullname,
+    publicKey,
+    meterNumber,
+    phoneNo,
+    userDetails,
+    productCode,
+    paymentMethod,
+    customerId,
+    error,
+    inError,
+    loading,
+    open,
+    change,
+    wantToPay,
+    modalStyle,
+    Details,
+    msg,
+    inital,
+    showAmount,
+    initialDetails,
+    verify,
+    input,
+  } = values;
 
-  sendRedirect = () => {
-    this.props.clearErrors();
+  // constructor(props) {
+  //   super(props);
+  //   state = {
+
+  //   };
+  // }
+
+  // componentDidUpdate(prevProps) {
+  //   const { error, success, authUser } = props;
+  //   // console.log(verify);
+  //   if (error !== prevProps.error) {
+  //     // check for register error
+  //     if (error.id === "METER_ERROR") {
+  //       setValues({ error: error.message.message });
+  //       // console.log(error);
+  //     }
+  //   } else {
+  //     if (authUser && success.success) {
+  //       sendRedirect();
+  //       setValues({ loading: false });
+  //       props.history.push(`${process.env.REACT_APP_URL}/invoice`);
+  //       // props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
+  //       // window.location.href = `${process.env.REACT_APP_URL}/buytoken`;
+  //     }
+  //   }
+  // }
+
+  const sendRedirect = () => {
+    props.clearErrors();
   };
 
-  handleChange = (name) => (event) => {
-    this.setState({ [name]: event.target.value });
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
+  const handleOpen = () => {
+    setValues({ ...values, open: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // const handleClose = () => {
+  //   setValues({ open: false });
+  // };
 
-  verifyNumber = async () => {
-    const { meterNumber } = this.state;
-
-    return await this.props.verifyNumber(meterNumber);
-  };
-
-  handlePay = (e) => {
+  const initializePayment = (e) => {
     e.preventDefault();
-    const { authUser } = this.props;
-    if (authUser && this.state.userDetails === null) {
+    const { token } = props.authUser;
+
+    if (localStorage.token && userDetails === null) {
       return "";
-    } else if (authUser && this.state.userDetails.responsedesc === "Success") {
-      const fullname = this.state.userDetails.customerName;
-      const {
-        meterNumber,
-        amount,
-        paymentMethod,
-        // fullname,
-        productCode,
-        customerId,
-      } = this.state;
+    } else if (localStorage.token && userDetails.responsedesc === "Success") {
+      setValues({ ...values, loading: true });
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      // if token, add to header
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+      }
+
+      const fullname = userDetails.customerName;
 
       const buyToken = {
         productCode,
@@ -129,64 +175,123 @@ class Tab1 extends Component {
         accountNumber: meterNumber,
         customerId,
       };
-      console.log(buyToken);
-      // console.log("payment");
-      this.props.token(buyToken);
-      // this.payBills();
+
+      axios
+        .post(
+          `${process.env.REACT_APP_API_INITIALIZE_PAYMENT}`,
+          buyToken,
+          config
+        )
+        .then((res) =>
+          setTimeout(() => {
+            setValues({
+              ...values,
+              loading: false,
+              initialDetails: res.data,
+              Details: true,
+              inital: true,
+              verify: true,
+              input: false,
+              showAmount: false,
+            });
+          }, 300)
+        )
+        .catch((err) => console.log(err));
     }
   };
 
-  submit = async (e) => {
+  const Pay = (e) => {
     e.preventDefault();
-    const { authUser } = this.props;
-    if (this.state.meterNumber === "") {
-      this.setState({ inError: "Input Required" });
-    } else {
-      if (localStorage.ProductTitle === "RCCG ELECTRIC") {
-        const { meterNumber } = this.state;
+    const { token } = props.authUser;
 
-        if (authUser) {
-          this.setState({ loading: true });
-          try {
-            axios
-              .get(
-                `http://www.blacksillicon.com/fastpayr/api/v1/provider/redeem/customer/${meterNumber}`
-              )
-              .then((res) =>
+    if (localStorage.token && userDetails === null) {
+      return "";
+    } else if (localStorage.token && userDetails.responsedesc === "Success") {
+      setValues({ ...values, loading: true });
+      const fastrId = initialDetails.fastrId;
+      const reference = null;
+
+      const buyToken = {
+        fastrId,
+        reference,
+      };
+
+      props.token(buyToken);
+      // console.log(buyToken);
+    }
+  };
+
+  const verifyMeterNumber = async () => {
+    const token = props.authUser.token;
+
+    return await verifyNumber(meterNumber, token);
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    // const { authUser } = props;
+    const { token } = props.authUser;
+    if (meterNumber === "") {
+      // handleValueChange("inError", "Input Required");
+      setValues({ ...values, inError: "Input Required" });
+    } else {
+      if (meterNumber.length > 11 || meterNumber.length < 11) {
+        setValues({ ...values, inError: "Input must be 11 digits" });
+      } else {
+        if (localStorage.ProductTitle === "RCCG ELECTRIC") {
+          if (localStorage.token) {
+            setValues({ ...values, loading: true });
+            try {
+              const result = await verifyMeterNumber();
+              // const { success, msg, verify } = result;
+              if (result.responsedesc === "SERVICE_UNAVAILABLE") {
+                // console.log("error");
+                setValues({
+                  ...values,
+                  loading: false,
+                  error: "Meter Number Invalid",
+                });
+              } else {
                 setTimeout(() => {
-                  this.setState({ loading: false, userDetails: res.data });
-                }, 300)
-              )
-              .catch((err) => console.log(err));
-          } catch (err) {
-            console.log(err);
+                  setValues({
+                    ...values,
+                    verify: true,
+                    input: true,
+                    userDetails: result,
+                    showAmount: true,
+                    inital: true,
+                    loading: false,
+                    Details: false,
+                  });
+                }, 300);
+              }
+
+              // console.log(result);
+            } catch (err) {
+              console.log(err);
+              // setValues({ error: err.response.data.msg });
+            }
           }
+        } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
+          console.log(localStorage.ProductTitle);
+        } else if (localStorage.ProductTitle === "EKO ELECTRIC") {
+          console.log(localStorage.ProductTitle);
+        } else if (localStorage.ProductTitle === "DSTV Subscription") {
+          console.log(localStorage.ProductTitle);
         } else {
-          this.setState({ wantToPay: true });
-          this.handleOpen();
+          handleValueChange("wantToPay", true);
+          handleOpen();
         }
-      } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
-        console.log(localStorage.ProductTitle);
-      } else if (localStorage.ProductTitle === "EKO ELECTRIC") {
-        console.log(localStorage.ProductTitle);
-      } else if (localStorage.ProductTitle === "DSTV Subscription") {
-        console.log(localStorage.ProductTitle);
       }
     }
   };
 
-  payBills = () => {
-    const { authUser, success } = this.props;
+  console.log(inError);
+
+  const payBills = () => {
+    const { authUser, success } = props;
     const pages = localStorage.getItem("LoggedPage");
-    const fullname = this.state.userDetails.customerName;
-    const {
-      meterNumber,
-      amount,
-      paymentMethod,
-      // fullname,
-      productCode,
-      customerId,
-    } = this.state;
+    const fullname = userDetails.customerName;
 
     const buyToken = {
       productCode,
@@ -196,251 +301,374 @@ class Tab1 extends Component {
       meterNumber,
       customerId,
     };
+
     // if user is authenticated
     if (authUser === true && pages) {
-      if (authUser && this.state.wantToPay) {
-        this.props.showLoader();
-        this.props.token(buyToken);
-        this.setState({ wantToPay: false });
+      if (authUser && wantToPay) {
+        props.showLoader();
+        props.token(buyToken);
+        // handleValueChange("wantToPay", true);
+        setValues({ ...values, wantToPay: false });
       }
       if (authUser && success.success) {
-        //if success.success === true
-        this.props.hideLoader();
-        // console.log("success", success.success);
-        this.props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
+        props.hideLoader();
+        props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
       }
     }
   };
 
-  handleClick = (e) => {
-    const { email, password } = this.state;
-    const user = {
-      email,
-      password,
-    };
+  // you can call this function anything
+  const handleSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    console.log(reference);
+    if (reference.message === "Approved") {
+      if (userDetails === null) {
+        return "";
+      } else if (userDetails.responsedesc === "Success") {
+        // setValues({ loading: true });
+        const fastrId = initialDetails.fastrId;
 
-    this.props.showLoader();
-    this.props.signin(user);
+        const buyToken = {
+          fastrId,
+          reference: reference.reference,
+        };
+        console.log(buyToken);
+
+        props.paystackToken(buyToken);
+        // setValues({ ...values, redirect: true });
+        // console.log(buyToken);
+      }
+    } else {
+      console.log("bad");
+    }
   };
 
-  render() {
-    console.log(this.state.userDetails);
-    console.log(this.state.loading);
-    return (
-      <>
-        {this.state.loading === true ? (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 5 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.3 }}
-          >
-            <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
-              <div className="d-flex align-items-center flex-column px-4">
-                <ClimbingBoxLoader color={"#3c44b1"} loading={true} />
-              </div>
-              <div className="text-muted font-size-xl text-dark text-center pt-3">
-                <span className="font-size-lg d-block text-dark">
-                  Your request is loading
-                </span>
-              </div>
+  // you can call this function anything
+  const handleClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+  };
+
+  useEffect(() => {
+    if (initialDetails) {
+      const amounts = `${
+        initialDetails === null ? "" : initialDetails.paymentDetails.amount
+      }`;
+
+      // handleValueChange("amount", amount);
+      setValues({ ...values, amount: amounts });
+
+      console.log(amount);
+    }
+  }, [initialDetails]);
+
+  useEffect(() => {
+    if (userDetails) {
+      const fullname = userDetails === null ? "" : userDetails.customerName;
+      // handleValueChange("fullname", amount);
+      setValues({ ...values, fullname: fullname });
+    }
+  }, [userDetails]);
+
+  useEffect(() => {}, [input]);
+
+  const componentProps = {
+    email: email,
+    amount: amount ? amount * 100 : 0,
+    metadata: {
+      fullname: fullname,
+      // fullname: userDetails === null ? "" : userDetails.customerName,
+      // phone,
+    },
+    publicKey: "pk_live_76004bcc59f334f109b8a3bc68735ee620c10485",
+    text: "Pay Now",
+    // onSuccess: (reference) => console.log(reference),
+    onSuccess: (reference) => reference && handleSuccess(reference),
+    onClose: handleClose,
+  };
+
+  if (props.buyToken.success) {
+    // console.log("daniel");
+    return <Redirect to={`${process.env.REACT_APP_URL}/invoice`} />;
+  }
+
+  return (
+    <>
+      {loading === true ? (
+        <motion.div
+          key="loading"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 5 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.3 }}
+        >
+          <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
+            <div className="d-flex align-items-center flex-column px-4">
+              <ClimbingBoxLoader color={"#3c44b1"} loading={true} />
             </div>
-          </motion.div>
-        ) : (
-          <div className="app-wrapper">
-            <div className="hero-wrapper w-100">
-              <div className="flex-grow-1 w-100 align-items-center">
-                <div>
-                  <div className="divider-v divider-v-lg d-none d-lg-block" />
-                  <div className="text-center mt-4">
-                    <img
-                      width="100"
-                      src={localStorage.getItem("ProductImage")}
-                      alt="rccg"
-                    />
-                    <h1 className="font-size-xxl mb-1 font-weight-bold">
-                      {localStorage.getItem("ProductTitle")}
-                    </h1>
-                    <p className="mb-0 text-black-50">
-                      Fill in the fields below to pay your{" "}
-                      <span className="text-lowercase">
-                        {process.env.REACT_APP_RCCG}
-                      </span>
-                    </p>
-                  </div>
-                  <div className="py-4">
-                    {/* <Form formName={FORM_NAME} key={FORM_NAME} /> */}
-                    <div>
-                      {this.state.userDetails === null ? (
-                        <div className="mb-4">
-                          <TextField
-                            fullWidth
-                            type="number"
-                            variant="outlined"
-                            helperText={this.state.inError}
-                            id="number"
-                            onChange={this.handleChange("meterNumber")}
-                            value={this.state.meterNumber}
-                            name="meterNumber"
-                            label="Meter Number"
-                            error={this.state.inError !== null}
-                            // error={this.state.inError && null}
-                            placeholder="Meter Number"
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <DialpadOutlinedIcon />
-                                </InputAdornment>
-                              ),
+            <div className="text-muted font-size-xl text-dark text-center pt-3">
+              <span className="font-size-lg d-block text-dark">
+                Your request is loading
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      ) : (
+        <div className="app-wrapper">
+          <div className="hero-wrapper w-100">
+            <div className="flex-grow-1 w-100 align-items-center">
+              <div>
+                <div className="divider-v divider-v-lg d-none d-lg-block" />
+                <div className="text-center mt-4">
+                  <img
+                    width="100"
+                    src={localStorage.getItem("ProductImage")}
+                    alt="rccg"
+                  />
+                  <h1 className="font-size-xxl mb-1 font-weight-bold">
+                    {localStorage.getItem("ProductTitle")}
+                  </h1>
+                  <p className="mb-0 text-black-50">
+                    Fill in the fields below to pay your{" "}
+                    <span className="text-lowercase">
+                      {process.env.REACT_APP_RCCG}
+                    </span>
+                  </p>
+                </div>
+                <div className="py-4">
+                  {/* <Form formName={FORM_NAME} key={FORM_NAME} /> */}
+                  <div>
+                    {!inital && (
+                      <div className="mb-4">
+                        <TextField
+                          fullWidth
+                          type="number"
+                          variant="outlined"
+                          helperText={inError}
+                          id="number"
+                          onChange={handleChange("meterNumber")}
+                          value={meterNumber}
+                          name="meterNumber"
+                          label="Meter Number"
+                          error={inError}
+                          placeholder="Meter Number"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <DialpadOutlinedIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        {error && (
+                          <Typography
+                            className="text-center"
+                            component="p"
+                            style={{
+                              fontSize: "15px",
+                              marginBottom: 0,
+                              marginTop: 5,
                             }}
-                            // InputProps={iconGenerate("DialpadOutlinedIcon")}
-                          />
-                          {this.state.error && (
-                            <Typography
-                              className="text-center"
-                              component="p"
-                              style={{ fontSize: "2px" }}
-                              color="error"
-                            >
-                              {this.state.error}
-                            </Typography>
-                          )}
+                            color="error"
+                          >
+                            {error}
+                          </Typography>
+                        )}
+                      </div>
+                    )}
+                    {inital && (
+                      <>
+                        <div className="allnew">
+                          <p>Full Name: </p>
+                          <p style={{ paddingLeft: "63px" }}>
+                            {userDetails.customerName}
+                          </p>
                         </div>
-                      ) : this.state.userDetails.responsedesc === "Success" ? (
-                        ""
-                      ) : (
-                        ""
-                      )}
-                      {this.state.userDetails === null ? (
-                        ""
-                      ) : this.state.userDetails.responsedesc === "Success" ? (
+                        <div className="allnew">
+                          <p>Address: </p>
+                          <p style={{ paddingLeft: "74px" }}>
+                            {userDetails.address}
+                          </p>
+                        </div>
+                        <div className="allnew">
+                          <p>Meter Number: </p>
+                          <p style={{ paddingLeft: "30px" }}>
+                            {userDetails.meterNumber}
+                          </p>
+                        </div>
+                        <div className="allnew">
+                          <p>undertaking: </p>
+                          <p style={{ paddingLeft: "50px" }}>
+                            {userDetails.undertaking}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                    {!input ? (
+                      initialDetails ? (
                         <>
                           <div className="allnew">
-                            <p>Full Name: </p>
-                            <p style={{ paddingLeft: "63px" }}>
-                              {this.state.userDetails.customerName}
+                            <p>Amount: </p>
+                            <p style={{ paddingLeft: "75px" }}>
+                              {initialDetails.paymentDetails
+                                ? initialDetails.paymentDetails.amount
+                                : 0}
                             </p>
                           </div>
-                          <div className="allnew">
-                            <p>Address: </p>
-                            <p style={{ paddingLeft: "74px" }}>
-                              {this.state.userDetails.address}
-                            </p>
-                          </div>
-                          <div className="allnew">
-                            <p>Meter Number: </p>
-                            <p style={{ paddingLeft: "30px" }}>
-                              {this.state.userDetails.meterNumber}
-                            </p>
-                          </div>
-                          <div className="allnew">
-                            <p>undertaking: </p>
-                            <p style={{ paddingLeft: "30px" }}>
-                              {this.state.userDetails.undertaking}
-                            </p>
-                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )
+                    ) : (
+                      <div className="mb-3">
+                        <TextField
+                          fullWidth
+                          variant="outlined"
+                          id="amount"
+                          label="Amount"
+                          value={amount}
+                          onChange={handleChange("amount")}
+                          type="number"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <span className="pr-3 align-items-center">
+                                  ₦
+                                </span>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </div>
+                    )}
 
-                          <div className="mb-3">
-                            <TextField
-                              fullWidth
-                              variant="outlined"
-                              id="amount"
-                              label="Amount"
-                              value={this.state.amount}
-                              onChange={this.handleChange("amount")}
-                              type="number"
-                              InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <span className="pr-3 align-items-center">
-                                      ₦
-                                    </span>
-                                  </InputAdornment>
-                                ),
+                    {showAmount && (
+                      <div className="text-center">
+                        <Button
+                          onClick={(e) => {
+                            if (props.authUser) {
+                              initializePayment(e);
+                            } else {
+                              initializePayment(e);
+                            }
+                            // console.log("Initialize");
+                          }}
+                          style={{
+                            backgroundColor: "#048cfc",
+                          }}
+                        >
+                          Proceed
+                        </Button>
+                      </div>
+                    )}
+                    <div className="">
+                      {!verify ? (
+                        <>
+                          <div className="text-center">
+                            <Button
+                              onClick={(e) => {
+                                if (props.authUser) {
+                                  submit(e);
+                                } else {
+                                  submit(e);
+                                }
                               }}
-                            />
+                              style={{
+                                backgroundColor: "#048cfc",
+                                color: "#fff",
+                                // position: "absolute",
+                                // right: 0,
+                              }}
+                            >
+                              Verify Number
+                            </Button>
                           </div>
                         </>
                       ) : (
                         ""
                       )}
-                      <div className="d-inline-flex">
-                        <div className="" style={{ float: "left" }}>
-                          <Pay />
-                        </div>
-                        {this.state.userDetails === null ? (
-                          <>
+
+                      {Details && (
+                        <div>
+                          <div style={{ float: "left" }}>
                             <div className="text-center">
-                              <Button
-                                onClick={(e) => {
-                                  if (this.props.authUser) {
-                                    this.submit(e);
-                                  } else {
-                                    this.submit(e);
-                                  }
-                                }}
-                                style={{
-                                  backgroundColor: "#048cfc",
-                                  position: "absolute",
-                                  right: 0,
-                                }}
-                              >
-                                verify Number
-                              </Button>
+                              <PaystackConsumer {...componentProps}>
+                                {({ initializePayment }) => (
+                                  <Button
+                                    style={{
+                                      backgroundColor: "grey",
+                                      // width: "100px",
+                                    }}
+                                    onClick={() =>
+                                      initializePayment(
+                                        handleSuccess,
+                                        handleClose
+                                      )
+                                    }
+                                  >
+                                    Card Payment
+                                  </Button>
+                                )}
+                              </PaystackConsumer>
                             </div>
-                          </>
-                        ) : (
+                            {/* <Pay
+                                data={userDetails}
+                                amount={amount}
+                              /> */}
+                          </div>
                           <div className="text-center">
                             <Button
                               onClick={(e) => {
-                                if (this.props.authUser) {
-                                  this.handlePay(e);
+                                if (props.authUser) {
+                                  Pay(e);
                                 } else {
-                                  this.handlePay(e);
+                                  Pay(e);
                                 }
+                                // console.log("wallet");
                               }}
                               style={{
                                 backgroundColor: "#048cfc",
-                                position: "absolute",
-                                right: 0,
+                                // position: "absolute",
+                                // right: 0,
                               }}
                             >
-                              Pay with wallet
+                              Wallet Payment
                             </Button>
                           </div>
-                        )}
-                      </div>
-                      {/* //{" "} */}
-                      {/* { : (
-                    //   ""
-                    // )} */}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </>
-    );
-  }
+        </div>
+      )}
+    </>
+  );
+  // }
 }
 
+Tab1.propTypes = {
+  token: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  authUser: state.authUser.isAuthenticated,
-  success: state.buyToken,
+  // authUser: state.authUser.isAuthenticated,
+  authUser: state.authUser,
+  buyToken: state.buyToken,
   verify: state.verify,
 });
 
 export default withRouter(
   connect(mapStateToProps, {
+    paystackToken,
     verifyNumber,
     signin,
     showModal,
     hideModal,
-    showLoader,
-    hideLoader,
     token,
     clearErrors,
   })(Tab1)

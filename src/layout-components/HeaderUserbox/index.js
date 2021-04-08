@@ -76,7 +76,7 @@ const HeaderUserbox = () => {
               className="nav-neutral-primary text-left d-flex align-items-center flex-column px-3 pb-3"
             >
               <Link
-                to={`${process.env.REACT_APP_URL}/PageProfile`}
+                to={`/PageProfile`}
                 className="p-3 d-block text-left"
               >
                 My Account

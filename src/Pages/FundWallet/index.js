@@ -232,7 +232,7 @@ class Wallet extends React.Component {
           </CardActions>
         </Card>
         <div className="mt-5 text-center">
-          <a href={`${process.env.REACT_APP_URL}/profilepage`}>
+          <a href={`/profilepage`}>
             back to Profile
           </a>
         </div>

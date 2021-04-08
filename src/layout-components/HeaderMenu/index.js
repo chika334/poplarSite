@@ -15,28 +15,28 @@ const HeaderMenu = (props) => {
             <ul className="d-flex nav nav-neutral-first justify-content-center">
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}`}
+                  to={``}
                   className="font-weight-bold rounded-sm px-3">
                   Home
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}/reportTranx`}
+                  to={`/reportTranx`}
                   className="font-weight-bold rounded-sm px-3">
                   Transactions
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}/profilepage`}
+                  to={`/profilepage`}
                   className="font-weight-bold rounded-sm px-3">
                   Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${process.env.REACT_APP_URL}/settings`}
+                  to={`/settings`}
                   className="font-weight-bold rounded-sm px-3">
                   Settings
                 </NavLink>
@@ -65,7 +65,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/electric`)
+                              props.history.push(`/electric`)
                             }
                           }}
                           target="_blank"
@@ -82,7 +82,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/water`)
+                              props.history.push(`/water`)
                             }
                           }}
                           target="_blank"
@@ -98,7 +98,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/cable`)
+                              props.history.push(`/cable`)
                             }
                           }}
                           // selected
@@ -115,7 +115,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/airtime`)
+                              props.history.push(`/airtime`)
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -131,7 +131,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/data`)
+                              props.history.push(`/data`)
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -147,7 +147,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/transfer`)
+                              props.history.push(`/transfer`)
                             }
                           }}
                           className="px-4 d-flex text-white-50 align-items-center"
@@ -163,7 +163,7 @@ const HeaderMenu = (props) => {
                           button
                           onClick={(e) => {
                             if (authUser) {
-                              props.history.push(`${process.env.REACT_APP_URL}/deposits`)
+                              props.history.push(`/deposits`)
                             }
                           }}
                           // onClick={(e) => e.preventDefault()}

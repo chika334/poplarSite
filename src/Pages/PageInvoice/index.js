@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-
+import { useSelector } from "react-redux";
 // import { PageTitle } from "../../layout-components";
 // import MessengerHeader from "../../Components/Homepage/Homepage1/MessengerHeader";
 import { Prompt } from "react-router";
@@ -8,6 +8,11 @@ import PageInvoice1 from "../../Components/PageInvoice/PageInvoice1";
 export default function PageInvoice() {
   const dispatch = useDispatch();
   const [blocking, setBlocking] = useState(false);
+  const token = useSelector((state) =>
+    state.buyToken.token === null ? "" : state.buyToken.token
+  );
+
+  // console.log(token);
 
   useEffect(() => {
     block();
@@ -21,7 +26,7 @@ export default function PageInvoice() {
         window.location.href = `${process.env.REACT_APP_URL}/products`;
       } else if (props.history.location.pathname && token.success === false) {
         dispatch(clearToken());
-        // this.props.history.push(`${process.env.REACT_APP_URL}/Products`);
+        // this.props.history.push(`/Products`);
         window.location.href = `${process.env.REACT_APP_URL}/products`;
       }
     });
@@ -37,7 +42,7 @@ export default function PageInvoice() {
 
     if (token.success === false && token === null) {
       dispatch(clearToken());
-      // // history.push(`${process.env.REACT_APP_URL}/Products`);
+      // // history.push(`${process.env.REACT_APP_URL}/products`);
       window.location.href = `${process.env.REACT_APP_URL}/products`;
     }
   };

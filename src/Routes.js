@@ -19,6 +19,7 @@ import {
 import PrivateRoute from "./Protect/Protect";
 import ProtectRoutes from "./Protect/ProtectRoute";
 import MessengerHeader from "./Components/Homepage/Homepage1/MessengerHeader";
+import Pay from "./Components/paystack/pay";
 
 // Layout components
 import Modal from "./layout-components/LoginModal";
@@ -47,9 +48,11 @@ import FundWallet from "./Pages/FundWallet";
 import debitWallet from "./Pages/debitWallet";
 import DashboardCommerce from "./Pages/DashboardCommerce";
 import Invoice from "./Components/PageInvoice/PageInvoice1";
+import Query from "./Pages/Query/index";
 
 import Homepage from "./Pages/Homepage";
 import PageLoginOverlay from "./layout-components/LoginModal/Login";
+import Service from "./layout-components/Service";
 import PageRecoverOverlay from "./Pages/PageRecoverOverlay";
 import BuyToken from "./Pages/ConfirmPayment";
 
@@ -94,11 +97,16 @@ const Routes = (props) => {
                 <MessengerHeader />
               </div>
               <Modal />
+              <Service />
               <RegisterModal />
               <ForgotModal />
               <ProductModal />
               <Switch>
-                <Redirect exact from="/" to={`${process.env.REACT_APP_URL}`} />
+                <Redirect
+                  exact
+                  from={`/`}
+                  to={`${process.env.REACT_APP_URL}`}
+                />
               </Switch>
               <Route
                 path={[
@@ -132,8 +140,10 @@ const Routes = (props) => {
               <Route
                 path={[
                   `${process.env.REACT_APP_URL}/buyProducts`,
+                  // `${process.env.REACT_APP_URL}/payment`,
                   `${process.env.REACT_APP_URL}/dashboard`,
                   `${process.env.REACT_APP_URL}/electric`,
+                  `${process.env.REACT_APP_URL}/query/tranx`,
                   `${process.env.REACT_APP_URL}/water`,
                   `${process.env.REACT_APP_URL}/cable`,
                   `${process.env.REACT_APP_URL}/airtime`,
@@ -150,7 +160,7 @@ const Routes = (props) => {
                   `${process.env.REACT_APP_URL}/debitWallet`,
                   `${process.env.REACT_APP_URL}/dash`,
                   `${process.env.REACT_APP_URL}/invoice`,
-                  // `${process.env.REACT_APP_URL}/PageRegisterOverlay`,
+                  // `/PageRegisterOverlay`,
                 ]}
               >
                 <PresentationLayout>
@@ -167,7 +177,17 @@ const Routes = (props) => {
                         exact
                         component={Products}
                       />
+                      {/* <Route
+                        path={`${process.env.REACT_APP_URL}/payment`}
+                        exact
+                        component={Pay}
+                      /> */}
                       <Route
+                        path={`${process.env.REACT_APP_URL}/query/tranx`}
+                        exact
+                        component={Query}
+                      />
+                      <PrivateRoute
                         path={`${process.env.REACT_APP_URL}/dashboard`}
                         exact
                         component={DashboardCommerce}

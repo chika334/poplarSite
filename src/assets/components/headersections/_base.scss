@@ -1,20 +1,19 @@
 // Variables
 
-$app-sidebar-transition:    cubic-bezier(0.685, 0.0473, 0.346, 1);
+$app-sidebar-transition: cubic-bezier(0.685, 0.0473, 0.346, 1);
 
 $header-height-sm: 64px;
 $header-height: 74px;
 $header-height-lg: 84px;
 $header-height-xl: 94px;
 
-$header-link-color-light: rgba($white, .8);
+$header-link-color-light: rgba($white, 0.8);
 $header-link-hover-color-light: $white;
-$header-link-hover-bg-light: rgba($white, .15);
+$header-link-hover-bg-light: rgba($white, 0.15);
 
-
-$header-link-color-dark: rgba($black, .8);
+$header-link-color-dark: rgba($black, 0.8);
 $header-link-hover-color-dark: $black;
-$header-link-hover-bg-dark: rgba($black, .07);
+$header-link-hover-bg-dark: rgba($black, 0.07);
 
 //  Core
 
@@ -65,34 +64,31 @@ $header-link-hover-bg-dark: rgba($black, .07);
   }
 }
 
-
 // Theming dark
 
 .navbar-dark {
-
   ul {
     & > li {
       & > a {
-        color: rgba($white, .7);
+        color: rgba($white, 0.7);
 
         &.active,
         &:hover {
           color: $white;
-          background: rgba($white, .15);
+          background: rgba($white, 0.15);
         }
       }
 
       &:hover {
         & > a {
           color: $white;
-          background: rgba($white, .15);
+          background: rgba($white, 0.15);
         }
       }
     }
   }
 
   .hamburger {
-
     .hamburger-inner {
       &,
       &::before,
@@ -114,35 +110,33 @@ $header-link-hover-bg-dark: rgba($black, .07);
 // Theming light
 
 .navbar-light {
-
   ul {
     & > li {
       & > a {
-        color: rgba($black, .7);
+        color: rgba($black, 0.7);
 
         &.active,
         &:hover {
           color: $black;
-          background: rgba($primary, .06);
+          background: rgba($primary, 0.06);
         }
       }
 
       &:hover {
         & > a {
           color: $black;
-          background: rgba($primary, .06);
+          background: rgba($primary, 0.06);
         }
       }
     }
   }
 
   .hamburger {
-
     .hamburger-inner {
       &,
       &::before,
       &::after {
-        background-color: rgba($black, .8);
+        background-color: rgba($black, 0.8);
       }
     }
 
@@ -172,7 +166,7 @@ $header-link-hover-bg-dark: rgba($black, .07);
     display: flex;
     align-items: center;
     align-content: center;
-    box-shadow: 1px 1px 3px rgba($black, .2);
+    box-shadow: 1px 1px 3px rgba($black, 0.2);
 
     img {
       width: 26px;
@@ -194,7 +188,7 @@ $header-link-hover-bg-dark: rgba($black, .07);
       font-size: 18px / 1.2;
       text-transform: uppercase;
       // font-size: $font-size-sm / 1.2;
-      opacity: .7;
+      opacity: 0.7;
       padding: 4px 0;
     }
 
@@ -212,7 +206,7 @@ $header-link-hover-bg-dark: rgba($black, .07);
 
 .app-nav-logo--dark {
   .app-nav-logo--icon {
-    border: rgba($black, .4) solid 1px;
+    border: rgba($black, 0.4) solid 1px;
   }
 
   .app-nav-logo--text {
@@ -274,7 +268,7 @@ $header-link-hover-bg-dark: rgba($black, .07);
         padding-top: 15px;
         transition: $transition-base;
         z-index: 20;
-        transform: translateX(-18px) translateY(-18px) scale(.75);
+        transform: translateX(-18px) translateY(-18px) scale(0.75);
 
         &--sm {
           width: 200px;
@@ -305,7 +299,6 @@ $header-link-hover-bg-dark: rgba($black, .07);
       }
 
       &:hover {
-
         & > a {
           & > .dropdown-arrow {
             transform: rotate(-180deg);
@@ -341,7 +334,9 @@ $header-link-hover-bg-dark: rgba($black, .07);
   background: transparent;
   width: 100%;
   height: 100%;
-  z-index: 25;
+  // z-index: 25;
+  // z-index: 1;
+  // display: none;
   transition: $transition-base;
   opacity: 0;
   visibility: hidden;
@@ -359,5 +354,3 @@ $header-link-hover-bg-dark: rgba($black, .07);
     animation-delay: 2s;
   }
 }
-
-

@@ -15,14 +15,14 @@ export class Logout extends Component {
     if (localStorage.token) {
       this.props.logout();
       window.location.href = `${process.env.REACT_APP_URL}`;
-      // this.props.history.push(`${process.env.REACT_APP_URL}`);
+      // this.props.history.push(`/`);
       // console.log("good");
     }
   };
 
   componentDidMount() {
-    // this.props.history.push(`${process.env.REACT_APP_URL}/Homepage`)
-    // window.location.href=`${process.env.REACT_APP_URL}/Homepage`
+    // this.props.history.push(`/Homepage`)
+    // window.location.href=`/Homepage`
     return (e) => this.LogoutUser(e);
   }
 

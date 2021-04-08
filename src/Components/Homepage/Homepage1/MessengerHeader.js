@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, withRouter, Redirect } from "react-router-dom";
+// import {  } from "react-router";
 import { Collapse, Container, Button, List, ListItem } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
@@ -26,11 +27,11 @@ class MessengerHeader extends Component {
     if (this.props.authUser || localStorage.token) {
       this.props.hideModal();
       const redirect = localStorage.getItem("redirectPage");
-      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      this.props.history.push(`${redirect}`);
     }
     // else if (localStorage.token) {
     //   this.props.hideModal();
-    //   this.props.history.push(`${process.env.REACT_APP_URL}/settings`);
+    //   this.props.history.push(`/settings`);
     // }
     else {
       this.props.showModal();
@@ -51,10 +52,10 @@ class MessengerHeader extends Component {
     e.preventDefault();
     if (this.props.authUser || localStorage.token) {
       const redirect = localStorage.getItem("redirectPage");
-      // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      // this.props.history.push(`${redirect}`);
       // this.props.showModal();
       // this.props.hideModal();
-      // this.props.history.push(`${process.env.REACT_APP_URL}/PageProfile`);
+      // this.props.history.push(`/PageProfile`);
     } else {
     }
   };
@@ -67,7 +68,7 @@ class MessengerHeader extends Component {
             <div className="app-nav-logo">
               <NavLink
                 to={`${process.env.REACT_APP_URL}`}
-                title="Bamburgh React Messenger Application with Material-UI PRO"
+                title="Poplar power"
                 className="d-flex align-items-center justify-content-center"
               >
                 <div
@@ -146,7 +147,10 @@ class MessengerHeader extends Component {
                     <Button
                       onClick={(e) => {
                         if (this.props.authUser) {
+                          // window.location.href = `/reportTranx`;
                           window.location.href = `${process.env.REACT_APP_URL}/reportTranx`;
+                          // return <Redirect to="/reportTranx" />;
+                          // this.props.router.push("/reportTranx");
                         }
                       }}
                       className="font-weight-bold rounded-sm px-3"
@@ -321,14 +325,10 @@ class MessengerHeader extends Component {
                       <ListItem
                         button
                         component={NavLink}
-                        to={`${process.env.REACT_APP_URL}`}
+                        to={`${process.env.REACT_APP_URL}/home`}
                         className="px-4 d-flex align-items-center"
                       >
                         <span>Home</span>
-                        {/* <FontAwesomeIcon
-                          icon={["fas", "angle-right"]}
-                          className="opacity-6 ml-auto"
-                        /> */}
                       </ListItem>
                       <ListItem
                         button
@@ -349,10 +349,6 @@ class MessengerHeader extends Component {
                         className="px-4 d-flex w-100 align-items-center"
                       >
                         Profile
-                        {/* <FontAwesomeIcon
-                          icon={["fas", "angle-right"]}
-                          className="opacity-6 ml-auto"
-                        /> */}
                       </ListItem>
                       <ListItem
                         button
@@ -370,10 +366,6 @@ class MessengerHeader extends Component {
                         className="px-4 d-flex w-100 align-items-center"
                       >
                         <span>Settings</span>
-                        {/* <FontAwesomeIcon
-                          icon={["fas", "angle-right"]}
-                          className="opacity-6 ml-auto"
-                        /> */}
                       </ListItem>
                       {this.props.authUser && localStorage.token ? (
                         <ListItem
@@ -395,10 +387,6 @@ class MessengerHeader extends Component {
                           className="px-4 d-flex w-100 align-items-center"
                         >
                           <span>Transactions</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                       ) : (
                         ""
@@ -516,10 +504,6 @@ class MessengerHeader extends Component {
                           className="px-4 d-flex text-white-50 align-items-center"
                         >
                           <span>Bank Transfer</span>
-                          {/* <FontAwesomeIcon
-                            icon={["fas", "angle-right"]}
-                            className="opacity-6 ml-auto"
-                          /> */}
                         </ListItem>
                         <ListItem
                           component="a"

@@ -71,8 +71,7 @@ class Select extends Component {
     if (e.target.value === "allTransactionPagination") {
       // console.log("no going back");
       this.refreshPage();
-    }
-    else {
+    } else {
       this.setState({ data: e.target.value });
     }
   };
@@ -269,17 +268,16 @@ class Select extends Component {
                   </div>
                   <CardContent>
                     <div className="table-responsive-md">
-                      <Table className="table table-borderless table-hover text-nowrap mb-0">
+                      <Table className="table table-borderless table-hover">
                         <thead>
                           <tr>
                             <th className="text-center">id</th>
-                            <th className="text-center">System Id</th>
-                            <th className="text-center">full name</th>
-                            <th className="text-center">account number</th>
-                            <th className="text-center">Payment type name</th>
-                            <th className="text-center">Phone number</th>
-                            <th className="text-center">title</th>
+                            <th className="text-center">Receipt #</th>
+                            <th className="text-center">Description</th>
+                            <th className="text-center">Product status</th>
                             <th className="text-center">Amount</th>
+                            <th className="text-center">Payment status</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -287,42 +285,44 @@ class Select extends Component {
                             <tr key={index}>
                               <td>{index + 1}</td>
                               <td className="text-center">
-                                {tdata.response.fastrId}
+                                {tdata.request.fastrId}
                               </td>
                               <td className="text-center">
-                                {tdata.response.paymentRequestid.fullname}
-                              </td>
-                              <td className="text-center">
-                                <div>
-                                  {
-                                    tdata.response.paymentRequestid
-                                      .accountNumber
-                                  }
-                                </div>
+                                {tdata.request.productCode.title} Token
                               </td>
                               <td className="text-center">
                                 <div>
-                                  {
-                                    tdata.response.paymentRequestid
-                                      .serviceproviderId.paymentTypeid
-                                      .paymentTypeName
-                                  }
+                                  {tdata.response === null ? (
+                                    <p>Please query Transaction</p>
+                                  ) : (
+                                    tdata.response.productMessage
+                                  )}
                                 </div>
                               </td>
-                              <td className="table-text text-center">
-                                {
-                                  tdata.response.paymentRequestid
-                                    .serviceproviderId.manager.phone
-                                }
+                              <td className="text-center">
+                                <div>{tdata.request.paymentDetails.amount}</div>
+                              </td>
+                              <td>
+                                {tdata.response === null ? (
+                                  <p>Verification Unsuccess</p>
+                                ) : (
+                                  <p>Verification Success</p>
+                                )}
                               </td>
                               <td className="table-text text-center">
-                                {
-                                  tdata.response.paymentRequestid.productCode
-                                    .title
-                                }
-                              </td>
-                              <td className="table-text text-center">
-                                {tdata.response.paymentRequestid.amount}
+                                <Button
+                                  onClick={(e) => {
+                                    // const fastrId = tdata.request.fastrId,
+                                    this.handleQuery({
+                                      transId: tdata.request.fastrId,
+                                    });
+                                  }}
+                                  style={{
+                                    backgroundColor: "#048cfc",
+                                  }}
+                                >
+                                  Query Transaction
+                                </Button>
                               </td>
                             </tr>
                           ))}

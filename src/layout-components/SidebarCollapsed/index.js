@@ -41,7 +41,7 @@ const SidebarCollapsed = (props) => {
         <div className="app-sidebar--header">
           {/* <div className="app-sidebar-logo"> */}
             <NavLink
-              to={`${process.env.REACT_APP_URL}`}
+              to={``}
               title={`${process.env.REACT_APP_NAME}`}
               className="app-sidebar-logo text-white">
               {/* <div className="app-sidebar-logo--icon"> */}
@@ -67,7 +67,7 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}`}>
+                    to={``}>
                     <span>
                       <HomeWorkTwoToneIcon />
                     </span>
@@ -83,7 +83,7 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/Overview`}>
+                    to={`/Overview`}>
                     <span>
                       <SpeakerNotesTwoToneIcon />
                     </span>
@@ -99,7 +99,7 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/profilepage`}>
+                    to={`/profilepage`}>
                     <span>
                       <AccountCircleTwoToneIcon />
                     </span>
@@ -115,7 +115,7 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/settings`}>
+                    to={`/settings`}>
                     <span>
                       <SettingsTwoToneIcon />
                     </span>
@@ -131,7 +131,7 @@ const SidebarCollapsed = (props) => {
                   <NavLink
                     onClick={toggleSidebarMobile}
                     activeClassName="active"
-                    to={`${process.env.REACT_APP_URL}/PageRegisterOverlay`}>
+                    to={`/PageRegisterOverlay`}>
                     <span>
                       <VpnKeyTwoToneIcon />
                     </span>

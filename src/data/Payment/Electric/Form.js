@@ -7,7 +7,6 @@ import { useForm, useValidator } from "./useForm";
 import Pay from "../../../Components/paystack/pay";
 import Typography from "@material-ui/core/Typography";
 import { hideLoader, showLoader } from "../../../_actions/loading";
-import { hideMeter, verifyNumber } from "../../../_actions/tokenAction";
 import store from "../../../config/store";
 
 const Form = (props) => {
@@ -29,98 +28,6 @@ const Form = (props) => {
       console.log("bad");
     }
   }, [userDetails]);
-
-  const onVerify = async () => {
-    const { meterNumber } = values;
-    // console.log(values);
-    // if (values.meterNumber === "") {
-    //   return null;
-    // } else {
-    return await form.submit(meterNumber);
-    // }
-  };
-
-  // useEffect(() => {
-  //   if (loader === true) {
-  //     console.log(loader);
-  //   }
-  //   // setDetails(result);
-  // }, [loader]);
-
-  const verifyNumber = async (e) => {
-    e.preventDefault();
-    const { meterNumber } = values;
-    props.showLoader();
-    setError("");
-    // setLoader(false);
-    if (values.meterNumber.length === 11) {
-      if (localStorage.ProductTitle === "RCCG ELECTRIC") {
-        // store.dispatch(form.submit(meterNumber));
-        props.verifyNumber(meterNumber);
-        // dispatch(verifyNumber(meterNumber))
-        // console.log(userDetails);
-        if (userDetails.success === true) {
-          console.log("good");
-          setDetails(userDetails);
-          props.hideLoader();
-        }
-        // localStorage.setItem("Amount", values.amount);
-        // try {
-        //   const result = await onVerify();
-        //   const {
-        //     responsedesc,
-        //     meterNumber,
-        //     customerName,
-        //     accountNumber,
-        //     address,
-        //     undertaking,
-        //   } = result;
-        //   console.log(result);
-        //   if (responsedesc) {
-        //     // useEffect(() => {
-        //     //   setDetails(result);
-        //     // }, [input]);
-        //     setLoader(true);
-        //     // setDetails([
-        //     //   {
-        //     //     ...details,
-        //     //     status: responsedesc,
-        //     //     meterNumber: meterNumber,
-        //     //     accountNumber: accountNumber,
-        //     //     customerName: customerName,
-        //     //     address: address,
-        //     //     undertaking: undertaking,
-        //     //   },
-        //     // ]);
-        //     console.log(result);
-        //     props.hideLoader();
-        //   } else {
-        //     setError("Enter correct Meter Number");
-        //     // console.log("nice");
-        //   }
-        // } catch (error) {
-        //   console.log(error);
-        // }
-      } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
-        console.log(localStorage.ProductTitle);
-      } else if (localStorage.ProductTitle === "EKO ELECTRIC") {
-        console.log(localStorage.ProductTitle);
-      } else if (localStorage.ProductTitle === "DSTV Subscription") {
-        console.log(localStorage.ProductTitle);
-      }
-
-      setIsVerified(true);
-    } else {
-      props.hideLoader();
-      if (values.meterNumber.length < 11) {
-        setError("Incorrect Meter Number, must be 11 digits");
-      } else if (values.meterNumber.length > 11) {
-        setError("Incorrect Meter Number, must be 11 digits");
-      }
-    }
-  };
-
-  console.log(details);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -183,7 +90,7 @@ const Form = (props) => {
         {!isVerified && (
           <div className="text-center">
             <Button
-              onClick={verifyNumber}
+              // onClick={verifyNumber}
               style={{
                 backgroundColor: "#048cfc",
                 position: "absolute",
@@ -212,6 +119,6 @@ const Form = (props) => {
 export default connect(null, {
   showLoader,
   hideLoader,
-  hideMeter,
-  verifyNumber,
+  // hideMeter,
+  // verifyNumber,
 })(Form);

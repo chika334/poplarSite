@@ -43,7 +43,7 @@ class BuyToken extends Component {
     // doc.setFontType('normal')
 
     // save the pdf file
-    doc.save(`${process.env.REACT_APP_URL}.pdf`);
+    doc.save(`.pdf`);
   };
 
   componentDidUpdate() {
@@ -52,14 +52,14 @@ class BuyToken extends Component {
       // Detecting, user has changed URL
       if (this.props.history.location.pathname) {
         this.props.clearToken();
-        window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
+        window.location.href = `/profilepage`;
       } else if (
         this.props.history.location.pathname &&
         token.success === false
       ) {
         this.props.clearToken();
-        // this.props.history.push(`${process.env.REACT_APP_URL}/Products`);
-        window.location.href = `${process.env.REACT_APP_URL}/products`;
+        // this.props.history.push(`/Products`);
+        window.location.href = `/products`;
       }
     });
   }
@@ -74,8 +74,8 @@ class BuyToken extends Component {
 
     if (this.props.success.success === false && token === null) {
       this.props.clearToken();
-      // // this.props.history.push(`${process.env.REACT_APP_URL}/Products`);
-      window.location.href = `${process.env.REACT_APP_URL}/Products`;
+      // // this.props.history.push(`/Products`);
+      window.location.href = `/Products`;
     }
     // else {
     //   const { token } = this.props.success === null ? "" : this.props.success;
@@ -132,7 +132,7 @@ class BuyToken extends Component {
                     className="ml-3 bg-white"
                     variant="contained"
                   >
-                    <Link to={`${process.env.REACT_APP_URL}/profilepage`}>
+                    <Link to={`/profilepage`}>
                       Back to Profile
                     </Link>
                   </Button>
@@ -147,7 +147,7 @@ class BuyToken extends Component {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Link to={`${process.env.REACT_APP_URL}/PageProfile`}>
+                <Link to={`/PageProfile`}>
                   <Button
                     color="primary"
                     autoFocus="autoFocus"

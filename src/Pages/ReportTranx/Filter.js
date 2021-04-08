@@ -139,7 +139,7 @@ function DatePickers() {
     <form className={classes.container} noValidate>
       <Container>
         <div className="mt-5">
-          <Link to={`${process.env.REACT_APP_URL}/reportTranx`}>
+          <Link to={`/reportTranx`}>
             View All Transactions
           </Link>
           <Card className="p-3 allsecond">

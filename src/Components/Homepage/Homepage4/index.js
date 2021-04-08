@@ -30,114 +30,116 @@ const slideDetails = [
   {
     src: `${rccg}`,
     title: `${process.env.REACT_APP_RCCG}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_RCCG}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${eko}`,
     title: `${process.env.REACT_APP_EKO}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_EKO}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${ikeja}`,
     title: `${process.env.REACT_APP_IKEJA}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_IKEJA}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${dstv}`,
     title: `${process.env.REACT_APP_DSTV}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_DSTV}`,
     link: `${process.env.REACT_APP_URL}/cable`,
   },
   {
     src: `${rccg}`,
     title: `${process.env.REACT_APP_RCCG}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_RCCG}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${eko}`,
     title: `${process.env.REACT_APP_EKO}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_EKO}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${ikeja}`,
     title: `${process.env.REACT_APP_IKEJA}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_IKEJA}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${dstv}`,
     title: `${process.env.REACT_APP_DSTV}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_DSTV}`,
     link: `${process.env.REACT_APP_URL}/cable`,
   },
   {
     src: `${rccg}`,
     title: `${process.env.REACT_APP_RCCG}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_RCCG}`,
+    link: `${process.env.REACT_APP_URL}/electric`,
+  },
+  {
+    src: `${rccg}`,
+    title: `${process.env.REACT_APP_RCCG}`,
+    quote: `${process.env.REACT_APP_RCCG}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${eko}`,
     title: `${process.env.REACT_APP_EKO}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_EKO}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${ikeja}`,
     title: `${process.env.REACT_APP_IKEJA}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_IKEJA}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${dstv}`,
     title: `${process.env.REACT_APP_DSTV}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_DSTV}`,
     link: `${process.env.REACT_APP_URL}/cable`,
   },
   {
     src: `${rccg}`,
     title: `${process.env.REACT_APP_RCCG}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_RCCG}`,
+    link: `${process.env.REACT_APP_URL}/electric`,
+  },
+  {
+    src: `${rccg}`,
+    title: `${process.env.REACT_APP_RCCG}`,
+    quote: `${process.env.REACT_APP_RCCG}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${eko}`,
     title: `${process.env.REACT_APP_EKO}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_EKO}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${ikeja}`,
     title: `${process.env.REACT_APP_IKEJA}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_IKEJA}`,
     link: `${process.env.REACT_APP_URL}/electric`,
   },
   {
     src: `${dstv}`,
     title: `${process.env.REACT_APP_DSTV}`,
-    quote:
-      "Enim cupidatat cillum sit mollit enim reprehenderit dolore esse eiusmod proident incididunt officia reprehenderit.",
+    quote: `${process.env.REACT_APP_DSTV}`,
     link: `${process.env.REACT_APP_URL}/cable`,
+  },
+  {
+    src: `${rccg}`,
+    title: `${process.env.REACT_APP_RCCG}`,
+    quote: `${process.env.REACT_APP_RCCG}`,
+    link: `${process.env.REACT_APP_URL}/electric`,
   },
 ];
 
@@ -237,7 +239,10 @@ export default function LivePreviewExample() {
                       </div>
                       <div className="pl-4">
                         <blockquote className="my-3 text-black-50">
-                          {allData.quote}
+                          <small>
+                            Poplarpower make all {allData.quote} payments fast,
+                            easy and reliable
+                          </small>
                           <Link to={allData.link}>
                             <FontAwesomeIcon
                               className="ml-3"

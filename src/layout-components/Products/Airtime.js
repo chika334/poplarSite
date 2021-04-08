@@ -18,6 +18,7 @@ import { clearErrors } from "../../_actions/errorAction";
 import { token } from "../../_actions/tokenAction";
 import { showLoader, hideLoader } from "../../_actions/loading";
 import { hideModal } from "../../_actions/modal";
+import { showServiceModal } from "../../_actions/modal";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
@@ -224,12 +225,15 @@ class Electric extends Component {
 
   FillForm = (props) => {
     // const { authUser } = this.props;
-    this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
-    // if (authUser === false) {
-    //   this.setState({ open: true });
-    // } else {
-    //   // console.log("BAD ERROR");
-    // }
+    if (
+      localStorage.getItem("ProductTitle") === "IKEJA ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "EKO ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "DSTV Subscription"
+    ) {
+      this.props.showServiceModal();
+    } else {
+      this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+    }
   };
 
   render() {
@@ -296,15 +300,6 @@ class Electric extends Component {
               </Grid>
             </div>
           </Container>
-          {/* <Modal
-            open={this.state.show}
-            onClose={this.hideModal}
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            className="pt-4 pb-4 d-flex align-item-center justify-content-center"
-          >
-            <>{body}</>
-          </Modal> */}
         </div>
       </div>
     );
@@ -322,18 +317,8 @@ export default withRouter(
     showLoader,
     hideLoader,
     hideModal,
+    showServiceModal,
     token,
     clearErrors,
   })(withStyles(styles)(Electric))
 );
-// export default withRouter(
-//   connect(mapStateToProps, {
-//     signin,
-//     showModal,
-//     hideModal,
-//     showLoader,
-//     hideLoader,
-//     token,
-//     clearErrors,
-//   })(Tab1)
-// );

@@ -34,7 +34,7 @@ const SidebarHeader = (props) => {
       <div className="app-sidebar--header">
         <div className="app-sidebar-logo">
           <Link
-            to={`${process.env.REACT_APP_URL}/DashboardAnalytics`}
+            to={`/DashboardAnalytics`}
             title="Bamburgh React Messenger Application with Material-UI PRO"
             className="app-sidebar-logo">
             <div className="app-sidebar-logo--icon">

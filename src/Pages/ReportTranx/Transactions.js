@@ -1,9 +1,12 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
+// import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { tokenConfig } from "../../_actions/userAction";
 import {
   Table,
   LinearProgress,
@@ -36,8 +39,9 @@ export class TranxReport extends PureComponent {
       offset: 0,
       tableData: [],
       orgtableData: [],
-      perPage: 5,
+      perPage: 1000,
       currentPage: 0,
+      data: null,
     };
     this.handlePageClick = this.handlePageClick.bind(this);
   }
@@ -91,6 +95,44 @@ export class TranxReport extends PureComponent {
     }, 2000);
   };
 
+  sendDetails = () => {
+    console.log(this.state.data);
+    console.log("daniel send");
+    if (this.state.data === null) {
+      return "";
+    } else {
+      this.props.history.push({
+        pathname: `${process.env.REACT_APP_URL}/query/tranx`,
+        state: { detail: this.state.data },
+      });
+    }
+  };
+
+  handleQuery = (transId) => {
+    // e.preventDefault();
+    // const transId = detail;
+    const { token, isAuthenticated } = this.props.authUser;
+    // console.log(token);
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    // if token, add to header
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    axios
+      .post(`${process.env.REACT_APP_API_QUERY}`, transId, config)
+      .then((res) => {
+        this.setState({ data: res.data });
+        this.sendDetails();
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -113,49 +155,55 @@ export class TranxReport extends PureComponent {
                   <thead>
                     <tr>
                       <th className="text-center">id</th>
-                      <th className="text-center">System Id</th>
-                      <th className="text-center">full name</th>
-                      <th className="text-center">account number</th>
-                      <th className="text-center">Payment type name</th>
-                      <th className="text-center">Phone number</th>
-                      <th className="text-center">title</th>
+                      <th className="text-center">Receipt #</th>
+                      <th className="text-center">Description</th>
+                      <th className="text-center">Product status</th>
                       <th className="text-center">Amount</th>
+                      <th className="text-center">Payment status</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     {this.state.tableData.map((tdata, index) => (
                       <tr key={index}>
                         <td>{index + 1}</td>
+                        <td className="text-center">{tdata.request.fastrId}</td>
                         <td className="text-center">
-                          {tdata.response.fastrId}
-                        </td>
-                        <td className="text-center">
-                          {tdata.response.paymentRequestid.fullname}
+                          {tdata.request.productCode.title} Token
                         </td>
                         <td className="text-center">
                           <div>
-                            {tdata.response.paymentRequestid.accountNumber}
+                            {tdata.response === null ? (
+                              <p>Please query Transaction</p>
+                            ) : (
+                              tdata.response.productMessage
+                            )}
                           </div>
                         </td>
                         <td className="text-center">
-                          <div>
-                            {
-                              tdata.response.paymentRequestid.serviceproviderId
-                                .paymentTypeid.paymentTypeName
-                            }
-                          </div>
+                          <div>{tdata.request.paymentDetails.amount}</div>
+                        </td>
+                        <td>
+                          {tdata.response === null ? (
+                            <p>Verification Unsuccess</p>
+                          ) : (
+                            <p>Verification Success</p>
+                          )}
                         </td>
                         <td className="table-text text-center">
-                          {
-                            tdata.response.paymentRequestid.serviceproviderId
-                              .manager.phone
-                          }
-                        </td>
-                        <td className="table-text text-center">
-                          {tdata.response.paymentRequestid.productCode.title}
-                        </td>
-                        <td className="table-text text-center">
-                          {tdata.response.paymentRequestid.amount}
+                          <Button
+                            onClick={(e) => {
+                              // const fastrId = tdata.request.fastrId,
+                              this.handleQuery({
+                                transId: tdata.request.fastrId,
+                              });
+                            }}
+                            style={{
+                              backgroundColor: "#048cfc",
+                            }}
+                          >
+                            Query Transaction
+                          </Button>
                         </td>
                       </tr>
                     ))}
@@ -170,9 +218,17 @@ export class TranxReport extends PureComponent {
   }
 }
 
+// const mapStateToProps = (state) => ({
+//   transactions: state.transactions.transaction,
+//   authUser: state.authUser.isAuthenticated,
+// });
+
 const mapStateToProps = (state) => ({
+  error: state.error,
   transactions: state.transactions.transaction,
-  authUser: state.authUser.isAuthenticated,
+  authUser: state.authUser,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(TranxReport));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(TranxReport))
+);

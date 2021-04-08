@@ -18,6 +18,7 @@ import { clearErrors } from "../../_actions/errorAction";
 import { token } from "../../_actions/tokenAction";
 import { showLoader, hideLoader } from "../../_actions/loading";
 import { hideModal } from "../../_actions/modal";
+import { showServiceModal } from "../../_actions/modal";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
@@ -223,7 +224,16 @@ class Electric extends Component {
   };
 
   FillForm = (props) => {
-    this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+    // const { authUser } = this.props;
+    if (
+      localStorage.getItem("ProductTitle") === "IKEJA ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "EKO ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "DSTV Subscription"
+    ) {
+      this.props.showServiceModal();
+    } else {
+      this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+    }
   };
 
   render() {
@@ -307,6 +317,7 @@ export default withRouter(
     showLoader,
     hideLoader,
     hideModal,
+    showServiceModal,
     token,
     clearErrors,
   })(withStyles(styles)(Electric))

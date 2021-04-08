@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { useDispatch, connect } from "react-redux";
 import { List, ListItem } from "@material-ui/core";
 import { paymentForms, getStateValues } from "./PaymentForms";
+import { showLoader, hideLoader } from "../../_actions/loading";
 import { useForm, useValidator } from "./useForm";
 import { showForgotModal } from "../../_actions/forgotModal";
-import { showLoader } from "../../_actions/loading";
 import { showRegisterModal } from "../../_actions/registerModal";
 
 const Form = (props) => {
@@ -78,4 +78,5 @@ export default connect(null, {
   showForgotModal,
   showRegisterModal,
   showLoader,
+  hideLoader,
 })(Form);

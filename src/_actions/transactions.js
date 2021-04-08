@@ -11,10 +11,7 @@ import {
 export const getTransactions = () => async (dispatch, getState) => {
   dispatch({ type: TRANSACTION_LOADING });
   await axios
-    .get(
-      `${process.env.REACT_APP_API}/fastpayr/api/v1/paymentrequest/latest`,
-      tokenConfig(getState)
-    )
+    .get(`${process.env.REACT_APP_API_ALL_TRANSACTIONS}`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: TRANSACTION_LOADED,

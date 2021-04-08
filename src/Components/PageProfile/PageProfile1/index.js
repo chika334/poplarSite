@@ -137,7 +137,7 @@ function LivePreviewExample(props) {
                       className="p-3 mx-3 rounded-lg"
                       style={{ backgroundColor: "#048cfc", color: "#fff" }}
                     >
-                      <Link to={`${process.env.REACT_APP_URL}/dashboard`}>
+                      <Link to={`/dashboard`}>
                         <span className="font-size-lg text-white px-2 py-1">
                           Dashboard
                         </span>
@@ -155,7 +155,7 @@ function LivePreviewExample(props) {
                         }
                       }}
                     >
-                      {/* <Link to={`${process.env.REACT_APP_URL}/walletTranx`}> */}
+                      {/* <Link to={`/walletTranx`}> */}
                       <span className="font-size-lg text-white px-2 py-1">
                         View Wallet Transactions
                       </span>
@@ -192,7 +192,7 @@ function LivePreviewExample(props) {
                     >
                       <Link
                         className="text-white"
-                        to={`${process.env.REACT_APP_URL}/debitWallet`}
+                        to={`/debitWallet`}
                       >
                         <span className="font-size-lg text-white px-2 py-1">
                           Debit Wallet
@@ -209,7 +209,7 @@ function LivePreviewExample(props) {
               {/* <Container> */}
               {/* <Link
                     className="text-white mr-3"
-                    to={`${process.env.REACT_APP_URL}/fundWallet`}
+                    to={`/fundWallet`}
                   >
                     <Button
                       className="rounded-lg"
@@ -222,7 +222,7 @@ function LivePreviewExample(props) {
                   </Link> */}
               {/* <Link
                   className="text-white"
-                  to={`${process.env.REACT_APP_URL}/debitWallet`}
+                  to={`/debitWallet`}
                 >
                   <Button
                     className="rounded-lg"

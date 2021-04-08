@@ -18,6 +18,7 @@ import { clearErrors } from "../../_actions/errorAction";
 import { token } from "../../_actions/tokenAction";
 import { showLoader, hideLoader } from "../../_actions/loading";
 import { hideModal } from "../../_actions/modal";
+import { showServiceModal } from "../../_actions/modal";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
@@ -224,7 +225,15 @@ class Electric extends Component {
 
   FillForm = (props) => {
     // const { authUser } = this.props;
-    this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+    if (
+      localStorage.getItem("ProductTitle") === "IKEJA ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "EKO ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "DSTV Subscription"
+    ) {
+      this.props.showServiceModal();
+    } else {
+      this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+    }
   };
 
   render() {
@@ -265,10 +274,6 @@ class Electric extends Component {
                       </small>
                       <div className="d-flex align-items-center justify-content-center mt-3">
                         <Button
-                          // style={{
-                          //   backgroundColor: `rgb(0, 68, 116)`,
-                          //   color: "#fff",
-                          // }}
                           style={{ backgroundColor: "#048cfc", color: "#fff" }}
                           className="w-50"
                           onClick={(e) => {
@@ -295,7 +300,6 @@ class Electric extends Component {
               </Grid>
             </div>
           </Container>
-          
         </div>
       </div>
     );
@@ -313,18 +317,8 @@ export default withRouter(
     showLoader,
     hideLoader,
     hideModal,
+    showServiceModal,
     token,
     clearErrors,
   })(withStyles(styles)(Electric))
 );
-// export default withRouter(
-//   connect(mapStateToProps, {
-//     signin,
-//     showModal,
-//     hideModal,
-//     showLoader,
-//     hideLoader,
-//     token,
-//     clearErrors,
-//   })(Tab1)
-// );

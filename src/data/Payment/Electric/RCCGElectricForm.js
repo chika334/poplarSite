@@ -1,6 +1,5 @@
 import { validateName, isNumeric, required } from "../../../config/validators";
 import { token } from "../../../_actions/tokenAction";
-import { verifyNumber } from "../../../_actions/tokenAction";
 
 export const PaymentForm = (formName) => {
   const forms = {
@@ -35,7 +34,6 @@ export const PaymentForm = (formName) => {
           placeholder: "Enter Amount",
         },
       ],
-      submit: verifyNumber,
       submits: token,
     },
   };

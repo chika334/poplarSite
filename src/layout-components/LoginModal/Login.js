@@ -47,17 +47,14 @@ class Login extends Component {
 
   check = () => {
     const { isAuthenticated } = this.props;
-    if (isAuthenticated) {
+    if (isAuthenticated === true) {
       let redirect = localStorage.getItem("redirectPage");
-      // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-      // console.log("LOGIN");
       this.sendRedirect();
       // this.props.hideLoader();
       this.props.hideModal();
-      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-      // window.location.href = `${process.env.REACT_APP_URL}${redirect}`;
-      // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
-      // <Redirect to={`${process.env.REACT_APP_URL}/profilepage`} />
+      this.props.history.push(`${redirect}`);
+    } else {
+      console.log("good");
     }
   };
 

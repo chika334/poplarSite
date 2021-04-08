@@ -20,7 +20,7 @@ import MailOutlineTwoToneIcon from "@material-ui/icons/MailOutlineTwoTone";
 import { signin } from "../../../_actions/userAction";
 import { showLoader } from "../../../_actions/loading";
 import { Redirect, withRouter } from "react-router-dom";
-import { showModal, hideLoader } from "../../../_actions/modal";
+import { showServiceModal } from "../../../_actions/modal";
 import {
   hideProductModal,
   showProductModal,
@@ -84,35 +84,26 @@ class ProductDisplay extends Component {
       // this.props.hideModal();
       this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
       // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
-      // <Redirect to={`${process.env.REACT_APP_URL}/profilepage`} />
+      // <Redirect to={`/profilepage`} />
     }
   };
 
   FillForm = (props) => {
     const { authUser } = this.props;
-    if (authUser === false) {
-      this.setState({ open: true });
+    if (
+      localStorage.getItem("ProductTitle") === "IKEJA ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "EKO ELECTRIC" ||
+      localStorage.getItem("ProductTitle") === "DSTV Subscription"
+    ) {
+      this.props.showServiceModal();
     } else {
-      this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+      if (authUser === false) {
+        this.setState({ open: true });
+      } else {
+        this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+      }
     }
   };
-
-  // submit = (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = this.state;
-  //   if (email === "" || password === "") {
-  //     this.setState({ error: "Please fill all inputs" });
-  //     return;
-  //   }
-
-  //   const user = {
-  //     email,
-  //     password,
-  //   };
-
-  //   this.props.signin(user);
-  //   this.props.showLoader();
-  // };
 
   forgotPassword = (e) => {
     this.props.showForgotModal();
@@ -230,68 +221,6 @@ class ProductDisplay extends Component {
                             )}
                           </div>
                           <Form formName={FORM_NAME} key={FORM_NAME} />
-                          {/* <div>
-                            <div className="mb-4">
-                              <TextField
-                                fullWidth
-                                variant="outlined"
-                                id="textfield-email"
-                                label="Email address"
-                                onChange={this.handleChange("email")}
-                                value={this.state.email || ""}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <MailOutlineTwoToneIcon />
-                                    </InputAdornment>
-                                  ),
-                                }}
-                              />
-                            </div>
-                            <div className="mb-3">
-                              <TextField
-                                fullWidth
-                                variant="outlined"
-                                id="textfield-password"
-                                label="Password"
-                                onChange={this.handleChange("password")}
-                                type="password"
-                                value={this.state.password || ""}
-                                InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <LockTwoToneIcon />
-                                    </InputAdornment>
-                                  ),
-                                }}
-                              />
-                            </div>
-                            {this.state.error && (
-                              <Typography
-                                className="text-center"
-                                component="p"
-                                color="error"
-                              >
-                                {this.state.error}
-                              </Typography>
-                            )}
-                            <div className="d-inline-flex">
-                              <div className="text-center py-2">
-                                <Button
-                                  onClick={(e) => this.submit(e)}
-                                  className="btn-second font-weight-bold p-3 my-2"
-                                >
-                                  Submit
-                                </Button>
-                              </div> */}
-                          {/* <div className="text-center">
-                            <Button
-                              onClick={this.forgotPassword}
-                              className="btn bg-white font-weight-bold my-2"
-                            >
-                              forgot Password
-                            </Button>
-                          </div> */}
                         </div>
                       </div>
                       {/* </div> */}
@@ -312,15 +241,13 @@ const mapStateToProps = (state) => ({
   authUser: state.authUser.isAuthenticated,
   error: state.error,
   success: state.buyToken,
-  // productModal: state.productModal.autoProductModal,
-  // ProductDisplays: state.ProductDisplayModal.autoProductDisplayModal,
 });
 
 export default withRouter(
   connect(mapStateToProps, {
     signin,
     showLoader,
-    showModal,
+    showServiceModal,
     hideProductModal,
     showProductModal,
     showProductDetailsModal,

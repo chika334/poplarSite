@@ -1,5 +1,11 @@
 // import React from "react";
-import { HIDE_LOADER, SHOW_LOADER, REMOVE_LOADER, GET_ERROR } from "../_actions/type";
+import {
+  HIDE_LOADER,
+  SHOW_LOADER,
+  REMOVE_LOADER,
+  REGISTER_USER,
+  LOGIN_USER,
+} from "../_actions/type";
 // import { useSelector } from "react-redux";
 import { returnErrors } from "../_actions/errorAction";
 
@@ -14,11 +20,8 @@ const loading = (state = initialState, action, props) => {
         ...state,
         loading: true,
       };
-    // case REMOVE_LOADER:
-    //   return {
-    //     ...state,
-    //     // loading: err => returnErrors(err),
-    //   };
+    case LOGIN_USER:
+    case REGISTER_USER:
     case HIDE_LOADER:
       return {
         ...state,

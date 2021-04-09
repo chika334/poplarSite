@@ -133,8 +133,13 @@ export class TranxReport extends PureComponent {
       .catch((err) => console.log(err));
   };
 
+  
   render() {
     const { classes } = this.props;
+    var formatter = new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    });
     return (
       <div>
         <Container>
@@ -181,7 +186,7 @@ export class TranxReport extends PureComponent {
                           </div>
                         </td>
                         <td className="text-center">
-                          <div>{tdata.request.paymentDetails.amount}</div>
+                          <div>{formatter.format(tdata.request.paymentDetails.amount)}</div>
                         </td>
                         <td>
                           {tdata.response === null ? (

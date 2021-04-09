@@ -22,7 +22,6 @@ const Form = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.showLoader();
-    // localStorage.setItem("redirectPage", "/profilepage");
     if (validate()) {
       dispatch(form.submit(values));
     }

@@ -14,9 +14,9 @@ const SuspenseLoading = (props) => {
 
   useEffect(() => {
     if (loading === false) return null;
-    // if (user === true) {
-    //   props.hideLoader();
-    // }
+    if (user) {
+      props.hideLoader();
+    }
   });
 
   return (

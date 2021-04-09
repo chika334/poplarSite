@@ -55,6 +55,7 @@ import PageLoginOverlay from "./layout-components/LoginModal/Login";
 import Service from "./layout-components/Service";
 import PageRecoverOverlay from "./Pages/PageRecoverOverlay";
 import BuyToken from "./Pages/ConfirmPayment";
+import PaystackInvoice from "./Components/PageInvoice/PageInvoice1/PaystackInvoice";
 
 const Routes = (props) => {
   const location = useLocation();
@@ -160,6 +161,7 @@ const Routes = (props) => {
                   `${process.env.REACT_APP_URL}/debitWallet`,
                   `${process.env.REACT_APP_URL}/dash`,
                   `${process.env.REACT_APP_URL}/invoice`,
+                  `${process.env.REACT_APP_URL}/cardInvoice`,
                   // `/PageRegisterOverlay`,
                 ]}
               >
@@ -177,11 +179,11 @@ const Routes = (props) => {
                         exact
                         component={Products}
                       />
-                      {/* <Route
-                        path={`${process.env.REACT_APP_URL}/payment`}
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/cardInvoice`}
                         exact
-                        component={Pay}
-                      /> */}
+                        component={PaystackInvoice}
+                      />
                       <Route
                         path={`${process.env.REACT_APP_URL}/query/tranx`}
                         exact

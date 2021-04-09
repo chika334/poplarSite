@@ -12,8 +12,8 @@ function SimpleModal(props) {
   );
 
   const body = (
-    <div className="card pl-3 pr-3 align-items-center">
-      <div className="app-wrapper">
+    <div className="pl-3 pr-3 align-items-center">
+      <div className="">
         <Register />
       </div>
     </div>
@@ -28,7 +28,8 @@ function SimpleModal(props) {
         onClose={props.hideRegisterModal}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        className="pt-4 pb-4 d-flex align-item-center justify-content-center"
+        className="pt-2 pb-4 d-flex align-item-center justify-content-center"
+        style={{overflow: "auto"}}
       >
         <>{body}</>
       </Modal>

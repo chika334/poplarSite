@@ -20,8 +20,8 @@ const loading = (state = initialState, action, props) => {
         ...state,
         loading: true,
       };
-    case LOGIN_USER:
-    case REGISTER_USER:
+    // case LOGIN_USER:
+    // case REGISTER_USER:
     case HIDE_LOADER:
       return {
         ...state,

@@ -28,12 +28,7 @@ class MessengerHeader extends Component {
       this.props.hideModal();
       const redirect = localStorage.getItem("redirectPage");
       this.props.history.push(`${redirect}`);
-    }
-    // else if (localStorage.token) {
-    //   this.props.hideModal();
-    //   this.props.history.push(`/settings`);
-    // }
-    else {
+    } else {
       this.props.showModal();
     }
   };

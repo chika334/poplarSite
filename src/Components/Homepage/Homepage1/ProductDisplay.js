@@ -3,24 +3,15 @@ import rccg from "../../../assets/images/product-logos/rccg.jpg";
 import Ikeja from "../../../assets/images/product-logos/ikeja.png";
 import eko from "../../../assets/images/product-logos/eko.jpg";
 import dstv from "../../../assets/images/product-logos/dstv.jpg";
-import {
-  Card,
-  Grid,
-  InputAdornment,
-  Button,
-  TextField,
-} from "@material-ui/core";
+import { Card, Grid, Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import Modal from "@material-ui/core/Modal";
-import SuspenseLoading from "../../../Components/Loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import LockTwoToneIcon from "@material-ui/icons/LockTwoTone";
 import Typography from "@material-ui/core/Typography";
-import MailOutlineTwoToneIcon from "@material-ui/icons/MailOutlineTwoTone";
 import { signin } from "../../../_actions/userAction";
 import { showLoader } from "../../../_actions/loading";
-import { Redirect, withRouter } from "react-router-dom";
-import { showServiceModal } from "../../../_actions/modal";
+import { withRouter, Redirect } from "react-router-dom";
+import { showServiceModal, showModal } from "../../../_actions/modal";
 import {
   hideProductModal,
   showProductModal,
@@ -34,22 +25,22 @@ const FourDetails = [
   {
     name: `${process.env.REACT_APP_RCCG}`,
     src: `${rccg}`,
-    description: "Redeem electric powering",
+    description: "(RCCG)",
   },
   {
     name: `${process.env.REACT_APP_IKEJA}`,
     src: `${Ikeja}`,
-    description: "Redeem electric powering",
+    description: "(IKEDC)",
   },
   {
     name: `${process.env.REACT_APP_EKO}`,
     src: `${eko}`,
-    description: "Redeem electric powering",
+    description: "(EKEDC)",
   },
   {
     name: `${process.env.REACT_APP_DSTV}`,
     src: `${dstv}`,
-    description: "Redeem electric powering",
+    description: "(DSTV)",
   },
 ];
 
@@ -64,7 +55,7 @@ class ProductDisplay extends Component {
     error: "",
   };
 
-  componentDidUpdate(prevProps, props) {
+  componentDidUpdate(prevProps) {
     const { error, authUser, success } = this.props;
     if (error !== prevProps.error) {
       // check for register error
@@ -77,12 +68,13 @@ class ProductDisplay extends Component {
     }
   }
 
-  check = (props) => {
+  check = () => {
     const { authUser } = this.props;
-    if (localStorage.token) {
+    if (authUser) {
       // this.props.hideLoader();
       // this.props.hideModal();
-      this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+      const redirect = localStorage.getItem("redirectPage");
+      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
       // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
       // <Redirect to={`/profilepage`} />
     }
@@ -97,10 +89,12 @@ class ProductDisplay extends Component {
     ) {
       this.props.showServiceModal();
     } else {
-      if (authUser === false) {
-        this.setState({ open: true });
+      if (this.props.authUser || localStorage.token) {
+        // this.props.hideModal();
+        const redirect = localStorage.getItem("redirectPage");
+        this.props.history.push(`${redirect}`);
       } else {
-        this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`);
+        this.props.showModal();
       }
     }
   };
@@ -116,6 +110,14 @@ class ProductDisplay extends Component {
   handleChange = (name) => (event) => {
     this.setState({ [name]: event.target.value });
   };
+
+  componentDidMount() {
+    if (this.props.authUser) {
+      const redirect = localStorage.getItem("redirectPage");
+      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+      // return <Redirect to="/buyProducts" />;
+    }
+  }
 
   render() {
     return (
@@ -140,18 +142,15 @@ class ProductDisplay extends Component {
                       </h5>
                     </div>
                     <hr />
-                    <small className="m-auto d-flex align-items-center justify-content-center p-50 color-grey">
+                    <p className="m-auto d-flex align-items-center justify-content-center p-50 color-grey">
                       {allDetails.description}
-                    </small>
+                    </p>
                     <div className="d-flex align-items-center justify-content-center m-2">
                       <Button
-                        // style={{
-                        //   backgroundColor: `rgb(0, 68, 116)`,
-                        //   color: "#fff",
-                        // }}
                         style={{ backgroundColor: "#048cfc", color: "#fff" }}
                         className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
                         onClick={(e) => {
+                          localStorage.setItem("redirectPage", `/buyProducts`);
                           localStorage.setItem(
                             "ProductImage",
                             `${allDetails.src}`
@@ -175,63 +174,6 @@ class ProductDisplay extends Component {
             ))}
           </Grid>
         </div>
-        <Modal
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          className="pt-4 pb-4 d-flex align-item-center w-auto h-auto justify-content-center"
-        >
-          <>
-            <div className="card pl-3 pr-3 align-items-center">
-              <div className="app-wrapper">
-                <div className="app-wrapper bg-white">
-                  <div className="hero-wrapper w-100">
-                    <div className="flex-grow-1 w-100 align-items-center">
-                      <div>
-                        <div style={{ position: "relative", left: "270px" }}>
-                          <Button
-                            onClick={this.handleClose}
-                            className="px-4 text-dark-50 mt-3"
-                          >
-                            <FontAwesomeIcon icon={["fas", "times"]} />
-                          </Button>
-                        </div>
-                        <div className="divider-v divider-v-lg d-none d-lg-block" />
-                        <div className="text-center mt-4">
-                          <div className="mb-0 text-black-50">
-                            <h1 className="font-size-xxl mb-1 font-weight-bold">
-                              Login
-                            </h1>
-                            <p className="mb-0 text-black-50 mt-5">
-                              Fill in the fields below to login to your account
-                            </p>
-                          </div>
-                        </div>
-                        <div className="py-4">
-                          <div>
-                            {this.state.error && (
-                              <Typography
-                                className="pb-3 text-center"
-                                component="p"
-                                color="error"
-                              >
-                                {this.state.error}
-                              </Typography>
-                            )}
-                          </div>
-                          <Form formName={FORM_NAME} key={FORM_NAME} />
-                        </div>
-                      </div>
-                      {/* </div> */}
-                      {/* </div> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        </Modal>
       </>
     );
   }
@@ -247,6 +189,7 @@ export default withRouter(
   connect(mapStateToProps, {
     signin,
     showLoader,
+    showModal,
     showServiceModal,
     hideProductModal,
     showProductModal,

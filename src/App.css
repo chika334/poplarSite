@@ -327,6 +327,19 @@ input::-webkit-inner-spin-button {
     padding: 10px;
     width: 50%;
   }
+
+  /* invoice card */
+  .invoiceCard {
+    /* max-width: 60%; */
+    overflow: auto;
+    margin-left: 12%;
+    margin-right: 12%;
+    max-height: 100%;
+  }
+
+  .mobileDetails {
+    display: none;
+  }
 }
 
 @media (max-width: 599px) {
@@ -349,6 +362,19 @@ input::-webkit-inner-spin-button {
     padding: 10px;
     /*width: 50%;*/
   }
+
+  .invoiceCard {
+    /* width: 80%; */
+    overflow: auto;
+    /* margin-left: 25%; */
+    /* margin-right: 20%; */
+    /* background-color: green; */
+  }
+
+  .tableData {
+    background-color: greenyellow;
+    display: none;
+  }
 }
 /* paystack payment ends */
 
@@ -365,10 +391,18 @@ input::-webkit-inner-spin-button {
   }
 }
 
-/* pdf styling */
-/* .pdf {
-  width: 612px;
-  height: 792px;
-  background-color: white;
-  margin: 0 auto;
-} */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.verifynumber input[type=number] {
+  -moz-appearance: textfield;
+  /* background-color: green; */
+  width: 90%;
+  margin: 4%
+}

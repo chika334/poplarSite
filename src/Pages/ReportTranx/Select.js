@@ -158,6 +158,11 @@ class Select extends Component {
 
   render() {
     const classes = this.props;
+
+    var formatter = new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    });
     return (
       <>
         {this.state.data === "filterByDate" ? (
@@ -300,7 +305,11 @@ class Select extends Component {
                                 </div>
                               </td>
                               <td className="text-center">
-                                <div>{tdata.request.paymentDetails.amount}</div>
+                                <div>
+                                  {formatter.format(
+                                    tdata.request.paymentDetails.amount
+                                  )}
+                                </div>
                               </td>
                               <td>
                                 {tdata.response === null ? (

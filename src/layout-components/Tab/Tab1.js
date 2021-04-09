@@ -51,7 +51,7 @@ function Tab1(props) {
     productCode: "rccg-power-12",
     paymentMethod: "fastrwallet",
     customerId: "",
-    error: "",
+    error: null,
     inError: null,
     loading: false,
     open: false,
@@ -67,6 +67,7 @@ function Tab1(props) {
     input: false,
     amounts: "",
     amount: "",
+    method: "",
   });
 
   const handleValueChange = (field, value) => {
@@ -101,34 +102,8 @@ function Tab1(props) {
     initialDetails,
     verify,
     input,
+    method,
   } = values;
-
-  // constructor(props) {
-  //   super(props);
-  //   state = {
-
-  //   };
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   const { error, success, authUser } = props;
-  //   // console.log(verify);
-  //   if (error !== prevProps.error) {
-  //     // check for register error
-  //     if (error.id === "METER_ERROR") {
-  //       setValues({ error: error.message.message });
-  //       // console.log(error);
-  //     }
-  //   } else {
-  //     if (authUser && success.success) {
-  //       sendRedirect();
-  //       setValues({ loading: false });
-  //       props.history.push(`${process.env.REACT_APP_URL}/invoice`);
-  //       // props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
-  //       // window.location.href = `${process.env.REACT_APP_URL}/buytoken`;
-  //     }
-  //   }
-  // }
 
   const sendRedirect = () => {
     props.clearErrors();
@@ -142,61 +117,61 @@ function Tab1(props) {
     setValues({ ...values, open: true });
   };
 
-  // const handleClose = () => {
-  //   setValues({ open: false });
-  // };
-
   const initializePayment = (e) => {
     e.preventDefault();
     const { token } = props.authUser;
 
-    if (localStorage.token && userDetails === null) {
-      return "";
-    } else if (localStorage.token && userDetails.responsedesc === "Success") {
-      setValues({ ...values, loading: true });
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+    if (amount === "") {
+      setValues({ ...values, inError: "Input Required" });
+    } else {
+      if (localStorage.token && userDetails === null) {
+        return "";
+      } else if (localStorage.token && userDetails.responsedesc === "Success") {
+        setValues({ ...values, loading: true });
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
 
-      // if token, add to header
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
+        // if token, add to header
+        if (token) {
+          config.headers["Authorization"] = `Bearer ${token}`;
+        }
+
+        const fullname = userDetails.customerName;
+
+        const buyToken = {
+          productCode,
+          paymentMethod,
+          fullname,
+          amount,
+          accountNumber: meterNumber,
+          customerId,
+        };
+
+        axios
+          .post(
+            `${process.env.REACT_APP_API_INITIALIZE_PAYMENT}`,
+            buyToken,
+            config
+          )
+          .then((res) =>
+            setTimeout(() => {
+              setValues({
+                ...values,
+                loading: false,
+                initialDetails: res.data,
+                Details: true,
+                inital: true,
+                verify: true,
+                input: false,
+                showAmount: false,
+              });
+            }, 300)
+          )
+          .catch((err) => console.log(err));
       }
-
-      const fullname = userDetails.customerName;
-
-      const buyToken = {
-        productCode,
-        paymentMethod,
-        fullname,
-        amount,
-        accountNumber: meterNumber,
-        customerId,
-      };
-
-      axios
-        .post(
-          `${process.env.REACT_APP_API_INITIALIZE_PAYMENT}`,
-          buyToken,
-          config
-        )
-        .then((res) =>
-          setTimeout(() => {
-            setValues({
-              ...values,
-              loading: false,
-              initialDetails: res.data,
-              Details: true,
-              inital: true,
-              verify: true,
-              input: false,
-              showAmount: false,
-            });
-          }, 300)
-        )
-        .catch((err) => console.log(err));
     }
   };
 
@@ -207,7 +182,7 @@ function Tab1(props) {
     if (localStorage.token && userDetails === null) {
       return "";
     } else if (localStorage.token && userDetails.responsedesc === "Success") {
-      setValues({ ...values, loading: true });
+      setValues({ ...values, loading: true, method: "wallet" });
       const fastrId = initialDetails.fastrId;
       const reference = null;
 
@@ -243,9 +218,7 @@ function Tab1(props) {
             setValues({ ...values, loading: true });
             try {
               const result = await verifyMeterNumber();
-              // const { success, msg, verify } = result;
               if (result.responsedesc === "SERVICE_UNAVAILABLE") {
-                // console.log("error");
                 setValues({
                   ...values,
                   loading: false,
@@ -286,8 +259,6 @@ function Tab1(props) {
     }
   };
 
-  console.log(inError);
-
   const payBills = () => {
     const { authUser, success } = props;
     const pages = localStorage.getItem("LoggedPage");
@@ -319,9 +290,8 @@ function Tab1(props) {
 
   // you can call this function anything
   const handleSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
     if (reference.message === "Approved") {
+      setValues({ ...values, loading: true, method: "card" });
       if (userDetails === null) {
         return "";
       } else if (userDetails.responsedesc === "Success") {
@@ -332,11 +302,8 @@ function Tab1(props) {
           fastrId,
           reference: reference.reference,
         };
-        console.log(buyToken);
 
         props.paystackToken(buyToken);
-        // setValues({ ...values, redirect: true });
-        // console.log(buyToken);
       }
     } else {
       console.log("bad");
@@ -355,7 +322,6 @@ function Tab1(props) {
         initialDetails === null ? "" : initialDetails.paymentDetails.amount
       }`;
 
-      // handleValueChange("amount", amount);
       setValues({ ...values, amount: amounts });
 
       console.log(amount);
@@ -365,31 +331,43 @@ function Tab1(props) {
   useEffect(() => {
     if (userDetails) {
       const fullname = userDetails === null ? "" : userDetails.customerName;
-      // handleValueChange("fullname", amount);
       setValues({ ...values, fullname: fullname });
     }
   }, [userDetails]);
-
-  useEffect(() => {}, [input]);
 
   const componentProps = {
     email: email,
     amount: amount ? amount * 100 : 0,
     metadata: {
       fullname: fullname,
-      // fullname: userDetails === null ? "" : userDetails.customerName,
-      // phone,
     },
+    // publicKey: "pk_test_07df38cc2381f42f40a3bcb363a5b6e0b7882dbe",
     publicKey: "pk_live_76004bcc59f334f109b8a3bc68735ee620c10485",
     text: "Pay Now",
-    // onSuccess: (reference) => console.log(reference),
     onSuccess: (reference) => reference && handleSuccess(reference),
     onClose: handleClose,
   };
 
   if (props.buyToken.success) {
-    // console.log("daniel");
-    return <Redirect to={`${process.env.REACT_APP_URL}/invoice`} />;
+    if (method === "wallet") {
+      console.log("wallet");
+      props.history.push({
+        pathname: `${process.env.REACT_APP_URL}/invoice`,
+        state: {
+          detail: { amount, initialDetails, method },
+        },
+      });
+    }
+    if (method === "card") {
+      console.log("card");
+      // props.hideLoader();
+      props.history.push({
+        pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
+        state: {
+          detail: { amount, initialDetails, method },
+        },
+      });
+    }
   }
 
   return (
@@ -444,9 +422,9 @@ function Tab1(props) {
                           fullWidth
                           type="number"
                           variant="outlined"
-                          helperText={inError}
                           id="number"
                           onChange={handleChange("meterNumber")}
+                          helperText={inError}
                           value={meterNumber}
                           name="meterNumber"
                           label="Meter Number"
@@ -523,22 +501,38 @@ function Tab1(props) {
                       <div className="mb-3">
                         <TextField
                           fullWidth
-                          variant="outlined"
-                          id="amount"
-                          label="Amount"
-                          value={amount}
-                          onChange={handleChange("amount")}
                           type="number"
+                          variant="outlined"
+                          id="number"
+                          onChange={handleChange("amount")}
+                          helperText={inError}
+                          value={amount}
+                          name="amount"
+                          label="Amount"
+                          error={inError}
+                          placeholder="Amount"
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
-                                <span className="pr-3 align-items-center">
-                                  ₦
-                                </span>
+                                <DialpadOutlinedIcon />
                               </InputAdornment>
                             ),
                           }}
                         />
+                        {error && (
+                          <Typography
+                            className="text-center"
+                            component="p"
+                            style={{
+                              fontSize: "15px",
+                              marginBottom: 0,
+                              marginTop: 5,
+                            }}
+                            color="error"
+                          >
+                            {error}
+                          </Typography>
+                        )}
                       </div>
                     )}
 
@@ -667,6 +661,8 @@ export default withRouter(
     paystackToken,
     verifyNumber,
     signin,
+    showLoader,
+    hideLoader,
     showModal,
     hideModal,
     token,

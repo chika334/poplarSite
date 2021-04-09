@@ -277,7 +277,7 @@ class componentName extends Component {
       store.dispatch(showModal());
       store.dispatch(hideModal());
     } else {
-      return <Redirect to={`/`} />;
+      return <Redirect to={`${process.env.REACT_APP_URL}`} />;
     }
   }
 

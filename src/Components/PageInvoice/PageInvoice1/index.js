@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const Buttons = React.forwardRef((props, ref) => {
   return (
     <React.Fragment>
-      <Pdf targetRef={ref} filename="code-example.pdf">
+      <Pdf targetRef={ref} filename="poplarpower.pdf">
         {({ toPdf }) => (
           <Button className="btn-primary" onClick={toPdf}>
             Download
@@ -111,7 +111,7 @@ function LivePreviewExample(props) {
     currency: "NGN",
   });
 
-  console.log(props);
+  // console.log(props);
 
   // printing modal
   const body = (
@@ -172,10 +172,6 @@ function LivePreviewExample(props) {
                 {props.authUser.user.user.fullName}
               </p>
               <p>
-                {/* <span className="d-block pb-1">
-                      <b className="pr-2">Tel.:</b>
-                      856-718-9505
-                    </span> */}
                 <span className="d-block">
                   <b className="pr-2">Email:</b>
                   {props.authUser.user.user.email}
@@ -235,7 +231,7 @@ function LivePreviewExample(props) {
                     }
                   </td>
                   <td className="tx-right text-center">
-                    {formatter.format(localStorage.getItem("amount"))}
+                  {formatter.format(props.location.state.detail.amount)}
                   </td>
                   <td className="tx-right text-center">
                     {formatter.format(props.buyToken.token.currentBalance)}
@@ -273,7 +269,7 @@ function LivePreviewExample(props) {
             <p>
               <span className="d-block">
                 <b className="pr-2">Amount:</b>
-                {formatter.format(localStorage.getItem("amount"))}
+                {formatter.format(props.location.state.detail.amount)}
               </span>
             </p>
 

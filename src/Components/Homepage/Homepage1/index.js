@@ -48,17 +48,18 @@ function LivePreviewExample(props) {
 
   return (
     <>
-      <div className="hero-wrapper bg-composed-wrapper bg-light">
+      <div className="hero-wrapper--content bg-composed-wrapper">
         {/* <div className="header-top-section pb-2">
           <MessengerHeader />
         </div> */}
+        {/* <div> */}
         <div className="hero-wrapper--content">
           <div
             className="bg-composed-wrapper--image opacity-5"
             style={{ backgroundImage: "url(" + particles1 + ")" }}
           />
-          <Modal />
-          <div className="bg-composed-wrapper--bg bg-white opacity-5" />
+          {/* <Modal /> */}
+          {/* <div className="bg-composed-wrapper--bg bg-white opacity-5" /> */}
           <div className="bg-composed-wrapper--content">
             <div className="py-3">
               <Container className="text-black text-center py-2">

@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const Buttons = React.forwardRef((props, ref) => {
   return (
     <React.Fragment>
-      <Pdf targetRef={ref} filename="code-example.pdf">
+      <Pdf targetRef={ref} filename="poplarpower.pdf">
         {({ toPdf }) => (
           <Button className="btn-primary" onClick={toPdf}>
             Download
@@ -59,8 +59,6 @@ const Buttons = React.forwardRef((props, ref) => {
     </React.Fragment>
   );
 });
-
-// const ref = React.createRef();
 
 function LivePreviewExample(props) {
   let docToPrint = React.createRef();
@@ -172,10 +170,6 @@ function LivePreviewExample(props) {
                 {props.authUser.user.user.fullName}
               </p>
               <p>
-                {/* <span className="d-block pb-1">
-                      <b className="pr-2">Tel.:</b>
-                      856-718-9505
-                    </span> */}
                 <span className="d-block">
                   <b className="pr-2">Email:</b>
                   {props.authUser.user.user.email}
@@ -348,10 +342,6 @@ function LivePreviewExample(props) {
                     {props.authUser.user.user.fullName}
                   </p>
                   <p>
-                    {/* <span className="d-block pb-1">
-                      <b className="pr-2">Tel.:</b>
-                      856-718-9505
-                    </span> */}
                     <span className="d-block">
                       <b className="pr-2">Email:</b>
                       {props.authUser.user.user.email}
@@ -372,10 +362,6 @@ function LivePreviewExample(props) {
                     <li className="d-flex justify-content-between pb-1">
                       <span className="text-black-50 pr-4">Issue Date</span>
                       <span className="pl-4">
-                        {/* {moment(
-                          props.buyToken.token.productResult.object
-                            .transactionDate
-                        ).format("DD-MM-YYYY")} */}
                         {moment(
                           props.location.state.detail.initialDetails
                             .paymentDetails.dateCreated
@@ -415,7 +401,6 @@ function LivePreviewExample(props) {
                         }
                       </td>
                       <td className="tx-right text-center">
-                        {/* ₦{props.buyToken.token.productResult.} */}
                         {formatter.format(props.location.state.detail.amount)}
                       </td>
                       <td className="tx-right text-center">

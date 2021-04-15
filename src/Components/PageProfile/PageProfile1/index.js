@@ -83,13 +83,6 @@ function LivePreviewExample(props) {
                         {/* <input {...getInputProps()} /> */}
                         <div className="dropzone-inner-wrapper d-140 rounded-circle dropzone-avatar">
                           <div className="avatar-icon-wrapper d-140 rounded-circle m-2">
-                            {/* <Button
-                              onClick={open}
-                              className="btn-first avatar-button badge shadow-sm-dark btn-icon badge-position badge-position--bottom-right border-0 text-indent-0 d-40 badge-circle badge-first text-white"
-                            >
-                              <PublishTwoToneIcon className="d-20" />
-                            </Button> */}
-
                             <div>
                               {isDragAccept && (
                                 <div className="rounded-circle overflow-hidden d-140 bg-success text-center font-weight-bold text-white d-flex justify-content-center align-items-center">
@@ -136,18 +129,20 @@ function LivePreviewExample(props) {
                       selected={activeTab2 === "1"}
                       className="p-3 mx-3 rounded-lg"
                       style={{ backgroundColor: "#048cfc", color: "#fff" }}
+                      onClick={(e) => {
+                        if (props.authUser) {
+                          window.location.href = `${process.env.REACT_APP_URL}/dashboard`;
+                        }
+                      }}
                     >
-                      <Link to={`/dashboard`}>
-                        <span className="font-size-lg text-white px-2 py-1">
-                          Dashboard
-                        </span>
-                      </Link>
+                      <span className="font-size-lg text-white px-2 py-1">
+                        Dashboard
+                      </span>
                     </Button>
 
                     <Button
                       selected={activeTab2 === "1"}
                       className="mx-3 rounded-lg"
-                      // style={{ backgroundColor: `rgb(242, 106, 6)` }}
                       style={{ backgroundColor: "#048cfc", color: "#fff" }}
                       onClick={(e) => {
                         if (props.authUser) {
@@ -155,18 +150,15 @@ function LivePreviewExample(props) {
                         }
                       }}
                     >
-                      {/* <Link to={`/walletTranx`}> */}
                       <span className="font-size-lg text-white px-2 py-1">
                         View Wallet Transactions
                       </span>
-                      {/* </Link> */}
                     </Button>
                   </List>
                   <List className="pb-5">
                     <Button
                       className="mx-3 p-3 rounded-lg"
                       style={{
-                        // backgroundColor: `rgb(0, 68, 116)`,
                         border: `3px solid #048cfc`,
                         width: "94%",
                       }}
@@ -183,59 +175,12 @@ function LivePreviewExample(props) {
                         </span>
                       </Link>
                     </Button>
-                    {/* <Button
-                      className="p-4 rounded-lg"
-                      style={{
-                        backgroundColor: `rgb(0, 68, 116)`,
-                        width: "45%",
-                      }}
-                    >
-                      <Link
-                        className="text-white"
-                        to={`/debitWallet`}
-                      >
-                        <span className="font-size-lg text-white px-2 py-1">
-                          Debit Wallet
-                        </span>
-                      </Link>
-                    </Button> */}
                   </List>
                   {/* </Container> */}
                 </div>
               </div>
             </div>
-            <div>
-              {/* <div className="pt-5"> */}
-              {/* <Container> */}
-              {/* <Link
-                    className="text-white mr-3"
-                    to={`/fundWallet`}
-                  >
-                    <Button
-                      className="rounded-lg"
-                      style={{ backgroundColor: `rgb(0, 68, 116)`, width: '45%' }}
-                    >
-                      <span className="font-size-lg text-white px-2 py-1">
-                        Fund Wallet
-                      </span>
-                    </Button>
-                  </Link> */}
-              {/* <Link
-                  className="text-white"
-                  to={`/debitWallet`}
-                >
-                  <Button
-                    className="rounded-lg"
-                    style={{ backgroundColor: `rgb(0, 68, 116)`, width: "45%" }}
-                  >
-                    <span className="font-size-lg text-white px-2 py-1">
-                      Debit Wallet
-                    </span>
-                  </Button>
-                </Link> */}
-              {/* </Container> */}
-              {/* </div> */}
-            </div>
+            <div></div>
           </div>
         </div>
       </div>

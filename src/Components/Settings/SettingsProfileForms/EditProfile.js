@@ -110,15 +110,12 @@ class VerticalLinearStepper extends Component {
         this.setState({ error: error.message.message });
       }
     } else {
-      if (authUser.editSuccess === true) {
-        this.props.hideLoader();
-        // alert(this.state.success)
-        localStorage.setItem("Success", true);
+      
         // setTimeout(() => {
         //   localStorage.removeItem("Success", true);
         // }, 3000);
         // console.log("DANIEL");
-      }
+      // }
       // this.check();
     }
   }
@@ -162,12 +159,22 @@ class VerticalLinearStepper extends Component {
       contactPhone,
     };
 
-    this.props.showLoader();
-    this.props.EditProfile(user);
+    setTimeout(() => {
+      this.props.showLoader();
+      this.props.EditProfile(user);
+    }, 3000);
   };
 
   render() {
     const { classes } = this.props;
+    if (this.props.authUser.editSuccess === true) {
+      setTimeout(() => {
+        this.props.hideLoader();
+        // alert(this.state.success)
+        localStorage.setItem("Success", true);
+      }, 3000);
+    }
+
     return (
       <div>
         <Card className={classes.card}>
@@ -176,7 +183,6 @@ class VerticalLinearStepper extends Component {
           ) : (
             ""
           )}
-          <Loader />
           <CardContent>
             {/* <Typography type="h1" className={classes.title}>
               Edit Profile

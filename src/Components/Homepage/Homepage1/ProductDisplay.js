@@ -63,22 +63,20 @@ class ProductDisplay extends Component {
         // this.props.hideLoader();
         this.setState({ error: error.message.message });
       }
-    } else {
-      this.check();
     }
   }
 
-  check = () => {
-    const { authUser } = this.props;
-    if (authUser) {
-      // this.props.hideLoader();
-      // this.props.hideModal();
-      const redirect = localStorage.getItem("redirectPage");
-      this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-      // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
-      // <Redirect to={`/profilepage`} />
-    }
-  };
+  // check = () => {
+  //   const { authUser } = this.props;
+  //   if (authUser) {
+  //     // this.props.hideLoader();
+  //     // this.props.hideModal();
+  //     const redirect = localStorage.getItem("redirectPage");
+  //     this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+  //     // window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
+  //     // <Redirect to={`/profilepage`} />
+  //   }
+  // };
 
   FillForm = (props) => {
     const { authUser } = this.props;
@@ -92,7 +90,7 @@ class ProductDisplay extends Component {
       if (this.props.authUser || localStorage.token) {
         // this.props.hideModal();
         const redirect = localStorage.getItem("redirectPage");
-        this.props.history.push(`${redirect}`);
+        this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
       } else {
         this.props.showModal();
       }
@@ -115,7 +113,6 @@ class ProductDisplay extends Component {
     if (this.props.authUser) {
       const redirect = localStorage.getItem("redirectPage");
       this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
-      // return <Redirect to="/buyProducts" />;
     }
   }
 
@@ -147,6 +144,7 @@ class ProductDisplay extends Component {
                     </p>
                     <div className="d-flex align-items-center justify-content-center m-2">
                       <Button
+                        id="buttonClicked"
                         style={{ backgroundColor: "#048cfc", color: "#fff" }}
                         className="rounded-sm mr-3 text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm"
                         onClick={(e) => {

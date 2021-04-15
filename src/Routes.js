@@ -106,12 +106,12 @@ const Routes = (props) => {
                 <Redirect
                   exact
                   from={`/`}
-                  to={`${process.env.REACT_APP_URL}`}
+                  to={`${process.env.REACT_APP_URL}/home`}
                 />
               </Switch>
               <Route
                 path={[
-                  `${process.env.REACT_APP_URL}`,
+                  `${process.env.REACT_APP_URL}/home`,
                   `${process.env.REACT_APP_URL}/protect`,
                 ]}
               >
@@ -125,7 +125,7 @@ const Routes = (props) => {
                       transition={pageTransition}
                     >
                       <Route
-                        path={`${process.env.REACT_APP_URL}`}
+                        path={`${process.env.REACT_APP_URL}/home`}
                         exact
                         component={Homepage}
                       />

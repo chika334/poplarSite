@@ -109,7 +109,7 @@ function LivePreviewExample(props) {
     currency: "NGN",
   });
 
-  console.log(props);
+  // console.log(props);
 
   // printing modal
   const body = (
@@ -290,6 +290,8 @@ function LivePreviewExample(props) {
     </div>
   );
 
+  // console.log(props.location.state.detail.amount);
+
   return (
     <div>
       <Container>
@@ -372,6 +374,18 @@ function LivePreviewExample(props) {
                 </div>
               </div>
               <div className="divider mb-5 mt-5" />
+              <div className="d-flex flex-column flex-lg-row justify-content-between">
+                <div>
+                  <div className="text-uppercase text-primary mb-2 font-size-xs">
+                    Token
+                  </div>
+                  <p>
+                    <span className="d-block">
+                      {props.buyToken.token.productResult.recieptNumber}
+                    </span>
+                  </p>
+                </div>
+              </div>
               <div className="table-responsive my-4 tableData">
                 <Table className="table table-striped table-hover text-nowrap font-size-xs">
                   <thead>
@@ -475,7 +489,7 @@ function LivePreviewExample(props) {
               <Button
                 className="btn-primary"
                 type="button"
-                onClick={handleOpen}
+                onClick={() => handleOpen()}
               >
                 Generate pdf
               </Button>
@@ -484,7 +498,7 @@ function LivePreviewExample(props) {
         </Grid>
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={() => handleClose()}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           className="pt-2 pb-2 invoiceCard"

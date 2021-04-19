@@ -19,8 +19,6 @@ export default class index extends Component {
     }.bind(this);
 
     if (this.props.location.state.detail.productResult.statusCode === 1) {
-      // dispatch(clearToken());
-      // // history.push(`/Products`);
       window.location.href = `${process.env.REACT_APP_URL}/reportTranx`;
     }
   };

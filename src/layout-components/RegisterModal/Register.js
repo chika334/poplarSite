@@ -172,8 +172,6 @@
 //   })(Register)
 // );
 
-
-
 import React from "react";
 import { signup } from "../../_actions/userAction";
 // import { create } from "../../api-user/api-user";
@@ -191,8 +189,8 @@ import Button from "@material-ui/core/Button";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 // import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import {showLoader, hideLoader} from '../../_actions/loading'
-import {hideRegisterModal} from '../../_actions/registerModal'
+import { showLoader, hideLoader } from "../../_actions/loading";
+import { hideRegisterModal } from "../../_actions/registerModal";
 // import Icon from "@material-ui/core/Icon";
 import { connect } from "react-redux";
 // import "./verify.css";
@@ -237,7 +235,7 @@ class Signup extends React.Component {
       countryId: "1",
       open: false,
       error: "",
-      inError: null
+      inError: null,
     };
   }
 
@@ -250,7 +248,7 @@ class Signup extends React.Component {
     authUser: PropTypes.object.isRequired,
     signup: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
   };
 
   componentDidUpdate(prevProps) {
@@ -269,8 +267,8 @@ class Signup extends React.Component {
     const { isAuthenticated } = this.props;
     if (isAuthenticated) {
       this.setState({ open: true });
-      this.props.hideRegisterModal()
-      this.props.hideLoader()
+      this.props.hideRegisterModal();
+      this.props.hideLoader();
       this.sendRedirect();
       window.location.href = `${process.env.REACT_APP_URL}/profilepage`;
     }
@@ -291,13 +289,19 @@ class Signup extends React.Component {
       countryId,
     } = this.state;
 
-    if (firstName === "" ||lastName === "" ||email === "" ||phone === "" ||password === "") {
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      phone === "" ||
+      password === ""
+    ) {
       this.setState({
         inError: "Input required",
       });
     } else {
-      this.props.showLoader()
-    this.props.hideRegisterModal()
+      this.props.showLoader();
+      this.props.hideRegisterModal();
       const user = {
         firstName,
         lastName,
@@ -306,7 +310,7 @@ class Signup extends React.Component {
         password,
         countryId,
       };
-  
+
       this.props.signup(user);
     }
   };
@@ -324,9 +328,9 @@ class Signup extends React.Component {
               Register
             </Typography>
             <TextField
-            helperText={this.state.inError}
-                  error={this.state.inError !== null}
-            variant="outlined"
+              helperText={this.state.inError}
+              error={this.state.inError !== null}
+              variant="outlined"
               id="firstname"
               label="First Name"
               className={classes.textField}
@@ -335,9 +339,9 @@ class Signup extends React.Component {
               margin="normal"
             />{" "}
             <TextField
-            helperText={this.state.inError}
-                  error={this.state.inError !== null}
-            variant="outlined"
+              helperText={this.state.inError}
+              error={this.state.inError !== null}
+              variant="outlined"
               id="lastname"
               label="Last Name"
               className={classes.textField}
@@ -347,9 +351,9 @@ class Signup extends React.Component {
             />{" "}
             <br />
             <TextField
-            helperText={this.state.inError}
-                  error={this.state.inError !== null}
-            variant="outlined"
+              helperText={this.state.inError}
+              error={this.state.inError !== null}
+              variant="outlined"
               id="email"
               label="Email"
               type="email"
@@ -360,9 +364,9 @@ class Signup extends React.Component {
             />{" "}
             <br />
             <TextField
-            helperText={this.state.inError}
-                  error={this.state.inError !== null}
-            variant="outlined"
+              helperText={this.state.inError}
+              error={this.state.inError !== null}
+              variant="outlined"
               id="mobile"
               label="Mobile"
               className={classes.textField}
@@ -373,9 +377,9 @@ class Signup extends React.Component {
             />{" "}
             <br />
             <TextField
-            helperText={this.state.inError}
-                  error={this.state.inError !== null}
-            variant="outlined"
+              helperText={this.state.inError}
+              error={this.state.inError !== null}
+              variant="outlined"
               id="password"
               label="Password"
               type="password"
@@ -387,7 +391,6 @@ class Signup extends React.Component {
             <br />
             {this.state.error && (
               <Typography component="p" color="error">
-                
                 {this.state.error}
               </Typography>
             )}
@@ -415,6 +418,10 @@ const mapStateToProps = (state) => ({
   error: state.error,
 });
 
-export default connect(mapStateToProps, { signup, clearErrors, showLoader, hideLoader, hideRegisterModal })(
-  withStyles(styles)(Signup)
-);
+export default connect(mapStateToProps, {
+  signup,
+  clearErrors,
+  showLoader,
+  hideLoader,
+  hideRegisterModal,
+})(withStyles(styles)(Signup));

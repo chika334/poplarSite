@@ -10,6 +10,7 @@ import DialpadOutlinedIcon from "@material-ui/icons/DialpadOutlined";
 import { TextField, InputAdornment } from "@material-ui/core";
 import { paystackToken, token } from "../../_actions/tokenAction";
 import Typography from "@material-ui/core/Typography";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import axios from "axios";
 
 const Pay = (props) => {
@@ -133,110 +134,71 @@ const Pay = (props) => {
   };
 
   // you can call this function anything
-  const handleSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    if (reference.message === "Approved") {
-      // console.log(reference.reference);
-      if (userDetails === null) {
-        return "";
-      } else if (userDetails.responsedesc === "Success") {
-        // this.setState({ loading: true });
-        const fastrId = initialDetails.fastrId;
-        // const reference = reference.reference;
+  // const handleSuccess = (reference) => {
+  //   // Implementation for whatever you want to do with reference and after success call.
+  //   if (reference.message === "Approved") {
+  //     // console.log(reference.reference);
+  //     if (userDetails === null) {
+  //       return "";
+  //     } else if (userDetails.responsedesc === "Success") {
+  //       // this.setState({ loading: true });
+  //       const fastrId = initialDetails.fastrId;
+  //       // const reference = reference.reference;
 
-        const buyToken = {
-          fastrId,
-          reference: reference.reference,
-          // reference: "T965771745193942"
-        };
+  //       const buyToken = {
+  //         fastrId,
+  //         reference: reference.reference,
+  //         // reference: "T965771745193942"
+  //       };
 
-        setRedirect(true);
-        props.paystackToken(buyToken);
-        // console.log(buyToken);
-        props.history.push(`${process.env.REACT_APP_URL}/invoice`);
-      }
-    } else {
-      console.log("bad");
-    }
-  };
+  //       setRedirect(true);
+  //       props.paystackToken(buyToken);
+  //       // console.log(buyToken);
+  //       props.history.push(`${process.env.REACT_APP_URL}/invoice`);
+  //     }
+  //   } else {
+  //     console.log("bad");
+  //   }
+  // };
 
   // you can call this function anything
-  const handleClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
-  };
+  // const handleClose = () => {
+  //   // implementation for  whatever you want to do when the Paystack dialog closed.
+  //   console.log("closed");
+  // };
 
-  const componentProps = {
-    email,
-    amount,
-    metadata: {
-      fullname,
-      // phone,
+  // const componentProps = {
+  //   email,
+  //   amount,
+  //   metadata: {
+  //     fullname,
+  //     // phone,
+  //   },
+  //   publicKey,
+  //   text: "Pay Now",
+  //   onSuccess: (reference) => handleSuccess(reference),
+  //   onClose: handleClose,
+  // };
+  const config = {
+    public_key: `${process.env.REACT_APP_TEST_FLUTTERWAVE}`,
+    tx_ref: Date.now(),
+    amount: amount,
+    currency: "NGN",
+    payment_options: "card,mobilemoney,ussd",
+    customer: {
+      email: email,
+      phonenumber: phone,
+      name: user.user.firstName,
     },
-    publicKey,
-    text: "Pay Now",
-    onSuccess: (reference) => handleSuccess(reference),
-    onClose: handleClose,
+    customizations: {
+      title: "Mipple pay",
+      description: "Bill payment made easy",
+      logo:
+        "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+    },
   };
 
-  const initializePayment = (e) => {
-    e.preventDefault();
-    const { token } = props.authUser;
-    const amount = amounts;
-
-    if (localStorage.token && userDetails === null) {
-      return "";
-    } else if (localStorage.token && userDetails.responsedesc === "Success") {
-      setLoading(true);
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      // if token, add to header
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-      }
-
-      const fullname = userDetails.customerName;
-      const meterNumber = userDetails.meterNumber;
-
-      const buyToken = {
-        productCode,
-        paymentMethod,
-        fullname,
-        amount,
-        accountNumber: meterNumber,
-        customerId,
-      };
-
-      console.log(buyToken);
-
-      axios
-        .post(
-          `${process.env.REACT_APP_API_INITIALIZE_PAYMENT}`,
-          buyToken,
-          config
-        )
-        .then((res) =>
-          setTimeout(() => {
-            // setUserDetails(res.data);
-            setLoading(false);
-            setValues({
-              ...values,
-              Details: true,
-              initialDetails: res.data,
-              inital: true,
-              verify: true,
-              showAmount: false,
-              amountInital: false,
-            });
-          }, 300)
-        )
-        .catch((err) => console.log(err));
-    }
-  };
+  const handleFlutterPayment = useFlutterwave(config);
 
   if (props.buyToken.change) {
     return <Redirect to={`/invoice`} />;
@@ -332,7 +294,7 @@ const Pay = (props) => {
                         </div>
                       </>
                       <div className="text-center">
-                        <PaystackConsumer {...componentProps}>
+                        {/* <PaystackConsumer {...componentProps}>
                           {({ initializePayment }) => (
                             <Button
                               style={{
@@ -346,7 +308,24 @@ const Pay = (props) => {
                               Card Payment
                             </Button>
                           )}
-                        </PaystackConsumer>
+                        </PaystackConsumer> */}
+                        <Button
+                          onClick={() => {
+                            handleFlutterPayment({
+                              callback: (response) => {
+                                const ref = response.tx_ref;
+                                props.verifyPayment(ref);
+                              },
+                              onClose: () => {
+                                alert("Please don't go :(");
+                              },
+                            });
+                          }}
+                          fullWidth
+                          className="btn-primary"
+                        >
+                          Pay with Card{" "}
+                        </Button>
                       </div>
                     </div>
                   </div>

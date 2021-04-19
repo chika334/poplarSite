@@ -16,6 +16,7 @@ import {
   Tooltip,
   Container,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 const styles = (theme) => ({
   root: {
@@ -42,6 +43,7 @@ export class TranxReport extends PureComponent {
       perPage: 1000,
       currentPage: 0,
       data: null,
+      msg: "",
     };
     this.handlePageClick = this.handlePageClick.bind(this);
   }
@@ -130,10 +132,11 @@ export class TranxReport extends PureComponent {
         this.setState({ data: res.data });
         this.sendDetails();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.setState({ msg: err.response.data.message });
+      });
   };
 
-  
   render() {
     const { classes } = this.props;
     var formatter = new Intl.NumberFormat("en-NG", {
@@ -143,6 +146,7 @@ export class TranxReport extends PureComponent {
     return (
       <div>
         <Container>
+          {this.state.msg ? <Alert severity="error">{this.state.msg}</Alert> : ""}
           <Card className="card-box mb-spacing-6-x2">
             <div className="card-header pr-2">
               <div className="card-header--title">All Transactions</div>
@@ -186,7 +190,11 @@ export class TranxReport extends PureComponent {
                           </div>
                         </td>
                         <td className="text-center">
-                          <div>{formatter.format(tdata.request.paymentDetails.amount)}</div>
+                          <div>
+                            {formatter.format(
+                              tdata.request.paymentDetails.amount
+                            )}
+                          </div>
                         </td>
                         <td>
                           {tdata.response === null ? (
@@ -199,6 +207,7 @@ export class TranxReport extends PureComponent {
                           <Button
                             onClick={(e) => {
                               // const fastrId = tdata.request.fastrId,
+                              e.preventDefault();
                               this.handleQuery({
                                 transId: tdata.request.fastrId,
                               });

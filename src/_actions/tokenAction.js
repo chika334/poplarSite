@@ -88,12 +88,13 @@ export const token = (buyToken) => (dispatch, getState) => {
     });
 };
 
-export const paystackToken = (payStackToken) => (dispatch, getState) => {
-  console.log(payStackToken);
+export const paystackToken = (ref) => (dispatch, getState) => {
+  const body = JSON.stringify(ref)
+  console.log(body);
   axios
     .post(
       `${process.env.REACT_APP_API_SINGLE_PAYMENT_PAYSTACK}`,
-      payStackToken,
+      body,
       tokenConfig(getState)
     )
     .then((res) =>

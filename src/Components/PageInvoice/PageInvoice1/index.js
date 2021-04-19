@@ -111,7 +111,7 @@ function LivePreviewExample(props) {
     currency: "NGN",
   });
 
-  // console.log(props);
+  console.log(props);
 
   // printing modal
   const body = (
@@ -231,7 +231,7 @@ function LivePreviewExample(props) {
                     }
                   </td>
                   <td className="tx-right text-center">
-                  {formatter.format(props.location.state.detail.amount)}
+                    {formatter.format(props.location.state.detail.amount)}
                   </td>
                   <td className="tx-right text-center">
                     {formatter.format(props.buyToken.token.currentBalance)}
@@ -344,10 +344,6 @@ function LivePreviewExample(props) {
                     {props.authUser.user.user.fullName}
                   </p>
                   <p>
-                    {/* <span className="d-block pb-1">
-                      <b className="pr-2">Tel.:</b>
-                      856-718-9505
-                    </span> */}
                     <span className="d-block">
                       <b className="pr-2">Email:</b>
                       {props.authUser.user.user.email}
@@ -368,10 +364,6 @@ function LivePreviewExample(props) {
                     <li className="d-flex justify-content-between pb-1">
                       <span className="text-black-50 pr-4">Issue Date</span>
                       <span className="pl-4">
-                        {/* {moment(
-                          props.buyToken.token.productResult.object
-                            .transactionDate
-                        ).format("DD-MM-YYYY")} */}
                         {moment(
                           props.location.state.detail.initialDetails
                             .paymentDetails.dateCreated
@@ -389,11 +381,10 @@ function LivePreviewExample(props) {
                   </div>
                   <p>
                     <span className="d-block">
-                      {props.buyToken.token.reference}
+                      {props.buyToken.token.productResult.recieptNumber}
                     </span>
                   </p>
                 </div>
-                
               </div>
               <div className="table-responsive my-4 tableData">
                 <Table className="table table-striped table-hover text-nowrap font-size-xs">
@@ -438,6 +429,48 @@ function LivePreviewExample(props) {
                   </tbody>
                 </Table>
               </div>
+              <div className="divider mb-4" />
+              <Grid container spacing={6}>
+                <Grid item lg={4}></Grid>
+                {/* <Grid item lg={8}>
+                  <ul className="list-unstyled mb-3">
+                    <li className="d-flex justify-content-between pb-1">
+                      <span className="pr-4">Amount</span>
+                      <span className="pl-4">
+                        {formatter.format(props.location.state.detail.amount)}
+                      </span>
+                    </li>
+                    <li className="d-flex justify-content-between pb-1">
+                      <span className="pr-4">Convenience Fee</span>
+                      <span className="pl-4">{formatter.format(100)}</span>
+                    </li>
+                    <li className="d-flex justify-content-between pb-1">
+                      <span className="pr-4">Transaction ID</span>
+                      <span className="pl-4">
+                        {/* {props.location.state.details.uuidvar} 
+                        {props.buyToken.token.reference}
+                      </span>
+                    </li>
+                  </ul>
+                  {/* <Button
+                    onClick={() => {
+                      handleFlutterPayment({
+                        callback: (response) => {
+                          const ref = response.tx_ref;
+                          props.verifyPayment(ref);
+                        },
+                        onClose: () => {
+                          alert("Please don't go :(");
+                        },
+                      });
+                    }}
+                    fullWidth
+                    className="btn-primary"
+                  >
+                    Pay with Card{" "}
+                  </Button>
+                </Grid> */}
+              </Grid>
               <div className="mobileDetails">
                 <div className="text-uppercase text-primary mb-2 font-size-xs">
                   Transaction Details

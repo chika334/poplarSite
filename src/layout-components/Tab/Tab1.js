@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { PaystackConsumer } from "react-paystack";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import {
   TextField,
   InputAdornment,
@@ -19,11 +20,12 @@ import { withRouter, Link } from "react-router-dom";
 import { signin } from "../../_actions/userAction";
 import Form from "../../data/Payment/Electric/Form";
 import axios from "axios";
-import { ClimbingBoxLoader } from "react-spinners";
+// import { token, paystackToken } from "../../_actions/tokenAction";
+import { ClimbingBoxLoader, PropagateLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import Pay from "../../Components/paystack/pay";
 
-const FORM_NAME = "rccgPaymentForm";
+// const FORM_NAME = "rccgPaymentForm";
 
 function getModalStyle() {
   const top = 50;
@@ -37,6 +39,15 @@ function getModalStyle() {
 }
 
 function Tab1(props) {
+  const user = useSelector((state) =>
+    state.authUser.user === null ? "" : state.authUser.user.user
+  );
+  // const [phone, setPhone] = useState(
+  //   `${user.user.user === null ? "" : user.user.user.phone}`
+  // );
+  // const [name, setName] = useState(
+  //   `${user.user === null ? "" : user.user.firstName}`
+  // );
   const [values, setValues] = useState({
     checked: false,
     email: `${
@@ -46,7 +57,8 @@ function Tab1(props) {
     fullname: "",
     publicKey: "",
     meterNumber: "",
-    phoneNo: "",
+    phoneNo: `${user.phone}`,
+    name: `${user.firstName}`,
     userDetails: null,
     productCode: "rccg-power-12",
     paymentMethod: "fastrwallet",
@@ -70,14 +82,17 @@ function Tab1(props) {
     method: "",
   });
 
+  const paymentMethods = "fastrflutterwave";
+
   const handleValueChange = (field, value) => {
     setValues((state) => ({ [field]: value }));
   };
 
   const {
     amount,
-    amounts,
-    checked,
+    // amounts,
+    // checked,
+    name,
     email,
     redirect,
     fullname,
@@ -104,6 +119,9 @@ function Tab1(props) {
     input,
     method,
   } = values;
+
+  const amountValue = parseFloat(amount, 10);
+  const totalAmount = amountValue + 100;
 
   const sendRedirect = () => {
     props.clearErrors();
@@ -140,12 +158,11 @@ function Tab1(props) {
         }
 
         const fullname = userDetails.customerName;
-
         const buyToken = {
           productCode,
           paymentMethod,
           fullname,
-          amount,
+          amount: amount,
           accountNumber: meterNumber,
           customerId,
         };
@@ -175,6 +192,64 @@ function Tab1(props) {
     }
   };
 
+  const initializePaymentWithCard = (e) => {
+    e.preventDefault();
+    const { token } = props.authUser;
+
+    if (amount === "") {
+      setValues({ ...values, inError: "Input Required" });
+    } else {
+      if (localStorage.token && userDetails === null) {
+        return "";
+      } else if (localStorage.token && userDetails.responsedesc === "Success") {
+        setValues({ ...values, loading: true });
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        // if token, add to header
+        if (token) {
+          config.headers["Authorization"] = `Bearer ${token}`;
+        }
+
+        const fullname = userDetails.customerName;
+        const buyToken = {
+          productCode,
+          paymentMethod: paymentMethods,
+          fullname,
+          amount: amount,
+          accountNumber: meterNumber,
+          customerId,
+        };
+
+        axios
+          .post(
+            `${process.env.REACT_APP_API_INITIALIZE_PAYMENT}`,
+            buyToken,
+            config
+          )
+          .then((res) =>
+            setTimeout(() => {
+              setValues({
+                ...values,
+                loading: false,
+                initialDetails: res.data,
+                Details: true,
+                inital: true,
+                verify: true,
+                input: false,
+                showAmount: false,
+              });
+            }, 300)
+          )
+          .catch((err) => console.log(err));
+      }
+    }
+  };
+
+  // wallet payment
   const Pay = (e) => {
     e.preventDefault();
     const { token } = props.authUser;
@@ -192,6 +267,27 @@ function Tab1(props) {
       };
 
       props.token(buyToken);
+      // console.log(buyToken);
+    }
+  };
+
+  // card payment
+  const PayWithFlutterwave = (response) => {
+    console.log(response);
+
+    if (localStorage.token && userDetails === null) {
+      return "";
+    } else if (localStorage.token && userDetails.responsedesc === "Success") {
+      setValues({ ...values, loading: true, method: "card" });
+      const fastrId = initialDetails.fastrId;
+      const reference = response.transaction_id;
+
+      const buyToken = {
+        fastrId,
+        reference,
+      };
+
+      props.paystackToken(buyToken);
       // console.log(buyToken);
     }
   };
@@ -259,63 +355,6 @@ function Tab1(props) {
     }
   };
 
-  const payBills = () => {
-    const { authUser, success } = props;
-    const pages = localStorage.getItem("LoggedPage");
-    const fullname = userDetails.customerName;
-
-    const buyToken = {
-      productCode,
-      fullname,
-      paymentMethod,
-      amount,
-      meterNumber,
-      customerId,
-    };
-
-    // if user is authenticated
-    if (authUser === true && pages) {
-      if (authUser && wantToPay) {
-        props.showLoader();
-        props.token(buyToken);
-        // handleValueChange("wantToPay", true);
-        setValues({ ...values, wantToPay: false });
-      }
-      if (authUser && success.success) {
-        props.hideLoader();
-        props.history.push(`${process.env.REACT_APP_URL}/buytoken`);
-      }
-    }
-  };
-
-  // you can call this function anything
-  const handleSuccess = (reference) => {
-    if (reference.message === "Approved") {
-      setValues({ ...values, loading: true, method: "card" });
-      if (userDetails === null) {
-        return "";
-      } else if (userDetails.responsedesc === "Success") {
-        // setValues({ loading: true });
-        const fastrId = initialDetails.fastrId;
-
-        const buyToken = {
-          fastrId,
-          reference: reference.reference,
-        };
-
-        props.paystackToken(buyToken);
-      }
-    } else {
-      console.log("bad");
-    }
-  };
-
-  // you can call this function anything
-  const handleClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
-  };
-
   useEffect(() => {
     if (initialDetails) {
       const amounts = `${
@@ -335,38 +374,70 @@ function Tab1(props) {
     }
   }, [userDetails]);
 
-  const componentProps = {
-    email: email,
-    amount: amount ? amount * 100 : 0,
-    metadata: {
-      fullname: fullname,
+  var formatter = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  });
+
+  // Flutterwave
+  const config = {
+    public_key: `${process.env.REACT_APP_TEST_FLUTTERWAVE}`,
+    tx_ref: Date.now(),
+    amount: amountValue,
+    currency: "NGN",
+    payment_options: "card",
+    customer: {
+      email: email,
+      phonenumber: phoneNo,
+      name: name,
     },
-    // publicKey: "pk_test_07df38cc2381f42f40a3bcb363a5b6e0b7882dbe",
-    publicKey: "pk_live_76004bcc59f334f109b8a3bc68735ee620c10485",
-    text: "Pay Now",
-    onSuccess: (reference) => reference && handleSuccess(reference),
-    onClose: handleClose,
+    customizations: {
+      title: "Poplar power",
+      description: "Bill payment made easy",
+      logo:
+        "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+    },
   };
+
+  const handleFlutterPayment = useFlutterwave(config);
 
   if (props.buyToken.success) {
     if (method === "wallet") {
       console.log("wallet");
-      props.history.push({
-        pathname: `${process.env.REACT_APP_URL}/invoice`,
-        state: {
-          detail: { amount, initialDetails, method },
-        },
-      });
+      if (props.buyToken.token.productResult.statusCode === "1") {
+        console.log(props.buyToken);
+        props.history.push({
+          pathname: `${process.env.REACT_APP_URL}/invoice`,
+          state: {
+            detail: { amount, initialDetails, method },
+          },
+        });
+      }
     }
+
     if (method === "card") {
       console.log("card");
-      // props.hideLoader();
-      props.history.push({
-        pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
-        state: {
-          detail: { amount, initialDetails, method },
-        },
-      });
+      closePaymentModal();
+      // props.history.push({
+      //   pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
+      //   state: {
+      //     detail: { amount, initialDetails, method },
+      //   },
+      // });
+      console.log(props.buyToken);
+      // if (props.buyToken.token.productResult.statusCode === "1") {
+      //   console.log(props.buyToken);
+      //   return (
+      //     <Redirect
+      //       to={{
+      //         pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
+      //         state: {
+      //           detail: { amount, initialDetails, method },
+      //         },
+      //       }}
+      //     />
+      //   );
+      // }
     }
   }
 
@@ -475,7 +546,7 @@ function Tab1(props) {
                           </p>
                         </div>
                         <div className="allnew">
-                          <p>undertaking: </p>
+                          <p>Undertaking: </p>
                           <p style={{ paddingLeft: "50px" }}>
                             {userDetails.undertaking}
                           </p>
@@ -488,9 +559,30 @@ function Tab1(props) {
                           <div className="allnew">
                             <p>Amount: </p>
                             <p style={{ paddingLeft: "75px" }}>
-                              {initialDetails.paymentDetails
-                                ? initialDetails.paymentDetails.amount
+                              {initialDetails.productAmount
+                                ? formatter.format(
+                                    initialDetails.productAmount
+                                    // amountValue
+                                  )
                                 : 0}
+                            </p>
+                          </div>
+                          <div className="allnew">
+                            <p>Convenience fee: </p>
+                            <p style={{ paddingLeft: "50px" }}>
+                              {initialDetails.fee
+                                ? formatter.format(initialDetails.fee)
+                                : ""}
+                            </p>
+                          </div>
+                          <div className="allnew">
+                            <p>Total Amount: </p>
+                            <p style={{ paddingLeft: "50px" }}>
+                              {initialDetails.fee
+                                ? formatter.format(
+                                    initialDetails.paymentDetails.amount
+                                  )
+                                : ""}
                             </p>
                           </div>
                         </>
@@ -537,22 +629,33 @@ function Tab1(props) {
                     )}
 
                     {showAmount && (
-                      <div className="text-center">
-                        <Button
-                          onClick={(e) => {
-                            if (props.authUser) {
-                              initializePayment(e);
-                            } else {
-                              initializePayment(e);
-                            }
-                            // console.log("Initialize");
-                          }}
-                          style={{
-                            backgroundColor: "#048cfc",
-                          }}
-                        >
-                          Proceed
-                        </Button>
+                      <div style={{ display: "inline" }}>
+                        <div style={{ float: "left", width: "45%" }}>
+                          <Button
+                            onClick={(e) => {
+                              if (props.authUser) {
+                                initializePaymentWithCard(e);
+                              } else {
+                                initializePaymentWithCard(e);
+                              }
+                            }}
+                            style={{
+                              backgroundColor: "#048cfc",
+                            }}
+                          >
+                            Proceed with card
+                          </Button>
+                        </div>
+                        <div style={{ float: "right", width: "45%" }}>
+                          <Button
+                            onClick={(e) => initializePayment(e)}
+                            style={{
+                              backgroundColor: "#048cfc",
+                            }}
+                          >
+                            Proceed with wallet
+                          </Button>
+                        </div>
                       </div>
                     )}
                     <div className="">
@@ -582,33 +685,33 @@ function Tab1(props) {
                         ""
                       )}
 
-                      {Details && (
+                      {Details ? (
                         <div>
                           <div style={{ float: "left" }}>
                             <div className="text-center">
-                              <PaystackConsumer {...componentProps}>
-                                {({ initializePayment }) => (
-                                  <Button
-                                    style={{
-                                      backgroundColor: "grey",
-                                      // width: "100px",
-                                    }}
-                                    onClick={() =>
-                                      initializePayment(
-                                        handleSuccess,
-                                        handleClose
-                                      )
-                                    }
-                                  >
-                                    Card Payment
-                                  </Button>
-                                )}
-                              </PaystackConsumer>
+                              <Button
+                                onClick={() => {
+                                  handleFlutterPayment({
+                                    callback: (response) => {
+                                      console.log(response);
+                                      // const reference = response.transaction_id;
+                                      // const ref = {
+                                      //   reference: reference,
+                                      // };
+                                      // props.paystackToken(ref);
+                                      PayWithFlutterwave(response);
+                                    },
+                                    onClose: () => {
+                                      alert("Please don't go :(");
+                                    },
+                                  });
+                                }}
+                                fullWidth
+                                className="btn-primary"
+                              >
+                                Pay with Card{" "}
+                              </Button>
                             </div>
-                            {/* <Pay
-                                data={userDetails}
-                                amount={amount}
-                              /> */}
                           </div>
                           <div className="text-center">
                             <Button
@@ -630,6 +733,8 @@ function Tab1(props) {
                             </Button>
                           </div>
                         </div>
+                      ) : (
+                        ""
                       )}
                     </div>
                   </div>

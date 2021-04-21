@@ -93,9 +93,9 @@ class Login extends React.Component {
       setTimeout(() => {
         this.props.hideModal();
         this.props.hideLoader();
-        console.log("daniel");
         const redirect = localStorage.getItem("redirectPage");
-        this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+        // this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+        return <Redirect to={`${process.env.REACT_APP_URL}${redirect}`} />;
       }, 300);
     }
   };
@@ -133,12 +133,12 @@ class Login extends React.Component {
   register = (e) => {
     this.props.showRegisterModal();
   };
- 
+
   render() {
-    if(this.props.isAuthenticated){
-    return <Redirect to="/buyProducts"/>
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/buyProducts" />;
     }
-  
+
     const { classes } = this.props;
     return (
       <div className="app-wrapper bg-white">

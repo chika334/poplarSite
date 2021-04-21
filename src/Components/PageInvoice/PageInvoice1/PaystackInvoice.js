@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, connect } from "react-redux";
-import MessengerHeader from "../../Homepage/Homepage1/MessengerHeader";
+// import MessengerHeader from "../../Homepage/Homepage1/MessengerHeader";
 import Pdf from "react-to-pdf";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles } from "@material-ui/core/styles";
-import PerfectScrollbar from "react-perfect-scrollbar";
+// import PerfectScrollbar from "react-perfect-scrollbar";
 import Modal from "@material-ui/core/Modal";
 import moment from "moment";
 import {
@@ -15,9 +15,6 @@ import {
   Button,
   Container,
 } from "@material-ui/core";
-import { clearToken } from "../../../_actions/tokenAction";
-import logo from "../../../assets/images/poplar.jpeg";
-import buyToken from "../../../_reducer/buyToken_Reducer";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -83,6 +80,13 @@ function LivePreviewExample(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
+  const backHome = (e) => {
+    e.preventDefault();
+    const redirect = localStorage.getItem("redirectPage");
+    // props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+    window.location.href = `${process.env.REACT_APP_URL}/home`;
+  };
+
   const handleOpen = () => {
     if (open === false) {
       setValues(false);
@@ -98,8 +102,6 @@ function LivePreviewExample(props) {
     setOpen(false);
   };
 
-  // console.log(props);
-
   if (props.buyToken.success === false && props.buyToken.token === null) {
     window.location.href = `${process.env.REACT_APP_URL}/products`;
   }
@@ -108,8 +110,6 @@ function LivePreviewExample(props) {
     style: "currency",
     currency: "NGN",
   });
-
-  // console.log(props);
 
   // printing modal
   const body = (
@@ -289,8 +289,6 @@ function LivePreviewExample(props) {
       </div>
     </div>
   );
-
-  // console.log(props.location.state.detail.amount);
 
   return (
     <div>
@@ -484,7 +482,7 @@ function LivePreviewExample(props) {
           </div>
         </div>
         <Grid container spacing={6}>
-          <Grid item lg={4}>
+          <Grid item lg={6}>
             <div className="mt-3">
               <Button
                 className="btn-primary"
@@ -492,6 +490,19 @@ function LivePreviewExample(props) {
                 onClick={() => handleOpen()}
               >
                 Generate pdf
+              </Button>
+            </div>
+          </Grid>
+          <Grid item lg={6}>
+            <div className="mt-3" style={{ float: "right" }}>
+              <Button
+                className="btn-primary"
+                type="button"
+                onClick={(e) => {
+                  backHome(e)
+                }}
+              >
+                Back to home
               </Button>
             </div>
           </Grid>

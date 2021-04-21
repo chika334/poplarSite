@@ -42,16 +42,10 @@ function Tab1(props) {
   const user = useSelector((state) =>
     state.authUser.user === null ? "" : state.authUser.user.user
   );
-  // const [phone, setPhone] = useState(
-  //   `${user.user.user === null ? "" : user.user.user.phone}`
-  // );
-  // const [name, setName] = useState(
-  //   `${user.user === null ? "" : user.user.firstName}`
-  // );
   const [values, setValues] = useState({
     checked: false,
     email: `${
-      props.authUser.user === null ? "" : props.authUser.user.user.email
+      props.authUser.user === null ? "" : props.authUser.user.user.email.trim()
     }`,
     redirect: false,
     fullname: "",
@@ -77,6 +71,9 @@ function Tab1(props) {
     initialDetails: null,
     verify: false,
     input: false,
+    card: false,
+    wallet: false,
+    walletDetails: false,
     amounts: "",
     amount: "",
     method: "",
@@ -92,6 +89,9 @@ function Tab1(props) {
     amount,
     // amounts,
     // checked,
+    card,
+    wallet,
+    walletDetails,
     name,
     email,
     redirect,
@@ -173,19 +173,23 @@ function Tab1(props) {
             buyToken,
             config
           )
-          .then((res) =>
-            setTimeout(() => {
+          .then(
+            (res) =>
+              // setTimeout(() => {
               setValues({
                 ...values,
                 loading: false,
                 initialDetails: res.data,
-                Details: true,
+                Details: false,
+                walletDetails: true,
+                wallet: false,
+                card: false,
                 inital: true,
                 verify: true,
                 input: false,
                 showAmount: false,
-              });
-            }, 300)
+              })
+            // }, 300)
           )
           .catch((err) => console.log(err));
       }
@@ -230,19 +234,22 @@ function Tab1(props) {
             buyToken,
             config
           )
-          .then((res) =>
-            setTimeout(() => {
+          .then(
+            (res) =>
+              // setTimeout(() => {
               setValues({
                 ...values,
                 loading: false,
                 initialDetails: res.data,
                 Details: true,
                 inital: true,
+                card: false,
+                wallet: false,
                 verify: true,
                 input: false,
                 showAmount: false,
-              });
-            }, 300)
+              })
+            // }, 300)
           )
           .catch((err) => console.log(err));
       }
@@ -267,14 +274,11 @@ function Tab1(props) {
       };
 
       props.token(buyToken);
-      // console.log(buyToken);
     }
   };
 
   // card payment
   const PayWithFlutterwave = (response) => {
-    console.log(response);
-
     if (localStorage.token && userDetails === null) {
       return "";
     } else if (localStorage.token && userDetails.responsedesc === "Success") {
@@ -321,18 +325,20 @@ function Tab1(props) {
                   error: "Meter Number Invalid",
                 });
               } else {
-                setTimeout(() => {
+                // setTimeout(() => {
                   setValues({
                     ...values,
                     verify: true,
                     input: true,
                     userDetails: result,
+                    wallet: true,
+                    card: true,
                     showAmount: true,
                     inital: true,
                     loading: false,
                     Details: false,
-                  });
-                }, 300);
+                  })
+                // }, 300);
               }
 
               // console.log(result);
@@ -363,7 +369,7 @@ function Tab1(props) {
 
       setValues({ ...values, amount: amounts });
 
-      console.log(amount);
+      // console.log(amount);
     }
   }, [initialDetails]);
 
@@ -404,7 +410,7 @@ function Tab1(props) {
   if (props.buyToken.success) {
     if (method === "wallet") {
       console.log("wallet");
-      if (props.buyToken.token.productResult.statusCode === "1") {
+      if (props.buyToken.success === true) {
         console.log(props.buyToken);
         props.history.push({
           pathname: `${process.env.REACT_APP_URL}/invoice`,
@@ -416,28 +422,27 @@ function Tab1(props) {
     }
 
     if (method === "card") {
-      console.log("card");
+      // console.log("card");
       closePaymentModal();
-      // props.history.push({
-      //   pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
-      //   state: {
-      //     detail: { amount, initialDetails, method },
-      //   },
-      // });
       console.log(props.buyToken);
-      // if (props.buyToken.token.productResult.statusCode === "1") {
-      //   console.log(props.buyToken);
-      //   return (
-      //     <Redirect
-      //       to={{
-      //         pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
-      //         state: {
-      //           detail: { amount, initialDetails, method },
-      //         },
-      //       }}
-      //     />
-      //   );
-      // }
+      if (props.buyToken.success === true) {
+        props.history.push({
+          pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
+          state: {
+            detail: { amount, initialDetails, method },
+          },
+        });
+        // return (
+        //   <Redirect
+        //     to={{
+        //       pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
+        //       state: {
+        //         detail: { amount, initialDetails, method },
+        //       },
+        //     }}
+        //   />
+        // );
+      }
     }
   }
 
@@ -560,10 +565,7 @@ function Tab1(props) {
                             <p>Amount: </p>
                             <p style={{ paddingLeft: "75px" }}>
                               {initialDetails.productAmount
-                                ? formatter.format(
-                                    initialDetails.productAmount
-                                    // amountValue
-                                  )
+                                ? formatter.format(initialDetails.productAmount)
                                 : 0}
                             </p>
                           </div>
@@ -628,7 +630,7 @@ function Tab1(props) {
                       </div>
                     )}
 
-                    {showAmount && (
+                    {card && (
                       <div style={{ display: "inline" }}>
                         <div style={{ float: "left", width: "45%" }}>
                           <Button
@@ -646,17 +648,20 @@ function Tab1(props) {
                             Proceed with card
                           </Button>
                         </div>
-                        <div style={{ float: "right", width: "45%" }}>
-                          <Button
-                            onClick={(e) => initializePayment(e)}
-                            style={{
-                              backgroundColor: "#048cfc",
-                            }}
-                          >
-                            Proceed with wallet
-                          </Button>
-                        </div>
                       </div>
+                    )}
+                    {wallet && (
+                      <div style={{ float: "right", width: "45%" }}>
+                        <Button
+                          onClick={(e) => initializePayment(e)}
+                          style={{
+                            backgroundColor: "#048cfc",
+                          }}
+                        >
+                          Proceed with wallet
+                        </Button>
+                      </div>
+                      // </div>
                     )}
                     <div className="">
                       {!verify ? (
@@ -685,36 +690,36 @@ function Tab1(props) {
                         ""
                       )}
 
-                      {Details ? (
-                        <div>
-                          <div style={{ float: "left" }}>
-                            <div className="text-center">
-                              <Button
-                                onClick={() => {
-                                  handleFlutterPayment({
-                                    callback: (response) => {
-                                      console.log(response);
-                                      // const reference = response.transaction_id;
-                                      // const ref = {
-                                      //   reference: reference,
-                                      // };
-                                      // props.paystackToken(ref);
-                                      PayWithFlutterwave(response);
-                                    },
-                                    onClose: () => {
-                                      alert("Please don't go :(");
-                                    },
-                                  });
-                                }}
-                                fullWidth
-                                className="btn-primary"
-                              >
-                                Pay with Card{" "}
-                              </Button>
-                            </div>
-                          </div>
+                      {Details && (
+                        <div className="text-center">
+                          <Button
+                            onClick={() => {
+                              handleFlutterPayment({
+                                callback: (response) => {
+                                  // const reference = response.transaction_id;
+                                  // const ref = {
+                                  //   reference: reference,
+                                  // };
+                                  // props.paystackToken(ref);
+                                  PayWithFlutterwave(response);
+                                },
+                                onClose: () => {
+                                  alert("Please don't go :(");
+                                },
+                              });
+                            }}
+                            fullWidth
+                            className="btn-primary"
+                          >
+                            Pay with Card{" "}
+                          </Button>
+                        </div>
+                      )}
+                      {walletDetails && (
+                        <>
                           <div className="text-center">
                             <Button
+                              fullWidth
                               onClick={(e) => {
                                 if (props.authUser) {
                                   Pay(e);
@@ -732,9 +737,7 @@ function Tab1(props) {
                               Wallet Payment
                             </Button>
                           </div>
-                        </div>
-                      ) : (
-                        ""
+                        </>
                       )}
                     </div>
                   </div>

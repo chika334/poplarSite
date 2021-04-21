@@ -56,6 +56,7 @@ import Service from "./layout-components/Service";
 import PageRecoverOverlay from "./Pages/PageRecoverOverlay";
 import BuyToken from "./Pages/ConfirmPayment";
 import PaystackInvoice from "./Components/PageInvoice/PageInvoice1/PaystackInvoice";
+import ResetPassword from "./Pages/ResetPassword/RestPassword";
 
 const Routes = (props) => {
   const location = useLocation();
@@ -85,6 +86,14 @@ const Routes = (props) => {
       props.hideLoader();
     }, 2000);
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+		let transId = params.get('uid64');
+
+    console.log(params);
+    console.log(transId);
+  }, [])
 
   return (
     <ThemeProvider theme={MuiTheme}>
@@ -141,7 +150,6 @@ const Routes = (props) => {
               <Route
                 path={[
                   `${process.env.REACT_APP_URL}/buyProducts`,
-                  // `${process.env.REACT_APP_URL}/payment`,
                   `${process.env.REACT_APP_URL}/dashboard`,
                   `${process.env.REACT_APP_URL}/electric`,
                   `${process.env.REACT_APP_URL}/query/tranx`,
@@ -162,7 +170,7 @@ const Routes = (props) => {
                   `${process.env.REACT_APP_URL}/dash`,
                   `${process.env.REACT_APP_URL}/invoice`,
                   `${process.env.REACT_APP_URL}/cardInvoice`,
-                  // `/PageRegisterOverlay`,
+                  `${process.env.REACT_APP_URL}/resetpassword`,
                 ]}
               >
                 <PresentationLayout>
@@ -174,6 +182,11 @@ const Routes = (props) => {
                       variants={pageVariants}
                       transition={pageTransition}
                     >
+                      <Route
+                        path={`${process.env.REACT_APP_URL}/resetpassword`}
+                        exact
+                        component={ResetPassword}
+                      />
                       <Route
                         path={`${process.env.REACT_APP_URL}/products`}
                         exact
@@ -249,11 +262,11 @@ const Routes = (props) => {
                         exact
                         component={FundWallet}
                       />
-                      <PrivateRoute
+                      {/* <PrivateRoute
                         path={`${process.env.REACT_APP_URL}/debitWallet`}
                         exact
                         component={debitWallet}
-                      />
+                      /> */}
                       <PrivateRoute
                         path={`${process.env.REACT_APP_URL}/deposits`}
                         exact
@@ -281,7 +294,9 @@ const Routes = (props) => {
                       />
                     </motion.div>
                   </Switch>
-                  <Footer />
+                  <div style={{ paddingTop: "20%" }}>
+                    <Footer />
+                  </div>
                   {/* </CollapsedSidebar> */}
                 </PresentationLayout>
               </Route>

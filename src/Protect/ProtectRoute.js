@@ -3,17 +3,24 @@ import React, { Component } from "react";
 import { Button, Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import { showModal } from "../_actions/modal";
+import { Redirect } from "react-router-dom";
 
 class ProtectRoutes extends Component {
   handleClick = (e) => {
     e.preventDefault();
-    this.props.showModal()
+    this.props.showModal();
   };
 
   render() {
+    if (
+      this.props.authUser === null
+        ? ""
+        : this.props.authUser.isAuthenticated === true
+    ) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
-        {/* <MessengerHeader /> */}
         <Container
           style={{
             alignItems: "center",
@@ -45,4 +52,8 @@ class ProtectRoutes extends Component {
   }
 }
 
-export default connect(null, { showModal })(ProtectRoutes);
+const mapStateToProps = (state) => ({
+  authUser: state.authUser,
+});
+
+export default connect(mapStateToProps, { showModal })(ProtectRoutes);

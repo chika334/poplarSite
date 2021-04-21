@@ -13,8 +13,10 @@ import { connect } from "react-redux";
 import Alert from "@material-ui/lab/Alert";
 import { clearErrors } from "../../_actions/errorAction";
 import { hideLoader } from "../../_actions/loading";
+import { showModal } from "../../_actions/modal";
+import { Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { showResetModal, hideResetModal } from '../../_actions/ResetPassword'
+import { showResetModal, hideResetModal } from "../../_actions/ResetPassword";
 
 const styles = (theme) => ({
   card: {
@@ -79,9 +81,6 @@ class resetPasswordDetails extends React.Component {
         this.setState({ error: error.message.message });
       }
     } else {
-      // this.props.hideLoader();
-      // if () {
-      // }
       this.sendRedirect();
     }
   }
@@ -100,65 +99,77 @@ class resetPasswordDetails extends React.Component {
 
   forgotPassword = (e) => {
     e.preventDefault();
+    const params = new URLSearchParams(this.props.location.search);
+    let token = params.get("uid64");
     const { password } = this.state;
     const details = {
+      token,
       password,
     };
 
+    // console.log(details);
     this.props.resetPasswordDetail(details);
+  };
+
+  handleClick = (e) => {
+    e.preventDefault();
+    // console.log("login");
+    this.props.showModal();
+    // localStorage.setItem("redirectPage", "/profilepage");
   };
 
   render() {
     const { classes } = this.props;
-    // console.log(this.props.authUser)
+    if (this.props.authUser.editSuccess === true) {
+      return <Redirect to={`${process.env.REACT_APP_URL}/`} />;
+    }
     return (
       <div>
-        <div style={{ position: "relative", left: "300px" }}>
-          <Button
-            onClick={this.props.hideResetModal}
-            className="px-4 text-dark-50 mt-3"
-          >
-            <FontAwesomeIcon icon={["fas", "times"]} />
-          </Button>
-        </div>
         <Card className={classes.card}>
-          {this.state.msg ? (
-            <Alert severity="success">{this.state.msg}</Alert>
+          {this.props.authUser.user !== null ? (
+            <Alert severity="success">{this.props.authUser.user.message}</Alert>
           ) : null}
-          <CardContent>
-            <Typography type="" className={classes.title}>
-              REQUEST PASSWORD RESET
-            </Typography>
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              className={classes.textField}
-              value={this.state.password || ""}
-              onChange={this.handleChange("password")}
-              margin="normal"
-            />{" "}
-            <br />
-            {this.state.error && (
-              <Typography component="p" color="error">
-                <Icon color="error" className={classes.error}>
-                  error
-                </Icon>
-                {this.state.error}
-              </Typography>
-            )}
-          </CardContent>
-          <CardActions>
-            <Button
-              color="primary"
-              type="button"
-              variant="contained"
-              onClick={this.forgotPassword}
-              className={classes.submit}
-            >
-              Submit
-            </Button>
-          </CardActions>
+          {this.props.authUser.user !== null &&
+          this.props.authUser.editSuccess === true ? (
+            <Button onClick={(e) => this.handleClick(e)}>Login</Button>
+          ) : (
+            <>
+              <CardContent>
+                <Typography type="" className={classes.title}>
+                  REQUEST PASSWORD RESET
+                </Typography>
+                <TextField
+                  id="password"
+                  label="Password"
+                  type="password"
+                  className={classes.textField}
+                  value={this.state.password || ""}
+                  onChange={this.handleChange("password")}
+                  margin="normal"
+                />{" "}
+                <br />
+                {this.state.error && (
+                  <Typography component="p" color="error">
+                    <Icon color="error" className={classes.error}>
+                      error
+                    </Icon>
+                    {this.state.error}
+                  </Typography>
+                )}
+              </CardContent>
+              <CardActions>
+                <Button
+                  color="primary"
+                  type="button"
+                  variant="contained"
+                  onClick={this.forgotPassword}
+                  className={classes.submit}
+                >
+                  Submit
+                </Button>
+              </CardActions>
+            </>
+          )}
         </Card>
       </div>
     );
@@ -173,6 +184,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  showModal,
   resetPasswordDetail,
   showResetModal,
   hideResetModal,

@@ -329,13 +329,13 @@ input::-webkit-inner-spin-button {
   }
 
   /* invoice card */
-  .invoiceCard {
-    /* max-width: 60%; */
+  /* .invoiceCard {
+    /* max-width: 60%;
     overflow: auto;
     margin-left: 12%;
     margin-right: 12%;
     max-height: 100%;
-  }
+  } */
 
   .mobileDetails {
     display: none;
@@ -363,13 +363,13 @@ input::-webkit-inner-spin-button {
     /*width: 50%;*/
   }
 
-  .invoiceCard {
-    /* width: 80%; */
+  /* .invoiceCard {
+    width: 80%;
     overflow: auto;
-    /* margin-left: 25%; */
-    /* margin-right: 20%; */
-    /* background-color: green; */
-  }
+    margin-left: 25%;
+    margin-right: 20%;
+    background-color: green;
+  } */
 
   .tableData {
     background-color: greenyellow;
@@ -534,3 +534,46 @@ input::-webkit-inner-spin-button {
   display: block;
 }
 /* end navbar */
+
+/* style pdf */
+/* desktop */
+/* .stylePDF {
+  background-color: green;
+  overflow: auto;
+} */
+
+/* mobile */
+@media only screen and (min-width: 480px) {
+  .stylePDF {
+    background-color: yellow;
+    overflow: auto;
+  }
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) {
+  .stylePDF {
+    background-color: red;
+    /* max-width: 150%; */
+    overflow: auto;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+  }
+}
+
+/* huge */
+@media only screen and (min-width: 1280px) {
+  .stylePDF {
+    background-color: blue;
+    max-width: 59%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .styleDetailsPDF {
+    /* background-color: indigo; */
+    /* width: ; */
+  }
+}

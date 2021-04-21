@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 // import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { tokenConfig } from "../../_actions/userAction";
+import { showLoader, hideLoader } from "../../_actions/loading";
 import {
   Table,
   LinearProgress,
@@ -83,7 +84,7 @@ export class TranxReport extends PureComponent {
   getData = () => {
     setTimeout(() => {
       this.props.transactions === null
-        ? console.log("bad")
+        ? this.props.showLoader()
         : this.setState({
             pageCount: Math.ceil(
               this.props.transactions.length / this.state.perPage
@@ -94,12 +95,10 @@ export class TranxReport extends PureComponent {
               this.state.offset + this.state.perPage
             ),
           });
-    }, 2000);
+    }, 20);
   };
 
   sendDetails = () => {
-    console.log(this.state.data);
-    console.log("daniel send");
     if (this.state.data === null) {
       return "";
     } else {
@@ -111,10 +110,7 @@ export class TranxReport extends PureComponent {
   };
 
   handleQuery = (transId) => {
-    // e.preventDefault();
-    // const transId = detail;
     const { token, isAuthenticated } = this.props.authUser;
-    // console.log(token);
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +134,6 @@ export class TranxReport extends PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
     var formatter = new Intl.NumberFormat("en-NG", {
       style: "currency",
       currency: "NGN",
@@ -146,7 +141,11 @@ export class TranxReport extends PureComponent {
     return (
       <div>
         <Container>
-          {this.state.msg ? <Alert severity="error">{this.state.msg}</Alert> : ""}
+          {this.state.msg ? (
+            <Alert severity="error">{this.state.msg}</Alert>
+          ) : (
+            ""
+          )}
           <Card className="card-box mb-spacing-6-x2">
             <div className="card-header pr-2">
               <div className="card-header--title">All Transactions</div>
@@ -173,54 +172,60 @@ export class TranxReport extends PureComponent {
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.tableData.map((tdata, index) => (
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td className="text-center">{tdata.request.fastrId}</td>
-                        <td className="text-center">
-                          {tdata.request.productCode.title} Token
-                        </td>
-                        <td className="text-center">
-                          <div>
+                    {this.state.tableData.map((tdata, index) =>
+                      tdata.response === null ? (
+                        null
+                      ) : (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td className="text-center">
+                            {tdata.request.fastrId}
+                          </td>
+                          <td className="text-center">
+                            {tdata.request.productCode.title} Token
+                          </td>
+                          <td className="text-center">
+                            <div>
+                              {tdata.response === null ? (
+                                <p>Please query Transaction</p>
+                              ) : (
+                                tdata.response.productMessage
+                              )}
+                            </div>
+                          </td>
+                          <td className="text-center">
+                            <div>
+                              {formatter.format(
+                                tdata.request.paymentDetails.amount
+                              )}
+                            </div>
+                          </td>
+                          <td>
                             {tdata.response === null ? (
-                              <p>Please query Transaction</p>
+                              <p>Verification Unsuccess</p>
                             ) : (
-                              tdata.response.productMessage
+                              <p>Verification Success</p>
                             )}
-                          </div>
-                        </td>
-                        <td className="text-center">
-                          <div>
-                            {formatter.format(
-                              tdata.request.paymentDetails.amount
-                            )}
-                          </div>
-                        </td>
-                        <td>
-                          {tdata.response === null ? (
-                            <p>Verification Unsuccess</p>
-                          ) : (
-                            <p>Verification Success</p>
-                          )}
-                        </td>
-                        <td className="table-text text-center">
-                          <Button
-                            onClick={(e) => {
-                              // const fastrId = tdata.request.fastrId,
-                              e.preventDefault();
-                              this.handleQuery({
-                                transId: tdata.request.fastrId,
-                              });
-                            }}
-                            style={{
-                              backgroundColor: "#048cfc",
-                            }}
-                          >
-                            Query Transaction
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
+                          </td>
+                          <td className="table-text text-center">
+                            <Button
+                              onClick={(e) => {
+                                // const fastrId = tdata.request.fastrId,
+                                e.preventDefault();
+                                this.handleQuery({
+                                  transId: tdata.request.fastrId,
+                                });
+                              }}
+                              style={{
+                                backgroundColor: "#048cfc",
+                              }}
+                            >
+                              Query Transaction
+                            </Button>
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </Table>
               </div>
@@ -244,5 +249,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps)(withStyles(styles)(TranxReport))
+  connect(mapStateToProps, { showLoader, hideLoader })(
+    withStyles(styles)(TranxReport)
+  )
 );

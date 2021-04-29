@@ -201,7 +201,7 @@ function LivePreviewExample(props) {
                   </div>
                   <p>
                     <span className="d-block">
-                      {props.buyToken.token.productResult.recieptNumber}
+                      {props.buyToken.token.productResult.object.recieptNumber}
                     </span>
                   </p>
                 </div>
@@ -393,7 +393,7 @@ function LivePreviewExample(props) {
                   </div>
                   <p>
                     <span className="d-block">
-                      {props.buyToken.token.productResult.recieptNumber}
+                      {props.buyToken.token.productResult.object.recieptNumber}
                     </span>
                   </p>
                 </div>

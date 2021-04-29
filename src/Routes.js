@@ -89,11 +89,8 @@ const Routes = (props) => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-		let transId = params.get('uid64');
-
-    console.log(params);
-    console.log(transId);
-  }, [])
+    let transId = params.get("uid64");
+  }, []);
 
   return (
     <ThemeProvider theme={MuiTheme}>
@@ -115,12 +112,12 @@ const Routes = (props) => {
                 <Redirect
                   exact
                   from={`/`}
-                  to={`${process.env.REACT_APP_URL}/home`}
+                  to={`${process.env.REACT_APP_URL}/`}
                 />
               </Switch>
               <Route
                 path={[
-                  `${process.env.REACT_APP_URL}/home`,
+                  `${process.env.REACT_APP_URL}/`,
                   `${process.env.REACT_APP_URL}/protect`,
                 ]}
               >
@@ -134,7 +131,7 @@ const Routes = (props) => {
                       transition={pageTransition}
                     >
                       <Route
-                        path={`${process.env.REACT_APP_URL}/home`}
+                        path={`${process.env.REACT_APP_URL}/`}
                         exact
                         component={Homepage}
                       />

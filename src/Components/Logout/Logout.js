@@ -17,7 +17,7 @@ export class Logout extends Component {
     if (localStorage.token) {
       this.props.logout();
       // window.location.href = `${process.env.REACT_APP_URL}`;
-      this.props.history.push(`${process.env.REACT_APP_URL}/home`);
+      this.props.history.push(`${process.env.REACT_APP_URL}`);
       setTimeout(() => {
         this.props.hideLoader();
       }, 200);

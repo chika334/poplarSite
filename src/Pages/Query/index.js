@@ -24,7 +24,6 @@ export default class index extends Component {
   };
 
   render() {
-    // console.log(this.props.location);
     return (
       <Container className="d-flex align-content-center justify-content-center">
         <Prompt
@@ -60,7 +59,7 @@ export default class index extends Component {
           <div className="allnew">
             <p>Token: </p>
             <p style={{ paddingLeft: "63px" }}>
-              {this.props.location.state.detail.productResult.recieptNumber}
+              {this.props.location.state.detail.productResult.object.recieptNumber}
             </p>
           </div>
           <div className="allnew">

@@ -88,9 +88,7 @@ class ProductDisplay extends Component {
       this.props.showServiceModal();
     } else {
       if (this.props.authUser || localStorage.token) {
-        // this.props.hideModal();
-        const redirect = localStorage.getItem("redirectPage");
-        this.props.history.push(`${process.env.REACT_APP_URL}${redirect}`);
+        this.props.history.push(`${process.env.REACT_APP_URL}/buyProducts`)
       } else {
         this.props.showModal();
       }

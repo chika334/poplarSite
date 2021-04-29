@@ -75,7 +75,7 @@ class MessengerHeader extends Component {
           <div className="p-2 shadow-xxl header-nav-wrapper header-nav-wrapper-xl rounded-bottom px-4 navbar-light">
             <div className="app-nav-logo">
               <NavLink
-                to={`${process.env.REACT_APP_URL}/home`}
+                to={`${process.env.REACT_APP_URL}/`}
                 title="Poplar power"
                 className="d-flex align-items-center justify-content-center"
               >
@@ -112,7 +112,7 @@ class MessengerHeader extends Component {
                   <Button
                     onClick={(e) => {
                       // if (this.props.authUser) {
-                      localStorage.setItem("redirectPage", "/home");
+                      localStorage.setItem("redirectPage", "/");
                       this.home();
                       // }
                     }}
@@ -332,7 +332,7 @@ class MessengerHeader extends Component {
                       <li onClick={(e) => this.closeMobileMenu(e)}>
                         <Button
                           onClick={(e) => {
-                            localStorage.setItem("redirectPage", "/home");
+                            localStorage.setItem("redirectPage", "/");
                             this.home();
                           }}
                           className="px-4 font-weight-bold w-100"

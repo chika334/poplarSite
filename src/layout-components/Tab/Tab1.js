@@ -42,6 +42,7 @@ function Tab1(props) {
   const user = useSelector((state) =>
     state.authUser.user === null ? "" : state.authUser.user.user
   );
+  const [parsedData, setParseData] = useState({});
   const [values, setValues] = useState({
     checked: false,
     email: `${
@@ -54,7 +55,7 @@ function Tab1(props) {
     phoneNo: `${user.phone}`,
     name: `${user.firstName}`,
     userDetails: null,
-    productCode: "rccg-power-12",
+    productCode: `${process.env.REACT_APP_PRODUCTCODE}`,
     paymentMethod: "fastrwallet",
     customerId: "",
     error: null,
@@ -144,7 +145,7 @@ function Tab1(props) {
     } else {
       if (localStorage.token && userDetails === null) {
         return "";
-      } else if (localStorage.token && userDetails.responsedesc === "Success") {
+      } else if (localStorage.token && userDetails.accountName !== "") {
         setValues({ ...values, loading: true });
         const config = {
           headers: {
@@ -157,7 +158,7 @@ function Tab1(props) {
           config.headers["Authorization"] = `Bearer ${token}`;
         }
 
-        const fullname = userDetails.customerName;
+        const fullname = userDetails.accountName;
         const buyToken = {
           productCode,
           paymentMethod,
@@ -205,7 +206,7 @@ function Tab1(props) {
     } else {
       if (localStorage.token && userDetails === null) {
         return "";
-      } else if (localStorage.token && userDetails.responsedesc === "Success") {
+      } else if (localStorage.token && userDetails.accountName !== "") {
         setValues({ ...values, loading: true });
         const config = {
           headers: {
@@ -218,7 +219,7 @@ function Tab1(props) {
           config.headers["Authorization"] = `Bearer ${token}`;
         }
 
-        const fullname = userDetails.customerName;
+        const fullname = userDetails.accountName;
         const buyToken = {
           productCode,
           paymentMethod: paymentMethods,
@@ -263,7 +264,7 @@ function Tab1(props) {
 
     if (localStorage.token && userDetails === null) {
       return "";
-    } else if (localStorage.token && userDetails.responsedesc === "Success") {
+    } else if (localStorage.token && userDetails.accountName !== "") {
       setValues({ ...values, loading: true, method: "wallet" });
       const fastrId = initialDetails.fastrId;
       const reference = null;
@@ -281,7 +282,7 @@ function Tab1(props) {
   const PayWithFlutterwave = (response) => {
     if (localStorage.token && userDetails === null) {
       return "";
-    } else if (localStorage.token && userDetails.responsedesc === "Success") {
+    } else if (localStorage.token && userDetails.accountName !== "") {
       setValues({ ...values, loading: true, method: "card" });
       const fastrId = initialDetails.fastrId;
       const reference = response.transaction_id;
@@ -299,7 +300,14 @@ function Tab1(props) {
   const verifyMeterNumber = async () => {
     const token = props.authUser.token;
 
-    return await verifyNumber(meterNumber, token);
+    const details = {
+      accountNumber: meterNumber,
+      productCode: productCode,
+    };
+
+    console.log(details);
+
+    return await verifyNumber(details, token);
   };
 
   const submit = async (e) => {
@@ -375,7 +383,7 @@ function Tab1(props) {
 
   useEffect(() => {
     if (userDetails) {
-      const fullname = userDetails === null ? "" : userDetails.customerName;
+      const fullname = userDetails === null ? "" : userDetails.accountName;
       setValues({ ...values, fullname: fullname });
     }
   }, [userDetails]);
@@ -445,6 +453,19 @@ function Tab1(props) {
       }
     }
   }
+
+  useEffect(() => {
+    let userOtherData = userDetails === null ? "{}" : userDetails.otherDetails;
+
+    let detail = JSON.parse(userOtherData);
+    console.log(detail, "1.5");
+
+    // console.log(typeof detail);
+
+    setParseData(detail);
+  }, [userDetails]);
+
+  console.log(parsedData);
 
   return (
     <>
@@ -535,7 +556,7 @@ function Tab1(props) {
                         <div className="allnew">
                           <p>Full Name: </p>
                           <p style={{ paddingLeft: "63px" }}>
-                            {userDetails.customerName}
+                            {userDetails.accountName}
                           </p>
                         </div>
                         <div className="allnew">
@@ -547,14 +568,12 @@ function Tab1(props) {
                         <div className="allnew">
                           <p>Meter Number: </p>
                           <p style={{ paddingLeft: "30px" }}>
-                            {userDetails.meterNumber}
+                            {userDetails.accountNumber}
                           </p>
                         </div>
                         <div className="allnew">
                           <p>Undertaking: </p>
-                          <p style={{ paddingLeft: "50px" }}>
-                            {userDetails.undertaking}
-                          </p>
+                          <p style={{ paddingLeft: "50px" }}>{parsedData.undertaking}</p>
                         </div>
                       </>
                     )}

@@ -24,6 +24,7 @@ export default class index extends Component {
   };
 
   render() {
+    console.log();
     return (
       <Container className="d-flex align-content-center justify-content-center">
         <Prompt

@@ -389,6 +389,26 @@ class MessengerHeader extends Component {
                           Setting
                         </Button>
                       </li>
+                      {this.props.authUser && localStorage.token ? (
+                        <li onClick={(e) => this.closeMobileMenu(e)}>
+                          <Button
+                            onClick={(e) => {
+                              if (this.props.authUser) {
+                                window.location.href = `${process.env.REACT_APP_URL}/reportTranx`;
+                              }
+                            }}
+                            className="w-100 font-weight-bold"
+                            style={{
+                              backgroundColor: "#fff",
+                              color: "#000",
+                            }}
+                          >
+                            Transactions
+                          </Button>
+                        </li>
+                      ) : (
+                        ""
+                      )}
                       <li
                         // className="d-lg-none p-3 text-center"
                         onClick={(e) => this.closeMobileMenu(e)}

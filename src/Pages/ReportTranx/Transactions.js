@@ -110,6 +110,7 @@ export class TranxReport extends PureComponent {
   };
 
   handleQuery = (transId) => {
+    this.props.showLoader();
     const { token, isAuthenticated } = this.props.authUser;
     const config = {
       headers: {
@@ -126,6 +127,7 @@ export class TranxReport extends PureComponent {
       .post(`${process.env.REACT_APP_API_QUERY}`, transId, config)
       .then((res) => {
         this.setState({ data: res.data });
+        this.props.hideLoader();
         this.sendDetails();
       })
       .catch((err) => {
@@ -134,6 +136,7 @@ export class TranxReport extends PureComponent {
   };
 
   render() {
+    // console.log(this.state.data);
     var formatter = new Intl.NumberFormat("en-NG", {
       style: "currency",
       currency: "NGN",
@@ -173,9 +176,7 @@ export class TranxReport extends PureComponent {
                   </thead>
                   <tbody>
                     {this.state.tableData.map((tdata, index) =>
-                      tdata.response === null ? (
-                        null
-                      ) : (
+                      tdata.response === null ? null : (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td className="text-center">

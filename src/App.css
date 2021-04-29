@@ -545,7 +545,7 @@ input::-webkit-inner-spin-button {
 /* mobile */
 @media only screen and (min-width: 480px) {
   .stylePDF {
-    background-color: yellow;
+    /* background-color: yellow; */
     overflow: auto;
   }
 }
@@ -553,7 +553,7 @@ input::-webkit-inner-spin-button {
 /* tablet */
 @media only screen and (min-width: 768px) {
   .stylePDF {
-    background-color: red;
+    /* background-color: red; */
     /* max-width: 150%; */
     overflow: auto;
     /* display: flex;
@@ -565,7 +565,7 @@ input::-webkit-inner-spin-button {
 /* huge */
 @media only screen and (min-width: 1280px) {
   .stylePDF {
-    background-color: blue;
+    /* background-color: blue; */
     max-width: 59%;
     display: flex;
     justify-content: center;

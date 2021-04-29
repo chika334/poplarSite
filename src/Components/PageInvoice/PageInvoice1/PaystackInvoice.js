@@ -123,7 +123,10 @@ function LivePreviewExample(props) {
               </Button>
             </div>
             <CardContent className="p-4 mt-5">
-              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+              <div className="d-flex justify-content-center">
+                <img src={localStorage.ProductImage} width="130" alt="logo" />
+              </div>
+              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-center">
                 <div className="text-center text-lg-left mb-3 mb-lg-0">
                   <h1 className="display-4 font-weight-bold">
                     Receipt #{props.buyToken.token.reference}
@@ -215,7 +218,7 @@ function LivePreviewExample(props) {
                 </div>
               </div>
               <div className="table-responsive my-4 tableData">
-                <Table className="table table-striped table-hover text-nowrap font-size-xs">
+                <Table className="table table-striped table-hover  font-size-xs">
                   <thead>
                     <tr>
                       <th className="text-center">Product</th>
@@ -243,10 +246,14 @@ function LivePreviewExample(props) {
                         }
                       </td>
                       <td className="tx-right text-center">
-                        {formatter.format(localStorage.getItem("amount"))}
+                        {formatter.format(props.location.state.detail.amount)}
                       </td>
                       <td className="tx-right text-center">
-                        {formatter.format(props.buyToken.token.currentBalance)}
+                        {props.location.state.detail.method === "card"
+                          ? "PAID WITH CARD"
+                          : formatter.format(
+                              props.buyToken.token.currentBalance
+                            )}
                       </td>
                     </tr>
                   </tbody>
@@ -294,7 +301,9 @@ function LivePreviewExample(props) {
                 <p>
                   <span className="d-block">
                     <b className="pr-2">Current Balance:</b>
-                    {formatter.format(props.buyToken.token.currentBalance)}
+                    {props.location.state.detail.method === "card"
+                      ? "PAID WITH CARD"
+                      : formatter.format(props.buyToken.token.currentBalance)}
                   </span>
                 </p>
               </div>
@@ -304,10 +313,10 @@ function LivePreviewExample(props) {
             </CardContent>
           </Card>
           {/* </div> */}
-          <div className="d-flex align-centent-center justify-content-center">
-            <Buttons ref={docToPrint} />
-          </div>
         </div>
+      </div>
+      <div className="d-flex align-centent-center justify-content-center">
+        <Buttons ref={docToPrint} />
       </div>
     </div>
   );
@@ -318,7 +327,10 @@ function LivePreviewExample(props) {
         <div className={values === true ? "d-none" : ""}>
           <Card className="card-box">
             <CardContent className="p-4">
-              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+              <div className="d-flex justify-content-center">
+                <img src={localStorage.ProductImage} width="130" alt="logo" />
+              </div>
+              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-center">
                 <div className="text-center text-lg-left mb-3 mb-lg-0">
                   <h1 className="display-4 font-weight-bold">
                     Receipt #{props.buyToken.token.reference}
@@ -534,6 +546,10 @@ function LivePreviewExample(props) {
           onClose={() => handleClose()}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
+          className="pt-2 pb-2 invoiceCard"
+          style={{
+            overflow: "auto",
+          }}
           className="pt-2 pb-2 invoiceCard"
         >
           {body}

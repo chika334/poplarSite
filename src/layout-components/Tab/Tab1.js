@@ -60,7 +60,7 @@ function Tab1(props) {
     error: null,
     inError: null,
     loading: false,
-    open: false,
+    // open: false,
     change: false,
     wantToPay: false,
     modalStyle: getModalStyle,
@@ -106,7 +106,7 @@ function Tab1(props) {
     error,
     inError,
     loading,
-    open,
+    // open,
     change,
     wantToPay,
     modalStyle,
@@ -131,9 +131,9 @@ function Tab1(props) {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  const handleOpen = () => {
-    setValues({ ...values, open: true });
-  };
+  // const handleOpen = () => {
+  //   setValues({ ...values, open: true });
+  // };
 
   const initializePayment = (e) => {
     e.preventDefault();
@@ -326,18 +326,18 @@ function Tab1(props) {
                 });
               } else {
                 // setTimeout(() => {
-                  setValues({
-                    ...values,
-                    verify: true,
-                    input: true,
-                    userDetails: result,
-                    wallet: true,
-                    card: true,
-                    showAmount: true,
-                    inital: true,
-                    loading: false,
-                    Details: false,
-                  })
+                setValues({
+                  ...values,
+                  verify: true,
+                  input: true,
+                  userDetails: result,
+                  wallet: true,
+                  card: true,
+                  showAmount: true,
+                  inital: true,
+                  loading: false,
+                  Details: false,
+                });
                 // }, 300);
               }
 
@@ -355,7 +355,7 @@ function Tab1(props) {
           console.log(localStorage.ProductTitle);
         } else {
           handleValueChange("wantToPay", true);
-          handleOpen();
+          // handleOpen();
         }
       }
     }
@@ -415,7 +415,7 @@ function Tab1(props) {
         props.history.push({
           pathname: `${process.env.REACT_APP_URL}/invoice`,
           state: {
-            detail: { amount, initialDetails, method },
+            detail: { amount, initialDetails, method, userDetails },
           },
         });
       }
@@ -429,7 +429,7 @@ function Tab1(props) {
         props.history.push({
           pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
           state: {
-            detail: { amount, initialDetails, method },
+            detail: { amount, initialDetails, method, userDetails },
           },
         });
         // return (

@@ -79,7 +79,8 @@ function LivePreviewExample(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (e) => {
+    e.preventDefault();
     if (open === false) {
       setValues(false);
       setValue(false);
@@ -89,7 +90,8 @@ function LivePreviewExample(props) {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.preventDefault();
     setValues(false);
     setOpen(false);
   };
@@ -118,12 +120,15 @@ function LivePreviewExample(props) {
               </Button>
             </div>
             <CardContent className="styleDetailsPDF p-4 mt-5">
-              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+              <div className="d-flex justify-content-center">
+                <img src={localStorage.ProductImage} width="130" alt="logo" />
+              </div>
+              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-center">
                 <div className="text-center text-lg-left mb-3 mb-lg-0">
                   <h1 className="display-4 font-weight-bold">
                     Receipt #{props.buyToken.token.reference}
                   </h1>
-                  <p className="mb-0 text-black-50">
+                  <p className="text-center mb-0 text-black-50">
                     Date:{" "}
                     {moment(
                       props.location.state.detail.initialDetails.paymentDetails
@@ -160,14 +165,17 @@ function LivePreviewExample(props) {
                   <div className="text-uppercase text-primary mb-2 font-size-xs">
                     Billed to
                   </div>
-                  <p className="mb-1 font-weight-bold">
+                  <p className="mb-1 d-block">
+                    <b className="pr-2">Full Name:</b>
                     {props.authUser.user.user.fullName}
                   </p>
-                  <p>
-                    <span className="d-block">
-                      <b className="pr-2">Email:</b>
-                      {props.authUser.user.user.email}
-                    </span>
+                  <p className="mb-1 d-block">
+                    <b className="pr-2">Email:</b>
+                    {props.authUser.user.user.email}
+                  </p>
+                  <p className="d-block">
+                    <b className="pr-2">Address:</b>
+                    {props.location.state.detail.userDetails.address}
                   </p>
                 </div>
                 <div>
@@ -304,18 +312,23 @@ function LivePreviewExample(props) {
     </div>
   );
 
+  console.log(props.location.state);
+
   return (
     <div>
       <Container>
         <div className={values === true ? "d-none" : ""}>
           <Card className="card-box">
             <CardContent className="p-4">
-              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+              <div className="d-flex justify-content-center">
+                <img src={localStorage.ProductImage} width="130" alt="logo" />
+              </div>
+              <div className="d-flex flex-column flex-lg-row align-items-center justify-content-center">
                 <div className="text-center text-lg-left mb-3 mb-lg-0">
                   <h1 className="display-4 font-weight-bold">
                     Receipt #{props.buyToken.token.reference}
                   </h1>
-                  <p className="mb-0 text-black-50">
+                  <p className="mb-0 text-center text-black-50">
                     Date:{" "}
                     {moment(
                       props.location.state.detail.initialDetails.paymentDetails
@@ -352,14 +365,17 @@ function LivePreviewExample(props) {
                   <div className="text-uppercase text-primary mb-2 font-size-xs">
                     Billed to
                   </div>
-                  <p className="mb-1 font-weight-bold">
+                  <p className="mb-1 d-block">
+                    <b className="pr-2">Full Name:</b>
                     {props.authUser.user.user.fullName}
                   </p>
-                  <p>
-                    <span className="d-block">
-                      <b className="pr-2">Email:</b>
-                      {props.authUser.user.user.email}
-                    </span>
+                  <p className="mb-1 d-block">
+                    <b className="pr-2">Email:</b>
+                    {props.authUser.user.user.email}
+                  </p>
+                  <p className="d-block">
+                    <b className="pr-2">Address:</b>
+                    {props.location.state.detail.userDetails.address}
                   </p>
                 </div>
                 <div>
@@ -518,7 +534,7 @@ function LivePreviewExample(props) {
                 <p>
                   <span className="d-block">
                     <b className="pr-2">Amount:</b>
-                    {formatter.format(localStorage.getItem("amount"))}
+                    {formatter.format(props.location.state.detail.amount)}
                   </span>
                 </p>
 
@@ -544,7 +560,7 @@ function LivePreviewExample(props) {
               <Button
                 className="btn-primary"
                 type="button"
-                onClick={handleOpen}
+                onClick={(e) => handleOpen(e)}
               >
                 Generate pdf
               </Button>
@@ -553,7 +569,7 @@ function LivePreviewExample(props) {
         </Grid>
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={(e) => handleClose(e)}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           style={{

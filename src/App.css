@@ -372,7 +372,7 @@ input::-webkit-inner-spin-button {
   } */
 
   .tableData {
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
     display: none;
   }
 }

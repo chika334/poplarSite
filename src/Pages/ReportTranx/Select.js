@@ -10,6 +10,7 @@ import { Table, CardContent, Tooltip } from "@material-ui/core";
 import { hideLoader, showLoader } from "../../_actions/loading";
 import { ClimbingBoxLoader } from "react-spinners";
 import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -126,30 +127,56 @@ class Select extends Component {
   }
 
   getData() {
-    if (!this.state.submitted) {
-      console.log("false", this.state.submitted);
-    } else {
-      setTimeout(() => {
-        const data =
-          this.props.transactions.transaction === null
-            ? ""
-            : this.props.transactions.transaction;
-        // console.log(data);
-        var slice = data.slice(
-          this.state.offset,
-          this.state.offset + this.state.perPage
-        );
+    // if (!this.state.submitted) {
+    //   console.log("false", this.state.submitted);
+    // } else {
+    setTimeout(() => {
+      const data =
+        this.props.transactions.transaction === null
+          ? ""
+          : this.props.transactions.transaction;
+      // console.log(data);
+      var slice = data.slice(
+        this.state.offset,
+        this.state.offset + this.state.perPage
+      );
 
-        this.setState({
-          pageCount: Math.ceil(data.length / this.state.perPage),
-          orgtableData: this.props.transactions.transaction,
-          tableData: slice,
-          length: slice.length,
-          loading: false,
-        });
-      }, 2000);
-    }
+      this.setState({
+        pageCount: Math.ceil(data.length / this.state.perPage),
+        orgtableData: this.props.transactions.transaction,
+        tableData: slice,
+        length: slice.length,
+        loading: false,
+      });
+    }, 2000);
+    // }
   }
+
+  handleQuery = (transId) => {
+    this.props.showLoader();
+    const { token, isAuthenticated } = this.props.authUser;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    // if token, add to header
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    axios
+      .post(`${process.env.REACT_APP_API_QUERY}`, transId, config)
+      .then((res) => {
+        this.setState({ data: res.data });
+        this.props.hideLoader();
+        this.sendDetails();
+      })
+      .catch((err) => {
+        this.setState({ msg: err.response.data.message });
+      });
+  };
 
   refreshPage = () => {
     console.log("good");

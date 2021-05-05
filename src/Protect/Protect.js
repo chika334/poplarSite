@@ -9,9 +9,6 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     :
     <Redirect to={{
         pathname: `${process.env.REACT_APP_URL}/protect`,
-        // state: {
-        //   from: props.location
-        // }
       }}
     />
   )}

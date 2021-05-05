@@ -3,13 +3,9 @@ import { returnErrors } from "./errorAction";
 import { tokenConfig } from "./userAction";
 import { QUERY_TRANX_FAIL, QUERY_TRANX } from "./type";
 
-export const Reference = (tranx) => (dispatch, getState) => {
+export const Query = (transId) => (dispatch, getState) => {
   axios
-    .post(
-      `${process.env.REACT_APP_API}/fastpayr/api/v1/paymentresponse/query`,
-      tranx,
-      tokenConfig(getState)
-    )
+    .post(`${process.env.REACT_APP_API_QUERY}`, transId, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: QUERY_TRANX,

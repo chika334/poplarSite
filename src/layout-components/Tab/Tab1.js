@@ -8,6 +8,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import { Redirect } from "react-router-dom";
 import DialpadOutlinedIcon from "@material-ui/icons/DialpadOutlined";
 import { showModal, hideModal } from "../../_actions/modal";
@@ -24,6 +25,7 @@ import axios from "axios";
 import { ClimbingBoxLoader, PropagateLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import Pay from "../../Components/paystack/pay";
+import PaymentNQuery from "./PaymentNQuery";
 
 // const FORM_NAME = "rccgPaymentForm";
 
@@ -43,6 +45,7 @@ function Tab1(props) {
     state.authUser.user === null ? "" : state.authUser.user.user
   );
   const [parsedData, setParseData] = useState({});
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [values, setValues] = useState({
     checked: false,
     email: `${
@@ -351,8 +354,12 @@ function Tab1(props) {
 
               // console.log(result);
             } catch (err) {
-              console.log(err);
-              // setValues({ error: err.response.data.msg });
+              // console.log(err.response.data.message);
+              setValues({
+                ...values,
+                loading: false,
+                error: err.response.data.message,
+              });
             }
           }
         } else if (localStorage.ProductTitle === "IKEJA ELECTRIC") {
@@ -395,7 +402,10 @@ function Tab1(props) {
 
   // Flutterwave
   const config = {
-    public_key: `${process.env.REACT_APP_TEST_FLUTTERWAVE}`,
+    // blacksilicon
+    // public_key: `FLWPUBK-83fdf17550f0e889de4b35ee59ce1480-X`,
+    // rccg key
+    public_key: "FLWPUBK-4eceff9592173d439711d8a32ac19d67-X",
     tx_ref: Date.now(),
     amount: amountValue,
     currency: "NGN",
@@ -415,11 +425,17 @@ function Tab1(props) {
 
   const handleFlutterPayment = useFlutterwave(config);
 
+  useEffect(() => {
+    let userOtherData = userDetails === null ? "{}" : userDetails.otherDetails;
+
+    let detail = JSON.parse(userOtherData);
+
+    setParseData(detail);
+  }, [userDetails]);
+
   if (props.buyToken.success) {
     if (method === "wallet") {
-      console.log("wallet");
       if (props.buyToken.success === true) {
-        console.log(props.buyToken);
         props.history.push({
           pathname: `${process.env.REACT_APP_URL}/invoice`,
           state: {
@@ -428,11 +444,8 @@ function Tab1(props) {
         });
       }
     }
-
     if (method === "card") {
-      // console.log("card");
       closePaymentModal();
-      console.log(props.buyToken);
       if (props.buyToken.success === true) {
         props.history.push({
           pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
@@ -440,32 +453,9 @@ function Tab1(props) {
             detail: { amount, initialDetails, method, userDetails },
           },
         });
-        // return (
-        //   <Redirect
-        //     to={{
-        //       pathname: `${process.env.REACT_APP_URL}/cardInvoice`,
-        //       state: {
-        //         detail: { amount, initialDetails, method },
-        //       },
-        //     }}
-        //   />
-        // );
       }
     }
   }
-
-  useEffect(() => {
-    let userOtherData = userDetails === null ? "{}" : userDetails.otherDetails;
-
-    let detail = JSON.parse(userOtherData);
-    console.log(detail, "1.5");
-
-    // console.log(typeof detail);
-
-    setParseData(detail);
-  }, [userDetails]);
-
-  console.log(parsedData);
 
   return (
     <>
@@ -511,6 +501,7 @@ function Tab1(props) {
                   </p>
                 </div>
                 <div className="py-4">
+                  {error && <Alert severity="error">{error}</Alert>}
                   {/* <Form formName={FORM_NAME} key={FORM_NAME} /> */}
                   <div>
                     {!inital && (
@@ -573,7 +564,9 @@ function Tab1(props) {
                         </div>
                         <div className="allnew">
                           <p>Undertaking: </p>
-                          <p style={{ paddingLeft: "50px" }}>{parsedData.undertaking}</p>
+                          <p style={{ paddingLeft: "50px" }}>
+                            {parsedData.undertaking}
+                          </p>
                         </div>
                       </>
                     )}

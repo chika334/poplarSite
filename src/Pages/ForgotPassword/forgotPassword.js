@@ -8,7 +8,6 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-// import Icon from "@material-ui/core/Icon";
 import { connect } from "react-redux";
 import Alert from "@material-ui/lab/Alert";
 import { clearErrors } from "../../_actions/errorAction";
@@ -20,7 +19,6 @@ import { showResetModal } from "../../_actions/ResetPassword";
 import { ClimbingBoxLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import axios from "axios";
-// import ResetModal from '../ResetPassword'
 
 const styles = (theme) => ({
   card: {
@@ -81,23 +79,6 @@ class forgotpassword extends React.Component {
     clearErrors: PropTypes.func.isRequired,
   };
 
-  // componentDidUpdate(prevProps) {
-  //   const { error } = this.props;
-  //   if (error !== prevProps.error) {
-  //     // check for register error
-  //     if (error.id === "FORGOT_PASSWORD_FAIL") {
-  //       this.props.hideLoader();
-  //       this.setState({ error: error.message.message });
-  //     }
-  //   } else {
-  //     this.props.hideLoader();
-  //     // if(localStorage.getItem("value")) {
-  //     // this.props.showResetModal()
-  //     // }
-  //     this.sendRedirect();
-  //   }
-  // }
-
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -106,67 +87,8 @@ class forgotpassword extends React.Component {
     this.setState({ open: false });
   };
 
-  // sendRedirect = () => {
-  //   const message =
-  //     this.props.forgot === null && this.props.forgot.success === false;
-
-  //   if (!message) {
-  //     this.setState({
-  //       msg: this.props.forgot.message,
-  //     });
-  //   }
-  //   this.props.clearErrors();
-  // };
-
-  // componentDidMount() {
-  //   this._isMounted = true;
-  // }
-
-  // forgotPassword = async (e) => {
-  //   this._isMounted = true;
-  //   e.preventDefault();
-  //   const { email } = this.state;
-  //   const { token } = this.props.authUser;
-  //   // this.setState({loading: false})
-  //   this.props.showLoader();
-  //   if (email === "") {
-  //     this.setState({ error: "Please fill all inputs" });
-  //   } else {
-  //     if (localStorage.token === undefined) {
-  //       const details = {
-  //         email,
-  //       };
-
-  //       const config = {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       };
-
-  //       localStorage.setItem("value", "forgot");
-  //       // this.props.showLoader();
-  //       return await axios
-  //         .post(
-  //           `${process.env.REACT_APP_API}/fastpayr/api/v1/account/reset/password`,
-  //           details,
-  //           config
-  //         )
-  //         // .then((response) => response.json())
-  //         .then((response) => {
-  //           // console.log(response.data.message);
-  //           // if (this._isMounted) {
-  //             this.setState({ ...this.state, msg: response.data });
-  //             this.props.hideLoader();
-  //           // }
-  //         })
-  //         .catch((err) => console.log(err));
-  //     }
-  //     // this.props.forgotPassword(details);
-  //   }
-  // };
-
-  submit = async () => {
-    // e.preventDefault();
+  submit = async (e) => {
+    e.preventDefault();
     const { email } = this.state;
 
     const details = {
@@ -184,11 +106,9 @@ class forgotpassword extends React.Component {
       const result = await this.submit();
       const { message } = result;
       this.setState({ loading: false, msg: message, set: true });
-      // this.props.hideLoader();
-      // const {success} =
-      console.log(result);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      // console.log(error);
+      this.setState({ error: err.response.data.msg });
     }
   };
 
@@ -246,11 +166,15 @@ class forgotpassword extends React.Component {
                 <FontAwesomeIcon icon={["fas", "times"]} />
               </Button>
             </div>
-            {/* <div style={{ position: "relative", left: "270px" }}></div> */}
             <Loader />
-            {/* {this.state.msg ? (
+            {this.state.msg ? (
               <Alert severity="success">{this.state.msg}</Alert>
-            ) : null} */}
+            ) : null}
+            {this.state.error && (
+              <Typography component="p" color="error">
+                {this.state.error}
+              </Typography>
+            )}
             <CardContent className="pt-5">
               <Typography type="" className={classes.title}>
                 forgot REQUEST PASSWORD RESET
@@ -265,11 +189,6 @@ class forgotpassword extends React.Component {
                 margin="normal"
               />{" "}
               <br />
-              {this.state.error && (
-                <Typography component="p" color="error">
-                  {this.state.error}
-                </Typography>
-              )}
             </CardContent>
             <CardActions>
               <Button

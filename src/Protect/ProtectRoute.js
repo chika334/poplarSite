@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import MessengerHeader from "../Components/Homepage/Homepage1/MessengerHeader";
 import { Button, Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import { showModal } from "../_actions/modal";

@@ -10,8 +10,6 @@ const SuspenseLoading = (props) => {
   const loading = useSelector((state) => state.loading.loading);
   const user = useSelector((state) => state.authUser.isAuthenticated);
 
-  // console.log(loading);
-
   useEffect(() => {
     if (loading === false) return null;
     if (user) {

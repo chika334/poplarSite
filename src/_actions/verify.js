@@ -14,8 +14,6 @@ export const verifyNumber = async (details, token) => {
     config.headers["authorization"] = `Bearer ${token}`;
   }
 
-  console.log(config);
-
   return await axios
     //   // .get(`${process.env.REACT_APP_API_VERIFYMETERNO}${details}`, config)
     .post(
